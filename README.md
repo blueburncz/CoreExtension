@@ -6,12 +6,12 @@
 # Table of Contents
 * [About](#about)
 * [Installation](#installation)
+* [Documentation and help](#documentation-and-help)
 * [Libraries](#libraries)
 * [Links](#links)
 
 # About
-CE is a collection of open-source GML libraries for GameMaker Studio 2 developed by an experienced programmer ([tools and graphics programmer of BBP](https://blueburn.cz/index.php?menu=bbp), [TyuTyu NyuNyu: The Forest Ninja](https://play.google.com/store/apps/details?id=com.blueburn.ForestNinja), [PushEd](https://github.com/GameMakerDiscord/PushEd), [BlueBurn AssetCreator](https://forum.yoyogames.com/index.php?threads/60628/), [Xpanda](https://github.com/GameMakerDiscord/Xpanda), [YYC Overwrite](https://github.com/kraifpatrik/yyc-overwrite), [Optimizing code for YYC](https://forum.yoyogames.com/index.php?threads/62937/)
-, [Custom C++ in YYC without DLLs](https://forum.yoyogames.com/index.php?threads/63045)). Its target is to provide you with a strong codebase so you can focus on coding your games instead of their technical backgrounds.
+CE is a collection of open-source GML libraries for GameMaker Studio 2. Its target is to provide you with a strong codebase so you can focus on coding your games instead of their technical backgrounds.
 
 Previously it was released as a single extension called [CE Core](https://github.com/kraifpatrik/ce-core), which suffered from dependency hell when trying to include only a specific library. This was the main motivation to split the extension into multiple repositories, each representing a library, which can be then included into you projects using [Catalyst](https://github.com/GameMakerHub/Catalyst), the open-source package manager for GameMaker Studio 2.
 
@@ -30,7 +30,22 @@ catalyst require kraifpatrik/<library>  # e.g. kraifpatrik/ce-class
 
 When including a single library, Catalyst automatically resolves its dependencies and adds them to your project as well.
 
+# Documentation and help
+Documentation for the latest release of CE is available online at https://kraifpatrik.com/docs/ce. If you need any additional help or you would just like to chat with other users of CE, you can join its dedicated Discord server: https://discord.gg/nt5hZWt.
+
+## Building documentation
+If you need a documentation for a previous release or you just want to have the documentation available offline, you can build it using [GMDoc](https://github.com/kraifpatrik/gmdoc).
+
+**Example:**
+* `git clone https://github.com/kraifpatrik/ce.git`
+* `cd .\ce`
+* `git checkout 1.3.1`
+* `catalyst install` - *Required to install the libraries included in the release!*
+* `gmdoc build`
+
 # Libraries
+Following is a list of libraries which are included in CE in *this* commit. If you want to see libraries of a specific release, please checkout to its tag.
+
 * [ce-array-utils](https://github.com/kraifpatrik/ce-array-utils)
 * [ce-assert](https://github.com/kraifpatrik/ce-assert)
 * [ce-callstack-utils](https://github.com/kraifpatrik/ce-callstack-utils)

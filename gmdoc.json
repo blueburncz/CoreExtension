@@ -4,6 +4,7 @@
   "author": "Patrik Kraif",
   "analytics": "UA-89677981-1",
   "prefix": "ce_",
+  "project": "ce.yyp",
   "api": {
     "rating": "/api/page_rating"
   },
