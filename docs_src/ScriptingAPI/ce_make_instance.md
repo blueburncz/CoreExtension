@@ -14,6 +14,3 @@ Creates a new instance (object) of a class.
 
 ## Returns
 `real` The id of the created object.
-
-### See
-[ce_get_instance](ce_get_instance.html)
