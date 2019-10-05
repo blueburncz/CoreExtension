@@ -9,12 +9,11 @@
 * [Installation](#installation)
 * [Documentation and help](#documentation-and-help)
 * [Libraries](#libraries)
-* [Links](#links)
 
 # About
 CE is a collection of open-source GML libraries for GameMaker Studio 2. Its target is to provide you with a strong codebase so you can focus on coding your games instead of their technical backgrounds.
 
-Previously it was released as a single extension called [CE Core](https://github.com/kraifpatrik/ce-core), which suffered from dependency hell when trying to include only a specific library. This was the main motivation to split the extension into multiple repositories, each representing a library, which can be then included into you projects using [Catalyst](https://github.com/GameMakerHub/Catalyst), the open-source package manager for GameMaker Studio 2.
+Previously it was released only as a single extension [CE Core](https://github.com/kraifpatrik/ce-core), which suffered from dependency hell when trying to include only a specific library. This was the main motivation to split the extension into multiple repositories, each representing a library, which can be then included into you projects using [Catalyst](https://github.com/GameMakerHub/Catalyst), the open-source package manager for GameMaker Studio 2.
 
 # Installation
 Use [Catalyst](https://github.com/GameMakerHub/Catalyst) to add CE into your project.
@@ -32,7 +31,7 @@ catalyst require kraifpatrik/<library>  # e.g. kraifpatrik/ce-class
 When including a single library, Catalyst automatically resolves its dependencies and adds them to your project as well.
 
 # Documentation and help
-Documentation for the latest release of CE is available online at https://kraifpatrik.com/docs/ce. If you need any additional help or you would just like to chat with other users of CE, you can join its dedicated Discord server: https://discord.gg/nt5hZWt.
+Documentation for the latest release of CE is available online at https://kraifpatrik.com/docs/ce. If you need any additional help, you can join its dedicated [Discord server](https://discord.gg/nt5hZWt) or its [forum thread](https://forum.yoyogames.com/index.php?threads/62585/).
 
 ## Building documentation
 If you need a documentation for a previous release or you just want to have the documentation available offline, you can build it using [GMDoc](https://github.com/kraifpatrik/gmdoc).
@@ -78,10 +77,3 @@ Following is a list of libraries which are included in CE in *this* commit. If y
 * [ce-uuid](https://github.com/kraifpatrik/ce-uuid)
 * [ce-vector](https://github.com/kraifpatrik/ce-vector)
 * [ce-xml](https://github.com/kraifpatrik/ce-xml)
-
-# Links
-* [Documentation](https://kraifpatrik.com/docs/ce)
-* [Latest changelog](https://kraifpatrik.com/docs/ce/ChangelogLatest.html)
-* [Forum](https://forum.yoyogames.com/index.php?threads/62585/)
-* [Discord](https://discord.gg/nt5hZWt)
-* [Twitch](https://www.twitch.tv/kraifpatrik)
