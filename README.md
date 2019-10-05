@@ -28,7 +28,7 @@ catalyst require kraifpatrik/ce@<release>  # e.g. kraifpatrik/ce@1.3.1
 catalyst require kraifpatrik/<library>  # e.g. kraifpatrik/ce-class
 ```
 
-When including a single library, Catalyst automatically resolves its dependencies and adds them to you project as well.
+When including a single library, Catalyst automatically resolves its dependencies and adds them to your project as well.
 
 # Libraries
 * [ce-array-utils](https://github.com/kraifpatrik/ce-array-utils)
