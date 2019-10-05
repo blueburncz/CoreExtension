@@ -1,0 +1,4 @@
+# Initialization and clean up
+Before using any of the component system functions in an instance, we have to first initialize the component system within the instance using [ce_init_components](./ce_init_components.html). This prepares all necessary variables for the component system to work properly. This function does not check whether the component system is already present in the instance and so calling it multiple times would cause overwriting the variables.
+
+Every instance which initializes component system must also destroy it and all its components using [ce_destroy_components](./ce_destroy_components.html) in the Clean Up event!

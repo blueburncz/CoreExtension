@@ -1,0 +1,80 @@
+{
+  "version": "1",
+  "title": "CE Core Docs",
+  "author": "Patrik Kraif",
+  "analytics": "UA-89677981-1",
+  "project": "C:/Users/kraif/Git/kraifpatrik/ce/ce-core/CECore_1.3.1",
+  "prefix": "ce_",
+  "api": {
+    "rating": "/api/page_rating"
+  },
+  "toc": {
+    "CE Core Docs": "index.html",
+    "Changelog 1.3.1": "ChangelogLatest.md",
+    "Class system": {
+      "file": "ClassSystem/ClassSystem.md",
+      "pages": {
+        "Creating a class": "ClassSystem/ClassCreatingAClass.md",
+        "Class properties and methods": "ClassSystem/ClassPropertiesAndMethods.md",
+        "Inheritance and shadowing": "ClassSystem/ClassInheritanceAndShadowing.md",
+        "Creating instances": "ClassSystem/ClassCreatingInstances.md",
+        "Getters and setters": "ClassSystem/ClassGettersAndSetters.md",
+        "Property calls and super": "ClassSystem/ClassPropertyCallsAndSuper.md",
+        "Casting and type checks": "ClassSystem/ClassCastingAndTypeChecks.md",
+        "Destructor": "ClassSystem/ClassDestructor.md"
+      }
+    },
+    "Component system": {
+      "file": "ComponentSystem/ComponentSystem.md",
+      "pages": {
+        "Initialization and clean up": "ComponentSystem/ComponentSystemInitializationAndCleanUp.md",
+        "Adding components": "ComponentSystem/ComponentSystemAddingComponents.md",
+        "Executing components' logic": "ComponentSystem/ComponentSystemExecutingComponentsLogic.md",
+        "Retrieving components": "ComponentSystem/ComponentSystemRetrievingComponents.md",
+        "Removing components": "ComponentSystem/ComponentSystemRemovingComponents.md",
+        "Creating custom components": "ComponentSystem/ComponentSystemCreatingCustomComponents.md"
+      }
+    },
+    "Event system": {
+      "file": "EventSystem/EventSystem.md",
+      "pages": {
+        "Configuration": "EventSystem/EventSystemConfiguration.md",
+        "Triggering events": "EventSystem/EventSystemTriggeringEvents.md",
+        "Reacting to events": "EventSystem/EventSystemReactingToEvents.md",
+        "Returning values": "EventSystem/EventSystemReturningValues.md"
+      }
+    },
+    "Input system": {
+      "file": "InputSystem/InputSystem.md",
+      "pages": {
+        "Defining actions": "InputSystem/InputSystemDefiningActions.md",
+        "Defining schemes": "InputSystem/InputSystemDefiningSchemes.md",
+        "Checking for input": "InputSystem/InputSystemCheckingForInput.md",
+        "Assigning gamepads": "InputSystem/InputSystemAssigningGamepads.md",
+        "Binding keys in-game": "InputSystem/InputSystemBindingKeysInGame.md",
+        "Saving and loading schemes": "InputSystem/InputSystemSavingAndLoadingSchemes.md",
+        "Events": "InputSystem/InputSystemEvents.md"
+      }
+    },
+    "Serialize": {
+      "file": "Serialize/Serialize.md",
+      "pages": {
+        "Defining serializable properties": "Serialize/SerializeDefiningSerializableProperties.md",
+        "Serialization": "Serialize/SerializeSerialization.md",
+        "Deserialization": "Serialize/SerializeDeserialization.md"
+      }
+    },
+    "XML": {
+      "file": "XML/XML.md",
+      "pages": {
+        "Implementation details": "XML/XMLImplementationDetails.md",
+        "Loading a file": "XML/XMLLoadingAFile.md",
+        "Traversing elements": "XML/XMLTraversingElements.md",
+        "Reading element attributes": "XML/XMLReadingElementAttributes.md",
+        "Searching elements": "XML/XMLSearchingElements.md",
+        "Reading element values": "XML/XMLReadingElementValues.md",
+        "Creating a document": "XML/XMLCreatingADocument.md"
+      }
+    }
+  }
+}

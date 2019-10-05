@@ -1,0 +1,6 @@
+# Assigning gamepads
+When checking for an input, you can specify the id of the gamepad from which the input should be read. When it is not specified, it defaults to the id of the main gamepad. The set or retrieve the id of the main gamepad, use the functions [ce_input_set_main_gamepad](./ce_input_set_main_gamepad.html) and [ce_input_get_main_gamepad](./ce_input_get_main_gamepad.html) respectively.
+
+When you are working on a local multiplayer game for example, where each player has their own gamepad and an instance which they control, it can be handy to assign the gamepad to the instance so you do not have to specify it explicitly in every function. This can be achieved using [ce_input_assign_gamepad](./ce_input_assign_gamepad.html). When an instance has a gamepad assigned to it and you do not pass any gamepad id to the `ce_input_check_*` functions, it will automatically default to the id of the assigned gamepad. You can also get an id of a gamepad assigned to an instance using [ce_input_get_assigned_gamepad](./ce_input_get_assigned_gamepad.html) or [ce_input_get_assigned_instance](./ce_input_get_assigned_instance.html) for the other way around.
+
+You can find some neat examples of use of these functions in the [Events](./InputSystemEvents.html) section.
