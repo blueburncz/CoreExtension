@@ -2,6 +2,7 @@
 > Collection of open-source GML libraries
 
 ![License](https://img.shields.io/github/license/kraifpatrik/ce)
+![Discord](https://img.shields.io/discord/573762224603004929?label=Discord)
 
 # Table of Contents
 * [About](#about)
