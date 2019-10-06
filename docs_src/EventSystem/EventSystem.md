@@ -1,5 +1,5 @@
 # Event system
-CE Core provides a simple way to trigger custom events within game objects. This section is an overview which should help you get started with the custom event system.
+CE provides a simple way to trigger custom events within game objects. This section is an overview which should help you get started with the custom event system.
 
 ## Contents
 * [Configuration](./EventSystemConfiguration.html)

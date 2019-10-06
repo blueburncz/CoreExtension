@@ -1,5 +1,5 @@
 # XML
-CE Core comes with a lightweight XML reader & writer library. In this section you can find a quick overview that should help you start using the library more easily.
+CE comes with a lightweight XML reader & writer library. In this section you can find a quick overview that should help you start using the library more easily.
 
 ## Contents
 * [Implementation details](./XMLImplementationDetails.html)
