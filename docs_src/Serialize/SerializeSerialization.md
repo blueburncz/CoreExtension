@@ -9,7 +9,7 @@ buffer_seek(_buffer, buffer_seek_start, 0);
 // Write number of all instances (player + enemies).
 ce_buffer_write(_buffer, buffer_u32, 1 + instance_number(OEnemy));
 // The player is only one, so this will be fast.
-ce_serialize_to_buffer(OPlayer, _buffer, _props);
+ce_serialize_to_buffer(OPlayer, _buffer);
 // There is a lot of enemies, so it's better to create the property list
 // beforehand.
 var _props = ce_get_serializable_properties(OEnemy);
