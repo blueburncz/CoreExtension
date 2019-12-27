@@ -1,10 +1,11 @@
 {
-  "_version": "1",
+  "_version": 2,
+  "project": "ce.yyp",
+  "project_name": "CE",
   "title": "CE Docs",
   "author": "Patrik Kraif",
-  "analytics": "UA-89677981-1",
   "prefix": "ce_",
-  "project": "ce.yyp",
+  "analytics": "UA-89677981-1",
   "api": {
     "rating": "/api/page_rating"
   },
