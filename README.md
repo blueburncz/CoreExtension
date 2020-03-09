@@ -2,7 +2,7 @@
 > Collection of open-source GML libraries
 
 ![License](https://img.shields.io/github/license/slagtand-org/ce)
-[![Discord](https://img.shields.io/discord/573762224603004929?label=Discord)](https://discord.gg/QjyxmHP)
+[![Discord](https://img.shields.io/discord/686494539308859394?label=Discord)](https://discord.gg/QjyxmHP)
 
 # Table of Contents
 * [About](#about)
