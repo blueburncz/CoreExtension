@@ -2,7 +2,7 @@
 > Collection of open-source GML libraries
 
 ![License](https://img.shields.io/github/license/slagtand-org/ce)
-[![Discord](https://img.shields.io/discord/573762224603004929?label=Discord)](https://discord.gg/nt5hZWt)
+[![Discord](https://img.shields.io/discord/573762224603004929?label=Discord)](https://discord.gg/QjyxmHP)
 
 # Table of Contents
 * [About](#about)
@@ -13,7 +13,7 @@
 # About
 CE is a collection of open-source GML libraries for GameMaker Studio 2. Its target is to provide you with a strong codebase so you can focus on coding your games instead of their technical backgrounds.
 
-Previously it was released only as a single extension [CE Core](https://github.com/slagtand-org/ce-core), which suffered from dependency hell when trying to include only a specific library. This was the main motivation to split the extension into multiple repositories, each representing a library, which can be then included into you projects using [Catalyst](https://github.com/GameMakerHub/Catalyst), the open-source package manager for GameMaker Studio 2.
+Previously it was released only as a single extension [CE Core](https://github.com/kraifpatrik/ce-core), which suffered from dependency hell when trying to include only a specific library. This was the main motivation to split the extension into multiple repositories, each representing a library, which can be then included into you projects using [Catalyst](https://github.com/GameMakerHub/Catalyst), the open-source package manager for GameMaker Studio 2.
 
 # Installation
 Use [Catalyst](https://github.com/GameMakerHub/Catalyst) to add CE into your project.
