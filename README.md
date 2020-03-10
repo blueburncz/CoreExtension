@@ -34,7 +34,7 @@ When including a single library, Catalyst automatically resolves its dependencie
 Documentation for the latest release of CE is available online at https://kraifpatrik.com/docs/ce. If you need any additional help, you can join its dedicated [Discord server](https://discord.gg/nt5hZWt) or its [forum thread](https://forum.yoyogames.com/index.php?threads/62585/).
 
 ## Building documentation
-If you need a documentation for a previous release or you just want to have the documentation available offline, you can build it using [GMDoc](https://github.com/slagtand-org/gmdoc).
+If you need a documentation for a previous release or you just want to have the documentation available offline, you can build it using [GMDoc](https://github.com/kraifpatrik/gmdoc).
 
 **Example:**
 * `git clone https://github.com/slagtand-org/ce.git`
