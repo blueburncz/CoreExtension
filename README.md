@@ -9,6 +9,7 @@
 * [Installation](#installation)
 * [Documentation and help](#documentation-and-help)
 * [Libraries](#libraries)
+* [Links](#links)
 
 # About
 CE is a collection of open-source GML libraries for GameMaker Studio 2. Its target is to provide you with a strong codebase so you can focus on coding your games instead of their technical backgrounds.
@@ -37,11 +38,13 @@ Documentation for the latest release of CE is available online at https://kraifp
 If you need a documentation for a previous release or you just want to have the documentation available offline, you can build it using [GMDoc](https://github.com/kraifpatrik/gmdoc).
 
 **Example:**
-* `git clone https://github.com/slagtand-org/ce.git`
-* `cd .\ce`
-* `git checkout 1.3.1`
-* `catalyst install` - *Required to install the libraries included in the release!*
-* `gmdoc build`
+```powershell
+git clone https://github.com/slagtand-org/ce.git
+cd .\ce
+git checkout 1.3.1
+catalyst install # Required to install the libraries included in the release!
+gmdoc build
+```
 
 # Libraries
 Following is a list of libraries which are included in CE in *this* commit. If you want to see libraries of a specific release, please checkout to its tag.
@@ -77,3 +80,6 @@ Following is a list of libraries which are included in CE in *this* commit. If y
 * [ce-uuid](https://github.com/slagtand-org/ce-uuid)
 * [ce-vector](https://github.com/slagtand-org/ce-vector)
 * [ce-xml](https://github.com/slagtand-org/ce-xml)
+
+# Links
+* [Public Trello board](https://trello.com/b/ZcvOyZwc/ce)
