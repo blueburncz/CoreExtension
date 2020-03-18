@@ -7,7 +7,7 @@ Every component must inherit from the [ce_component_class](./ce_component_class.
 ```gml
 /// @func ai_component()
 CE_PRAGMA_ONCE;
-var _aiComponent = ce_class_create(ce_component_class);
+var _ai_component = ce_class_create(ce_component_class);
 ```
 
 ## Methods bound to events
@@ -15,12 +15,12 @@ If a component needs to run a piece of code in a specific event, that code shoul
 
 Method | Description | Called automatically
 ----- | ----------- | --------------------
-onAdd | A method called when a component is added to an instance. | Yes
-onCustomEvent | A method which should be called when a user event occurs (see the [Event system](./EventSystem.html) manual for more information). | No
-onDraw | A method which should be called every frame in the Draw event. | No
-onInit | A method called when a component is created. | Yes
-onRemove | A method called when a component is removed from an instance. | Yes
-onUpdate | A method which should be called every frame in the Step event. | No
+on_add | A method called when a component is added to an instance. | Yes
+on_custom_event | A method which should be called when a user event occurs (see the [Event system](./EventSystem.html) manual for more information). | No
+on_draw | A method which should be called every frame in the Draw event. | No
+on_init | A method called when a component is created. | Yes
+on_remove | A method called when a component is removed from an instance. | Yes
+on_update | A method which should be called every frame in the Step event. | No
 
 These methods always take a single parameter, which is the id of the component object. Methods that are not called automatically have to be called using [ce_call_components](./ce_call_components.html) (or using [ce_call](./ce_call.html) for each component).
 

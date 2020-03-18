@@ -3,9 +3,9 @@ If class *A* inherits from class *B*, it is possible to cast objects of class *A
 
 ```gml
 var _circle = circle_create(10, 10, 100);
-ce_call(_circle, "getArea"); // => 31415.92
+ce_call(_circle, "get_area"); // => 31415.92
 var _shape = ce_cast(_circle, shape_class);
-ce_call(_shape, "getArea"); // => undefined
+ce_call(_shape, "get_area"); // => undefined
 // ce_cast(_circle, some_other_class); // Would end with an error
 ```
 

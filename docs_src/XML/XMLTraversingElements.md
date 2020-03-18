@@ -18,8 +18,8 @@ following code iterates through all the `<enemy>` elements. In the first iterati
 var _enemies = ce_xml_read("enemies.xml");
 if (_enemies != noone)
 {
-    var _childCount = ce_xml_elem_get_child_count(_enemies);
-    for (var i = 0; i < _childCount; ++i)
+    var _child_count = ce_xml_elem_get_child_count(_enemies);
+    for (var i = 0; i < _child_count; ++i)
     {
         var _enemy = ce_xml_elem_get_child(_enemies, i);
         // Process 'enemy' element's data here...

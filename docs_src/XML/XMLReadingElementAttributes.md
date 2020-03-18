@@ -17,8 +17,8 @@ following code would iterate through the `<enemy>` elements and spawn instances 
 var _enemies = ce_xml_read("enemies.xml");
 if (_enemies != noone)
 {
-    var _childCount = ce_xml_elem_get_child_count(_enemies);
-    for (var i = 0; i < _childCount; ++i)
+    var _child_count = ce_xml_elem_get_child_count(_enemies);
+    for (var i = 0; i < _child_count; ++i)
     {
         var _enemy = ce_xml_elem_get_child(_enemies, i);
         instance_create_layer(
@@ -36,15 +36,15 @@ It is possible that you sometimes may now know the exact structure of the loaded
 Following code iterates through all attributes of an element.
 
 ```gml
-var _attributeCount = ce_xml_elem_get_attribute_count(_elem);
-if (_attributeCount > 0)
+var _attribute_count = ce_xml_elem_get_attribute_count(_elem);
+if (_attribute_count > 0)
 {
-    var _attributeName = ce_xml_elem_find_first_attribute(_elem);
-    repeat (_attributeCount)
+    var _attribute_name = ce_xml_elem_find_first_attribute(_elem);
+    repeat (_attribute_count)
     {
-        var _attributeValue = ce_xml_elem_get_attribute(_elem, _attributeName);
+        var _attribute_value = ce_xml_elem_get_attribute(_elem, _attribute_name);
         // Process attribute value here...
-        _attributeName = ce_xml_elem_find_next_attribute(_elem, _attributeName);
+        _attribute_name = ce_xml_elem_find_next_attribute(_elem, _attribute_name);
     }
 }
 ```

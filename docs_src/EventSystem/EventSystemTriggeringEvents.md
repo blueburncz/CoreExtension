@@ -6,12 +6,12 @@ We suggest you to define your custom events either using macros or enums. In thi
 ```gml
 /// @macro {string} When an instance receives this event, it means it was
 /// damaged. The number of damage dealt can be retrieved from the event data.
-#macro EV_GOT_HIT "evGotHit"
+#macro EV_GOT_HIT "ev_got_hit"
 
 /// @desc Player's mouse click event
 with (OEnemy)
 {
-    if (point_distance(x, y, other.x, other.y) < other.attackRange)
+    if (point_distance(x, y, other.x, other.y) < other.attack_range)
     {
         ce_trigger_event(EV_GOT_HIT, other.damage);
     }
@@ -22,12 +22,12 @@ For triggering events in all instances there is also a shorthand function [ce_tr
 
 ```gml
 /// @macro {string} The game was paused.
-#macro EV_GAME_PAUSED "evGamePaused"
+#macro EV_GAME_PAUSED "ev_game_paused"
 
 /// @macro {string} The game was unpaused.
-#macro EV_GAME_UNPAUSED "evGameUnpaused"
+#macro EV_GAME_UNPAUSED "ev_game_unpaused"
 
 /// @desc When Escape is pressed
-global.gamePaused = !global.gamePaused;
-ce_trigger_event_global(global.gamePaused ? EV_GAME_PAUSED : EV_GAME_UNPAUSED);
+global.game_paused = !global.game_paused;
+ce_trigger_event_global(global.game_paused ? EV_GAME_PAUSED : EV_GAME_UNPAUSED);
 ```

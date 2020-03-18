@@ -7,10 +7,10 @@ switch (ce_get_event())
 {
 case CE_EV_COMPONENT_REMOVED:
     var _component = ce_get_event_data();
-    if (_component == timerComponent)
+    if (_component == timer_component)
     {
         // Do something when a specific timer component stored in
-        // the timerComponent variable is removed...
+        // the timer_component variable is removed...
     }
     if (ce_is_instance(_component, ce_timer_component))
     {
