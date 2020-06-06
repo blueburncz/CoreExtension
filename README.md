@@ -2,18 +2,19 @@
 > Collection of open-source GML libraries
 
 ![License](https://img.shields.io/github/license/slagtand-org/ce)
-[![Discord](https://img.shields.io/discord/573762224603004929?label=Discord)](https://discord.gg/nt5hZWt)
+[![Discord](https://img.shields.io/discord/686494539308859394?label=Discord)](https://discord.gg/QjyxmHP)
 
 # Table of Contents
 * [About](#about)
 * [Installation](#installation)
 * [Documentation and help](#documentation-and-help)
 * [Libraries](#libraries)
+* [Links](#links)
 
 # About
 CE is a collection of open-source GML libraries for GameMaker Studio 2. Its target is to provide you with a strong codebase so you can focus on coding your games instead of their technical backgrounds.
 
-Previously it was released only as a single extension [CE Core](https://github.com/slagtand-org/ce-core), which suffered from dependency hell when trying to include only a specific library. This was the main motivation to split the extension into multiple repositories, each representing a library, which can be then included into you projects using [Catalyst](https://github.com/GameMakerHub/Catalyst), the open-source package manager for GameMaker Studio 2.
+Previously it was released only as a single extension [CE Core](https://github.com/kraifpatrik/ce-core), which suffered from dependency hell when trying to include only a specific library. This was the main motivation to split the extension into multiple repositories, each representing a library, which can be then included into you projects using [Catalyst](https://github.com/GameMakerHub/Catalyst), the open-source package manager for GameMaker Studio 2.
 
 # Installation
 Use [Catalyst](https://github.com/GameMakerHub/Catalyst) to add CE into your project.
@@ -31,17 +32,19 @@ catalyst require slagtand-org/<library>  # e.g. slagtand-org/ce-class
 When including a single library, Catalyst automatically resolves its dependencies and adds them to your project as well.
 
 # Documentation and help
-Documentation for the latest release of CE is available online at https://kraifpatrik.com/docs/ce. If you need any additional help, you can join its dedicated [Discord server](https://discord.gg/nt5hZWt) or its [forum thread](https://forum.yoyogames.com/index.php?threads/62585/).
+Documentation for the latest release of CE is available online at https://kraifpatrik.com/docs/ce. If you need any additional help, you can join its dedicated [Discord server](https://discord.gg/nt5h_zWt) or its [forum thread](https://forum.yoyogames.com/index.php?threads/62585/).
 
 ## Building documentation
-If you need a documentation for a previous release or you just want to have the documentation available offline, you can build it using [GMDoc](https://github.com/slagtand-org/gmdoc).
+If you need a documentation for a previous release or you just want to have the documentation available offline, you can build it using [GMDoc](https://github.com/kraifpatrik/gmdoc).
 
 **Example:**
-* `git clone https://github.com/slagtand-org/ce.git`
-* `cd .\ce`
-* `git checkout 1.3.1`
-* `catalyst install` - *Required to install the libraries included in the release!*
-* `gmdoc build`
+```powershell
+git clone https://github.com/slagtand-org/ce.git
+cd .\ce
+git checkout 1.3.1
+catalyst install # Required to install the libraries included in the release!
+gmdoc build
+```
 
 # Libraries
 Following is a list of libraries which are included in CE in *this* commit. If you want to see libraries of a specific release, please checkout to its tag.
@@ -77,3 +80,6 @@ Following is a list of libraries which are included in CE in *this* commit. If y
 * [ce-uuid](https://github.com/slagtand-org/ce-uuid)
 * [ce-vector](https://github.com/slagtand-org/ce-vector)
 * [ce-xml](https://github.com/slagtand-org/ce-xml)
+
+# Links
+* [Public Trello board](https://trello.com/b/ZcvOyZwc/ce)

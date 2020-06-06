@@ -4,8 +4,8 @@ After an instance initializes the component system, we can add components to it 
 ```gml
 /// @desc Create event
 ce_init_components();
-stateMachineComponent = ce_add_component(id, ce_state_machine_component);
-timerComponent = ce_add_component(id, ce_timer_component);
+state_machine_component = ce_add_component(id, ce_state_machine_component);
+timer_component = ce_add_component(id, ce_timer_component);
 ```
 
 Adding components to instances also triggers a custom event

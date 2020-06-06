@@ -6,20 +6,20 @@ It is often useful to define what should happen when an instance of a class is d
 ```gml
 /// @func iterative_class()
 CE_PRAGMA_ONCE;
-var _iterativeClass = ce_class_create();
-ce_class_define_destructor(_iterativeClass, iterative_delete);
+var _iterative_class = ce_class_create();
+ce_class_define_destructor(_iterative_class, iterative_delete);
 
 /// @func iterative_delete()
 show_debug_message("Iterative destroyed");
 
 /// @func list_class()
 CE_PRAGMA_ONCE;
-var _listClass = ce_class_create(iterative_class);
-ce_class_define_properties(_listClass, [
+var _list_class = ce_class_create(iterative_class);
+ce_class_define_properties(_list_class, [
     "list", noone,
     "_init", list_init,
 ]);
-ce_class_define_destructor(_listClass, list_delete);
+ce_class_define_destructor(_list_class, list_delete);
 
 /// @func list_init(id)
 var _list = argument[0];

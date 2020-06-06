@@ -8,8 +8,8 @@ var _compressed = buffer_load("save.sav");
 var _buffer = buffer_decompress(_compressed);
 buffer_delete(_compressed);
 buffer_seek(_buffer, buffer_seek_start, 0);
-var _instanceCount = buffer_read(_buffer, buffer_u32);
-repeat (_instanceCount)
+var _instance_count = buffer_read(_buffer, buffer_u32);
+repeat (_instance_count)
 {
     ce_deserialize_from_buffer(_buffer);
 }

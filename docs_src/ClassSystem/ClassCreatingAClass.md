@@ -9,5 +9,5 @@ Following code defines a new class *shape*, which we will further use as a base 
 /// @func shape_class()
 /// @desc Defines a *shape* class.
 CE_PRAGMA_ONCE;
-var _shapeClass = ce_class_create();
+var _shape_class = ce_class_create();
 ```

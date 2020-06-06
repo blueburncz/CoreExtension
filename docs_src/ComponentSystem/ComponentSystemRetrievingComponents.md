@@ -6,11 +6,11 @@ If you want retrieve an instance's component of a specific type, you can do so u
 if (ce_has_component(id, health_component)
     && ce_has_component(other.id, damage_component))
 {
-    var _healthComponent = ce_get_component(id, health_component);
-    var _damageComponent = ce_get_component(other.id, damage_component);
-    var _damageDealt = ce_get_prop(_damageComponent, "damage");
-    var _newHealth = ce_get_prop(_healthComponent, "health") - _damageDealt;
-    ce_set_prop(_healthComponent, "health", _newHealth);
+    var _health_component = ce_get_component(id, health_component);
+    var _damage_component = ce_get_component(other.id, damage_component);
+    var _damage_dealt = ce_get_prop(_damage_component, "damage");
+    var _new_health = ce_get_prop(_health_component, "health") - _damage_dealt;
+    ce_set_prop(_health_component, "health", _new_health);
 }
 ```
 
@@ -20,9 +20,9 @@ Instances can have multiple components of the same type. To retrieve a list of a
 var _lights = ce_list_components(id, light_component);
 while (ce_iter(_lights, ds_type_list))
 {
-    var _lightComponent = CE_ITER_VALUE;
-    var _randomColor = make_color_hsv(irandom(255), 255, 255);
-    ce_set_prop(_lightComponent, "color", _randomColor);
+    var _light_component = CE_ITER_VALUE;
+    var _random_color = make_color_hsv(irandom(255), 255, 255);
+    ce_set_prop(_light_component, "color", _random_color);
 }
 ds_list_destroy(_lights);
 ```
@@ -32,7 +32,7 @@ The functions above retrieve components of an instance, but sometimes it can be 
 Following is a code showing what could a rendering system using components look like.
 
 ```gml
-var _matrixWorld = matrix_get(matrix_world);
+var _matrix_world = matrix_get(matrix_world);
 var _renderable = ce_objects_with_component(true, transform_component,
     mesh_component);
 
@@ -40,13 +40,13 @@ while (ce_iter(_renderable, ce_type_list))
 {
     with (CE_ITER_VALUE)
     {
-        var _transformComponent = ce_get_component(id, transform_component);
-        var _meshComponent = ce_get_component(id, mesh_component);
-        matrix_set(matrix_world, ce_get_prop(_transformComponent, "matrix"));
-        ce_call(_meshComponent, "submit");
+        var _transform_component = ce_get_component(id, transform_component);
+        var _mesh_component = ce_get_component(id, mesh_component);
+        matrix_set(matrix_world, ce_get_prop(_transform_component, "matrix"));
+        ce_call(_mesh_component, "submit");
     }
 }
 
-matrix_set(matrix_world, _matrixWorld);
+matrix_set(matrix_world, _matrix_world);
 ds_list_destroy(_renderable);
 ```
