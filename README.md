@@ -73,7 +73,7 @@ Following is a list of libraries which are included in CE in *this* commit. If y
 * [CE Object Utils 1.0.0](https://github.com/slagtand-org/ce-object-utils/tree/1.0.0)
 * [CE Quaternion 1.0.6](https://github.com/slagtand-org/ce-quaternion/tree/1.0.6)
 * [CE Real Utils 1.0.1](https://github.com/slagtand-org/ce-real-utils/tree/1.0.1)
-* [CE Scene Graph Component 1.0.0](https://github.com/slagtand-org/ce-scene-graph-component/tree/1.0.1)
+* [CE Scene Graph Component 1.0.0](https://github.com/slagtand-org/ce-scene-graph-component/tree/1.0.0)
 * [CE Serialize 1.0.1](https://github.com/slagtand-org/ce-serialize/tree/1.0.1)
 * [CE State Machine Component 1.1.0](https://github.com/slagtand-org/ce-state-machine-component/tree/1.1.0)
 * [CE String Utils 1.0.1](https://github.com/slagtand-org/ce-string-utils/tree/1.0.1)
