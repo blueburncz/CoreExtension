@@ -39,6 +39,7 @@
         "slagtand-org/ce-ds-bucket": "1.0.0",
         "slagtand-org/ce-tween": "1.0.1",
         "slagtand-org/ce-window-resize-tracker-component": "1.0.2",
-        "slagtand-org/ce-event-listener-component": "1.0.0"
+        "slagtand-org/ce-event-listener-component": "1.0.0",
+        "slagtand-org/ce-scene-graph-component": "1.0.0"
     }
 }
