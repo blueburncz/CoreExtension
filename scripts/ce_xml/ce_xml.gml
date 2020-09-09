@@ -20,25 +20,28 @@ enum CE_EXmlChars
 	SQ = 39,
 	/// @member Slash.
 	Slash = 47,
-	/// @member Less than sign.
+	/// @member Less-than sign.
 	LT = 60,
 	/// @member Equals sign.
 	Equal = 61,
-	/// @member Greater than sign.
+	/// @member Greater-than sign.
 	GT = 62,
 	/// @member Question mark.
 	QM = 63
 };
 
-/// @param {string} [_msg]
+/// @func CE_XmlError([_msg])
+/// @desc Base class for all errors thrown by the XML library.
+/// @param {string} [_msg] An error message. Defaults to an empty string.
 function CE_XmlError() constructor
 {
-	/// @var {string}
+	/// @var {string} The error message.
 	/// @readonly
 	msg = (argument_count > 0) ? argument[0] : "";
 }
 
 /// @func CE_XmlElement([_name[, value]])
+/// @desc Represents a tag within an XML document.
 /// @param {string} [_name] The name of the element. Defaults to an empty string.
 /// @param {string/real/bool/undefined} [_value] The element value. Defaults to
 /// `undefined`.
@@ -77,7 +80,7 @@ function CE_XmlElement() constructor
 	};
 
 	/// @func has_attribute([_name])
-	/// @param {string} [_name]
+	/// @param {string} [_name] The name of the attribute.
 	/// @return {bool} Returns `true` if the element has the attribute.
 	static has_attribute = function () {
 		gml_pragma("forceinline");
@@ -155,8 +158,10 @@ function CE_XmlElement() constructor
 	};
 
 	/// @func get_child(_index)
-	/// @param {int} _index
-	/// @return {CE_XmlElement}
+	/// @param {int} _index The index of the child element.
+	/// @return {CE_XmlElement} Returns a child element with given index.
+	/// @see CE_XmlElement.has_children
+	/// @see CE_XmlElement.get_child_count
 	static get_child = function (_index) {
 		gml_pragma("forceinline");
 		return children[| _index];
@@ -182,6 +187,7 @@ function CE_XmlElement() constructor
 }
 
 /// @func CE_XmlDocument()
+/// @desc An XML document.
 function CE_XmlDocument() constructor
 {
 	/// @var {string/undefined}
@@ -260,9 +266,10 @@ function CE_XmlDocument() constructor
 	};
 
 	/// @func load(_path)
-	/// @param {string} _path
-	/// @return {CE_XmlDocument}
-	/// @throws {CE_XmlError)
+	/// @desc Loads an XML document from a file.
+	/// @param {string} _path The path to the file to load.
+	/// @return {CE_XmlDocument} Returns `self` to allow method chaining.
+	/// @throws {CE_XmlError) If the loading fails.
 	static load = function (_path) {
 		var _file = file_bin_open(_path, 0);
 		if (_file == -1)
@@ -500,7 +507,8 @@ function CE_XmlDocument() constructor
 	};
 
 	/// @func to_string()
-	/// @return {string}
+	/// @desc Prints the document into a string.
+	/// @return {string} The created string.
 	static to_string = function () {
 		var _element = (argument_count > 0) ? argument[0] : root;
 		var _name = _element.name;
@@ -558,8 +566,9 @@ function CE_XmlDocument() constructor
 	};
 
 	/// @func save([_path])
-	/// @param {string} [_path]
-	/// @return {CE_XmlDocument}
+	/// @desc Saves the document to a file.
+	/// @param {string} [_path] The file path.
+	/// @return {CE_XmlDocument} Returns `self` to allow method chaining.
 	/// @throws {CE_XmlError} If the save path is not defined.
 	static save = function () {
 		var _path = (argument_count > 0) ? argument[0] : path;
