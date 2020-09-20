@@ -7,8 +7,64 @@ CE_PRAGMA_ONCE;
 /// represent a number.
 function ce_parse_real(_string)
 {
-	// TODO: Implement ce_parse_real
-	return NaN;
+	var _sign = 1;
+	var _number = "0";
+	var _index = 1;
+	var _state = 0;
+
+	repeat (string_length(_string) + 1)
+	{
+		var _char = string_char_at(_string, _index++);
+
+		switch (_state)
+		{
+		case 0:
+			if (_char == "-")
+			{
+				_sign *= -1;
+			}
+			else if (_char == "+")
+			{
+				_sign *= +1;
+			}
+			else if (ce_char_is_digit(_char)
+				|| _char == ".")
+			{
+				_state = 1;
+				--_index;
+			}
+			else
+			{
+				return NaN;
+			}
+			break;
+
+		case 1:
+			if (ce_char_is_digit(_char)
+				|| _char == ".")
+			{
+				_number += _char;
+			}
+			else
+			{
+				return NaN;
+			}
+			break;
+
+		case 2:
+			if (ce_char_is_digit(_char))
+			{
+				_number += _char;
+			}
+			else
+			{
+				return NaN;
+			}
+			break;
+		}
+	}
+
+	return _sign * real(_number);
 }
 
 /// @func ce_real_compare(r1, r2)
