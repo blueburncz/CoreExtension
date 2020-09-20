@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "Math",
-    "path": "folders/Scripts/CE/Math.yy",
+    "path": "folders/CE/Scripts/Math.yy",
   },
   "resourceVersion": "1.0",
   "name": "ce_vec3",
