@@ -1,5 +1,3 @@
-CE_PRAGMA_ONCE;
-
 /// @func ce_hours_to_ms(_hours)
 /// @param {real} _hours Hours to be converted to milliseconds.
 /// @return {real} Hours converted to milliseconds.

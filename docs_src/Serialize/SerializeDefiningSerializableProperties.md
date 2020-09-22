@@ -4,8 +4,6 @@ By default any serialized instance contains its object name, x and y position an
 ```gml
 /// @func serialize_config()
 gml_pragma("global", "serialize_config();");
-CE_PRAGMA_ONCE;
-
 // Serializable properties common for all objects
 ce_add_serializable_property(all, "sprite_index", buffer_u32);
 

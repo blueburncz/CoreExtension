@@ -1,5 +1,3 @@
-CE_PRAGMA_ONCE;
-
 /// @func ce_draw_rectangle(_x, _y, _width, _height, _color[, _alpha])
 /// @desc Draws a rectangle of the given size and color at the given position.
 /// @param {real} _x The x position to draw the rectangle at.

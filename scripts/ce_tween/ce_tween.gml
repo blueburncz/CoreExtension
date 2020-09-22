@@ -1,5 +1,3 @@
-CE_PRAGMA_ONCE;
-
 /// @func ce_tween_back_in(_time, _value, _final, _duration[, back])
 /// @desc Cubic easing in with a back effect - accelerating from zero velocity.
 /// @param {real} _time Current time in frames/seconds/µs...

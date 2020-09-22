@@ -1,5 +1,3 @@
-CE_PRAGMA_ONCE;
-
 /// @func ce_color_alpha_to_argb(_color, _alpha)
 /// @desc Converts the color and aplha into a ARGB color.
 /// @param {real} _color The color.

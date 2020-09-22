@@ -1,5 +1,3 @@
-CE_PRAGMA_ONCE;
-
 /// @func ce_array_clear(_array, _value)
 /// @desc Replaces all values in an array with given value.
 /// @param {array} _array The array.

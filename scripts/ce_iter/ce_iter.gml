@@ -1,5 +1,3 @@
-CE_PRAGMA_ONCE;
-
 /// @macro {string/real} The current index in the iteration.
 #macro CE_ITER_INDEX global.__ce_iter_index_prev
 

@@ -1,12 +1,7 @@
-CE_PRAGMA_ONCE;
-
 //gml_pragma("UnityBuild", "false");
 
-/// @macro {bool} `true` to enable debug.
+/// @macro {bool} Use `true` to enable debug.
 #macro CE_DEBUG true
-
-/// @macro {bool} `true` to run tests.
-#macro CE_RUN_TESTS true
 
 /// @macro {real} The width of the screen that the game is designed for,
 /// ignoring the device orientation (always use the longer side).

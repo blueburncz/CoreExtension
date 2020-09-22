@@ -1,5 +1,3 @@
-CE_PRAGMA_ONCE;
-
 /// @func ce_parse_real(string)
 /// @desc Parses a real number from a string.
 /// @param {string} string The string to parse the number from.

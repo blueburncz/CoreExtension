@@ -1,5 +1,3 @@
-CE_PRAGMA_ONCE;
-
 /// @func ce_generate_uuid([_bytes])
 /// @desc Generates a version 4 UUID.
 /// @param {array} [_bytes] An array that will be used for storing random bytes.

@@ -1,5 +1,3 @@
-CE_PRAGMA_ONCE;
-
 /// @func ce_hammersley_2d(_i, _n)
 /// @desc Gets i-th point from sequence of uniformly distributed points on a
 /// unit square.

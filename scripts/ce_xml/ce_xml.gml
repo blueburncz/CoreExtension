@@ -1,5 +1,3 @@
-CE_PRAGMA_ONCE;
-
 /// @enum XML delimiters.
 /// @private
 enum CE_EXmlChars

@@ -1,5 +1,3 @@
-CE_PRAGMA_ONCE;
-
 /// @func ce_object_get_base(_object)
 /// @param {real} _object The object index.
 /// @return {real} The index of the base object in the object's ancestors

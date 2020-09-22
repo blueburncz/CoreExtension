@@ -1,5 +1,3 @@
-CE_PRAGMA_ONCE;
-
 /// @func ce_surface_blur(_target, _work, _scale)
 /// @desc Blurs the target surface.
 /// @param {surface} _target The surface to be blurred.

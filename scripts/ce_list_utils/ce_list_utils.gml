@@ -1,5 +1,3 @@
-CE_PRAGMA_ONCE;
-
 // TODO: Rewrite for loops to repeats for higher performance.
 
 /// @func ce_ds_list_add_list(_l1, _l2)

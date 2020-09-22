@@ -1,5 +1,3 @@
-CE_PRAGMA_ONCE;
-
 /// @func ce_ds_map_clone(_map)
 /// @desc Creates a shallow copy of the map.
 /// @param {ds_map} _map The map to clone.

@@ -1,5 +1,3 @@
-CE_PRAGMA_ONCE;
-
 /// @func ce_char_is_digit(_char)
 /// @param {string} _char The character.
 /// @return {bool} `true` if the character is a digit.

@@ -1,5 +1,3 @@
-CE_PRAGMA_ONCE;
-
 /// @func ce_vec3_create(_x[, _y, _z])
 /// @desc Creates a new vector with given components. If only the first value
 /// is supplied, then it is used for every component.

@@ -1,5 +1,3 @@
-CE_PRAGMA_ONCE;
-
 /// @func ce_byte_array_to_hex(_bytes)
 /// @desc Converts an array of number between 0..255 into a string of
 /// hexadecimal representations of each number.
