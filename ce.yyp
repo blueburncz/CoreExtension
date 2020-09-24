@@ -11,6 +11,7 @@
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":0,},
     {"id":{"name":"CE_ShBlur","path":"shaders/CE_ShBlur/CE_ShBlur.yy",},"order":0,},
     {"id":{"name":"ce_surface_utils","path":"scripts/ce_surface_utils/ce_surface_utils.yy",},"order":7,},
+    {"id":{"name":"ce_struct_utils","path":"scripts/ce_struct_utils/ce_struct_utils.yy",},"order":9,},
     {"id":{"name":"ce_event_system","path":"scripts/ce_event_system/ce_event_system.yy",},"order":2,},
     {"id":{"name":"ce_vec3","path":"scripts/ce_vec3/ce_vec3.yy",},"order":1,},
     {"id":{"name":"ce_hex","path":"scripts/ce_hex/ce_hex.yy",},"order":8,},
