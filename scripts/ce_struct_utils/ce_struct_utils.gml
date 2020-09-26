@@ -2,7 +2,7 @@
 /// @desc Retrieves structure's property value.
 /// @param {struct} _struct The structure.
 /// @param {string} _name The property name.
-/// @param {_default} [_name] The value returned when the struct doesn't have
+/// @param {any} [_default] The value returned when the struct doesn't have
 /// such property.
 /// @return {any} The property value.
 function ce_struct_get(_struct, _name)
