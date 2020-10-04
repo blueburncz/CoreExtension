@@ -95,3 +95,48 @@ function ce_surface_create_from_sprite(_sprite, _index)
 	surface_reset_target();
 	return _surface;
 }
+
+/// @func ce_surface_clear_color(_color, _alpha)
+/// @desc Clears color of the current render target without clearing its
+/// depth buffer.
+/// @param {uint} _color The color to clear the target with.
+/// @param {real} _alpha The alpha to clear the target with.
+function ce_surface_clear_color(_color, _alpha)
+{
+	var _surface = surface_get_target();
+	gpu_push_state();
+	gpu_set_blendenable(true);
+	gpu_set_blendmode_ext(bm_one, bm_zero);
+	gpu_set_ztestenable(false);
+	gpu_set_zwriteenable(false);
+
+	shader_set(ShClearColor);
+	shader_set_uniform_f(shader_get_uniform(ShClearColor, "u_vColor"),
+		color_get_red(_color) / 255,
+		color_get_green(_color) / 255,
+		color_get_blue(_color) / 255,
+		_alpha);
+	draw_rectangle(0, 0, surface_get_width(_surface), surface_get_height(_surface), false);
+	shader_reset();
+
+	gpu_pop_state();
+}
+
+/// @func ce_surface_copy(_source, _target)
+/// @desc Renders contents of one surface to another without blending (affected
+/// pixels in the target surface are completely overwritten with ones from the
+/// source surface).
+/// @param {surface} _source The surface to be rendered.
+/// @param {surface} _target The surface to render into.
+function ce_surface_copy(_source, _target)
+{
+	surface_set_target(_target);
+	gpu_push_state();
+	gpu_set_blendenable(true);
+	gpu_set_blendmode_ext(bm_one, bm_zero);
+	gpu_set_ztestenable(false);
+	gpu_set_zwriteenable(false);
+	draw_surface(_source, 0, 0);
+	gpu_pop_state();
+	surface_reset_target();
+}
