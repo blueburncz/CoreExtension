@@ -5,7 +5,7 @@
     "path": "folders/CE/Shaders.yy",
   },
   "resourceVersion": "1.0",
-  "name": "CE_ShBlur",
+  "name": "CE_ShGaussianBlur",
   "tags": [],
   "resourceType": "GMShader",
 }

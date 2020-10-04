@@ -9,7 +9,7 @@
     {"id":{"name":"ce_matrix","path":"scripts/ce_matrix/ce_matrix.yy",},"order":4,},
     {"id":{"name":"ce_iter","path":"scripts/ce_iter/ce_iter.yy",},"order":19,},
     {"id":{"name":"RmTest","path":"rooms/RmTest/RmTest.yy",},"order":0,},
-    {"id":{"name":"CE_ShBlur","path":"shaders/CE_ShBlur/CE_ShBlur.yy",},"order":0,},
+    {"id":{"name":"CE_ShGaussianBlur","path":"shaders/CE_ShGaussianBlur/CE_ShGaussianBlur.yy",},"order":0,},
     {"id":{"name":"ce_surface_utils","path":"scripts/ce_surface_utils/ce_surface_utils.yy",},"order":7,},
     {"id":{"name":"ce_struct_utils","path":"scripts/ce_struct_utils/ce_struct_utils.yy",},"order":9,},
     {"id":{"name":"ce_event_system","path":"scripts/ce_event_system/ce_event_system.yy",},"order":2,},
