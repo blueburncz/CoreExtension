@@ -1,2 +1,0 @@
-# Saving and loading schemes
-After the player modifies their key bindings, you can save the modified input scheme on the disk using function [ce_input_scheme_save](./ce_input_scheme_save.html). To load the scheme back into the game, use the function [ce_input_scheme_load](./ce_input_scheme_load.html). When an input scheme is no longer necessary to keep in memory, you can destroy it using function [ce_input_scheme_destroy](./ce_input_scheme_destroy.html).
