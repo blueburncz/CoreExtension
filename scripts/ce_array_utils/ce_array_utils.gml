@@ -261,10 +261,10 @@ function ce_array_reduce(_array, _callback)
 {
 	var i = 0;
 	var _accumulator = (argument_count > 2) ? argument[2] : _array[i++];
-	var _size = array_length(_array);
-	for (/**/; i < _size; ++i)
+	repeat (array_length(_array))
 	{
 		_accumulator = _callback(_accumulator, _array[i], i);
+		++i;
 	}
 	return _accumulator;
 }
@@ -291,9 +291,10 @@ function ce_array_reduce_right(_array, _callback)
 {
 	var i = array_length(_array) - 1;
 	var _accumulator = (argument_count > 2) ? argument[2] : _array[i--];
-	for (/**/; i >= 0; --i)
+	repeat (i + 1)
 	{
 		_accumulator = _callback(_accumulator, _array[i], i);
+		--i;
 	}
 	return _accumulator;
 }
