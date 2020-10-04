@@ -109,16 +109,14 @@ function ce_surface_clear_color(_color, _alpha)
 	gpu_set_blendmode_ext(bm_one, bm_zero);
 	gpu_set_ztestenable(false);
 	gpu_set_zwriteenable(false);
-
-	shader_set(ShClearColor);
-	shader_set_uniform_f(shader_get_uniform(ShClearColor, "u_vColor"),
+	shader_set(CE_ShClearColor);
+	shader_set_uniform_f(shader_get_uniform(CE_ShClearColor, "u_vColor"),
 		color_get_red(_color) / 255,
 		color_get_green(_color) / 255,
 		color_get_blue(_color) / 255,
 		_alpha);
 	draw_rectangle(0, 0, surface_get_width(_surface), surface_get_height(_surface), false);
 	shader_reset();
-
 	gpu_pop_state();
 }
 

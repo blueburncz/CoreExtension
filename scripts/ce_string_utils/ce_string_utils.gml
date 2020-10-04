@@ -81,24 +81,21 @@ function ce_string_endswith(_string, _substring)
 /// @example
 /// This creates an array `["Hello", " World!"]`.
 /// ```
-/// string_explode("Hello, World!", ",");
+/// ce_string_explode("Hello, World!", ",");
 /// ```
 function ce_string_explode(_string, _delimiter)
 {
 	var _count = string_count(_delimiter, _string);
-	var _arr = array_create(_count + 1, "");
-	var _from = 1;
+	var _arr = array_create(_count + 1, undefined);
+	var _start = 1;
 	var i = 0;
-
-	for (/**/; i < _count; ++i)
+	repeat (_count)
 	{
-		var _to = string_pos(_delimiter, _string);
-		_arr[i] = string_copy(_string, _from, _to - _from);
-		_from = _to + 1;
+		var _end = string_pos_ext(_delimiter, _string, _start);
+		_arr[@ i++] = string_copy(_string, _start, _end - _start);
+		_start = _end + 1;
 	}
-
-	_arr[i] = string_copy(_string, _from, string_length(_string) - _from + 1);
-
+	_arr[@ i] = string_delete(_string, 1, _start - 1);
 	return _arr;
 }
 

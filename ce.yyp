@@ -13,6 +13,7 @@
     {"id":{"name":"ce_surface_utils","path":"scripts/ce_surface_utils/ce_surface_utils.yy",},"order":7,},
     {"id":{"name":"ce_struct_utils","path":"scripts/ce_struct_utils/ce_struct_utils.yy",},"order":9,},
     {"id":{"name":"ce_event_system","path":"scripts/ce_event_system/ce_event_system.yy",},"order":2,},
+    {"id":{"name":"CE_ShClearColor","path":"shaders/CE_ShClearColor/CE_ShClearColor.yy",},"order":1,},
     {"id":{"name":"ce_vec3","path":"scripts/ce_vec3/ce_vec3.yy",},"order":1,},
     {"id":{"name":"ce_hex","path":"scripts/ce_hex/ce_hex.yy",},"order":8,},
     {"id":{"name":"ce_string_utils","path":"scripts/ce_string_utils/ce_string_utils.yy",},"order":6,},
