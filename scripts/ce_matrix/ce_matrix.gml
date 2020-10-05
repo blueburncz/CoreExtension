@@ -227,11 +227,11 @@ function ce_matrix_multiply_componentwise(_m1, _m2)
 	_m1[@ 15] *= _m2[@ 15];
 }
 
-/// @func ce_matrix_scale(_m, _s)
-/// @desc Scales the matrix by the value.
+/// @func ce_matrix_scale_componentwise(_m, _s)
+/// @desc Scales each component of a matrix by a value.
 /// @param {array} _m The matrix to scale.
 /// @param {real} _s The value to scale the matrix by.
-function ce_matrix_scale(_m, _s)
+function ce_matrix_scale_componentwise(_m, _s)
 {
 	gml_pragma("forceinline");
 	_m[@ 0] *= _s;
@@ -328,4 +328,52 @@ function ce_matrix_transpose(_m)
 	_m[@ 1] = _c[ 4]; _m[@ 5] = _c[ 5]; _m[@ 9] = _c[ 6]; _m[@ 13] = _c[ 7];
 	_m[@ 2] = _c[ 8]; _m[@ 6] = _c[ 9]; _m[@ 10] = _c[10]; _m[@ 14] = _c[11];
 	_m[@ 3] = _c[12]; _m[@ 7] = _c[13]; _m[@ 11] = _c[14]; _m[@ 15] = _c[15];
+}
+
+/// @func ce_matrix_translate(_matrix, _x[, _y, _z])
+/// @param {matrix} _matrix
+/// @param {real/real[]}_x
+/// @param {real} [_y]
+/// @param {real} [_z]
+/// @return {matrix}
+function ce_matrix_translate(_matrix, _x)
+{
+	gml_pragma("forceinline");
+	var _y = (argument_count == 4) ? argument[2] : _x[1];
+	var _z = (argument_count == 4) ? argument[3] : _x[2];
+	_x = (argument_count == 4) ? _x : _x[0];
+	return matrix_multiply(_matrix,
+		matrix_build(_x, _y, _z, 0, 0, 0, 1, 1, 1));
+}
+
+/// @func ce_matrix_rotate(_matrix, _x[, _y, _z])
+/// @param {matrix} _matrix
+/// @param {real/real[]}_x
+/// @param {real} [_y]
+/// @param {real} [_z]
+/// @return {matrix}
+function ce_matrix_rotate(_matrix, _x)
+{
+	gml_pragma("forceinline");
+	var _y = (argument_count == 4) ? argument[2] : _x[1];
+	var _z = (argument_count == 4) ? argument[3] : _x[2];
+	_x = (argument_count == 4) ? _x : _x[0];
+	return matrix_multiply(_matrix,
+		matrix_build(0, 0, 0, _x, _y, _z, 0, 0, 0));
+}
+
+/// @func ce_matrix_scale(_matrix, _x[, _y, _z])
+/// @param {matrix} _matrix
+/// @param {real/real[]}_x
+/// @param {real} [_y]
+/// @param {real} [_z]
+/// @return {matrix}
+function ce_matrix_scale(_matrix, _x)
+{
+	gml_pragma("forceinline");
+	var _y = (argument_count == 4) ? argument[2] : _x[1];
+	var _z = (argument_count == 4) ? argument[3] : _x[2];
+	_x = (argument_count == 4) ? _x : _x[0];
+	return matrix_multiply(_matrix,
+		matrix_build(0, 0, 0, 0, 0, 0, _x, _y, _z));
 }
