@@ -13,6 +13,7 @@
     {"id":{"name":"ce_map_utils","path":"scripts/ce_map_utils/ce_map_utils.yy",},"order":4,},
     {"id":{"name":"ce_math_misc","path":"scripts/ce_math_misc/ce_math_misc.yy",},"order":0,},
     {"id":{"name":"ce_matrix","path":"scripts/ce_matrix/ce_matrix.yy",},"order":1,},
+    {"id":{"name":"OTest","path":"objects/OTest/OTest.yy",},"order":1,},
     {"id":{"name":"ce_object_utils","path":"scripts/ce_object_utils/ce_object_utils.yy",},"order":5,},
     {"id":{"name":"ce_quaternion","path":"scripts/ce_quaternion/ce_quaternion.yy",},"order":2,},
     {"id":{"name":"ce_real_utils","path":"scripts/ce_real_utils/ce_real_utils.yy",},"order":6,},
