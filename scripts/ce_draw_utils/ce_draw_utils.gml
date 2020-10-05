@@ -1,15 +1,17 @@
-/// @func ce_draw_rectangle(_x, _y, _width, _height, _color[, _alpha])
+/// @func ce_draw_rectangle(_x, _y, _width, _height[, _color[, _alpha]])
 /// @desc Draws a rectangle of the given size and color at the given position.
 /// @param {real} _x The x position to draw the rectangle at.
 /// @param {real} _y The y position to draw the rectangle at.
 /// @param {real} _width The width of the rectangle.
 /// @param {real} _height The height of the rectangle.
-/// @param {real} _color The color of the rectangle.
-/// @param {real} [_alpha] The alpha of the rectangle.
-function ce_draw_rectangle(_x, _y, _width, _height, _color)
+/// @param {uint} [_color] The color of the rectangle. Defaults to `c_white`.
+/// @param {real} [_alpha] The alpha of the rectangle. Defaults to 1.
+function ce_draw_rectangle(_x, _y, _width, _height)
 {
-	var _alpha = (argument_count > 5) ? argument[5] : 1;
-	draw_sprite_ext(CE_SprRectangle, 0, _x, _y, _width, _height, 0, _color, _alpha);
+	gml_pragma("forceinline");
+	draw_sprite_ext(CE_SprRectangle, 0, _x, _y, _width, _height, 0,
+		(argument_count > 4) ? argument[4] : c_white,
+		(argument_count > 5) ? argument[5] : 1);
 }
 
 /// @func ce_draw_sprite_nine_slice(_sprite, _subimage, _x, _y, _width, _height, _tiled[, _color[, _alpha]])
