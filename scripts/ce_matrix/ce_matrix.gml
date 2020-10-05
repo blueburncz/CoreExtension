@@ -180,6 +180,27 @@ function ce_matrix_inverse(_m)
 	_m[@ 15] = _s * (_m1 * _m6 * _m8 - _m2 * _m5 * _m8 + _m2 * _m4 * _m9 - _m0 * _m6 * _m9 - _m1 * _m4 * _m10 + _m0 * _m5 * _m10);
 }
 
+/// @func ce_matrix_multiply(_matrix, ...)
+/// @desc Multiplies any number of given matrices.
+/// @param {matrix} _matrix The first matrix.
+/// @return {matrix} The resulting matrix.
+/// @example
+/// Both following lines of code would produce the same result.
+/// ```gml
+/// ce_matrix_multiply(A, B, C);
+/// matrix_multiply(matrix_multiply(A, B), C);
+/// ```
+function ce_matrix_multiply(_matrix)
+{
+	gml_pragma("forceinline");
+	var i = 1;
+	repeat (argument_count - 1)
+	{
+		_matrix = matrix_multiply(_matrix, argument[i++]);
+	}
+	return _matrix;
+}
+
 /// @func ce_matrix_multiply_componentwise(_m1, _m2)
 /// @desc Multiplies matrices `_m1`, `_m2` componentwise and stores the result to
 /// `_m1`.
