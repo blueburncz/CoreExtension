@@ -9,6 +9,7 @@
     {"id":{"name":"ce_cubemap","path":"scripts/ce_cubemap/ce_cubemap.yy",},"order":11,},
     {"id":{"name":"ce_event_system","path":"scripts/ce_event_system/ce_event_system.yy",},"order":3,},
     {"id":{"name":"ce_hex","path":"scripts/ce_hex/ce_hex.yy",},"order":4,},
+    {"id":{"name":"ce_instance_utils","path":"scripts/ce_instance_utils/ce_instance_utils.yy",},"order":10,},
     {"id":{"name":"ce_iter","path":"scripts/ce_iter/ce_iter.yy",},"order":5,},
     {"id":{"name":"ce_list_utils","path":"scripts/ce_list_utils/ce_list_utils.yy",},"order":3,},
     {"id":{"name":"ce_map_utils","path":"scripts/ce_map_utils/ce_map_utils.yy",},"order":4,},
