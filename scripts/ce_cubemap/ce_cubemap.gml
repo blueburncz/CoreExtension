@@ -95,7 +95,8 @@ function CE_Cubemap(_resolution) constructor
 	/// @param {ECubemapSide} side The cubemap side.
 	/// @return {matrix} The created view matrix.
 	static get_view_matrix = function (_side) {
-		var _negEye = Position.Scale(-1);
+		var _negEye = ce_vec3_clone(Position);
+		ce_vec3_scale(_negEye, -1);
 		var _x, _y, _z;
 
 		switch (_side)
