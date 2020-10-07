@@ -6,6 +6,7 @@
     {"id":{"name":"ce_color_utils","path":"scripts/ce_color_utils/ce_color_utils.yy",},"order":1,},
     {"id":{"name":"ce_config","path":"scripts/ce_config/ce_config.yy",},"order":2,},
     {"id":{"name":"ce_draw_utils","path":"scripts/ce_draw_utils/ce_draw_utils.yy",},"order":2,},
+    {"id":{"name":"ce_cubemap","path":"scripts/ce_cubemap/ce_cubemap.yy",},"order":11,},
     {"id":{"name":"ce_event_system","path":"scripts/ce_event_system/ce_event_system.yy",},"order":3,},
     {"id":{"name":"ce_hex","path":"scripts/ce_hex/ce_hex.yy",},"order":4,},
     {"id":{"name":"ce_iter","path":"scripts/ce_iter/ce_iter.yy",},"order":5,},
