@@ -131,7 +131,7 @@ function ce_draw_sprite_nine_slice(_sprite, _subimage, _x, _y, _width, _height, 
 		_slice_x, _slice_y, _right_x, _y, 1, 1, _color, _alpha);
 
 	// Bottom left corner
-	draw_sprite_part_ext(_sprite, _subimage, 0, _slice_x2,
+	draw_sprite_part_ext(_sprite, _subimage, 0, _slice_y2,
 		_slice_x, _slice_y, _x, _bottom_y, 1, 1, _color, _alpha);
 
 	// Bottom right corner
