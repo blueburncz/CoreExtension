@@ -1,24 +1,21 @@
-/// @func ce_vec4_create(x[, _y, _z, _w])
+/// @func ce_vec4_create([_x[, _y[, _z[, _w]]]])
 /// @desc Creates a new vector with given components. If only the first value
 /// is supplied, then it is used for every component.
-/// @param {real} _x The first vector component.
-/// @param {real} [_y] The second vector component.
-/// @param {real} [_z] The third vector component.
-/// @param {real} [_w] The fourth vector component.
+/// @param {real} [_x] The first vector component. Defaults to 0.
+/// @param {real} [_y] The second vector component. Defaults to `_x`.
+/// @param {real} [_z] The third vector component. Defaults to `_y`.
+/// @param {real} [_w] The fourth vector component. Defaults to `_z`.
 /// @return {array} The created vector.
 /// @note One could also just write `[x, y, z, w]`, which would give the same
 /// result.
 function ce_vec4_create()
 {
 	gml_pragma("forceinline");
-	if (argument_count == 1)
-	{
-		return array_create(4, argument[0]);
-	}
-	if (argument_count == 4)
-	{
-		return [argument[0], argument[1], argument[2], argument[3]];
-	}
+	var _x = (argument_count > 0) ? argument[0] : 0;
+	var _y = (argument_count > 1) ? argument[1] : _x;
+	var _z = (argument_count > 2) ? argument[2] : _y;
+	var _w = (argument_count > 3) ? argument[3] : _z;
+	return [_x, _y, _z, _w];
 }
 
 /// @func ce_vec4_abs(_v)

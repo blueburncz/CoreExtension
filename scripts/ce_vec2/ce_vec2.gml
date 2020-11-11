@@ -1,21 +1,16 @@
-/// @func ce_vec2_create(_x[, _y])
+/// @func ce_vec2_create([_x[, _y]])
 /// @desc Creates a new vector with given components. If only the first value
 /// is supplied, then it is used for every component.
-/// @param {real} _x The first vector component.
-/// @param {real} [_y] The second vector component.
+/// @param {real} [_x] The first vector component. Defalts to 0.
+/// @param {real} [_y] The second vector component. Defaults to `_x`.
 /// @return {array} The created vector.
 /// @note One could also just write `[x, y]`, which would give the same result.
 function ce_vec2_create()
 {
 	gml_pragma("forceinline");
-	if (argument_count == 1)
-	{
-		return array_create(2, argument[0]);
-	}
-	if (argument_count == 2)
-	{
-		return [argument[0], argument[1]];
-	}
+	var _x = (argument_count > 0) ? argument[0] : 0;
+	var _y = (argument_count > 1) ? argument[1] : _x;
+	return [_x, _y];
 }
 
 /// @func ce_vec2_abs(_v)
