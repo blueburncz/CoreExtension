@@ -1,6 +1,5 @@
 /// @func ce_vec4_create([_x[, _y[, _z[, _w]]]])
-/// @desc Creates a new vector with given components. If only the first value
-/// is supplied, then it is used for every component.
+/// @desc Creates a new 4D vector.
 /// @param {real} [_x] The first vector component. Defaults to 0.
 /// @param {real} [_y] The second vector component. Defaults to `_x`.
 /// @param {real} [_z] The third vector component. Defaults to `_y`.

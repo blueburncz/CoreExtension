@@ -1,6 +1,5 @@
 /// @func ce_vec2_create([_x[, _y]])
-/// @desc Creates a new vector with given components. If only the first value
-/// is supplied, then it is used for every component.
+/// @desc Creates a new 2D vector.
 /// @param {real} [_x] The first vector component. Defalts to 0.
 /// @param {real} [_y] The second vector component. Defaults to `_x`.
 /// @return {array} The created vector.
