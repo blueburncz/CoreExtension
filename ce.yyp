@@ -52,8 +52,8 @@
     "name": "Default",
     "children": [],
   },
-  "RoomOrder": [
-    {"name":"RmTest","path":"rooms/RmTest/RmTest.yy",},
+  "RoomOrderNodes": [
+    {"roomId":{"name":"RmTest","path":"rooms/RmTest/RmTest.yy",},},
   ],
   "Folders": [
     {"folderPath":"folders/Test.yy","order":0,"resourceVersion":"1.0","name":"Test","tags":[],"resourceType":"GMFolder",},
@@ -69,13 +69,13 @@
     {"targets":461609314234257646,"resourceVersion":"1.0","name":"audiogroup_default","resourceType":"GMAudioGroup",},
   ],
   "TextureGroups": [
-    {"isScaled":true,"autocrop":true,"border":2,"mipsToGenerate":0,"targets":461609314234257646,"resourceVersion":"1.0","name":"Default","resourceType":"GMTextureGroup",},
+    {"isScaled":true,"autocrop":true,"border":2,"mipsToGenerate":0,"groupParent":null,"targets":461609314234257646,"resourceVersion":"1.0","name":"Default","resourceType":"GMTextureGroup",},
   ],
   "IncludedFiles": [],
   "MetaData": {
-    "IDEVersion": "2.3.0.529",
+    "IDEVersion": "2.3.1.536",
   },
-  "resourceVersion": "1.3",
+  "resourceVersion": "1.4",
   "name": "ce",
   "tags": [],
   "resourceType": "GMProject",
