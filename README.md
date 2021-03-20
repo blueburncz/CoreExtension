@@ -62,7 +62,7 @@ None
 [ce_assert](scripts/ce_assert/ce_assert.gml)
 
 **Dependencies:**
-None
+[Config](#config)
 
 ## Color utils
 **Resources:**
