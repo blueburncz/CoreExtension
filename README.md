@@ -8,7 +8,7 @@ Donate: [PayPal.Me](https://www.paypal.me/kraifpatrik/1usd)
 
 # Table of Contents
 * [License](#license)
-* [Documentation](#documentation)
+* [Documentation and help](#documentation-and-help)
 * [Contents](#contents)
   * [Array utils](#array-utils)
   * [Assert](#assert)
