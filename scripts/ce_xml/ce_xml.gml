@@ -35,7 +35,7 @@ function CE_XmlError() constructor
 {
 	/// @var {string} The error message.
 	/// @readonly
-	msg = (argument_count > 0) ? argument[0] : "";
+	Msg = (argument_count > 0) ? argument[0] : "";
 }
 
 /// @func CE_XmlElement([_name[, value]])
@@ -47,25 +47,25 @@ function CE_XmlElement() constructor
 {
 	/// @var {string} The name of the element.
 	/// @readonly
-	name = (argument_count > 0) ? argument[0] : "";
+	Name = (argument_count > 0) ? argument[0] : "";
 
 	/// @var {string/real/bool/undefined} The element's value. If `undefined`,
 	/// then the element does not have a value.
 	/// @readonly
-	value = (argument_count > 1) ? argument[1] : undefined;
+	Value = (argument_count > 1) ? argument[1] : undefined;
 
 	/// @var {ds_map<string, string/real/bool>} A map of element's attributes.
 	/// @readonly
-	attributes = ds_map_create();
+	Attributes = ds_map_create();
 
 	/// @var {CE_XmlElement/undefined} The parent of this element. If `undefined`,
 	/// then this is a root element.
 	/// @readonly
-	parent = undefined;
+	Parent = undefined;
 
 	/// @var {ds_list<CE_XmlElement>} A list of child elements.
 	/// @readonly
-	children = ds_list_create();
+	Children = ds_list_create();
 
 	/// @func set_attribute(_name, _value)
 	/// @param {string} _name The name of the attribute.
@@ -73,7 +73,7 @@ function CE_XmlElement() constructor
 	/// @return {CE_XmlElement} Returns `self` to allow method chaining.
 	static set_attribute = function (_name, _value) {
 		gml_pragma("forceinline");
-		attributes[? _name] = _value;
+		Attributes[? _name] = _value;
 		return self;
 	};
 
@@ -84,15 +84,15 @@ function CE_XmlElement() constructor
 		gml_pragma("forceinline");
 		if (argument_count == 0)
 		{
-			return !ds_map_empty(attributes);
+			return !ds_map_empty(Attributes);
 		}
-		return ds_map_exists(attributes, argument[0]);
+		return ds_map_exists(Attributes, argument[0]);
 	};
 
 	/// @func get_attribute_count()
 	/// @return {int} Returns number of attributes of the element.
 	static get_attribute_count = function () {
-		return ds_map_size(attributes);
+		return ds_map_size(Attributes);
 	};
 
 	/// @func get_attribute(_name)
@@ -100,34 +100,34 @@ function CE_XmlElement() constructor
 	/// @return {string/real/bool/undefined} The attribute value.
 	static get_attribute = function (_name) {
 		gml_pragma("forceinline");
-		return attributes[? _name];
+		return Attributes[? _name];
 	};
 
 	/// @func find_first_attribute()
 	/// @return {string} The name of the first attribute.
 	static find_first_attribute = function () {
-		return ds_map_find_first(attributes);
+		return ds_map_find_first(Attributes);
 	};
 
 	/// @func find_prev_attribute(_name)
 	/// @param {string} _name The name of the current attribute.
 	/// @return {string} The name of the previous attribute.
 	static find_prev_attribute = function (_name) {
-		return ds_map_find_previous(attributes, _name);
+		return ds_map_find_previous(Attributes, _name);
 	};
 
 	/// @func find_next_attribute(_name)
 	/// @param {string} _name The name of the current attribute.
 	/// @return {string} The name of the next attribute.
 	static find_next_attribute = function (_name) {
-		return ds_map_find_next(attributes, _name);
+		return ds_map_find_next(Attributes, _name);
 	};
 
 	/// @func remove_attribute(_name)
 	/// @param {string} _name The name of the attribute.
 	/// @return {CE_XmlElement} Returns `self` to allow method chaining.
 	static remove_attribute = function (_name) {
-		ds_map_delete(attributes, _name);
+		ds_map_delete(Attributes, _name);
 		return self;
 	};
 
@@ -136,7 +136,7 @@ function CE_XmlElement() constructor
 	/// @return {CE_XmlElement} Returns `self` to allow mathod chaining.
 	static add_child = function (_child) {
 		gml_pragma("forceinline");
-		ds_list_add(children, _child);
+		ds_list_add(Children, _child);
 		_child.parent = self;
 		return self;
 	};
@@ -145,7 +145,7 @@ function CE_XmlElement() constructor
 	/// @return {bool} Returns `true` if the element has child elements. 
 	static has_children = function () {
 		gml_pragma("forceinline");
-		return !ds_list_empty(children);
+		return !ds_list_empty(Children);
 	};
 
 	/// @func get_child_count()
@@ -162,7 +162,7 @@ function CE_XmlElement() constructor
 	/// @see CE_XmlElement.get_child_count
 	static get_child = function (_index) {
 		gml_pragma("forceinline");
-		return children[| _index];
+		return Children[| _index];
 	};
 
 	/// @func destroy()
@@ -177,10 +177,10 @@ function CE_XmlElement() constructor
 		var i = 0;
 		repeat (ds_list_size(children))
 		{
-			children[| i++].destroy();
+			Children[| i++].destroy();
 		}
-		ds_list_destroy(children);
-		ds_map_destroy(attributes);
+		ds_list_destroy(Children);
+		ds_map_destroy(Attributes);
 	};
 }
 
@@ -188,12 +188,15 @@ function CE_XmlElement() constructor
 /// @desc An XML document.
 function CE_XmlDocument() constructor
 {
-	/// @var {string/undefined}
+	/// @var {string/undefined} Path to the XML file. It is `undefined` until the
+	/// document is saved or loaded.
+	/// @see CE_XmlDocument.save
+	/// @see CE_XmlDocument.load
 	/// @readonly
-	path = undefined;
+	Path = undefined;
 
-	/// @var {CE_XmlElement/undefined}
-	root = undefined;
+	/// @var {CE_XmlElement/undefined} The root element.
+	Root = undefined;
 
 	/// @func parse(_string)
 	/// @desc Parses a value from a string.
@@ -500,7 +503,8 @@ function CE_XmlDocument() constructor
 
 		file_bin_close(_file);
 
-		root = _root;
+		Path = _path;
+		Root = _root;
 		return self;
 	};
 
@@ -508,7 +512,7 @@ function CE_XmlDocument() constructor
 	/// @desc Prints the document into a string.
 	/// @return {string} The created string.
 	static to_string = function () {
-		var _element = (argument_count > 0) ? argument[0] : root;
+		var _element = (argument_count > 0) ? argument[0] : Root;
 		var _name = _element.name;
 		var _attribute_count = _element.get_attribute_count();
 		var _child_count = _element.get_child_count();
@@ -565,16 +569,16 @@ function CE_XmlDocument() constructor
 
 	/// @func save([_path])
 	/// @desc Saves the document to a file.
-	/// @param {string} [_path] The file path.
+	/// @param {string} [_path] The file path. Defaults to {@link CE_XmlDocument.Path}.
 	/// @return {CE_XmlDocument} Returns `self` to allow method chaining.
 	/// @throws {CE_XmlError} If the save path is not defined.
 	static save = function () {
-		var _path = (argument_count > 0) ? argument[0] : path;
+		var _path = (argument_count > 0) ? argument[0] : Path;
 		if (_path == undefined)
 		{
 			throw new CE_XmlError("Save path not defined!");
 		};
-		path = _path;
+		Path = _path;
 
 		var _file = file_text_open_write(_path);
 		if (_file == -1)
@@ -597,10 +601,10 @@ function CE_XmlDocument() constructor
 	/// delete document;
 	/// ```
 	static destroy = function () {
-		if (root != undefined)
+		if (Root != undefined)
 		{
-			root.destroy();
-			delete root;
+			Root.destroy();
+			delete Root;
 		}
 	};
 }
