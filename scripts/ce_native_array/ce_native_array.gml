@@ -14,7 +14,7 @@ function CE_NativeArray(_type, _size) constructor
 	Type = _type;
 
 	/// @var {uint} The size of the type in bytes.
-	/// @private
+	/// @readonly
 	TypeSize = buffer_sizeof(Type);
 
 	/// @var {uint} The size of the array.
@@ -27,13 +27,32 @@ function CE_NativeArray(_type, _size) constructor
 	Buffer = buffer_create(TypeSize * Size, buffer_fixed, 1);
 
 	/// @func get_ptr()
+	/// @desc Retrieves a pointer to the underyling buffer.
 	/// @return {ptr} The pointer to the underlying buffer.
+	/// @example
+	/// ```gml
+	/// function native_array_sort(_native_array)
+	/// {
+	///     gml_pragma("forceinline");
+	///     static _fn = external_define(
+	///         "MyExtension.dll",
+	///         "native_array_sort",
+	///         dll_cdecl,
+	///         ty_real,
+	///         3,
+	///         ty_string, // Pointer to the buffer
+	///         ty_real,   // Size of the array
+	///         ty_real);  // Size of array entry type in bytes
+	///     return external_call(_fn, _native_array.get_ptr(), _native_array.Size, _native_array.TypeSize);
+	/// }
+	/// ```
 	static get_ptr = function () {
 		gml_pragma("forceinline");
 		return buffer_get_address(Buffer);
 	};
 
 	/// @func get_bytesize()
+	/// @desc Retrieves the total size of the array in bytes.
 	/// @return {uint} The total size of the array in bytes.
 	static get_bytesize = function () {
 		gml_pragma("forceinline");
