@@ -71,15 +71,17 @@ function CE_Cubemap(_resolution) constructor
 		return _sur;
 	};
 
-	/// @func to_single_surface(_surface, _clearColor, _clearAlpha)
+	/// @func to_single_surface(_surface, _clear_color, _clear_alpha)
 	/// @desc Puts all faces of the cubemap into a single surface.
-	/// @param {uint} _clearColor
-	/// @param {real} _clearAlpha
+	/// @param {uint} _clear_color The color to clear the target surface with
+	/// before the cubemap is rendered into it.
+	/// @param {real} _clear_alpha The alpha to clear the targe surface with
+	/// before the cubemap is rendered into it.
 	/// @see CE_Cubemap.Surface
-	static to_single_surface = function (_clearColor, _clearAlpha) {
+	static to_single_surface = function (_clear_color, _clear_alpha) {
 		Surface = ce_surface_check(Surface, Resolution * 8, Resolution);
 		surface_set_target(Surface);
-		draw_clear_alpha(_clearColor, _clearAlpha);
+		draw_clear_alpha(_clear_color, _clear_alpha);
 		var _x = 0;
 		var i = 0;
 		repeat (CE_ECubeSide.SIZE)
