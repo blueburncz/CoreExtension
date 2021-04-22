@@ -17,6 +17,70 @@ function ce_vec4_create()
 	return [_x, _y, _z, _w];
 }
 
+/// @func ce_vec4_create_barycentric(_v1, _v2, _v3, _f, _g)
+/// @desc Creates a new vector using barycentric coordinates, following formula
+/// `_v1 + _f(_v2-_v1) + _g(_v3-_v1)`.
+/// @param {array} _v1 The first point of triangle.
+/// @param {array} _v2 The second point of triangle.
+/// @param {array} _v3 The third point of triangle.
+/// @param {real} _f The first weighting factor.
+/// @param {real} _g The second weighting factor.
+/// @return {array} The created vector.
+function ce_vec4_create_barycentric(_v1, _v2, _v3, _f, _g)
+{
+	gml_pragma("forceinline");
+	var _v10 = _v1[0];
+	var _v11 = _v1[1];
+	var _v12 = _v1[2];
+	var _v13 = _v1[3];
+	return [
+		_v10 + _f*(_v2[0]-_v10) + _g*(_v3[0]-_v10),
+		_v11 + _f*(_v2[1]-_v11) + _g*(_v3[1]-_v11),
+		_v12 + _f*(_v2[2]-_v12) + _g*(_v3[2]-_v12),
+		_v13 + _f*(_v2[3]-_v13) + _g*(_v3[3]-_v13),
+	];
+}
+
+/// @func ce_vec4_create_from_array(_array[, _index])
+/// @desc Creates a new 4D vector, taking its components from the array, starting
+/// from given index.
+/// @param {real[]} _array The array to take the values from.
+/// @param {uint} [_index] The index to start taking the values from.
+/// @return {real[4]} The created vector.
+/// @example
+/// ```gml
+/// var _arr = [1, 2, 3, 4, 5, 6];
+/// var _vec = ce_vec4_from_array(_arr, 2); // => [3, 4, 5, 6]
+/// ```
+function ce_vec4_create_from_array(_array)
+{
+	gml_pragma("forceinline");
+	var _index = (argument_count > 1) ? argument[1] : 0;
+	return [
+		_array[_index],
+		_array[_index + 1],
+		_array[_index + 2],
+		_array[_index + 3],
+	];
+}
+
+/// @func ce_vec4_create_from_buffer(_buffer, _type)
+/// @desc Creates a new 4D vector, taking its components from the buffer.
+/// @param {buffer} _buffer The buffer to take the values from.
+/// @param {uint} _type The type of values in the buffer. Use one of the
+/// `buffer_` type constants.
+/// @return {real[4]} The created vector.
+function ce_vec2_create_from_buffer(_buffer, _type)
+{
+	gml_pragma("forceinline");
+	var _vec = array_create(4);
+	_vec[@ 0] = buffer_read(_buffer, _type);
+	_vec[@ 1] = buffer_read(_buffer, _type);
+	_vec[@ 2] = buffer_read(_buffer, _type);
+	_vec[@ 3] = buffer_read(_buffer, _type);
+	return _vec;
+}
+
 /// @func ce_vec4_abs(_v)
 /// @desc Sets vector's components to their absolute value.
 /// @param {array} _v The vector.
@@ -77,30 +141,6 @@ function ce_vec4_clone(_v)
 	var _clone = array_create(4, 0);
 	array_copy(_clone, 0, _v, 0, 4);
 	return _clone;
-}
-
-/// @func ce_vec4_create_barycentric(_v1, _v2, _v3, _f, _g)
-/// @desc Creates a new vector using barycentric coordinates, following formula
-/// `_v1 + _f(_v2-_v1) + _g(_v3-_v1)`.
-/// @param {array} _v1 The first point of triangle.
-/// @param {array} _v2 The second point of triangle.
-/// @param {array} _v3 The third point of triangle.
-/// @param {real} _f The first weighting factor.
-/// @param {real} _g The second weighting factor.
-/// @return {array} The created vector.
-function ce_vec4_create_barycentric(_v1, _v2, _v3, _f, _g)
-{
-	gml_pragma("forceinline");
-	var _v10 = _v1[0];
-	var _v11 = _v1[1];
-	var _v12 = _v1[2];
-	var _v13 = _v1[3];
-	return [
-		_v10 + _f*(_v2[0]-_v10) + _g*(_v3[0]-_v10),
-		_v11 + _f*(_v2[1]-_v11) + _g*(_v3[1]-_v11),
-		_v12 + _f*(_v2[2]-_v12) + _g*(_v3[2]-_v12),
-		_v13 + _f*(_v2[3]-_v13) + _g*(_v3[3]-_v13),
-	];
 }
 
 /// @func ce_vec4_dot(_v1, _v2)
