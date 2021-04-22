@@ -552,3 +552,109 @@ function ce_matrix_scale_z(_matrix, _scale)
 	return matrix_multiply(_matrix,
 		matrix_build(0, 0, 0, 0, 0, 0, 1, 1, _scale));
 }
+
+/// @func ce_matrix_to_aabb(_matrix, _aabb_out)
+/// @desc Converts matrix into an axis-aligned bounding box.
+/// @param {real[16]} _matrix The matrix.
+/// @param {real[6]} _aabb_out An output array in form of
+/// `[x_min, y_min, z_min, x_max, y_max, z_max]`.
+/// @example
+/// ```gml
+/// var _matrix = matrix_build(x, y, z, rotX, rotY, rotZ, scaleX, scaleY, scaleZ);
+/// var _aabb = array_create(6);
+/// var _width = _aabb[0] - _aabb[3];
+/// var _height = _aabb[1] - _aabb[4];
+/// var _depth = _aabb[2] - _aabb[5];
+/// ```
+function ce_matrix_to_aabb(_matrix, _aabb_out)
+{
+	var _m0, _m1, _m2, _m3;
+	var _temp;
+	var _b0, _b1, _b2, _b3;
+	var _t0, _t1, _t2, _t3;
+	var _min, _max;
+
+	////////////////////////////////////////////////////////////////////////////
+	// X
+	_m0 = _matrix[0];
+	_m1 = _matrix[4];
+	_m2 = _matrix[8];
+	_m3 = _matrix[12];
+
+	_temp = -_m0 - _m1;
+	_b0 = _temp - _m2 + _m3;
+	_t0 = _temp + _m2 + _m3;
+
+	_temp = _m0 - _m1;
+	_b1 = _temp - _m2 + _m3;
+	_t1 = _temp + _m2 + _m3;
+
+	_temp = _m0 + _m1;
+	_b2 = _temp - _m2 + _m3;
+	_t2 = _temp + _m2 + _m3;
+
+	_temp = -_m0 + _m1;
+	_b3 = _temp - _m2 + _m3;
+	_t3 = _temp + _m2 + _m3;
+
+	_min = min(_b0, _b1, _b2, _b3, _t0, _t1, _t2, _t3);
+	_max = max(_b0, _b1, _b2, _b3, _t0, _t1, _t2, _t3);
+	_aabb_out[@ 0] = _min;
+	_aabb_out[@ 3] = _max;
+
+	////////////////////////////////////////////////////////////////////////////
+	// Y
+	_m0 = _matrix[1];
+	_m1 = _matrix[5];
+	_m2 = _matrix[9];
+	_m3 = _matrix[13];
+
+	_temp = -_m0 - _m1;
+	_b0 = _temp - _m2 + _m3;
+	_t0 = _temp + _m2 + _m3;
+
+	_temp = _m0 - _m1;
+	_b1 = _temp - _m2 + _m3;
+	_t1 = _temp + _m2 + _m3;
+
+	_temp = _m0 + _m1;
+	_b2 = _temp - _m2 + _m3;
+	_t2 = _temp + _m2 + _m3;
+
+	_temp = -_m0 + _m1;
+	_b3 = _temp - _m2 + _m3;
+	_t3 = _temp + _m2 + _m3;
+
+	_min = min(_b0, _b1, _b2, _b3, _t0, _t1, _t2, _t3);
+	_max = max(_b0, _b1, _b2, _b3, _t0, _t1, _t2, _t3);
+	_aabb_out[@ 1] = _min;
+	_aabb_out[@ 4] = _max;
+
+	////////////////////////////////////////////////////////////////////////////
+	// Z
+	_m0 = _matrix[2];
+	_m1 = _matrix[6];
+	_m2 = _matrix[10];
+	_m3 = _matrix[14];
+
+	_temp = -_m0 - _m1;
+	_b0 = _temp - _m2 + _m3;
+	_t0 = _temp + _m2 + _m3;
+
+	_temp = _m0 - _m1;
+	_b1 = _temp - _m2 + _m3;
+	_t1 = _temp + _m2 + _m3;
+
+	_temp = _m0 + _m1;
+	_b2 = _temp - _m2 + _m3;
+	_t2 = _temp + _m2 + _m3;
+
+	_temp = -_m0 + _m1;
+	_b3 = _temp - _m2 + _m3;
+	_t3 = _temp + _m2 + _m3;
+
+	_min = min(_b0, _b1, _b2, _b3, _t0, _t1, _t2, _t3);
+	_max = max(_b0, _b1, _b2, _b3, _t0, _t1, _t2, _t3);
+	_aabb_out[@ 2] = _min;
+	_aabb_out[@ 5] = _max;
+}
