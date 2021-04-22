@@ -562,9 +562,9 @@ function ce_matrix_scale_z(_matrix, _scale)
 /// ```gml
 /// var _matrix = matrix_build(x, y, z, rotX, rotY, rotZ, scaleX, scaleY, scaleZ);
 /// var _aabb = array_create(6);
-/// var _width = _aabb[0] - _aabb[3];
-/// var _height = _aabb[1] - _aabb[4];
-/// var _depth = _aabb[2] - _aabb[5];
+/// var _width = _aabb[3] - _aabb[0];
+/// var _height = _aabb[4] - _aabb[1];
+/// var _depth = _aabb[5] - _aabb[2];
 /// ```
 function ce_matrix_to_aabb(_matrix, _aabb_out)
 {
