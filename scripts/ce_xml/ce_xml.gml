@@ -137,7 +137,7 @@ function CE_XmlElement() constructor
 	static add_child = function (_child) {
 		gml_pragma("forceinline");
 		ds_list_add(Children, _child);
-		_child.parent = self;
+		_child.Parent = self;
 		return self;
 	};
 
@@ -327,7 +327,7 @@ function CE_XmlDocument() constructor
 					&& _parent_element != undefined
 					&& _parent_element.get_child_count() == 0)
 				{
-					_parent_element.value = parse(_token);
+					_parent_element.Value = parse(_token);
 				}
 
 				_element = new CE_XmlElement();
@@ -372,12 +372,12 @@ function CE_XmlDocument() constructor
 				{
 					// If the element is not self-closing and it does not
 					// have a value defined, then set its value to an empty string.
-					if (_parent_element.value == undefined
+					if (_parent_element.Value == undefined
 						&& _parent_element.get_child_count() == 0)
 					{
-						_parent_element.value = "";
+						_parent_element.Value = "";
 					}
-					_parent_element = _parent_element.parent;
+					_parent_element = _parent_element.Parent;
 					_last_element = undefined;
 					_element.destroy();
 					delete _element;
@@ -476,14 +476,14 @@ function CE_XmlDocument() constructor
 				if (_token != "")
 				{ 
 					// Set element name
-					if (_element != undefined && _element.name == "")
+					if (_element != undefined && _element.Name == "")
 					{
-						_element.name = _token;
+						_element.Name = _token;
 					}
 					else if (_last_element != undefined
-						&& _last_element.name == "")
+						&& _last_element.Name == "")
 					{
-						_last_element.name = _token;
+						_last_element.Name = _token;
 					}
 					_token = "";
 				}
@@ -513,10 +513,10 @@ function CE_XmlDocument() constructor
 	/// @return {string} The created string.
 	static to_string = function () {
 		var _element = (argument_count > 0) ? argument[0] : Root;
-		var _name = _element.name;
+		var _name = _element.Name;
 		var _attribute_count = _element.get_attribute_count();
 		var _child_count = _element.get_child_count();
-		var _value = _element.value;
+		var _value = _element.Value;
 		var _indent = (argument_count > 1) ? argument[1] : 0;
 		var _spaces = string_repeat(" ", _indent * 2);
 
@@ -556,12 +556,12 @@ function CE_XmlDocument() constructor
 		// Close element
 		if (_child_count != 0)
 		{
-			_string += _spaces + "</" + _element.name + ">" + chr(10);
+			_string += _spaces + "</" + _element.Name + ">" + chr(10);
 		}
 		else if (!is_undefined(_value))
 		{
 			_string += unparse(_value);
-			_string += "</" + _element.name + ">" + chr(10);
+			_string += "</" + _element.Name + ">" + chr(10);
 		}
 
 		return _string;
