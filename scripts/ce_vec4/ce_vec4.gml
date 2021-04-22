@@ -70,7 +70,7 @@ function ce_vec4_create_from_array(_array)
 /// @param {uint} _type The type of values in the buffer. Use one of the
 /// `buffer_` type constants.
 /// @return {real[4]} The created vector.
-function ce_vec2_create_from_buffer(_buffer, _type)
+function ce_vec4_create_from_buffer(_buffer, _type)
 {
 	gml_pragma("forceinline");
 	var _vec = array_create(4);
