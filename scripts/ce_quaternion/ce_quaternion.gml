@@ -4,7 +4,7 @@
 /// @param {real} _y The y component of the quaternion.
 /// @param {real} _z The z component of the quaternion.
 /// @param {real} _w The w component of the quaternion.
-/// @return {array} The created quaternion.
+/// @return {real[4]} The created quaternion.
 function ce_quaternion_create(_x, _y, _z, _w)
 {
 	gml_pragma("forceinline");
@@ -13,8 +13,8 @@ function ce_quaternion_create(_x, _y, _z, _w)
 
 /// @func ce_quaternion_add(_q1, _q2)
 /// @desc Adds the quaternions `_q1`, `_q2` and stores the result to `_q1`.
-/// @param {array} _q1 The first quaternion.
-/// @param {array} _q2 The second quaternion.
+/// @param {real[4]} _q1 The first quaternion.
+/// @param {real[4]} _q2 The second quaternion.
 function ce_quaternion_add(_q1, _q2)
 {
 	_q1[@ 0] += _q2[0];
@@ -25,8 +25,8 @@ function ce_quaternion_add(_q1, _q2)
 
 /// @func ce_quaternion_clone(_q)
 /// @desc Creates a clone of the quaternion.
-/// @param {array} _q The quaternion.
-/// @return {array} The created quaternion.
+/// @param {real[4]} _q The quaternion.
+/// @return {real[4]} The created quaternion.
 function ce_quaternion_clone(_q)
 {
 	gml_pragma("forceinline");
@@ -37,7 +37,7 @@ function ce_quaternion_clone(_q)
 
 /// @func ce_quaternion_conjugate(_q)
 /// @desc Conjugates the quaternion.
-/// @param {array} _q The quaternion.
+/// @param {real[4]} _q The quaternion.
 function ce_quaternion_conjugate(_q)
 {
 	_q[@ 0] = -_q[0];
@@ -47,9 +47,9 @@ function ce_quaternion_conjugate(_q)
 
 /// @func ce_quaternion_create_from_axisangle(_axis, _angle)
 /// @desc Creates a quaternion form the axis an the angle.
-/// @param {array} _axis A 3D vector representing the axis.
+/// @param {real[3]} _axis A 3D vector representing the axis.
 /// @param {real} _angle The angle in degrees.
-/// @return {array} The created quaternion.
+/// @return {real[4]} The created quaternion.
 function ce_quaternion_create_from_axisangle(_axis, _angle)
 {
 	var _sin_half_angle = -dsin(_angle * 0.5);
@@ -64,9 +64,9 @@ function ce_quaternion_create_from_axisangle(_axis, _angle)
 /// @func ce_quaternion_create_fromto_rotation(_from, _to)
 /// @desc Creates a quaternion that represents rotation from one vector to
 /// another.
-/// @param {array} _from The 3D "from" vector.
-/// @param {array} _to The 3D "to" vector.
-/// @return {array} The created quaternion.
+/// @param {real[3]} _from The 3D "from" vector.
+/// @param {real[3]} _to The 3D "to" vector.
+/// @return {real[4]} The created quaternion.
 function ce_quaternion_create_fromto_rotation(_from, _to)
 {
 	var _dot = ce_vec3_dot(_from, _to);
@@ -96,7 +96,7 @@ function ce_quaternion_create_fromto_rotation(_from, _to)
 
 /// @func ce_quaternion_create_identity()
 /// @desc Creates an identity quaternion.
-/// @return {array} The created identity quaternion.
+/// @return {real[4]} The created identity quaternion.
 function ce_quaternion_create_identity()
 {
 	gml_pragma("forceinline");
@@ -107,9 +107,9 @@ function ce_quaternion_create_identity()
 /// @desc Creates a quaternion with the specified forward and up vectors. These
 /// vectors must not be parallel! If they are, then an identity quaternion
 /// will be returned.
-/// @param {array} _forward The 3D forward unit vector.
-/// @param {array} _up The 3D up unit vector.
-/// @return {array} An array representing the quaternion.
+/// @param {real[3]} _forward The 3D forward unit vector.
+/// @param {real[3]} _up The 3D up unit vector.
+/// @return {real[4]} An array representing the quaternion.
 /// @source https://www.gamedev.net/forums/topic/613595-quaternion-lookrotationlookat-up/4876913/
 function ce_quaternion_create_look_rotation(_forward, _up)
 {
@@ -141,8 +141,8 @@ function ce_quaternion_create_look_rotation(_forward, _up)
 
 /// @func ce_quaternion_dot(_q1, _q2)
 /// @desc Gets the dot product of the two quaternions.
-/// @param {array} _q1 The first quaternion.
-/// @param {array} _q2 The second quaternion.
+/// @param {real[4]} _q1 The first quaternion.
+/// @param {real[4]} _q2 The second quaternion.
 /// @return {real} The dot product of the two quaternions.
 function ce_quaternion_dot(_q1, _q2)
 {
@@ -155,7 +155,7 @@ function ce_quaternion_dot(_q1, _q2)
 
 /// @func ce_quaternion_inverse(_q)
 /// @desc Inverts the quaternion.
-/// @param {array} _q The quaternion.
+/// @param {real[4]} _q The quaternion.
 function ce_quaternion_inverse(_q)
 {
 	ce_quaternion_conjugate(_q);
@@ -165,7 +165,7 @@ function ce_quaternion_inverse(_q)
 
 /// @func ce_quaternion_length(_q)
 /// @desc Gets the length of the quaternion.
-/// @param {array} _q The quaternion.
+/// @param {real[4]} _q The quaternion.
 /// @return {real} The length of the quaternion.
 function ce_quaternion_length(_q)
 {
@@ -182,7 +182,7 @@ function ce_quaternion_length(_q)
 
 /// @func ce_quaternion_lengthsqr(_q)
 /// @desc Gets the squared length of the quaternion.
-/// @param {array} _q An array representing the quaternion.
+/// @param {real[4]} _q An array representing the quaternion.
 /// @return {real} The squared length of the quaternion.
 function ce_quaternion_lengthsqr(_q) {
 	gml_pragma("forceinline");
@@ -199,8 +199,8 @@ function ce_quaternion_lengthsqr(_q) {
 /// @func ce_quaternion_lerp(_q1, _q2, _s)
 /// @desc Performs a linear interpolation between the quaternions `_q1`, `_q2`
 /// and stores the result to `_q1`.
-/// @param {array} _q1 The first quaternion.
-/// @param {array} _q2 The second quaternion.
+/// @param {real[4]} _q1 The first quaternion.
+/// @param {real[4]} _q2 The second quaternion.
 /// @param {real} _s The lerping factor.
 function ce_quaternion_lerp(_q1, _q2, _s)
 {
@@ -212,8 +212,8 @@ function ce_quaternion_lerp(_q1, _q2, _s)
 
 /// @func ce_quaternion_multiply(_q1, _q2)
 /// @desc Multiplies the quaternions `_q1`, `_q2` and stores the result to `_q1`.
-/// @param {array} _q1 The first quaternion.
-/// @param {array} _q2 The second quaternion.
+/// @param {real[4]} _q1 The first quaternion.
+/// @param {real[4]} _q2 The second quaternion.
 function ce_quaternion_multiply(_q1, _q2)
 {
 	var _q10 = _q1[0];
@@ -237,7 +237,7 @@ function ce_quaternion_multiply(_q1, _q2)
 
 /// @func ce_quaternion_normalize(_q)
 /// @desc Normalizes the quaternion.
-/// @param {array} _q The quaternion.
+/// @param {real[4]} _q The quaternion.
 function ce_quaternion_normalize(_q)
 {
 	var _length_sqr = ce_quaternion_lengthsqr(_q);
@@ -254,8 +254,8 @@ function ce_quaternion_normalize(_q)
 
 /// @func ce_quaternion_rotate(_q, _v)
 /// @desc Rotates the 3D vector by the quaternion.
-/// @param {array} _q The quaternion.
-/// @param {array} _v The 3D vector.
+/// @param {real[4]} _q The quaternion.
+/// @param {real[4]} _v The 3D vector.
 function ce_quaternion_rotate(_q, _v)
 {
 	var _clone = ce_quaternion_clone(_q);
@@ -273,7 +273,7 @@ function ce_quaternion_rotate(_q, _v)
 
 /// @func ce_quaternion_scale(_q, _s)
 /// @desc Scales a quaternion by the value.
-/// @param {array} _q The quaternion.
+/// @param {real[4]} _q The quaternion.
 /// @param {real} _s The value to scale the quaternion by.
 function ce_quaternion_scale(_q, _s)
 {
@@ -286,8 +286,8 @@ function ce_quaternion_scale(_q, _s)
 /// @func ce_quaternion_slerp(_q1, _q2, _s)
 /// @desc Performs a spherical linear interpolation between the quaternions
 /// `_q1`, `_q2` and stores the result to `_q1`.
-/// @param {array} _q1 The first quaternion.
-/// @param {array} _q2 The second quaternion.
+/// @param {real[4]} _q1 The first quaternion.
+/// @param {real[4]} _q2 The second quaternion.
 /// @param {real} _s The slerping factor.
 /// @source https://en.wikipedia.org/wiki/Slerp#Source_code
 function ce_quaternion_slerp(_q1, _q2, _s)
@@ -363,8 +363,8 @@ function ce_quaternion_slerp(_q1, _q2, _s)
 
 /// @func ce_quaternion_subtract(q1, _q2)
 /// @desc Subtracts quaternion `_q2` from `_q1` and stores the result into `_q1`.
-/// @param {array} _q1 The quaternion to subtract from.
-/// @param {array} _q2 The quaternion to subtract.
+/// @param {real[4]} _q1 The quaternion to subtract from.
+/// @param {real[4]} _q2 The quaternion to subtract.
 function ce_quaternion_subtract(_q1, _q2)
 {
 	_q1[@ 0] -= _q2[0];
@@ -375,7 +375,7 @@ function ce_quaternion_subtract(_q1, _q2)
 
 /// @func ce_quaternion_to_angle(_q)
 /// @desc Gets quaternion angle in degrees.
-/// @param {array} _q The quaternion.
+/// @param {real[4]} _q The quaternion.
 /// @return {real} The quaternion angle in degrees.
 function ce_quaternion_to_angle(_q)
 {
@@ -385,8 +385,8 @@ function ce_quaternion_to_angle(_q)
 
 /// @func ce_quaternion_to_axis(_q)
 /// @desc Creates 3D axis from the quaternion.
-/// @param {array} _q The quaternion.
-/// @return {array} The created axis as `[x, y, z]`.
+/// @param {real[4]} _q The quaternion.
+/// @return {real[4]} The created axis as `[x, y, z]`.
 function ce_quaternion_to_axis(_q)
 {
 	var _sin_theta_inv = 1 / sin(arccos(_q[3]));

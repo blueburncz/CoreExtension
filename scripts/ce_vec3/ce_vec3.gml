@@ -3,7 +3,7 @@
 /// @param {real} [_x] The first vector component. Defaults to 0.
 /// @param {real} [_y] The second vector component. Defaults to `_x`.
 /// @param {real} [_z] The third vector component. Defaults to `_y`.
-/// @return {array} The created vector.
+/// @return {real[3]} The created vector.
 /// @note One could also just write `[x, y, z]`, which would give the same
 /// result.
 function ce_vec3_create()
@@ -18,12 +18,12 @@ function ce_vec3_create()
 /// @func ce_vec3_create_barycentric(_v1, _v2, _v3, _f, _g)
 /// @desc Creates a new vector using barycentric coordinates, following formula
 /// `_v1 + _f(_v2-_v1) + _g(_v3-_v1)`.
-/// @param {array} _v1 The first point of triangle.
-/// @param {array} _v2 The second point of triangle.
-/// @param {array} _v3 The third point of triangle.
+/// @param {real[3]} _v1 The first point of triangle.
+/// @param {real[3]} _v2 The second point of triangle.
+/// @param {real[3]} _v3 The third point of triangle.
 /// @param {real} _f The first weighting factor.
 /// @param {real} _g The second weighting factor.
-/// @return {array} The created vector.
+/// @return {real[3]} The created vector.
 function ce_vec3_create_barycentric(_v1, _v2, _v3, _f, _g)
 {
 	gml_pragma("forceinline");
@@ -77,7 +77,7 @@ function ce_vec3_create_from_buffer(_buffer, _type)
 
 /// @func ce_vec3_abs(_v)
 /// @desc Sets vector's components to their absolute value.
-/// @param {array} _v The vector.
+/// @param {real[3]} _v The vector.
 function ce_vec3_abs(_v)
 {
 	gml_pragma("forceinline");
@@ -88,8 +88,8 @@ function ce_vec3_abs(_v)
 
 /// @func ce_vec3_add(_v1, _v2)
 /// @desc Adds vectors `_v1`, `_v2` and stores the result into `_v1`.
-/// @param {array} _v1 The first vector.
-/// @param {array} _v2 The second vector.
+/// @param {real[3]} _v1 The first vector.
+/// @param {real[3]} _v2 The second vector.
 function ce_vec3_add(_v1, _v2)
 {
 	gml_pragma("forceinline");
@@ -100,7 +100,7 @@ function ce_vec3_add(_v1, _v2)
 
 /// @func ce_vec3_ceil(_v)
 /// @desc Ceils each component of the vector.
-/// @param {array} _v The vector to ceil.
+/// @param {real[3]} _v The vector to ceil.
 function ce_vec3_ceil(_v)
 {
 	gml_pragma("forceinline");
@@ -111,7 +111,7 @@ function ce_vec3_ceil(_v)
 
 /// @func ce_vec3_clamp_length(_v, _min, _max)
 /// @desc Clamps vector's length between `min` and `max`.
-/// @param {array} _v The vector.
+/// @param {real[3]} _v The vector.
 /// @param {real} _min The minimum vector length.
 /// @param {real} _max The maximum vector length.
 function ce_vec3_clamp_length(_v, _min, _max)
@@ -124,8 +124,8 @@ function ce_vec3_clamp_length(_v, _min, _max)
 
 /// @func ce_vec3_clone(_v)
 /// @desc Creates a clone of the vector.
-/// @param {array} _v The vector.
-/// @return {array} The created clone.
+/// @param {real[3]} _v The vector.
+/// @return {real[3]} The created clone.
 function ce_vec3_clone(_v)
 {
 	gml_pragma("forceinline");
@@ -137,8 +137,8 @@ function ce_vec3_clone(_v)
 /// @func ce_vec3_cross(_v1, _v2)
 /// @desc Gets the cross product of the vectors `_v1`, `_v2` and stores it to
 /// `_v1`.
-/// @param {array} _v1 The first vector.
-/// @param {array} _v2 The second vector.
+/// @param {real[3]} _v1 The first vector.
+/// @param {real[3]} _v2 The second vector.
 function ce_vec3_cross(_v1, _v2)
 {
 	gml_pragma("forceinline");
@@ -155,8 +155,8 @@ function ce_vec3_cross(_v1, _v2)
 
 /// @func ce_vec3_dot(_v1, _v2)
 /// @desc Gets the dot product of vectors `_v1` and `_v2`.
-/// @param {array} _v1 The first vector.
-/// @param {array} _v2 The second vector.
+/// @param {real[3]} _v1 The first vector.
+/// @param {real[3]} _v2 The second vector.
 /// @return {real} The dot product.
 function ce_vec3_dot(_v1, _v2)
 {
@@ -168,8 +168,8 @@ function ce_vec3_dot(_v1, _v2)
 
 /// @func ce_vec3_equals(_v1, _v2)
 /// @desc Gets whether vectors `_v1` and `_v2` are equal.
-/// @param {array} _v1 The first vector.
-/// @param {array} _v2 The second vector.
+/// @param {real[3]} _v1 The first vector.
+/// @param {real[3]} _v2 The second vector.
 /// @return {bool} `true` if the vectors are equal.
 function ce_vec3_equals(_v1, _v2)
 {
@@ -181,7 +181,7 @@ function ce_vec3_equals(_v1, _v2)
 
 /// @func ce_vec3_floor(_v)
 /// @desc Floors each component of the vector.
-/// @param {array} _v The vector to floor.
+/// @param {real[3]} _v The vector to floor.
 function ce_vec3_floor(_v)
 {
 	gml_pragma("forceinline");
@@ -192,7 +192,7 @@ function ce_vec3_floor(_v)
 
 /// @func ce_vec3_frac(_v)
 /// @desc Sets each component of the input vector to it's decimal part.
-/// @param {array} _v The input vector.
+/// @param {real[3]} _v The input vector.
 function ce_vec3_frac(_v)
 {
 	gml_pragma("forceinline");
@@ -203,7 +203,7 @@ function ce_vec3_frac(_v)
 
 /// @func ce_vec3_length(_v)
 /// @desc Gets length of the vector.
-/// @param {array} _v The vector.
+/// @param {real[3]} _v The vector.
 /// @return {real} The vector's length.
 function ce_vec3_length(_v)
 {
@@ -218,7 +218,7 @@ function ce_vec3_length(_v)
 
 /// @func ce_vec3_lengthsqr(_v)
 /// @desc Gets squared length of the vector.
-/// @param {array} _v The vector.
+/// @param {real[3]} _v The vector.
 /// @return {real} The vector's squared length.
 function ce_vec3_lengthsqr(_v)
 {
@@ -234,8 +234,8 @@ function ce_vec3_lengthsqr(_v)
 /// @func ce_vec3_lerp(_v1, _v2, _s)
 /// @desc Linearly interpolates between vectors `_v1`, `_v2` and stores the
 /// resulting vector into `_v1`.
-/// @param {array} _v1 The first vector.
-/// @param {array} _v2 The second vector.
+/// @param {real[3]} _v1 The first vector.
+/// @param {real[3]} _v2 The second vector.
 /// @param {real} _s The interpolation factor.
 function ce_vec3_lerp(_v1, _v2, _s)
 {
@@ -247,7 +247,7 @@ function ce_vec3_lerp(_v1, _v2, _s)
 
 /// @func ce_vec3_max_component(_v)
 /// @desc Gets the largest component of the vector.
-/// @param {array} _v The vector.
+/// @param {real[3]} _v The vector.
 /// @return {real} The vetor's largest component.
 /// @example
 /// Here the `_max` variable would be equal to `3`.
@@ -264,8 +264,8 @@ function ce_vec3_max_component(_v)
 /// @func ce_vec3_maximize(_v1, _v2)
 /// @desc Gets a vector that is made up of the largest components of the
 /// vectors `_v1`, `_v2` and stores it into `_v1`.
-/// @param {array} _v1 The first vector.
-/// @param {array} _v2 The second vector.
+/// @param {real[3]} _v1 The first vector.
+/// @param {real[3]} _v2 The second vector.
 /// @example
 /// This would make the vector `_v1` equal to `[2, 4, 6]`.
 /// ```gml
@@ -283,7 +283,7 @@ function ce_vec3_maximize(_v1, _v2)
 
 /// @func ce_vec3_min_component(_v)
 /// @desc Gets the smallest component of the vector.
-/// @param {array} _v The vector.
+/// @param {real[3]} _v The vector.
 /// @return {real} The vetor's smallest component.
 /// @example
 /// Here the `_min` variable would be equal to `1`.
@@ -300,8 +300,8 @@ function ce_vec3_min_component(_v)
 /// @func ce_vec3_minimize(_v1, _v2)
 /// @desc Gets a vector that is made up of the smallest components of the
 /// vectors `_v1`, `_v2` and stores it into `_v1`.
-/// @param {array} _v1 The first vector.
-/// @param {array} _v2 The second vector.
+/// @param {real[3]} _v1 The first vector.
+/// @param {real[3]} _v2 The second vector.
 /// @example
 /// This would make the vector `_v1` equal to `[1, 3, 5]`.
 /// ```gml
@@ -320,8 +320,8 @@ function ce_vec3_minimize(_v1, _v2)
 /// @func ce_vec3_multiply(_v1, _v2)
 /// @desc Multiplies the vectors `_v1`, `_v2` componentwise and stores the result
 /// into `_v1`.
-/// @param {array} _v1 The first vector.
-/// @param {array} _v2 The second vector.
+/// @param {real[3]} _v1 The first vector.
+/// @param {real[3]} _v2 The second vector.
 /// @example
 /// This would make the vector `_v1` equal to `[4, 10, 18]`.
 /// ```gml
@@ -339,7 +339,7 @@ function ce_vec3_multiply(_v1, _v2)
 
 /// @func ce_vec3_normalize(_v)
 /// @desc Normalizes the vector (makes the vector's length equal to `1`).
-/// @param {array} _v The vector to be normalized.
+/// @param {real[3]} _v The vector to be normalized.
 function ce_vec3_normalize(_v)
 {
 	gml_pragma("forceinline");
@@ -355,8 +355,8 @@ function ce_vec3_normalize(_v)
 
 /// @func ce_vec3_orthonormalize(_v1, _v2)
 /// @desc Orthonormalizes the vectors using the Gram–Schmidt process.
-/// @param {array} _v1 The first vector.
-/// @param {array} _v2 The second vector.
+/// @param {real[3]} _v1 The first vector.
+/// @param {real[3]} _v2 The second vector.
 /// @return {bool} `true` if the vectors were orthonormalized.
 /// @source https://www.gamedev.net/forums/topic/585184-orthonormalize-two-vectors/
 function ce_vec3_orthonormalize(_in_v1, _in_v2)
@@ -390,9 +390,9 @@ function ce_vec3_orthonormalize(_in_v1, _in_v2)
 
 /// @func ce_vec3_project(_v, _screen, _mat)
 /// @desc Projects the vector from world space into screen space.
-/// @param {array} _v The vector.
-/// @param {array} _screen An array containing `[screen_width, screen_height]`.
-/// @param {array} _mat The world * view * projection matrix.
+/// @param {real[3]} _v The vector.
+/// @param {real[3]} _screen An array containing `[screen_width, screen_height]`.
+/// @param {real[3]} _mat The world * view * projection matrix.
 function ce_vec3_project(_v, _screen, _mat)
 {
 	gml_pragma("forceinline");
@@ -408,8 +408,8 @@ function ce_vec3_project(_v, _screen, _mat)
 
 /// @func ce_vec3_reflect(_v, _n)
 /// @desc Reflects the incident vector `_v` off the normal vector `_n`.
-/// @param {array} _v The incident vector.
-/// @param {array} _n The normal vector.
+/// @param {real[3]} _v The incident vector.
+/// @param {real[3]} _n The normal vector.
 function ce_vec3_reflect(_v, _n)
 {
 	gml_pragma("forceinline");
@@ -421,7 +421,7 @@ function ce_vec3_reflect(_v, _n)
 
 /// @func ce_vec3_scale(_v, _s)
 /// @desc Scales the vector's components by the given value.
-/// @param {array} _v The vector.
+/// @param {real[3]} _v The vector.
 /// @param {real} _s The value to scale the components by.
 function ce_vec3_scale(_v, _s)
 {
@@ -434,8 +434,8 @@ function ce_vec3_scale(_v, _s)
 /// @func ce_vec3_slerp(_v1, _v2, _s)
 /// @desc Performs a spherical linear interpolation between the vectors `_v1`,
 /// `_v2` and stores the result to `_v1`.
-/// @param {array} _v1 The first vector. Should be normalized!
-/// @param {array} _v2 The second vector. Should be normalized!
+/// @param {real[3]} _v1 The first vector. Should be normalized!
+/// @param {real[3]} _v2 The second vector. Should be normalized!
 /// @param {real} _s The slerping factor.
 /// @source https://keithmaggio.wordpress.com/2011/02/15/math-magician-lerp-slerp-and-nlerp/
 function ce_vec3_slerp(_v1, _v2, _s)
@@ -455,8 +455,8 @@ function ce_vec3_slerp(_v1, _v2, _s)
 
 /// @func ce_vec3_subtract(_v1, _v2)
 /// @desc Subtracts vector `_v2` from `_v1` and stores the result into `_v1`.
-/// @param {array} _v1 The vector to subtract from.
-/// @param {array} _v2 The vector to subtract.
+/// @param {real[3]} _v1 The vector to subtract from.
+/// @param {real[3]} _v2 The vector to subtract.
 function ce_vec3_subtract(_v1, _v2)
 {
 	gml_pragma("forceinline");
@@ -468,8 +468,8 @@ function ce_vec3_subtract(_v1, _v2)
 /// @func ce_vec3_transform(_v, _m)
 /// @desc Transforms a 4D vector `[_v_x, _v_y, _v_z, 1]` by the matrix `_m` and stores
 /// `[x, y, z]` of the resulting vector to `v`.
-/// @param {array} _v The vector to transform.
-/// @param {array} _m The transform matrix.
+/// @param {real[3]} _v The vector to transform.
+/// @param {real[3]} _m The transform matrix.
 function ce_vec3_transform(_v, _m)
 {
 	gml_pragma("forceinline");
@@ -482,9 +482,9 @@ function ce_vec3_transform(_v, _m)
 
 /// @func ce_vec3_unproject(_v, _screen, _mat)
 /// @desc Unprojects the vector from screen space to world space.
-/// @param {array} _v The vector in screen space.
-/// @param {array} _screen An array containing `[screen_width, screen_height]`.
-/// @param {array} _mat The inverse world * view * projection matrix.
+/// @param {real[3]} _v The vector in screen space.
+/// @param {real[3]} _screen An array containing `[screen_width, screen_height]`.
+/// @param {real[3]} _mat The inverse world * view * projection matrix.
 function ce_vec3_unproject(_v, _screen, _mat)
 {
 	gml_pragma("forceinline");

@@ -4,7 +4,7 @@
 /// @param {real} _m10.._m13 The second row of the matrix.
 /// @param {real} _m20.._m23 The third row of the matrix.
 /// @param {real} _m30.._m33 The fourth row of the matrix.
-/// @return {array} The created matrix.
+/// @return {real[16]} The created matrix.
 function ce_matrix_create(
 	_m00, _m01, _m02, _m03,
 	_m10, _m11, _m12, _m13,
@@ -22,8 +22,8 @@ function ce_matrix_create(
 
 /// @func ce_matrix_add_componentwise(_m1, _m2)
 /// @desc Adds matrices `_m1`, `_m2` componentwise and stores the result to `_m1`.
-/// @param {array} _m1 The first matrix.
-/// @param {array} _m2 The second matrix.
+/// @param {real[16]} _m1 The first matrix.
+/// @param {real[16]} _m2 The second matrix.
 function ce_matrix_add_componentwise(_m1, _m2)
 {
 	gml_pragma("forceinline");
@@ -47,10 +47,10 @@ function ce_matrix_add_componentwise(_m1, _m2)
 
 /// @func ce_matrix_build_lookat(_from, _to, _up)
 /// @desc Builds a look-at matrix from given vec3.
-/// @param {array} _from Camera's position vector.
-/// @param {array} _to Camera's target position.
-/// @param {array} _up Camera's up vector.
-/// @return {array} The created matrix.
+/// @param {real[3]} _from Camera's position vector.
+/// @param {real[3]} _to Camera's target position.
+/// @param {real[3]} _up Camera's up vector.
+/// @return {real[16]} The created matrix.
 function ce_matrix_build_lookat(_from, _to, _up)
 {
 	gml_pragma("forceinline");
@@ -73,8 +73,8 @@ function ce_matrix_copy(_source, _target)
 
 /// @func ce_matrix_clone(_m)
 /// @desc Creates a clone of the matrix.
-/// @param {array} _m The matrix to create a clone of.
-/// @return {array} The created matrix.
+/// @param {real[16]} _m The matrix to create a clone of.
+/// @return {real[16]} The created matrix.
 function ce_matrix_clone(_m)
 {
 	gml_pragma("forceinline");
@@ -85,11 +85,11 @@ function ce_matrix_clone(_m)
 
 /// @func ce_matrix_create_from_columns(_c0, _c1, _c2, _c3)
 /// @desc Creates a matrix with specified columns.
-/// @param {array} _c0 The first column of the matrix.
-/// @param {array} _c1 The second column of the matrix.
-/// @param {array} _c2 The third column of the matrix.
-/// @param {array} _c3 The fourth column of the matrix.
-/// @return {array} The created matrix.
+/// @param {real[4]} _c0 The first column of the matrix.
+/// @param {real[4]} _c1 The second column of the matrix.
+/// @param {real[4]} _c2 The third column of the matrix.
+/// @param {real[4]} _c3 The fourth column of the matrix.
+/// @return {real[16]} The created matrix.
 function ce_matrix_create_from_columns(_c0, _c1, _c2, _c3)
 {
 	gml_pragma("forceinline");
@@ -103,11 +103,11 @@ function ce_matrix_create_from_columns(_c0, _c1, _c2, _c3)
 
 /// @func ce_matrix_create_from_rows(_r0, _r1, _r2, _r3)
 /// @desc Creates a matrix with specified rows.
-/// @param {array} _r0 The first row of the matrix.
-/// @param {array} _r1 The second row of the matrix.
-/// @param {array} _r2 The third row of the matrix.
-/// @param {array} _r3 The fourth row of the matrix.
-/// @return {array} The created matrix.
+/// @param {real[4]} _r0 The first row of the matrix.
+/// @param {real[4]} _r1 The second row of the matrix.
+/// @param {real[4]} _r2 The third row of the matrix.
+/// @param {real[4]} _r3 The fourth row of the matrix.
+/// @return {real[16]} The created matrix.
 function ce_matrix_create_from_rows(_r0, _r1, _r2, _r3)
 {
 	gml_pragma("forceinline");
@@ -121,7 +121,7 @@ function ce_matrix_create_from_rows(_r0, _r1, _r2, _r3)
 
 /// @func ce_matrix_determinant(_m)
 /// @desc Gets the determinant of the matrix.
-/// @param {array} _m The matrix.
+/// @param {real[16]} _m The matrix.
 /// @return {real} The determinant of the matrix.
 function ce_matrix_determinant(_m)
 {
@@ -153,7 +153,7 @@ function ce_matrix_determinant(_m)
 
 /// @func ce_matrix_inverse(_m)
 /// @desc Inverts the matrix.
-/// @param {array} _m The matrix.
+/// @param {real[16]} _m The matrix.
 function ce_matrix_inverse(_m)
 {
 	gml_pragma("forceinline");
@@ -227,8 +227,8 @@ function ce_matrix_multiply(_matrix)
 /// @func ce_matrix_multiply_componentwise(_m1, _m2)
 /// @desc Multiplies matrices `_m1`, `_m2` componentwise and stores the result to
 /// `_m1`.
-/// @param {array} _m1 The first matrix.
-/// @param {array} _m2 The second matrix.
+/// @param {real[16]} _m1 The first matrix.
+/// @param {real[16]} _m2 The second matrix.
 function ce_matrix_multiply_componentwise(_m1, _m2)
 {
 	gml_pragma("forceinline");
@@ -252,7 +252,7 @@ function ce_matrix_multiply_componentwise(_m1, _m2)
 
 /// @func ce_matrix_scale_componentwise(_m, _s)
 /// @desc Scales each component of a matrix by a value.
-/// @param {array} _m The matrix to scale.
+/// @param {real[16]} _m The matrix to scale.
 /// @param {real} _s The value to scale the matrix by.
 function ce_matrix_scale_componentwise(_m, _s)
 {
@@ -278,8 +278,8 @@ function ce_matrix_scale_componentwise(_m, _s)
 /// @func ce_matrix_subtract_componentwise(_m1, _m2)
 /// @desc Subtracts matrices `_m1`, `_m2` componentwise and stores the result to
 /// `_m1`.
-/// @param {array} _m1 The first matrix.
-/// @param {array} _m2 The second matrix.
+/// @param {real[16]} _m1 The first matrix.
+/// @param {real[16]} _m2 The second matrix.
 function ce_matrix_subtract_componentwise(_m1, _m2)
 {
 	gml_pragma("forceinline");
@@ -303,8 +303,8 @@ function ce_matrix_subtract_componentwise(_m1, _m2)
 
 /// @func ce_matrix_to_euler(_m)
 /// @desc Gets euler angles from the YXZ rotation matrix.
-/// @param {array} _m The YXZ rotation matrix.
-/// @return {array} An array containing the euler angles `[rot_x, rot_y, rot_z]`.
+/// @param {real[16]} _m The YXZ rotation matrix.
+/// @return {real[16]} An array containing the euler angles `[rot_x, rot_y, rot_z]`.
 /// @source https://www.geometrictools.com/Documentation/EulerAngles.pdf
 function ce_matrix_to_euler(_m)
 {
@@ -343,7 +343,7 @@ function ce_matrix_to_euler(_m)
 
 /// @func ce_matrix_transpose(_m)
 /// @desc Transposes the matrix.
-/// @param {array} _m The matrix to be transposed.
+/// @param {real[16]} _m The matrix to be transposed.
 function ce_matrix_transpose(_m)
 {
 	gml_pragma("forceinline");
