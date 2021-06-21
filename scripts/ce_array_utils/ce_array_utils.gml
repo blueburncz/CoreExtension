@@ -187,15 +187,6 @@ function ce_array_get(_array, _index)
 	return _array[_index];
 }
 
-/// @func ce_array_intelligent_design_sort(_array)
-/// @desc Sorts the array in-place in $$O(1)$$ time using the Intelligent Design
-/// Sort algorithm. Praise the Sorter!
-/// @param {array} array The array to sort.
-/// @source http://www.dangermouse.net/esoteric/intelligentdesignsort.html
-function ce_array_intelligent_design_sort(_array)
-{
-}
-
 /// @func ce_array_map(_array, _callback)
 /// @desc Creates a new array containing the results of calling the script on
 /// every value in the given array.
@@ -239,22 +230,22 @@ function ce_array_merge(_a1, _a2)
 	return _merged;
 }
 
-/// @func ce_array_reduce(_array, _callback[, _initial_value])
+/// @func ce_array_reduce(_array, _callback[, _initialValue])
 /// @desc Reduces the array from left to right, applying the callback script on
 /// each value, resulting into a single value.
 /// @param {array} _array The array to reduce.
 /// @param {function} _callback The reducer function. It takes the accumulator (which
 /// is the `initial_value` at start) as the first argument, the current value as
 /// the second argument and optionally the current index as the third argument.
-/// @param {any} [_initial_value] The initial value. If not specified, the first
+/// @param {any} [_initialValue] The initial value. If not specified, the first
 /// value in the array is taken.
 /// @return {any} The result of the reduction.
 /// @example
 /// ```gml
-/// // Here the script scr_reduce_add(a, b) returns a + b
+/// var _add = function (_a, _b) { return (_a + _b); };
 /// var _a = [1, 2, 3, 4];
-/// var _r1 = ce_array_reduce(_a, scr_reduce_add); // Results to 10
-/// var _r2 = ce_array_reduce(_a, scr_reduce_add, 5); // Results to 15
+/// var _r1 = ce_array_reduce(_a, _add); // Results to 10
+/// var _r2 = ce_array_reduce(_a, _add, 5); // Results to 15
 /// ```
 /// @see ce_array_reduce_right
 function ce_array_reduce(_array, _callback)
@@ -269,22 +260,22 @@ function ce_array_reduce(_array, _callback)
 	return _accumulator;
 }
 
-/// @func ce_array_reduce_right(_array, _callback[, _initial_value])
+/// @func ce_array_reduce_right(_array, _callback[, _initialValue])
 /// @desc Reduces the array from right to left, applying the callback script on
 /// each value, resulting into a single value.
 /// @param {array} _array The array to reduce.
 /// @param {function} _callback The reducer function. It takes the accumulator (which
 /// is the `initial_value` at start) as the first argument, the current value as
 /// the second argument and optionally the current index as the third argument.
-/// @param {any} [_initial_value] The initial value. If not specified, the last
+/// @param {any} [_initialValue] The initial value. If not specified, the last
 /// value in the array is taken.
 /// @return {any} The result of the reduction.
 /// @example
 /// ```gml
-/// // Here the script scr_reduce_subtract(a, b) returns a - b
+/// var _subtract = function (_a, _b) { return (_a - _b); };
 /// var _a = [1, 2, 3, 4];
-/// var _r1 = ce_array_reduce(_a, scr_reduce_subtract); // Results to -8
-/// var _r2 = ce_array_reduce_right(_a, scr_reduce_subtract); // Results to -2
+/// var _r1 = ce_array_reduce(_a, _subtract); // Results to -8
+/// var _r2 = ce_array_reduce_right(_a, _subtract); // Results to -2
 /// ```
 /// @see ce_array_reduce
 function ce_array_reduce_right(_array, _callback)
@@ -328,67 +319,14 @@ function ce_array_reverse(_array)
 function ce_array_shuffle(_array)
 {
 	var _length = array_length(_array);
-	var _length_minus1 = _length - 1;
+	var _lengthMinus1 = _length - 1;
 	var _seed = random_get_seed();
 	randomize();
 	repeat (_length)
 	{
-		ce_array_swap(_array, irandom(_length_minus1), irandom(_length_minus1));
+		ce_array_swap(_array, irandom(_lengthMinus1), irandom(_lengthMinus1));
 	}
 	random_set_seed(_seed);
-}
-
-/// @func ce_array_sort(_array, _ascending)
-/// @desc Sorts the array.
-/// @param {array} _array The array to sort.
-/// @param {bool} _ascending True to sort the values in ascending order, false
-/// for descending.
-/// @source https://www.geeksforgeeks.org/iterative-quick-sort/
-function ce_array_sort(_array, _ascending)
-{
-	var _size = array_length(_array);
-	var _l = 0;
-	var _h = _size - 1;
-	var _stack = array_create(_h - _l + 1);
-	var _top = -1;
-
-	_stack[++_top] = _l;
-	_stack[++_top] = _h;
-
-	while (_top >= 0)
-	{
-		_h = _stack[_top--];
-		_l = _stack[_top--];
-
-		#region Partition
-		var _x = _array[_h];
-		var i = _l - 1;
-		for (var j = _l; j <= _h - 1; ++j)
-		{
-			if (_ascending
-				? _array[j] <= _x
-				: _array[j] >= _x)
-			{
-				++i;
-				ce_array_swap(_array, i, j);
-			}
-		}
-		ce_array_swap(_array, i + 1, _h);
-		var _p = i + 1;
-		#endregion Partition
-
-		if (_p - 1 > _l)
-		{
-			_stack[++_top] = _l;
-			_stack[++_top] = _p - 1;
-		}
-
-		if (_p + 1 < _h)
-		{
-			_stack[++_top] = _p + 1;
-			_stack[++_top] = _h ;
-		}
-	}
 }
 
 /// @func ce_array_swap(_array, _i, _j)

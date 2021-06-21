@@ -21,7 +21,7 @@ function ce_vec2_create()
 /// @param {real} _f The first weighting factor.
 /// @param {real} _g The second weighting factor.
 /// @return {real[2]} The created vector.
-function ce_vec2_create_barycentric(_v1, _v2, _v3, _f, _g) 
+function ce_vec2_create_barycentric(_v1, _v2, _v3, _f, _g)
 {
 	gml_pragma("forceinline");
 	var _v10 = _v1[0];
@@ -140,7 +140,7 @@ function ce_vec2_dot(_v1, _v2)
 /// @desc Gets whether vectors `_v1` and `_v2` are equal.
 /// @param {real[2]} _v1 The first vector.
 /// @param {real[2]} _v2 The second vector.
-/// @return {bool} `true` if the vectors are equal.
+/// @return {bool} Returns `true` if the vectors are equal.
 function ce_vec2_equals(_v1, _v2)
 {
 	gml_pragma("forceinline");
@@ -302,10 +302,10 @@ function ce_vec2_multiply(_v1, _v2)
 function ce_vec2_normalize(_v)
 {
 	gml_pragma("forceinline");
-	var _length_sqr = ce_vec2_lengthsqr(_v);
-	if (_length_sqr > 0)
+	var _lengthSqr = ce_vec2_lengthsqr(_v);
+	if (_lengthSqr > 0)
 	{
-		var _n = 1 / sqrt(_length_sqr);
+		var _n = 1 / sqrt(_lengthSqr);
 		_v[@ 0] *= _n;
 		_v[@ 1] *= _n;
 	}
@@ -346,7 +346,7 @@ function ce_vec2_subtract(_v1, _v2)
 }
 
 /// @func ce_vec2_transform(_v, _m)
-/// @desc Transforms a 4D vector `[_v_x, _v_y, 0, 1]` by the matrix `_m` and stores
+/// @desc Transforms a 4D vector `[_vX, _vY, 0, 1]` by the matrix `_m` and stores
 /// `[x, y]` of the resulting vector to `_v`.
 /// @param {real[2]} _v The vector to transform.
 /// @param {real[2]} _m The transform matrix.

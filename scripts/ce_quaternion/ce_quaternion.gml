@@ -17,6 +17,7 @@ function ce_quaternion_create(_x, _y, _z, _w)
 /// @param {real[4]} _q2 The second quaternion.
 function ce_quaternion_add(_q1, _q2)
 {
+	gml_pragma("forceinline");
 	_q1[@ 0] += _q2[0];
 	_q1[@ 1] += _q2[1];
 	_q1[@ 2] += _q2[2];
@@ -40,6 +41,7 @@ function ce_quaternion_clone(_q)
 /// @param {real[4]} _q The quaternion.
 function ce_quaternion_conjugate(_q)
 {
+	gml_pragma("forceinline");
 	_q[@ 0] = -_q[0];
 	_q[@ 1] = -_q[1];
 	_q[@ 2] = -_q[2];
@@ -52,11 +54,12 @@ function ce_quaternion_conjugate(_q)
 /// @return {real[4]} The created quaternion.
 function ce_quaternion_create_from_axisangle(_axis, _angle)
 {
-	var _sin_half_angle = -dsin(_angle * 0.5);
+	gml_pragma("forceinline");
+	var _sinHalfAngle = -dsin(_angle * 0.5);
 	return [
-		_axis[0] * _sin_half_angle,
-		_axis[1] * _sin_half_angle,
-		_axis[2] * _sin_half_angle,
+		_axis[0] * _sinHalfAngle,
+		_axis[1] * _sinHalfAngle,
+		_axis[2] * _sinHalfAngle,
 		dcos(_angle * 0.5)
 	];
 }
@@ -130,12 +133,12 @@ function ce_quaternion_create_look_rotation(_forward, _up)
 	var _m22 = _forward[2];
 
 	var _w = sqrt(1 + _m00 + _m11 + _m22) * 0.5;
-	var _w4_recip = 1 / (4 * _w);
+	var _w4Recip = 1 / (4 * _w);
 
 	return ce_quaternion_create(
-		(_m21 - _m12) * _w4_recip,
-		(_m02 - _m20) * _w4_recip,
-		(_m10 - _m01) * _w4_recip,
+		(_m21 - _m12) * _w4Recip,
+		(_m02 - _m20) * _w4Recip,
+		(_m10 - _m01) * _w4Recip,
 		_w);
 }
 
@@ -158,6 +161,7 @@ function ce_quaternion_dot(_q1, _q2)
 /// @param {real[4]} _q The quaternion.
 function ce_quaternion_inverse(_q)
 {
+	gml_pragma("forceinline");
 	ce_quaternion_conjugate(_q);
 	var _n = 1 / ce_quaternion_length(_q);
 	ce_quaternion_scale(_q, _n);
@@ -204,6 +208,7 @@ function ce_quaternion_lengthsqr(_q) {
 /// @param {real} _s The lerping factor.
 function ce_quaternion_lerp(_q1, _q2, _s)
 {
+	gml_pragma("forceinline");
 	_q1[@ 0] = lerp(_q1[0], _q2[0], _s);
 	_q1[@ 1] = lerp(_q1[1], _q2[1], _s);
 	_q1[@ 2] = lerp(_q1[2], _q2[2], _s);
@@ -240,12 +245,12 @@ function ce_quaternion_multiply(_q1, _q2)
 /// @param {real[4]} _q The quaternion.
 function ce_quaternion_normalize(_q)
 {
-	var _length_sqr = ce_quaternion_lengthsqr(_q);
-	if (_length_sqr <= 0)
+	var _lengthSqr = ce_quaternion_lengthsqr(_q);
+	if (_lengthSqr <= 0)
 	{
 		return;
 	}
-	var _n = 1 / sqrt(_length_sqr);
+	var _n = 1 / sqrt(_lengthSqr);
 	_q[@ 0] *= _n;
 	_q[@ 1] *= _n;
 	_q[@ 2] *= _n;
@@ -277,6 +282,7 @@ function ce_quaternion_rotate(_q, _v)
 /// @param {real} _s The value to scale the quaternion by.
 function ce_quaternion_scale(_q, _s)
 {
+	gml_pragma("forceinline");
 	_q[@ 0] *= _s;
 	_q[@ 1] *= _s;
 	_q[@ 2] *= _s;
@@ -347,11 +353,11 @@ function ce_quaternion_slerp(_q1, _q2, _s)
 	}
 	else
 	{
-		var _theta_0 = arccos(_dot);
-		var _theta = _theta_0 * _s;
-		var _sin_theta = sin(_theta);
-		var _sin_theta_0 = sin(_theta_0);
-		var _s2 = _sin_theta / _sin_theta_0;
+		var _theta0 = arccos(_dot);
+		var _theta = _theta0 * _s;
+		var _sinTheta = sin(_theta);
+		var _sinTheta0 = sin(_theta0);
+		var _s2 = _sinTheta / _sinTheta0;
 		var _s1 = cos(_theta) - (_dot * _s2);
 
 		_q1[@ 0] = (_q10 * _s1) + (_q20 * _s2);
@@ -367,6 +373,7 @@ function ce_quaternion_slerp(_q1, _q2, _s)
 /// @param {real[4]} _q2 The quaternion to subtract.
 function ce_quaternion_subtract(_q1, _q2)
 {
+	gml_pragma("forceinline");
 	_q1[@ 0] -= _q2[0];
 	_q1[@ 1] -= _q2[1];
 	_q1[@ 2] -= _q2[2];
@@ -389,11 +396,12 @@ function ce_quaternion_to_angle(_q)
 /// @return {real[4]} The created axis as `[x, y, z]`.
 function ce_quaternion_to_axis(_q)
 {
-	var _sin_theta_inv = 1 / sin(arccos(_q[3]));
+	gml_pragma("forceinline");
+	var _sinThetaInv = 1 / sin(arccos(_q[3]));
 	return [
-		_q[0] * _sin_theta_inv,
-		_q[1] * _sin_theta_inv,
-		_q[2] * _sin_theta_inv
+		_q[0] * _sinThetaInv,
+		_q[1] * _sinThetaInv,
+		_q[2] * _sinThetaInv
 	];
 }
 

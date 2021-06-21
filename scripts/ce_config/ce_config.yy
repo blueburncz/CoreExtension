@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Scripts",
-    "path": "folders/CE/Scripts.yy",
+    "name": "Config",
+    "path": "folders/CE/Config.yy",
   },
   "resourceVersion": "1.0",
   "name": "ce_config",

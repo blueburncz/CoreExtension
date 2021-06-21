@@ -62,8 +62,8 @@ function ce_matrix_build_lookat(_from, _to, _up)
 
 /// @func ce_matrix_copy(_source, _target)
 /// @desc Copies a matrix.
-/// @param {matrix} _source The matrix to copy from.
-/// @param {matrix} _target The matrix to copy to.
+/// @param {real[16]} _source The matrix to copy from.
+/// @param {real[16]} _target The matrix to copy to.
 function ce_matrix_copy(_source, _target)
 {
 	gml_pragma("forceinline");
@@ -184,7 +184,7 @@ function ce_matrix_inverse(_m)
 		+ (_m2 * _m4 *  _m9 * _m15) - (_m0 * _m6 *  _m9 * _m15) - (_m1 * _m4 * _m10 * _m15) + (_m0 * _m5 * _m10 * _m15));
 
 	var _s = 1 / _determinant;
-	
+
 	_m[@  0] = _s * ((_m6 * _m11 * _m13) - (_m7 * _m10 * _m13) + (_m7 * _m9 * _m14) - (_m5 * _m11 * _m14) - (_m6 * _m9 * _m15) + (_m5 * _m10 * _m15));
 	_m[@  1] = _s * ((_m3 * _m10 * _m13) - (_m2 * _m11 * _m13) - (_m3 * _m9 * _m14) + (_m1 * _m11 * _m14) + (_m2 * _m9 * _m15) - (_m1 * _m10 * _m15));
 	_m[@  2] = _s * ((_m2 *  _m7 * _m13) - (_m3 *  _m6 * _m13) + (_m3 * _m5 * _m14) - (_m1 *  _m7 * _m14) - (_m2 * _m5 * _m15) + (_m1 *  _m6 * _m15));
@@ -205,8 +205,8 @@ function ce_matrix_inverse(_m)
 
 /// @func ce_matrix_multiply(_matrix, ...)
 /// @desc Multiplies any number of given matrices.
-/// @param {matrix} _matrix The first matrix.
-/// @return {matrix} The resulting matrix.
+/// @param {real[16]} _matrix The first matrix.
+/// @return {real[16]} The resulting matrix.
 /// @example
 /// Both following lines of code would produce the same result.
 /// ```gml
@@ -309,35 +309,35 @@ function ce_matrix_subtract_componentwise(_m1, _m2)
 function ce_matrix_to_euler(_m)
 {
 	gml_pragma("forceinline");
-	var _theta_x, _theta_y, _theta_z;
+	var _thetaX, _thetaY, _thetaZ;
 	var _m6 = _m[6];
 
 	if (_m6 < 1)
 	{
 		if (_m6 > -1)
 		{
-			_theta_x = arcsin(-_m6);
-			_theta_y = arctan2(_m[2], _m[10]);
-			_theta_z = arctan2(_m[4], _m[5]);
+			_thetaX = arcsin(-_m6);
+			_thetaY = arctan2(_m[2], _m[10]);
+			_thetaZ = arctan2(_m[4], _m[5]);
 		}
 		else
 		{
-			_theta_x = pi * 0.5;
-			_theta_y = -arctan2(-_m[1], _m[0]);
-			_theta_z = 0;
+			_thetaX = pi * 0.5;
+			_thetaY = -arctan2(-_m[1], _m[0]);
+			_thetaZ = 0;
 		}
 	}
 	else
 	{
-		_theta_x = -pi * 0.5;
-		_theta_y = arctan2(-_m[1], _m[0]);
-		_theta_z = 0;
+		_thetaX = -pi * 0.5;
+		_thetaY = arctan2(-_m[1], _m[0]);
+		_thetaZ = 0;
 	}
 
 	return [
-		(360 + radtodeg(_theta_x)) mod 360,
-		(360 + radtodeg(_theta_y)) mod 360,
-		(360 + radtodeg(_theta_z)) mod 360
+		(360 + radtodeg(_thetaX)) mod 360,
+		(360 + radtodeg(_thetaY)) mod 360,
+		(360 + radtodeg(_thetaZ)) mod 360
 	];
 }
 
@@ -357,14 +357,14 @@ function ce_matrix_transpose(_m)
 
 /// @func ce_matrix_translate(_matrix, _x[, _y, _z])
 /// @desc Translates a matrix.
-/// @param {matrix} _matrix The matrix to translate.
+/// @param {real[16]} _matrix The matrix to translate.
 /// @param {real/real[]} _x The translation on an X axis or an array with
 /// `[x, y, z]` translation.
 /// @param {real} [_y] The translation on the Y axis. Not used when `_x` is an
 /// array.
 /// @param {real} [_z] The translation on the Z axis. Not used when `_x` is an
 /// array.
-/// @return {matrix} The resulting matrix.
+/// @return {real[16]} The resulting matrix.
 /// @example
 /// Both following lines of code would produce the same result.
 /// ```gml
@@ -383,9 +383,9 @@ function ce_matrix_translate(_matrix, _x)
 
 /// @func ce_matrix_translate_x(_matrix, _translate)
 /// @desc Translates a matrix on the X axis.
-/// @param {matrix} _matrix The matrix to translate.
+/// @param {real[16]} _matrix The matrix to translate.
 /// @param {real} _translate A value to translate the matrix by.
-/// @return {matrix} The resulting matrix.
+/// @return {real[16]} The resulting matrix.
 function ce_matrix_translate_x(_matrix, _translate)
 {
 	gml_pragma("forceinline");
@@ -395,9 +395,9 @@ function ce_matrix_translate_x(_matrix, _translate)
 
 /// @func ce_matrix_translate_y(_matrix, _translate)
 /// @desc Translates a matrix on the Y axis.
-/// @param {matrix} _matrix The matrix to translate.
+/// @param {real[16]} _matrix The matrix to translate.
 /// @param {real} _translate A value to translate the matrix by.
-/// @return {matrix} The resulting matrix.
+/// @return {real[16]} The resulting matrix.
 function ce_matrix_translate_y(_matrix, _translate)
 {
 	gml_pragma("forceinline");
@@ -407,9 +407,9 @@ function ce_matrix_translate_y(_matrix, _translate)
 
 /// @func ce_matrix_translate_z(_matrix, _translate)
 /// @desc Translates a matrix on the Z axis.
-/// @param {matrix} _matrix The matrix to translate.
+/// @param {real[16]} _matrix The matrix to translate.
 /// @param {real} _translate A value to translate the matrix by.
-/// @return {matrix} The resulting matrix.
+/// @return {real[16]} The resulting matrix.
 function ce_matrix_translate_z(_matrix, _translate)
 {
 	gml_pragma("forceinline");
@@ -419,14 +419,14 @@ function ce_matrix_translate_z(_matrix, _translate)
 
 /// @func ce_matrix_rotate(_matrix, _x[, _y, _z])
 /// @desc Rotates a matrix.
-/// @param {matrix} _matrix The matrix to rotate.
+/// @param {real[16]} _matrix The matrix to rotate.
 /// @param {real/real[]} _x Either rotation on the X axis, array with
 /// `[x, y, z]` rotation or an array with `[x, y, z, w]` quaternion.
 /// @param {real} [_y] The rotation on the Y axis. Not used when `_x` is an
 /// array.
 /// @param {real} [_z] The rotation on the Z axis. Not used when `_x` is an
 /// array.
-/// @return {matrix} The resulting matrix.
+/// @return {real[16]} The resulting matrix.
 /// @example
 /// Each of following lines of code would produce the same result.
 /// ```gml
@@ -457,9 +457,9 @@ function ce_matrix_rotate(_matrix, _x)
 
 /// @func ce_matrix_rotate_x(_matrix, _angle)
 /// @desc Rotates a matrix on the X axis.
-/// @param {matrix} _matrix The matrix to rotate.
+/// @param {real[16]} _matrix The matrix to rotate.
 /// @param {real} _angle An angle in degrees.
-/// @return {matrix} The resulting matrix.
+/// @return {real[16]} The resulting matrix.
 function ce_matrix_rotate_x(_matrix, _angle)
 {
 	gml_pragma("forceinline");
@@ -469,9 +469,9 @@ function ce_matrix_rotate_x(_matrix, _angle)
 
 /// @func ce_matrix_rotate_y(_matrix, _angle)
 /// @desc Rotates a matrix on the Y axis.
-/// @param {matrix} _matrix The matrix to rotate.
+/// @param {real[16]} _matrix The matrix to rotate.
 /// @param {real} _angle An angle in degrees.
-/// @return {matrix} The resulting matrix.
+/// @return {real[16]} The resulting matrix.
 function ce_matrix_rotate_y(_matrix, _angle)
 {
 	gml_pragma("forceinline");
@@ -481,9 +481,9 @@ function ce_matrix_rotate_y(_matrix, _angle)
 
 /// @func ce_matrix_rotate_z(_matrix, _angle)
 /// @desc Rotates a matrix on the Z axis.
-/// @param {matrix} _matrix The matrix to rotate.
+/// @param {real[16]} _matrix The matrix to rotate.
 /// @param {real} _angle An angle in degrees.
-/// @return {matrix} The resulting matrix.
+/// @return {real[16]} The resulting matrix.
 function ce_matrix_rotate_z(_matrix, _angle)
 {
 	gml_pragma("forceinline");
@@ -493,14 +493,14 @@ function ce_matrix_rotate_z(_matrix, _angle)
 
 /// @func ce_matrix_scale(_matrix, _x[, _y, _z])
 /// @desc Scales a matrix.
-/// @param {matrix} _matrix The matrix to scale.
+/// @param {real[16]} _matrix The matrix to scale.
 /// @param {real/real[]} _x The scale on an X axis or an array with
 /// `[x, y, z]` scale.
 /// @param {real} [_y] The scale on the Y axis. Not used when `_x` is an
 /// array.
 /// @param {real} [_z] The scale on the Z axis. Not used when `_x` is an
 /// array.
-/// @return {matrix} The resulting matrix.
+/// @return {real[16]} The resulting matrix.
 /// @example
 /// Both following lines of code would produce the same result.
 /// ```gml
@@ -519,9 +519,9 @@ function ce_matrix_scale(_matrix, _x)
 
 /// @func ce_matrix_scale_x(_matrix, _scale)
 /// @desc Scales a matrix on the X axis.
-/// @param {matrix} _matrix The matrix to scale.
+/// @param {real[16]} _matrix The matrix to scale.
 /// @param {real} _scale A value to scale the matrix by.
-/// @return {matrix} The resulting matrix.
+/// @return {real[16]} The resulting matrix.
 function ce_matrix_scale_x(_matrix, _scale)
 {
 	gml_pragma("forceinline");
@@ -531,9 +531,9 @@ function ce_matrix_scale_x(_matrix, _scale)
 
 /// @func ce_matrix_scale_y(_matrix, _scale)
 /// @desc Scales a matrix on the Y axis.
-/// @param {matrix} _matrix The matrix to scale.
+/// @param {real[16]} _matrix The matrix to scale.
 /// @param {real} _scale A value to scale the matrix by.
-/// @return {matrix} The resulting matrix.
+/// @return {real[16]} The resulting matrix.
 function ce_matrix_scale_y(_matrix, _scale)
 {
 	gml_pragma("forceinline");
@@ -543,9 +543,9 @@ function ce_matrix_scale_y(_matrix, _scale)
 
 /// @func ce_matrix_scale_z(_matrix, _scale)
 /// @desc Scales a matrix on the Z axis.
-/// @param {matrix} _matrix The matrix to scale.
+/// @param {real[16]} _matrix The matrix to scale.
 /// @param {real} _scale A value to scale the matrix by.
-/// @return {matrix} The resulting matrix.
+/// @return {real[16]} The resulting matrix.
 function ce_matrix_scale_z(_matrix, _scale)
 {
 	gml_pragma("forceinline");
@@ -553,10 +553,10 @@ function ce_matrix_scale_z(_matrix, _scale)
 		matrix_build(0, 0, 0, 0, 0, 0, 1, 1, _scale));
 }
 
-/// @func ce_matrix_to_aabb(_matrix, _aabb_out)
+/// @func ce_matrix_to_aabb(_matrix, _aabbOut)
 /// @desc Converts matrix into an axis-aligned bounding box.
 /// @param {real[16]} _matrix The matrix.
-/// @param {real[6]} _aabb_out An output array in form of
+/// @param {real[6]} _aabbOut An output array in form of
 /// `[x_min, y_min, z_min, x_max, y_max, z_max]`.
 /// @example
 /// ```gml
@@ -567,7 +567,7 @@ function ce_matrix_scale_z(_matrix, _scale)
 /// var _height = _aabb[4] - _aabb[1];
 /// var _depth = _aabb[5] - _aabb[2];
 /// ```
-function ce_matrix_to_aabb(_matrix, _aabb_out)
+function ce_matrix_to_aabb(_matrix, _aabbOut)
 {
 	var _m0, _m1, _m2, _m3;
 	var _temp;
@@ -600,8 +600,8 @@ function ce_matrix_to_aabb(_matrix, _aabb_out)
 
 	_min = min(_b0, _b1, _b2, _b3, _t0, _t1, _t2, _t3);
 	_max = max(_b0, _b1, _b2, _b3, _t0, _t1, _t2, _t3);
-	_aabb_out[@ 0] = _min;
-	_aabb_out[@ 3] = _max;
+	_aabbOut[@ 0] = _min;
+	_aabbOut[@ 3] = _max;
 
 	////////////////////////////////////////////////////////////////////////////
 	// Y
@@ -628,8 +628,8 @@ function ce_matrix_to_aabb(_matrix, _aabb_out)
 
 	_min = min(_b0, _b1, _b2, _b3, _t0, _t1, _t2, _t3);
 	_max = max(_b0, _b1, _b2, _b3, _t0, _t1, _t2, _t3);
-	_aabb_out[@ 1] = _min;
-	_aabb_out[@ 4] = _max;
+	_aabbOut[@ 1] = _min;
+	_aabbOut[@ 4] = _max;
 
 	////////////////////////////////////////////////////////////////////////////
 	// Z
@@ -656,6 +656,6 @@ function ce_matrix_to_aabb(_matrix, _aabb_out)
 
 	_min = min(_b0, _b1, _b2, _b3, _t0, _t1, _t2, _t3);
 	_max = max(_b0, _b1, _b2, _b3, _t0, _t1, _t2, _t3);
-	_aabb_out[@ 2] = _min;
-	_aabb_out[@ 5] = _max;
+	_aabbOut[@ 2] = _min;
+	_aabbOut[@ 5] = _max;
 }

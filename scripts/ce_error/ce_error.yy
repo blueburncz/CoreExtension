@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Scripts",
-    "path": "folders/CE/Scripts.yy",
+    "name": "Error",
+    "path": "folders/CE/Error.yy",
   },
   "resourceVersion": "1.0",
-  "name": "ce_event_system",
+  "name": "ce_error",
   "tags": [],
   "resourceType": "GMScript",
 }

@@ -1,8 +1,8 @@
 {
   "type": 1,
   "parent": {
-    "name": "Shaders",
-    "path": "folders/CE/Shaders.yy",
+    "name": "Surface",
+    "path": "folders/CE/Surface.yy",
   },
   "resourceVersion": "1.0",
   "name": "CE_ShClearColor",

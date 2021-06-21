@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Scripts",
-    "path": "folders/CE/Scripts.yy",
+    "name": "Cubemap",
+    "path": "folders/CE/Cubemap.yy",
   },
   "resourceVersion": "1.0",
   "name": "ce_cubemap",

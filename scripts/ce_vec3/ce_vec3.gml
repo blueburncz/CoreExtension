@@ -170,7 +170,7 @@ function ce_vec3_dot(_v1, _v2)
 /// @desc Gets whether vectors `_v1` and `_v2` are equal.
 /// @param {real[3]} _v1 The first vector.
 /// @param {real[3]} _v2 The second vector.
-/// @return {bool} `true` if the vectors are equal.
+/// @return {bool} Returns `true` if the vectors are equal.
 function ce_vec3_equals(_v1, _v2)
 {
 	gml_pragma("forceinline");
@@ -191,7 +191,7 @@ function ce_vec3_floor(_v)
 }
 
 /// @func ce_vec3_frac(_v)
-/// @desc Sets each component of the input vector to it's decimal part.
+/// @desc Sets each component of the input vector to its decimal part.
 /// @param {real[3]} _v The input vector.
 function ce_vec3_frac(_v)
 {
@@ -343,10 +343,10 @@ function ce_vec3_multiply(_v1, _v2)
 function ce_vec3_normalize(_v)
 {
 	gml_pragma("forceinline");
-	var _length_sqr = ce_vec3_lengthsqr(_v);
-	if (_length_sqr > 0)
+	var _lengthSqr = ce_vec3_lengthsqr(_v);
+	if (_lengthSqr > 0)
 	{
-		var _n = 1 / sqrt(_length_sqr);
+		var _n = 1 / sqrt(_lengthSqr);
 		_v[@ 0] *= _n;
 		_v[@ 1] *= _n;
 		_v[@ 2] *= _n;
@@ -357,17 +357,17 @@ function ce_vec3_normalize(_v)
 /// @desc Orthonormalizes the vectors using the Gram–Schmidt process.
 /// @param {real[3]} _v1 The first vector.
 /// @param {real[3]} _v2 The second vector.
-/// @return {bool} `true` if the vectors were orthonormalized.
+/// @return {bool} Returns `true` if the vectors were orthonormalized.
 /// @source https://www.gamedev.net/forums/topic/585184-orthonormalize-two-vectors/
-function ce_vec3_orthonormalize(_in_v1, _in_v2)
+function ce_vec3_orthonormalize(_inV1, _inV2)
 {
 	gml_pragma("forceinline");
 
-	var _v1 = ce_vec3_clone(_in_v1);
+	var _v1 = ce_vec3_clone(_inV1);
 	ce_vec3_normalize(_v1);
 	var _proj = ce_vec3_clone(_v1);
-	ce_vec3_scale(_proj, ce_vec3_dot(_in_v2, _v1));
-	var _v2 = ce_vec3_clone(_in_v2);
+	ce_vec3_scale(_proj, ce_vec3_dot(_inV2, _v1));
+	var _v2 = ce_vec3_clone(_inV2);
 	ce_vec3_subtract(_v2, _proj);
 
 	if (ce_vec3_lengthsqr(_v2) <= 0)
@@ -377,13 +377,13 @@ function ce_vec3_orthonormalize(_in_v1, _in_v2)
 
 	ce_vec3_normalize(_v2);
 
-	_in_v1[@ 0] = _v1[0];
-	_in_v1[@ 1] = _v1[1];
-	_in_v1[@ 2] = _v1[2];
+	_inV1[@ 0] = _v1[0];
+	_inV1[@ 1] = _v1[1];
+	_inV1[@ 2] = _v1[2];
 
-	_in_v2[@ 0] = _v2[0];
-	_in_v2[@ 1] = _v2[1];
-	_in_v2[@ 2] = _v2[2];
+	_inV2[@ 0] = _v2[0];
+	_inV2[@ 1] = _v2[1];
+	_inV2[@ 2] = _v2[2];
 
 	return true;
 }
@@ -441,16 +441,16 @@ function ce_vec3_scale(_v, _s)
 function ce_vec3_slerp(_v1, _v2, _s)
 {
 	gml_pragma("forceinline");
-	var _dot = clamp(ce_vec3_dot(_v1, _v2), -1, 1); 
+	var _dot = clamp(ce_vec3_dot(_v1, _v2), -1, 1);
 	var _theta = arccos(_dot) * _s;
-	var _relative_vec = ce_vec3_clone(_v2);
+	var _relativeVec = ce_vec3_clone(_v2);
 	var _sub = ce_vec3_clone(_v1);
 	ce_vec3_scale(_sub, _dot);
-	ce_vec3_subtract(_relative_vec, _sub);
-	ce_vec3_normalize(_relative_vec);
+	ce_vec3_subtract(_relativeVec, _sub);
+	ce_vec3_normalize(_relativeVec);
 	ce_vec3_scale(_v1, cos(_theta));
-	ce_vec3_scale(_relative_vec, sin(_theta));
-	ce_vec3_add(_v1, _relative_vec);
+	ce_vec3_scale(_relativeVec, sin(_theta));
+	ce_vec3_add(_v1, _relativeVec);
 }
 
 /// @func ce_vec3_subtract(_v1, _v2)
@@ -466,7 +466,7 @@ function ce_vec3_subtract(_v1, _v2)
 }
 
 /// @func ce_vec3_transform(_v, _m)
-/// @desc Transforms a 4D vector `[_v_x, _v_y, _v_z, 1]` by the matrix `_m` and stores
+/// @desc Transforms a 4D vector `[_vX, _vY, _vZ, 1]` by the matrix `_m` and stores
 /// `[x, y, z]` of the resulting vector to `v`.
 /// @param {real[3]} _v The vector to transform.
 /// @param {real[3]} _m The transform matrix.

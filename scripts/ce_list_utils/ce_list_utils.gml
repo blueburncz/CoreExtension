@@ -192,7 +192,7 @@ function ce_ds_list_find_index_last(_list, _value)
 
 /// @func ce_ds_list_get(_list, _index[, _default])
 /// @desc Retrieves a value at given index of a list.
-/// @param {ds_list} _list The list to get the value from.
+/// @param {ds_list} _list The list to Get the value from.
 /// @param {real} _index The index.
 /// @param {any} [_default] The default value.
 /// @return {any} Value at given index or the default value if is specified and
@@ -328,23 +328,23 @@ function ce_ds_list_merge(_l1, _l2)
 	return _merged;
 }
 
-/// @func ce_ds_list_reduce(_list, _callback[, _initial_value])
+/// @func ce_ds_list_reduce(_list, _callback[, _initialValue])
 /// @desc Reduces the list from left to right, applying the callback script on
 /// each value, resulting into a single value.
 /// @param {ds_list} _list The list to reduce.
 /// @param {function} _callback The reducer function. It takes the accumulator (which
-/// is the `_initial_value` at start) as the first argument, the current value as
+/// is the `_initialValue` at start) as the first argument, the current value as
 /// the second argument and optionally the current index as the third argument.
-/// @param {any} [_initial_value] The initial value. If not specified, the first
+/// @param {any} [_initialValue] The initial value. If not specified, the first
 /// value in the list is taken.
 /// @return {any} The result of the reduction.
 /// @example
 /// ```gml
-/// // Here the script scr_reduce_add(a, b) returns a + b
+/// var _add = function (_a, _b) { return (_a + _b); };
 /// var _l = ds_list_create();
 /// ds_list_add(_l, 1, 2, 3, 4);
-/// var _r1 = ce_ds_list_reduce(_l, scr_reduce_add); // Results to 10
-/// var _r2 = ce_ds_list_reduce(_l, scr_reduce_add, 5); // Results to 15
+/// var _r1 = ce_ds_list_reduce(_l, _add); // Results to 10
+/// var _r2 = ce_ds_list_reduce(_l, _add, 5); // Results to 15
 /// ```
 /// @see ce_ds_list_reduce_right
 function ce_ds_list_reduce(_list, _callback)
@@ -359,23 +359,23 @@ function ce_ds_list_reduce(_list, _callback)
 	return _accumulator;
 }
 
-/// @func ce_ds_list_reduce_right(_list, _callback[, _initial_value])
+/// @func ce_ds_list_reduce_right(_list, _callback[, _initialValue])
 /// @desc Reduces the list from right to left, applying the callback script on
 /// each value, resulting into a single value.
 /// @param {ds_list} _list The list to reduce.
 /// @param {function} _callback The reducer function. It takes the accumulator (which
-/// is the `_initial_value` at start) as the first argument, the current value as
+/// is the `_initialValue` at start) as the first argument, the current value as
 /// the second argument and optionally the current index as the third argument.
-/// @param {any} [_initial_value] The initial value. If not specified, the last
+/// @param {any} [_initialValue] The initial value. If not specified, the last
 /// value in the list is taken.
 /// @return {any} The result of the reduction.
 /// @example
 /// ```gml
-/// // Here the script scr_reduce_subtract(a, b) returns a - b
+/// var _subtract = function (_a, _b) { return (_a - _b); };
 /// var _l = ds_list_create();
 /// ds_list_add(_l, 1, 2, 3, 4);
-/// var _r1 = ce_ds_list_reduce(_l, scr_reduce_subtract); // Results to -8
-/// var _r2 = ce_ds_list_reduce_right(_l, scr_reduce_subtract); // Results to -2
+/// var _r1 = ce_ds_list_reduce(_l, _subtract); // Results to -8
+/// var _r2 = ce_ds_list_reduce_right(_l, _subtract); // Results to -2
 /// ```
 /// @see ce_ds_list_reduce
 function ce_ds_list_reduce_right(_list, _callback)
@@ -408,10 +408,10 @@ function ce_ds_list_remove(_list, _value)
 }
 
 /// @func ce_ds_list_remove_first(_list, _value)
-/// @desc Removes the first occurence of the value from the list.
+/// @desc Removes the first occurrence of the value from the list.
 /// @param {ds_list} _list The list to remove the value from.
 /// @param {any} _value The value to remove.
-/// @return {bool} `true` if the value was in the list.
+/// @return {bool} Returns `true` if the value was in the list.
 function ce_ds_list_remove_first(list, value)
 {
 	var _index = ds_list_find_index(_list, _value);

@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Utils",
-    "path": "folders/CE/Scripts/Utils.yy",
+    "name": "ListUtils",
+    "path": "folders/CE/ListUtils.yy",
   },
   "resourceVersion": "1.0",
   "name": "ce_list_utils",

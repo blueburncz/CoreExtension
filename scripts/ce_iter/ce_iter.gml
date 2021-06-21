@@ -1,8 +1,8 @@
 /// @macro {string/real} The current index in the iteration.
-#macro CE_ITER_INDEX global.__ce_iter_index_prev
+#macro CE_ITER_INDEX global.__ceIterIndexPrev
 
 /// @macro {any} The current value in the iteration.
-#macro CE_ITER_VALUE global.__ce_iter_value
+#macro CE_ITER_VALUE global.__ceIterValue
 
 /// @macro {code} Breaks the current iteration (equivalent of `break`).
 #macro CE_ITER_BREAK { _ce_iter_restore_context(); break; }
@@ -12,46 +12,46 @@
 
 /// @var {real} A stack used for iteration context switches.
 /// @private
-global.__ce_iter_stack = ds_stack_create();
+global.__ceIterStack = ds_stack_create();
 
 /// @var {array/real} The currently iterated structure. Can be an array or an
 /// id of a data structure.
 /// @private
-global.__ce_iter_struct = undefined;
+global.__ceIterStruct = undefined;
 
 /// @var {real} The type of the currently iterated structure. Equals -1 when
 /// iterating an array.
 /// @private
-global.__ce_iter_type = undefined;
+global.__ceIterType = undefined;
 
 /// @var {real} Number of left iterations in the currently iterated structure.
 /// @private
-global.__ce_iter_counter = undefined;
+global.__ceIterCounter = undefined;
 
 /// @var {string/real} The current iteration index.
 /// @private
-global.__ce_iter_index = undefined;
+global.__ceIterIndex = undefined;
 
 /// @var {string/real} The previous iteration index.
 /// @private
-global.__ce_iter_index_prev = undefined;
+global.__ceIterIndexPrev = undefined;
 
 /// @var {any} The current iteration value.
 /// @private
-global.__ce_iter_value = undefined;
+global.__ceIterValue = undefined;
 
 /// @func _ce_iter_restore_context()
 /// @private
 function _ce_iter_restore_context()
 {
-	if (ds_stack_size(global.__ce_iter_stack) > 0)
+	if (ds_stack_size(global.__ceIterStack) > 0)
 	{
-		var _context = ds_stack_pop(global.__ce_iter_stack);
-		global.__ce_iter_struct = _context[0];
-		global.__ce_iter_type = _context[1];
-		global.__ce_iter_counter = _context[2];
-		global.__ce_iter_index = _context[3];
-		global.__ce_iter_index_prev = _context[4];
+		var _context = ds_stack_pop(global.__ceIterStack);
+		global.__ceIterStruct = _context[0];
+		global.__ceIterType = _context[1];
+		global.__ceIterCounter = _context[2];
+		global.__ceIterIndex = _context[3];
+		global.__ceIterIndexPrev = _context[4];
 	}
 }
 
@@ -62,7 +62,7 @@ function _ce_iter_restore_context()
 /// @param {real} [type] The type of the data structure. Currently `ds_type_list`
 /// and `ds_type_map` are supported. This parameter is obligatory when `struct` is
 /// not an array.
-/// @return {bool} `true` if the iteration continues.
+/// @return {bool} Returns `true` if the iteration continues.
 /// @example
 /// Following code iterates through the array, skipping index 1 and breaking
 /// at index 2, so it prints only '0:1' and '2:3' to the console.
@@ -100,24 +100,24 @@ function ce_iter(_struct)
 	}
 
 	// Iteration target has changed.
-	if (global.__ce_iter_type != _type
-		|| global.__ce_iter_struct != _struct)
+	if (global.__ceIterType != _type
+		|| global.__ceIterStruct != _struct)
 	{
 		// Store current context into the stack.
-		if (global.__ce_iter_struct != undefined)
+		if (global.__ceIterStruct != undefined)
 		{
-			ds_stack_push(global.__ce_iter_stack, [
-				global.__ce_iter_struct,
-				global.__ce_iter_type,
-				global.__ce_iter_counter,
-				global.__ce_iter_index,
-				global.__ce_iter_index_prev,
+			ds_stack_push(global.__ceIterStack, [
+				global.__ceIterStruct,
+				global.__ceIterType,
+				global.__ceIterCounter,
+				global.__ceIterIndex,
+				global.__ceIterIndexPrev,
 			]);
 		}
 
 		// Create new contex.
-		global.__ce_iter_struct = _struct;
-		global.__ce_iter_type = _type;
+		global.__ceIterStruct = _struct;
+		global.__ceIterType = _type;
 
 		var _size;
 		var _index;
@@ -140,34 +140,34 @@ function ce_iter(_struct)
 			break;
 		}
 
-		global.__ce_iter_counter = _size;
-		global.__ce_iter_index = _index;
+		global.__ceIterCounter = _size;
+		global.__ceIterIndex = _index;
 	}
 
 	// Continue iteration.
-	if (global.__ce_iter_counter > 0)
+	if (global.__ceIterCounter > 0)
 	{
-		--global.__ce_iter_counter;
+		--global.__ceIterCounter;
 
-		global.__ce_iter_index_prev = global.__ce_iter_index;
+		global.__ceIterIndexPrev = global.__ceIterIndex;
 
-		switch (global.__ce_iter_type)
+		switch (global.__ceIterType)
 		{
 		case -1:
-			global.__ce_iter_value = global.__ce_iter_struct[global.__ce_iter_index++];
+			global.__ceIterValue = global.__ceIterStruct[global.__ceIterIndex++];
 			break;
 
 		case ds_type_list:
-			global.__ce_iter_value = global.__ce_iter_struct[| global.__ce_iter_index++];
+			global.__ceIterValue = global.__ceIterStruct[| global.__ceIterIndex++];
 			break;
 
 		case ds_type_map:
-			global.__ce_iter_value = global.__ce_iter_struct[? global.__ce_iter_index];
-			global.__ce_iter_index = ds_map_find_next(global.__ce_iter_struct, global.__ce_iter_index);
+			global.__ceIterValue = global.__ceIterStruct[? global.__ceIterIndex];
+			global.__ceIterIndex = ds_map_find_next(global.__ceIterStruct, global.__ceIterIndex);
 			break;
 
 		default:
-			ce_assert(false, "Iteration of " + string(global.__ce_iter_type) + " is not supported!");
+			ce_assert(false, "Iteration of " + string(global.__ceIterType) + " is not supported!");
 		}
 
 		return true;

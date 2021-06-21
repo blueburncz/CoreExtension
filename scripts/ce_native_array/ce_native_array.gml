@@ -26,12 +26,12 @@ function CE_NativeArray(_type, _size) constructor
 	// TODO: Fix native array buffer alignment?
 	Buffer = buffer_create(TypeSize * Size, buffer_fixed, 1);
 
-	/// @func get_ptr()
+	/// @func GetPtr()
 	/// @desc Retrieves a pointer to the underyling buffer.
 	/// @return {ptr} The pointer to the underlying buffer.
 	/// @example
 	/// ```gml
-	/// function native_array_sort(_native_array)
+	/// function native_array_sort(_nativeArray)
 	/// {
 	///     gml_pragma("forceinline");
 	///     static _fn = external_define(
@@ -43,51 +43,51 @@ function CE_NativeArray(_type, _size) constructor
 	///         ty_string, // Pointer to the buffer
 	///         ty_real,   // Size of the array
 	///         ty_real);  // Size of array entry type in bytes
-	///     return external_call(_fn, _native_array.get_ptr(), _native_array.Size, _native_array.TypeSize);
+	///     return external_call(_fn, _nativeArray.GetPtr(), _nativeArray.Size, _nativeArray.TypeSize);
 	/// }
 	/// ```
-	static get_ptr = function () {
+	static GetPtr = function () {
 		gml_pragma("forceinline");
 		return buffer_get_address(Buffer);
 	};
 
-	/// @func get_bytesize()
+	/// @func GetByteSize()
 	/// @desc Retrieves the total size of the array in bytes.
 	/// @return {uint} The total size of the array in bytes.
-	static get_bytesize = function () {
+	static GetByteSize = function () {
 		gml_pragma("forceinline");
 		return buffer_get_size(Buffer);
 	};
 
-	/// @func get(_index)
+	/// @func Get(_index)
 	/// @desc Retrieves a value at given index.
 	/// @param {uint} _index A position within the native array to read
 	/// the value from.
 	/// @return {real} The value at given index.
-	static get = function (_index) {
+	static Get = function (_index) {
 		gml_pragma("forceinline");
 		buffer_seek(Buffer, buffer_seek_start, TypeSize * _index);
 		return buffer_read(Buffer, Type);
 	};
 
-	/// @func set(_index, _value)
+	/// @func Set(_index, _value)
 	/// @desc Sets a value at given index.
 	/// @param {uint} _index A position within the native to set the value
 	/// at.
 	/// @param {real} _value The value.
 	/// @return {CE_NativeArray} Returns `self`.
-	static set = function (_index, _value) {
+	static Set = function (_index, _value) {
 		gml_pragma("forceinline");
 		buffer_seek(Buffer, buffer_seek_start, TypeSize * _index);
 		buffer_write(Buffer, Type, _value);
 		return self;
 	};
 
-	/// @func from_array(_array)
+	/// @func FromArray(_array)
 	/// @desc Copies values from a normal array into the native array.
 	/// @param {real[]} _array The array to copy the values from.
 	/// @return {CE_NativeArray} Returns `self`.
-	static from_array = function (_array) {
+	static FromArray = function (_array) {
 		gml_pragma("forceinline");
 		var i = 0;
 		buffer_seek(Buffer, buffer_seek_start, 0);
@@ -98,12 +98,12 @@ function CE_NativeArray(_type, _size) constructor
 		return self;
 	};
 
-	/// @func to_array([_array])
+	/// @func ToArray([_array])
 	/// @desc Copies all values from the native array into a normal array.
 	/// @param {array} [_array] The target array to copy the values to. If
 	/// not specified, then a new one is created.
 	/// @return {real[]} The target array.
-	static to_array = function () {
+	static ToArray = function () {
 		gml_pragma("forceinline");
 		var _array = (argument_count > 0) ? argument[0] : array_create(Size, 0);
 		var i = 0;
@@ -115,10 +115,10 @@ function CE_NativeArray(_type, _size) constructor
 		return _array;
 	};
 
-	/// @func to_string()
+	/// @func ToString()
 	/// @desc Pretty-prints the native array into a string.
 	/// @return {string} The created string.
-	static to_string = function () {
+	static ToString = function () {
 		gml_pragma("forceinline");
 		var _str = "[ ";
 		buffer_seek(Buffer, buffer_seek_start, 0);
@@ -129,9 +129,9 @@ function CE_NativeArray(_type, _size) constructor
 		return (_str + string(buffer_read(Buffer, Type)) + " ]");
 	};
 
-	/// @func destroy()
+	/// @func Destroy()
 	/// @desc Frees memory used by the native array.
-	static destroy = function () {
+	static Destroy = function () {
 		gml_pragma("forceinline");
 		buffer_delete(Buffer);
 	};
@@ -149,5 +149,5 @@ function CE_NativeArray(_type, _size) constructor
 function ce_native_array_from_array(_array, _type)
 {
 	gml_pragma("forceinline");
-	return new CE_NativeArray(_type, array_length(_array)).from_array(_array);
+	return new CE_NativeArray(_type, array_length(_array)).FromArray(_array);
 }

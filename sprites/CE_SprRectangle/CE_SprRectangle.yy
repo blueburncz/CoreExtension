@@ -67,9 +67,10 @@
   "layers": [
     {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"da1a3f7b-d65a-4189-9b55-df178c13f423","tags":[],"resourceType":"GMImageLayer",},
   ],
+  "nineSlice": null,
   "parent": {
-    "name": "Sprites",
-    "path": "folders/CE/Sprites.yy",
+    "name": "DrawUtils",
+    "path": "folders/CE/DrawUtils.yy",
   },
   "resourceVersion": "1.0",
   "name": "CE_SprRectangle",

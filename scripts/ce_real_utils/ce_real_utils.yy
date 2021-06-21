@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Utils",
-    "path": "folders/CE/Scripts/Utils.yy",
+    "name": "RealUtils",
+    "path": "folders/CE/RealUtils.yy",
   },
   "resourceVersion": "1.0",
   "name": "ce_real_utils",

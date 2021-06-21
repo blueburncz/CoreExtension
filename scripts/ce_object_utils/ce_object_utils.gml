@@ -21,7 +21,7 @@ function ce_object_get_base(_object)
 /// @func ce_object_is(_a, _b)
 /// @param {real} _a The index of object A.
 /// @param {real} _b The index of object B.
-/// @return {bool} `true` if object A is or inherits from object B.
+/// @return {bool} Returns `true` if object A is or inherits from object B.
 function ce_object_is(_a, _b)
 {
 	gml_pragma("forceinline");

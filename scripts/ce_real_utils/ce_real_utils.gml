@@ -1,6 +1,6 @@
 /// @func ce_parse_real(string)
 /// @desc Parses a real number from a string.
-/// @param {string} string The string to parse the number from.
+/// @param {string} string The string to Parse the number from.
 /// @return {real/string} The parsed number or `NaN` if the string does not
 /// represent a number.
 function ce_parse_real(_string)
@@ -69,7 +69,7 @@ function ce_parse_real(_string)
 /// @desc Compares two numbers.
 /// @param {real} _r1 The first number.
 /// @param {real} _r2 The second number.
-/// @return {real} `cmpfunc_equal` if the numbers are equal or
+/// @return {real} Returns `cmpfunc_equal` if the numbers are equal or
 /// `cmpfunc_less` / `cmpfunc_greater` if the first number is
 /// less / greater than the second number.
 /// @example
@@ -100,7 +100,7 @@ function ce_real_compare(_r1, _r2)
 
 /// @func ce_real_is_even(_real)
 /// @param {real} _real The number to check.
-/// @return {bool} `true` if the number is even.
+/// @return {bool} Returns `true` if the number is even.
 function ce_real_is_even(_real)
 {
 	gml_pragma("forceinline");
@@ -109,18 +109,18 @@ function ce_real_is_even(_real)
 
 /// @func ce_real_is_odd(_real)
 /// @param {real} _real The number to check.
-/// @return {bool} `true` if the number is odd.
+/// @return {bool} Returns `true` if the number is odd.
 function ce_real_is_odd(_real)
 {
 	gml_pragma("forceinline");
 	return (_real & $1 == 1);
 }
 
-/// @func ce_real_to_string(_real[, _dec_places])
+/// @func ce_real_to_string(_real[, _decPlaces])
 /// @desc Converts a real value to a string without generating trailing zeros
 /// after a decimal point.
 /// @param {real} _real The real value to convert to a string.
-/// @param {real} [_dec_places] Maximum decimal places. Defaults to 16.
+/// @param {real} [_decPlaces] Maximum decimal places. Defaults to 16.
 /// @return {string} The resulting string.
 /// @example
 /// ```gml
@@ -129,19 +129,19 @@ function ce_real_is_odd(_real)
 /// ```
 function ce_real_to_string(_real)
 {
-	var _dec_places = (argument_count > 1) ? argument[1] : 16;
-	var _string = string_format(_real, -1, _dec_places);
-	var _string_length = string_length(_string);
+	var _decPlaces = (argument_count > 1) ? argument[1] : 16;
+	var _string = string_format(_real, -1, _decPlaces);
+	var _stringLength = string_length(_string);
 
 	do
 	{
-		_string = string_format(_real, -1, --_dec_places);
-		if (string_byte_at(_string, --_string_length) != 48)
+		_string = string_format(_real, -1, --_decPlaces);
+		if (string_byte_at(_string, --_stringLength) != 48)
 		{
 			break;
 		}
 	}
-	until (_dec_places == 0);
+	until (_decPlaces == 0);
 
 	return _string;
 }

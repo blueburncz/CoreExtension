@@ -25,17 +25,17 @@ enum CE_ECubeSide
 function CE_Cubemap(_resolution) constructor
 {
 	/// @var {array} The position of the cubemap in the world space.
-	/// @see CE_Cubemap.get_view_matrix
+	/// @see CE_Cubemap.GetViewMatrix
 	Position = ce_vec3_create(0);
 
 	/// @var {real} Distance to the near clipping plane used in the cubemap's
 	/// projection matrix. Defaults to `0.1`.
-	/// @see CE_Cubemap.get_projection_matrix
+	/// @see CE_Cubemap.GetProjectionMatrix
 	ZNear = 0.1;
 
 	/// @var {real} Distance to the far clipping plane used in the cubemap's
 	/// projection matrix. Defaults to `8192`.
-	/// @see CE_Cubemap.get_projection_matrix
+	/// @see CE_Cubemap.GetProjectionMatrix
 	ZFar = 8192;
 
 	/// @var {array<surface>} An array of surfaces.
@@ -52,16 +52,16 @@ function CE_Cubemap(_resolution) constructor
 	Resolution = _resolution;
 
 	/// @var {CE_ECubeSide} An index of a side that we are currently rendering to.
-	/// @see CE_Cubemap.set_target
+	/// @see CE_Cubemap.SetTarget
 	/// @private
 	RenderTo = 0;
 
-	/// @func get_surface(_side)
+	/// @func GetSurface(_side)
 	/// @desc Gets a surface for given cubemap side. If the surface is corrupted,
 	/// then a new one is created.
 	/// @param {CE_ECubeSide} _side The cubemap side.
 	/// @return {real} The surface.
-	static get_surface = function (_side) {
+	static GetSurface = function (_side) {
 		var _surOld = Sides[_side];
 		var _sur = ce_surface_check(_surOld, Resolution, Resolution);
 		if (_sur != _surOld)
@@ -71,17 +71,17 @@ function CE_Cubemap(_resolution) constructor
 		return _sur;
 	};
 
-	/// @func to_single_surface(_surface, _clear_color, _clear_alpha)
+	/// @func ToSingleSurface(_surface, _clearColor, _clearAlpha)
 	/// @desc Puts all faces of the cubemap into a single surface.
-	/// @param {uint} _clear_color The color to clear the target surface with
+	/// @param {uint} _clearColor The color to clear the target surface with
 	/// before the cubemap is rendered into it.
-	/// @param {real} _clear_alpha The alpha to clear the targe surface with
+	/// @param {real} _clearAlpha The alpha to clear the targe surface with
 	/// before the cubemap is rendered into it.
 	/// @see CE_Cubemap.Surface
-	static to_single_surface = function (_clear_color, _clear_alpha) {
+	static ToSingleSurface = function (_clearColor, _clearAlpha) {
 		Surface = ce_surface_check(Surface, Resolution * 8, Resolution);
 		surface_set_target(Surface);
-		draw_clear_alpha(_clear_color, _clear_alpha);
+		draw_clear_alpha(_clearColor, _clearAlpha);
 		var _x = 0;
 		var i = 0;
 		repeat (CE_ECubeSide.SIZE)
@@ -92,11 +92,11 @@ function CE_Cubemap(_resolution) constructor
 		surface_reset_target();
 	};
 
-	/// @func get_view_matrix(_side)
+	/// @func GetViewMatrix(_side)
 	/// @desc Creates a view matrix for given cubemap side.
 	/// @param {ECubemapSide} side The cubemap side.
-	/// @return {matrix} The created view matrix.
-	static get_view_matrix = function (_side) {
+	/// @return {real[16]} The created view matrix.
+	static GetViewMatrix = function (_side) {
 		var _negEye = ce_vec3_clone(Position);
 		ce_vec3_scale(_negEye, -1);
 		var _x, _y, _z;
@@ -148,53 +148,53 @@ function CE_Cubemap(_resolution) constructor
 		];
 	}
 
-	/// @func get_projection_matrix()
+	/// @func GetProjectionMatrix()
 	/// @desc Creates a projection matrix for the cubemap.
-	/// @return {matrix} The created projection matrix.
-	static get_projection_matrix = function () {
+	/// @return {real[16]} The created projection matrix.
+	static GetProjectionMatrix = function () {
 		gml_pragma("forceinline");
 		return matrix_build_projection_perspective_fov(90, 1, ZNear, ZFar);
 	};
 
-	/// @func set_target()
+	/// @func SetTarget()
 	/// @desc Sets next cubemap side surface as the render target and sets
 	/// the current view and projection matrices appropriately.
-	/// @return {bool} Returns `true` if the render target was set or `false`
+	/// @return {bool} Returns `true` if the render target was Set or `false`
 	/// if all cubemap sides were iterated through,
 	/// @example
 	/// ```gml
-	/// while (cubemap.set_target())
+	/// while (cubemap.SetTarget())
 	/// {
 	///     draw_clear(c_black);
 	///     // Render to cubemap here...
-	///     cubemap.reset_target();
+	///     cubemap.ResetTarget();
 	/// }
 	/// ```
-	/// @see CE_Cubemap.reset_target
-	static set_target = function () {
+	/// @see CE_Cubemap.ResetTarget
+	static SetTarget = function () {
 		var _renderTo = RenderTo++;
 		if (_renderTo < CE_ECubeSide.SIZE)
 		{
-			surface_set_target(get_surface(_renderTo));
-			matrix_set(matrix_view, get_view_matrix(_renderTo));
-			matrix_set(matrix_projection, get_projection_matrix());
+			surface_set_target(GetSurface(_renderTo));
+			matrix_set(matrix_view, GetViewMatrix(_renderTo));
+			matrix_set(matrix_projection, GetProjectionMatrix());
 			return true;
 		}
 		RenderTo = 0;
 		return false;
 	};
 
-	/// @func reset_target()
+	/// @func ResetTarget()
 	/// @desc Resets the render target.
-	/// @see CE_Cubemap.set_target
-	static reset_target = function () {
+	/// @see CE_Cubemap.SetTarget
+	static ResetTarget = function () {
 		gml_pragma("forceinline");
 		surface_reset_target();
 	};
 
-	/// @func destroy()
+	/// @func Destroy()
 	/// @desc Frees memory used by the cubemap.
-	static destroy = function () {
+	static Destroy = function () {
 		var i = 0;
 		repeat (CE_ECubeSide.SIZE)
 		{

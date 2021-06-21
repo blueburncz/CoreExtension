@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Utils",
-    "path": "folders/CE/Scripts/Utils.yy",
+    "name": "StringUtils",
+    "path": "folders/CE/StringUtils.yy",
   },
   "resourceVersion": "1.0",
   "name": "ce_string_utils",

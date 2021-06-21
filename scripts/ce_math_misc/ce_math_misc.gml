@@ -17,38 +17,38 @@ function ce_hammersley_2d(_i, _n)
 	];
 }
 
-/// @func ce_point_in_rect(_point_x, _point_y, _rect_x, _rect_y, _rect_width, _rect_height)
-/// @param {real} _point_x The x position of the point.
-/// @param {real} _point_y The y position of the point.
-/// @param {real} _rect_x The x position of the rectangle's top left corner.
-/// @param {real} _rect_y The y position of the rectangle's top left corner.
-/// @param {real} _rect_width The width of the rectangle.
-/// @param {real} _rect_height The height of the rectangle.
-/// @return {bool} `true` if the point is in the rectangle.
-function ce_point_in_rect(_point_x, _point_y, _rect_x, _rect_y, _rect_width, _rect_height)
+/// @func ce_point_in_rect(_pointX, _pointY, _rectX, _rectY, _rectWidth, _rectHeight)
+/// @param {real} _pointX The x position of the point.
+/// @param {real} _pointY The y position of the point.
+/// @param {real} _rectX The x position of the rectangle's top left corner.
+/// @param {real} _rectY The y position of the rectangle's top left corner.
+/// @param {real} _rectWidth The width of the rectangle.
+/// @param {real} _rectHeight The height of the rectangle.
+/// @return {bool} Returns `true` if the point is in the rectangle.
+function ce_point_in_rect(_pointX, _pointY, _rectX, _rectY, _rectWidth, _rectHeight)
 {
 	gml_pragma("forceinline");
-	return (_point_x > _rect_x
-		&& _point_y > _rect_y
-		&& _point_x < _rect_x + _rect_width
-		&& _point_y < _rect_y + _rect_height);
+	return (_pointX > _rectX
+		&& _pointY > _rectY
+		&& _pointX < _rectX + _rectWidth
+		&& _pointY < _rectY + _rectHeight);
 }
 
-/// @func ce_scale_keep_aspect(_target_w, _target_h, _width, _height)
-/// @param {real} _target_w The target width.
-/// @param {real} _target_h The target height.
+/// @func ce_scale_keep_aspect(_targetW _targetH, _width, _height)
+/// @param {real} _targetW The target width.
+/// @param {real} _targetH The target height.
 /// @param {real} _width The original width.
 /// @param {real} _height The original height.
 /// @return {real} The scale.
-function ce_scale_keep_aspect(_target_w, _target_h, _width, _height)
+function ce_scale_keep_aspect(_targetW, _targetH, _width, _height)
 {
-	var _prev_aspect = _target_w / _target_h;
-	var _img_aspect = _width / _height;
-	if (_prev_aspect > _img_aspect)
+	var _prevAspect = _targetW / _targetH;
+	var _imgAspect = _width / _height;
+	if (_prevAspect > _imgAspect)
 	{
-		return _target_h / _height;
+		return _targetH / _height;
 	}
-	return _target_w / _width;
+	return _targetW / _width;
 }
 
 /// @func ce_smoothstep(_e0, _e1, _x)

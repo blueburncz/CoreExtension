@@ -1,8 +1,8 @@
 /// @func ce_generate_uuid([_bytes])
 /// @desc Generates a version 4 UUID.
 /// @param {array} [_bytes] An array that will be used for storing random bytes.
-/// It's size must be 16! If the array is not provided, a new one is created.
-/// Providing the array can save some extra ms when sequentially generating
+/// Its size must be 16! If the array is not provided, a new one is created.
+/// Providing the array can Save some extra ms when sequentially generating
 /// large numbers of UUIDs.
 /// @return {string} The generated UUID.
 /// @note Depends on the `_to_hex` functions.
