@@ -1,6 +1,6 @@
 /// @enum XML delimiters.
 /// @private
-enum CE_EXmlChars
+enum CE_EXMLChar
 {
 	/// @member Null character.
 	Null = 0,
@@ -28,12 +28,66 @@ enum CE_EXmlChars
 	QM = 63
 };
 
-/// @func CE_XmlElement([_name[, value]])
+/// @func ce_xml_parse(_string)
+/// @desc Parses value from the string.
+/// @param {string} _string The string to parse.
+/// @return {real/string} Real value or a string, where XML character entities
+/// are replaced with their original form.
+function ce_xml_parse(_string)
+{
+	// Clear whitespace, replace character entities
+	while (string_byte_at(_string, 1) == 32)
+	{
+		_string = string_delete(_string, 1, 1);
+	}
+
+	_string = string_replace_all(_string, "&lt;", "<");
+	_string = string_replace_all(_string, "&gt;", ">");
+	_string = string_replace_all(_string, "&quot;", "\"");
+	_string = string_replace_all(_string, "&apos;", "'");
+	_string = string_replace_all(_string, "&amp;", "&");
+
+	// Parse real
+	var _real = ce_parse_real(_string);
+
+	if (is_nan(_real))
+	{
+		return _string;
+	}
+
+	return _real;
+}
+
+/// @func ce_xml_string(_value)
+/// @desc Turns given value into a string. Replaces characters with their
+/// XML-safe form.
+/// @param {any} _value The value to be turned into a string.
+/// @return {string} The resulting string.
+function ce_xml_string(_value)
+{
+	if (is_real(_value))
+	{
+		return ce_real_to_string(_value);
+	}
+
+	if (is_string(_value))
+	{
+		_value = string_replace_all(_value, "&", "&amp;");
+		_value = string_replace_all(_value, "<", "&lt;");
+		_value = string_replace_all(_value, ">", "&gt;");
+		_value = string_replace_all(_value, "'", "&apos;");
+		_value = string_replace_all(_value, "\"", "&quot;");
+	}
+
+	return string(_value);
+}
+
+/// @func CE_XMLElement([_name[, value]])
 /// @desc Represents a tag within an XML document.
 /// @param {string} [_name] The name of the element. Defaults to an empty string.
 /// @param {string/real/bool/undefined} [_value] The element value. Defaults to
 /// `undefined`.
-function CE_XmlElement() constructor
+function CE_XMLElement() constructor
 {
 	/// @var {string} The name of the element.
 	/// @readonly
@@ -48,19 +102,19 @@ function CE_XmlElement() constructor
 	/// @readonly
 	Attributes = ds_map_create();
 
-	/// @var {CE_XmlElement/undefined} The parent of this element. If `undefined`,
+	/// @var {CE_XMLElement/undefined} The parent of this element. If `undefined`,
 	/// then this is a root element.
 	/// @readonly
 	Parent = undefined;
 
-	/// @var {ds_list<CE_XmlElement>} A list of child elements.
+	/// @var {ds_list<CE_XMLElement>} A list of child elements.
 	/// @readonly
 	Children = ds_list_create();
 
 	/// @func SetAttribute(_name, _value)
 	/// @param {string} _name The name of the attribute.
 	/// @param {string/real/bool/undefined} _value The attribute value.
-	/// @return {CE_XmlElement} Returns `self` to allow method chaining.
+	/// @return {CE_XMLElement} Returns `self` to allow method chaining.
 	static SetAttribute = function (_name, _value) {
 		gml_pragma("forceinline");
 		Attributes[? _name] = _value;
@@ -115,15 +169,15 @@ function CE_XmlElement() constructor
 
 	/// @func RemoveAttribute(_name)
 	/// @param {string} _name The name of the attribute.
-	/// @return {CE_XmlElement} Returns `self` to allow method chaining.
+	/// @return {CE_XMLElement} Returns `self` to allow method chaining.
 	static RemoveAttribute = function (_name) {
 		ds_map_delete(Attributes, _name);
 		return self;
 	};
 
 	/// @func AddChild(_child)
-	/// @param {CE_XmlElement} _child The child element.
-	/// @return {CE_XmlElement} Returns `self` to allow mathod chaining.
+	/// @param {CE_XMLElement} _child The child element.
+	/// @return {CE_XMLElement} Returns `self` to allow mathod chaining.
 	static AddChild = function (_child) {
 		gml_pragma("forceinline");
 		ds_list_add(Children, _child);
@@ -147,12 +201,72 @@ function CE_XmlElement() constructor
 
 	/// @func GetChild(_index)
 	/// @param {int} _index The index of the child element.
-	/// @return {CE_XmlElement} Returns a child element with given index.
-	/// @see CE_XmlElement.HasChildren
-	/// @see CE_XmlElement.GetChildCount
+	/// @return {CE_XMLElement} Returns a child element with given index.
+	/// @see CE_XMLElement.HasChildren
+	/// @see CE_XMLElement.GetChildCount
 	static GetChild = function (_index) {
 		gml_pragma("forceinline");
 		return Children[| _index];
+	};
+
+	/// @func ToString([_indent])
+	/// @desc Writes the element and its subtree into a string.
+	/// @param {uint} [_indent] The current indentation level. Defaults to 0.
+	/// @return {string} The resulting XML string.
+	static ToString = function () {
+		var _indent = (argument_count > 0) ? argument[0] : 0;
+
+		var _name = Name;
+		var _attributeCount = GetAttributeCount();
+		var _childCount = GetChildCount();
+		var _value = Value;
+		var _spaces = string_repeat(" ", _indent * 2);
+
+		// Open element
+		var _string = _spaces + "<" + _name;
+
+		// Attributes
+		var _attribute = FindFirstAttribute();
+
+		repeat (_attributeCount)
+		{
+			_string += " " + string(_attribute) + "=\""
+				+ ce_xml_string(GetAttribute(_attribute))
+				+ "\"";
+			_attribute = FindNextAttribute(_attribute);
+		}
+
+		if (_childCount == 0 && is_undefined(_value))
+		{
+			_string += "/";
+		}
+
+		_string += ">";
+
+		if (_childCount != 0 || is_undefined(_value))
+		{
+			_string += chr(10);
+		}
+
+		// Children
+		for (var i = 0; i < _childCount; ++i)
+		{
+			var _childElement = GetChild(i);
+			_string += _childElement.ToString(_indent + 1);
+		}
+
+		// Close element
+		if (_childCount != 0)
+		{
+			_string += _spaces + "</" + Name + ">" + chr(10);
+		}
+		else if (!is_undefined(_value))
+		{
+			_string += ce_xml_string(_value);
+			_string += "</" + Name + ">" + chr(10);
+		}
+
+		return _string;
 	};
 
 	/// @func Destroy()
@@ -174,93 +288,25 @@ function CE_XmlElement() constructor
 	};
 }
 
-/// @func CE_XmlDocument()
+/// @func CE_XMLDocument()
 /// @desc An XML document.
-function CE_XmlDocument() constructor
+function CE_XMLDocument() constructor
 {
 	/// @var {string/undefined} Path to the XML file. It is `undefined` until the
 	/// document is saved or loaded.
-	/// @see CE_XmlDocument.Save
-	/// @see CE_XmlDocument.Load
+	/// @see CE_XMLDocument.Save
+	/// @see CE_XMLDocument.Load
 	/// @readonly
 	Path = undefined;
 
-	/// @var {CE_XmlElement/undefined} The root element.
+	/// @var {CE_XMLElement/undefined} The root element.
 	Root = undefined;
-
-	/// @func Parse(_string)
-	/// @desc Parses a value from a string.
-	/// @param {string} string The string to parse.
-	/// @return {string/real/bool} Real value or a string, where XML character entities
-	/// are replaced with their original form.
-	/// @private
-	static Parse = function (_string) {
-		// Clear whitespace, replace character entities
-		while (string_byte_at(_string, 1) == 32)
-		{
-			_string = string_delete(_string, 1, 1);
-		}
-
-		_string = string_replace_all(_string, "&lt;", "<");
-		_string = string_replace_all(_string, "&gt;", ">");
-		_string = string_replace_all(_string, "&quot;", "\"");
-		_string = string_replace_all(_string, "&apos;", "'");
-		_string = string_replace_all(_string, "&amp;", "&");
-
-		// Parse real
-		var _real = ce_parse_real(_string);
-		if (!is_nan(_real))
-		{
-			return _real;
-		}
-
-		// Bools
-		if (_string == "true")
-		{
-			return true;
-		}
-		if (_string == "false")
-		{
-			return false;
-		}
-
-		return _string;
-	};
-
-	/// @func Unparse(_value)
-	/// @desc Turns given value into a string. Replaces characters with their
-	/// XML-safe form.
-	/// @param {any} _value The value to be turned into a string.
-	/// @return {string} The resulting string.
-	/// @private
-	static Unparse = function (_value) {
-		if (is_bool(_value))
-		{
-			return _value ? "true" : "false";
-		}
-
-		if (is_real(_value))
-		{
-			return ce_real_to_string(_value);
-		}
-
-		if (is_string(_value))
-		{
-			_value = string_replace_all(_value, "&", "&amp;");
-			_value = string_replace_all(_value, "<", "&lt;");
-			_value = string_replace_all(_value, ">", "&gt;");
-			_value = string_replace_all(_value, "'", "&apos;");
-			_value = string_replace_all(_value, "\"", "&quot;");
-		}
-
-		return string(_value);
-	};
 
 	/// @func Load(_path)
 	/// @desc Loads an XML document from a file.
 	/// @param {string} _path The path to the file to load.
-	/// @return {CE_XmlDocument} Returns `self` to allow method chaining.
-	/// @throws {CE_Error) If the loading fails.
+	/// @return {CE_XMLDocument} Returns `self` to allow method chaining.
+	/// @throws {CE_Error} If the loading fails.
 	static Load = function (_path) {
 		var _file = file_bin_open(_path, 0);
 		if (_file == -1)
@@ -270,7 +316,7 @@ function CE_XmlDocument() constructor
 
 		var _filePos = 0;
 		var _fileSize = file_bin_size(_file);
-		var _byte = CE_EXmlChars.Space;
+		var _byte = CE_EXMLChar.Space;
 		var _isSeparator = true;
 		var _token = "";
 		var _isString = false;
@@ -295,7 +341,7 @@ function CE_XmlDocument() constructor
 			switch (_byte)
 			{
 			// Start of new element
-			case CE_EXmlChars.LT:
+			case CE_EXMLChar.LT:
 				if (_element != undefined)
 				{
 					if (_root != undefined)
@@ -317,14 +363,14 @@ function CE_XmlDocument() constructor
 					&& _parentElement != undefined
 					&& _parentElement.GetChildCount() == 0)
 				{
-					_parentElement.Value = Parse(_token);
+					_parentElement.Value = ce_xml_parse(_token);
 				}
 
-				_element = new CE_XmlElement();
+				_element = new CE_XMLElement();
 				break;
 
 			// End of element
-			case CE_EXmlChars.GT:
+			case CE_EXMLChar.GT:
 				if (_element == undefined)
 				{
 					if (_root != undefined)
@@ -350,7 +396,7 @@ function CE_XmlDocument() constructor
 					delete _element;
 					_isComment = false;
 				}
-				else if (_lastByte == CE_EXmlChars.Slash)
+				else if (_lastByte == CE_EXMLChar.Slash)
 				{
 					// Self-closing element
 					if (_parentElement != undefined)
@@ -385,19 +431,19 @@ function CE_XmlDocument() constructor
 				break;
 
 			// Closing element
-			case CE_EXmlChars.Slash:
+			case CE_EXMLChar.Slash:
 				if (_isString || _element == undefined)
 				{
 					_isSeparator = false;
 				}
-				else if (_lastByte == CE_EXmlChars.LT)
+				else if (_lastByte == CE_EXMLChar.LT)
 				{
 					_isClosing = true;
 				}
 				break;
 
 			// Attribute
-			case CE_EXmlChars.Equal:
+			case CE_EXMLChar.Equal:
 				if (!_isString)
 				{
 					if (_token != "")
@@ -410,8 +456,8 @@ function CE_XmlDocument() constructor
 				break;
 
 			// Start/end of string
-			case CE_EXmlChars.SQ:
-			case CE_EXmlChars.DQ:
+			case CE_EXMLChar.SQ:
+			case CE_EXMLChar.DQ:
 				if (_isString == _byte)
 				{
 					_isString = false;
@@ -420,7 +466,7 @@ function CE_XmlDocument() constructor
 					{
 						if (_element != undefined)
 						{
-							_element.SetAttribute(_attributeName, Parse(_token));
+							_element.SetAttribute(_attributeName, ce_xml_parse(_token));
 						}
 						_attributeName = "";
 					}
@@ -432,9 +478,9 @@ function CE_XmlDocument() constructor
 				break;
 
 			// Treat as comments
-			case CE_EXmlChars.QM:
-			case CE_EXmlChars.EM:
-				if (_lastByte == CE_EXmlChars.LT)
+			case CE_EXMLChar.QM:
+			case CE_EXMLChar.EM:
+				if (_lastByte == CE_EXMLChar.LT)
 				{
 					_isComment = true;
 				}
@@ -447,8 +493,8 @@ function CE_XmlDocument() constructor
 			default:
 				// Whitespace
 				if (!_isString && _element != undefined
-					&& ((_byte > CE_EXmlChars.Null && _byte <= CE_EXmlChars.CR)
-					|| _byte == CE_EXmlChars.Space))
+					&& ((_byte > CE_EXMLChar.Null && _byte <= CE_EXMLChar.CR)
+					|| _byte == CE_EXMLChar.Space))
 				{
 					// Do nothing...
 				}
@@ -481,10 +527,10 @@ function CE_XmlDocument() constructor
 			else
 			{
 				// Build token
-				if (_byte > CE_EXmlChars.Null && _byte <= CE_EXmlChars.CR)
+				if (_byte > CE_EXMLChar.Null && _byte <= CE_EXMLChar.CR)
 				{
 					// Replace new lines, tabs, etc. with spaces
-					_byte = CE_EXmlChars.Space;
+					_byte = CE_EXMLChar.Space;
 				}
 				_token += chr(_byte);
 			}
@@ -502,65 +548,14 @@ function CE_XmlDocument() constructor
 	/// @desc Prints the document into a string.
 	/// @return {string} The created string.
 	static ToString = function () {
-		var _element = (argument_count > 0) ? argument[0] : Root;
-		var _name = _element.Name;
-		var _attributeCount = _element.GetAttributeCount();
-		var _childCount = _element.GetChildCount();
-		var _value = _element.Value;
-		var _indent = (argument_count > 1) ? argument[1] : 0;
-		var _spaces = string_repeat(" ", _indent * 2);
-
-		// Open element
-		var _string = _spaces + "<" + _name;
-
-		// Attributes
-		var _attribute = _element.FindFirstAttribute();
-
-		repeat (_attributeCount)
-		{
-			_string += " " + string(_attribute) + "=\""
-				+ Unparse(_element.GetAttribute(_attribute))
-				+ "\"";
-			_attribute = _element.FindNextAttribute(_attribute);
-		}
-
-		if (_childCount == 0 && is_undefined(_value))
-		{
-			_string += "/";
-		}
-
-		_string += ">";
-
-		if (_childCount != 0 || is_undefined(_value))
-		{
-			_string += chr(10);
-		}
-
-		// Children
-		for (var i = 0; i < _childCount; ++i)
-		{
-			var _childElement = _element.GetChild(i);
-			_string += ToString(_childElement, _indent + 1);
-		}
-
-		// Close element
-		if (_childCount != 0)
-		{
-			_string += _spaces + "</" + _element.Name + ">" + chr(10);
-		}
-		else if (!is_undefined(_value))
-		{
-			_string += Unparse(_value);
-			_string += "</" + _element.Name + ">" + chr(10);
-		}
-
-		return _string;
+		gml_pragma("forceinline");
+		return Root.ToString();
 	};
 
 	/// @func Save([_path])
 	/// @desc Saves the document to a file.
-	/// @param {string} [_path] The file path. Defaults to {@link CE_XmlDocument.Path}.
-	/// @return {CE_XmlDocument} Returns `self` to allow method chaining.
+	/// @param {string} [_path] The file path. Defaults to {@link CE_XMLDocument.Path}.
+	/// @return {CE_XMLDocument} Returns `self` to allow method chaining.
 	/// @throws {CE_Error} If the Save path is not defined.
 	static Save = function () {
 		var _path = (argument_count > 0) ? argument[0] : Path;

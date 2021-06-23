@@ -19,6 +19,7 @@
     {"id":{"name":"ce_object_utils","path":"scripts/ce_object_utils/ce_object_utils.yy",},"order":0,},
     {"id":{"name":"ce_native_array","path":"scripts/ce_native_array/ce_native_array.yy",},"order":0,},
     {"id":{"name":"ce_quaternion","path":"scripts/ce_quaternion/ce_quaternion.yy",},"order":0,},
+    {"id":{"name":"ce_xml_legacy","path":"scripts/ce_xml_legacy/ce_xml_legacy.yy",},"order":1,},
     {"id":{"name":"ce_real_utils","path":"scripts/ce_real_utils/ce_real_utils.yy",},"order":0,},
     {"id":{"name":"ce_string_utils","path":"scripts/ce_string_utils/ce_string_utils.yy",},"order":0,},
     {"id":{"name":"ce_struct_utils","path":"scripts/ce_struct_utils/ce_struct_utils.yy",},"order":0,},

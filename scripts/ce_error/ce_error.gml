@@ -1,4 +1,5 @@
 /// @func CE_Error([_message])
+/// @desc Base class for all errors thrown by this library.
 /// @param {string} [_message] The error message. Defaults to an empty stirng.
 function CE_Error() constructor
 {
