@@ -32,12 +32,12 @@ Donate: [PayPal.Me](https://www.paypal.me/kraifpatrik/1usd)
   * [StructUtils](#structutils)
   * [SurfaceUtils](#surfaceutils)
   * [Time](#time)
+  * [Timer](#timer)
   * [Tween](#tween)
   * [UUID](#uuid)
   * [Vec2](#vec2)
   * [Vec3](#vec3)
   * [Vec4](#vec4)
-  * [XML](#XML)
 * [Projects using CE](#projects-using-ce)
 * [Links](#links)
 
@@ -139,6 +139,10 @@ None
 **Requires:**
 None
 
+## Timer
+**Requires:**
+None
+
 ## Tween
 **Requires:**
 None
@@ -159,11 +163,6 @@ None
 **Requires:**
 None
 
-## XML
-**Requires:**
-[Error](#error),
-[RealUtils](#realutils)
-
 # Projects using CE
 * [BBMOD](https://marketplace.yoyogames.com/assets/9424/bbmod)
 * Your project here?
@@ -171,5 +170,5 @@ None
 # Links
 * [Discord](https://discord.gg/ep2BGPm) - If you need help with using CE, you can find me on the [BlueBurn](https://blueburn.cz/) Discord server.
 * [GameMaker Community](https://forum.yoyogames.com/index.php?threads/62585) - Or you can use this dedicated forum thread.
-* [GMDoc](https://github.com/kraifpatrik/gmdoc) - Used to generate HTML documentation.
+* [GMDoc](https://marketplace.yoyogames.com/assets/10014/gmdoc-2) - Used to generate HTML documentation.
 * [Xpanda](https://github.com/GameMakerDiscord/Xpanda) - Used to create and manage shaders.

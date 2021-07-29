@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "XML",
-    "path": "folders/CE/XML.yy",
+    "name": "Timer",
+    "path": "folders/CE/Timer.yy",
   },
   "resourceVersion": "1.0",
-  "name": "ce_xml_legacy",
+  "name": "ce_timer",
   "tags": [],
   "resourceType": "GMScript",
 }

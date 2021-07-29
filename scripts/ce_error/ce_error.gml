@@ -12,6 +12,6 @@ function CE_Error() constructor
 /// @extends CE_Error
 /// @desc An error thrown when a method is not implemented.
 function CE_NotImplementedError()
-	: CE_Error(("Method not implemented!")) constructor
+	: CE_Error("Method not implemented!") constructor
 {
 }
