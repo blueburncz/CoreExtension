@@ -59,7 +59,7 @@
     {"folderPath":"folders/Test.yy","order":0,"resourceVersion":"1.0","name":"Test","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/CE.yy","order":1,"resourceVersion":"1.0","name":"CE","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/CE/DrawUtils.yy","order":1,"resourceVersion":"1.0","name":"DrawUtils","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/CE/Surface.yy","order":5,"resourceVersion":"1.0","name":"Surface","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/CE/SurfaceUtils.yy","order":5,"resourceVersion":"1.0","name":"SurfaceUtils","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/CE/ArrayUtils.yy","order":16,"resourceVersion":"1.0","name":"ArrayUtils","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/CE/Assert.yy","order":17,"resourceVersion":"1.0","name":"Assert","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/CE/ColorUtils.yy","order":18,"resourceVersion":"1.0","name":"ColorUtils","tags":[],"resourceType":"GMFolder",},

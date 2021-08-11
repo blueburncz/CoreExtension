@@ -1,8 +1,8 @@
 {
   "type": 1,
   "parent": {
-    "name": "Surface",
-    "path": "folders/CE/Surface.yy",
+    "name": "SurfaceUtils",
+    "path": "folders/CE/SurfaceUtils.yy",
   },
   "resourceVersion": "1.0",
   "name": "CE_ShGaussianBlur",

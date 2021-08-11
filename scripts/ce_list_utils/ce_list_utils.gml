@@ -223,7 +223,7 @@ function ce_ds_list_get(_list, _index)
 /// @param {ds_list} _l1 The list to inserted into.
 /// @param {real} _pos The index to insert the list at.
 /// @param {ds_list} _l2 The list to be inserted.
-function ce_ds_list_insert_list(l1, pos, l2)
+function ce_ds_list_insert_list(_l1, _pos, _l2)
 {
 	gml_pragma("forceinline");
 	ds_list_insert(_l1, _pos, _l2);
@@ -412,7 +412,7 @@ function ce_ds_list_remove(_list, _value)
 /// @param {ds_list} _list The list to remove the value from.
 /// @param {any} _value The value to remove.
 /// @return {bool} Returns `true` if the value was in the list.
-function ce_ds_list_remove_first(list, value)
+function ce_ds_list_remove_first(_list, _value)
 {
 	var _index = ds_list_find_index(_list, _value);
 	if (_index != -1)
