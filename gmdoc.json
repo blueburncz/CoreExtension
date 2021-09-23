@@ -7,7 +7,7 @@
   "prefix": "ce_",
   "analytics": "",
   "api": {
-    "rating": ""
+    "rating": "/api/v1/page_rating"
   },
   "toc": {
     "CE Docs": "index.md"
