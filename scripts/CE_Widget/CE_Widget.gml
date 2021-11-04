@@ -30,6 +30,8 @@ function CE_RectTransformComponent()
 function CE_Widget()
 	: CE_Entity() constructor
 {
+	CE_CLASS_GENERATED_BODY;
+
 	Transform = new CE_RectTransformComponent()
 
 	AddComponent(Transform);

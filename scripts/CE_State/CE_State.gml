@@ -6,6 +6,8 @@
 function CE_State(_name)
 	: CE_Class() constructor
 {
+	CE_CLASS_GENERATED_BODY;
+
 	/// @var {CE_StateMachine/undefined} The state machine to which this state
 	/// belongs.
 	/// @readonly

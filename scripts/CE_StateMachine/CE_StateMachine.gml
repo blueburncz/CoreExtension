@@ -5,6 +5,8 @@
 function CE_StateMachine()
 	: CE_Class() constructor
 {
+	CE_CLASS_GENERATED_BODY;
+
 	static Super_Class = {
 		Destroy: Destroy,
 	};

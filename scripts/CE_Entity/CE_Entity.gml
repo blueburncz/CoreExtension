@@ -143,6 +143,8 @@ function CE_EntityDestroy()
 function CE_Entity()
 	: CE_Class() constructor
 {
+	CE_CLASS_GENERATED_BODY;
+
 	static Super_Class = {
 		Destroy: Destroy,
 	};
