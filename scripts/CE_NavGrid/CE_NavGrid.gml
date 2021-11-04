@@ -503,6 +503,8 @@ function CE_NavGrid(_x, _y, _width, _height, _cellWidth, _cellHeight) constructo
 			if (_currentX < 0 || _currentX >= Rows) continue;
 			if (_currentY < 0 || _currentY >= Cols) continue;
 
+			var _cost;
+
 			var i = 0;
 			repeat (8)
 			{
@@ -514,41 +516,49 @@ function CE_NavGrid(_x, _y, _width, _height, _cellWidth, _cellHeight) constructo
 				case 0:
 					_nextX = _currentX - 1;
 					_nextY = _currentY;
+					_cost = 1;
 					break;
 
 				case 1:
 					_nextX = _currentX - 1;
 					_nextY = _currentY - 1;
+					_cost = 2;
 					break;
 
 				case 2:
 					_nextX = _currentX;
 					_nextY = _currentY - 1;
+					_cost = 1;
 					break;
 
 				case 3:
 					_nextX = _currentX + 1;
 					_nextY = _currentY - 1;
+					_cost = 2;
 					break;
 
 				case 4:
 					_nextX = _currentX + 1;
 					_nextY = _currentY;
+					_cost = 1;
 					break;
 
 				case 5:
 					_nextX = _currentX + 1;
 					_nextY = _currentY + 1;
+					_cost = 2;
 					break;
 
 				case 6:
 					_nextX = _currentX;
 					_nextY = _currentY + 1;
+					_cost = 1;
 					break;
 
 				case 7:
 					_nextX = _currentX - 1;
 					_nextY = _currentY + 1;
+					_cost = 2;
 					break;
 				}
 
@@ -561,7 +571,7 @@ function CE_NavGrid(_x, _y, _width, _height, _cellWidth, _cellHeight) constructo
 				}
 
 				var _next = EncodeLocal(_nextX, _nextY);
-				var _newCost = _costSoFar[? _current] + 1; //Cost[# _nextX, _nextY];
+				var _newCost = _costSoFar[? _current] + _cost; //Cost[# _nextX, _nextY];
 
 				if (!ds_map_exists(_costSoFar, _next)
 					|| _newCost < _costSoFar[? _next])

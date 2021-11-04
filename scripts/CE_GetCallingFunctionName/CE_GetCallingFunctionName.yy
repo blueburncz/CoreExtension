@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Vec4",
-    "path": "folders/CE/Vec4.yy",
+    "name": "CE",
+    "path": "folders/CE.yy",
   },
   "resourceVersion": "1.0",
-  "name": "CE_Vec4",
+  "name": "CE_GetCallingFunctionName",
   "tags": [],
   "resourceType": "GMScript",
 }

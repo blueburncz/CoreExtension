@@ -28,7 +28,7 @@ function CE_EntityAddComponent(_component)
 		throw new CE_Exception("Component already has an owner!");
 	}
 	_component.Owner = self;
-	var _index = CE_ComponentGetIndex(_component);
+	var _index = CE_ClassGetName(_component);
 	if (!ds_map_exists(Components, _index))
 	{
 		Components[? _index] = [];
@@ -45,7 +45,7 @@ function CE_EntityAddComponent(_component)
 function CE_EntityHasComponent(_component)
 {
 	gml_pragma("forceinline");
-	var _index = CE_ComponentGetIndex(_component);
+	var _index = CE_ClassGetName(_component);
 	if (!ds_map_exists(Components, _index))
 	{
 		return false;
@@ -73,7 +73,7 @@ function CE_EntityHasComponent(_component)
 function CE_EntityGetComponents(_component)
 {
 	gml_pragma("forceinline");
-	var _index = CE_ComponentGetIndex(_component);
+	var _index = CE_ClassGetName(_component);
 	if (!ds_map_exists(Components, _index))
 	{
 		return [];
@@ -92,7 +92,7 @@ function CE_EntityRemoveComponent(_component)
 {
 	gml_pragma("forceinline");
 
-	var _index = CE_ComponentGetIndex(_component);
+	var _index = CE_ClassGetName(_component);
 	var _components = Components[? _index];
 
 	if (is_struct(_component))
@@ -191,6 +191,10 @@ function CE_Entity()
 	static RemoveComponent = function (_component) {
 		gml_pragma("forceinline");
 		CE_EntityRemoveComponent(_component);
+		return self;
+	};
+
+	static OnDrawGUI = function () {
 		return self;
 	};
 

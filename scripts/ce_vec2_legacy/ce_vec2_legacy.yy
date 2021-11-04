@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Vec4",
-    "path": "folders/CE/Vec4.yy",
+    "name": "Vec2",
+    "path": "folders/CE/Vec2.yy",
   },
   "resourceVersion": "1.0",
-  "name": "CE_Vec4",
+  "name": "ce_vec2_legacy",
   "tags": [],
   "resourceType": "GMScript",
 }

@@ -96,6 +96,25 @@ function ce_array_filter(_array, _callback)
 	return _filtered;
 }
 
+/// @func ce_array_includes(_array, _value)
+/// @desc Checks if array includes a value.
+/// @param {array} _array The array to search in.
+/// @param {any} _value The value to search for.
+/// @return {bool} Returns `true` if the array includes the value.
+function ce_array_includes(_array, _value)
+{
+	gml_pragma("forceinline");
+	var i = 0;
+	repeat (array_length(_array))
+	{
+		if (_array[i++] == _value)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 /// @func ce_array_find_index(_array, _value)
 /// @desc Finds index at which the array contains the value.
 /// @param {array} _array The array to search in.
