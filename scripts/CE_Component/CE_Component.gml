@@ -11,4 +11,22 @@ function CE_Component()
 	/// has not been added to an entity yet.
 	/// @readonly
 	Owner = undefined;
+
+	/// @func OnUpdate()
+	/// @return {CE_Component} Returns `self`.
+	static OnUpdate = function () {
+		return self;
+	};
+
+	/// @func OnDraw()
+	/// @return {CE_Component} Returns `self`.
+	static OnDraw = function () {
+		return self;
+	};
+
+	/// @func OnDrawGUI()
+	/// @return {CE_Component} Returns `self`.
+	static OnDrawGUI = function () {
+		return self;
+	};
 }

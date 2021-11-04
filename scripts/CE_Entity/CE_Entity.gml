@@ -66,13 +66,28 @@ function CE_EntityHasComponent(_component)
 	return false;
 }
 
-/// @func CE_EntityGetComponents(_component)
+/// @func CE_EntityGetComponents([_component])
 /// @desc Retrieves an array of component instances of given type.
-/// @param {typeof CE_Component} _component The type of the component.
+/// @param {typeof CE_Component} [_component] The type of the component. If not
+/// defined, then all components are returned.
 /// @return {CE_Component[]} An array of component instances.
-function CE_EntityGetComponents(_component)
+function CE_EntityGetComponents(_component=undefined)
 {
 	gml_pragma("forceinline");
+	if (_component == undefined)
+	{
+		var _allComponents = [];
+		var _key = ds_map_find_first(Components);
+		repeat (ds_map_size(Components))
+		{
+			var _components = Components[? _key];
+			array_copy(
+				_allComponents, array_length(_allComponents),
+				_components, 0, array_length(_components));
+			_key = ds_map_find_next(Components, _key);
+		}
+		return _allComponents;
+	}
 	var _index = CE_ClassGetName(_component);
 	if (!ds_map_exists(Components, _index))
 	{
@@ -176,9 +191,10 @@ function CE_Entity()
 
 	/// @func GetComponents(_component)
 	/// @desc Retrieves an array of component instances of given type.
-	/// @param {typeof CE_Component} _component The type of the component.
+	/// @param {typeof CE_Component} [_component] The type of the component.
+	/// If not defined, then all components are returned.
 	/// @return {CE_Component[]} An array of component instances.
-	static GetComponents = function (_component) {
+	static GetComponents = function (_component=undefined) {
 		gml_pragma("forceinline");
 		return CE_EntityGetComponents(_component);
 	};
@@ -196,12 +212,23 @@ function CE_Entity()
 		return self;
 	};
 
-	static OnDrawGUI = function () {
-		return self;
-	};
-
 	static Destroy = function() {
 		method(self, Super_Class.Destroy)();
 		CE_EntityDestroy();
 	};
 }
+
+/// @macro Shorthand used to call a method for each component of an entity.
+/// @example
+/// ```gml
+/// // Step event
+/// CE_EACH_COMPONENT.OnUpdate();
+///
+/// // Draw event
+/// CE_EACH_COMPONENT.OnDraw();
+/// ```
+#macro CE_EACH_COMPONENT \
+	var __ceComponents = CE_EntityGetComponents(); \
+	var __ceComponentsIndex = 0; \
+	repeat (array_length(__ceComponents)) \
+		__ceComponents[__ceComponentsIndex++]
