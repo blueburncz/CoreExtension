@@ -1,4 +1,4 @@
-/// @macro Must be the first line when difining a custom class!
+/// @macro Must be the first line when defining a custom class!
 /// @example
 /// ```gml
 /// function CRectangle(_x, _y, _width, _height)
@@ -79,6 +79,18 @@ function CE_Class() constructor
 			method(self, _destroyActions[i++])();
 		}
 	};
+}
+
+/// @func CE_IsClass(_value)
+/// @desc Checks if a value is an instance of `CE_Class`.
+/// @param {any} _value The value to check.
+/// @return {bool} Returns `true` if the value is an instance of `CE_Class`.
+/// @see CE_Class
+function CE_IsClass(_value)
+{
+	gml_pragma("forceinline");
+	return (is_struct(_value)
+		&& variable_struct_exists(_value, "__ClassName"));
 }
 
 /// @func CE_ClassGetName(_class)
