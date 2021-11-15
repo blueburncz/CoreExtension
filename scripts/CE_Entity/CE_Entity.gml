@@ -6,10 +6,10 @@
 /// // Create event
 /// CE_EntityInit();
 /// transform = new CTransformComponent();
-/// CE_EntityAddComponent(transform);
+/// AddComponent(transform);
 ///
 /// // Clean up event
-/// CE_EntityDestroy();
+/// CE_EntityCleanUp();
 /// ```
 /// @see CE_Entity
 function CE_EntityInit(_instance)
@@ -17,6 +17,28 @@ function CE_EntityInit(_instance)
 	with (_instance)
 	{
 		Components = [];
+
+		AddComponent = function (_component) {
+			gml_pragma("forceinline");
+			CE_EntityAddComponent(self, _component);
+			return self;
+		};
+
+		HasComponent = function (_component) {
+			gml_pragma("forceinline");
+			return CE_EntityHasComponent(self, _component);
+		};
+
+		GetComponents = function (_component=undefined) {
+			gml_pragma("forceinline");
+			return CE_EntityGetComponents(self, _component);
+		};
+
+		RemoveComponent = function (_component) {
+			gml_pragma("forceinline");
+			CE_EntityRemoveComponent(self, _component);
+			return self;
+		};
 	}
 }
 
@@ -120,7 +142,6 @@ function CE_EntityGetComponents(_entity, _component=undefined)
 function CE_EntityRemoveComponent(_entity, _component)
 {
 	gml_pragma("forceinline");
-
 	with (_entity)
 	{
 		if (is_struct(_component))
@@ -189,10 +210,6 @@ function CE_Entity()
 	/// @private
 	Components = [];
 
-	/// @var {ds_map<string, CE_Component>} Mapping of component types to component instances.
-	/// @private
-	ComponentIndex = ds_map_create();
-
 	/// @func AddComponent(_component)
 	/// @desc Adds a component instance to the entity.
 	/// @param {CE_Component} _component The component to add.
@@ -247,13 +264,13 @@ function CE_Entity()
 /// @example
 /// ```gml
 /// // Step event
-/// CE_EACH_COMPONENT.OnUpdate();
+/// CE_EACH_COMPONENT.OnUpdate(delta_time);
 ///
 /// // Draw event
 /// CE_EACH_COMPONENT.OnDraw();
 /// ```
 #macro CE_EACH_COMPONENT \
-	var __ceComponents = CE_EntityGetComponents(self); \
+	var __ceComponents = GetComponents(); \
 	var __ceComponentsIndex = 0; \
 	repeat (array_length(__ceComponents)) \
 		__ceComponents[__ceComponentsIndex++]
