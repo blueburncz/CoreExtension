@@ -4,7 +4,7 @@
 function CE_GetCallingFunctionName()
 {
 	gml_pragma("forceinline");
-	var _name = debug_get_callstack(2)[1];
+	var _name = debug_get_callstack(/*2*/)[1]; // TODO: Check if this argument works in YYC already
 	_name = string_replace(_name, "gml_Script_", "");
 	return string_copy(_name, 1, string_pos(":", _name) - 1);
 }
