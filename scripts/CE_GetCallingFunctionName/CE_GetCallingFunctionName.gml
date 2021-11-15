@@ -1,4 +1,4 @@
-/// @func CE_GetCallingFunctionName()
+/// @func CE_GetCallingFunctionName(_depth)
 /// @desc Retrieves name of the calling function.
 /// @return {string} The name of the calling function.
 function CE_GetCallingFunctionName()
