@@ -29,9 +29,14 @@ function CE_EntityInit(_instance)
 			return CE_EntityHasComponent(self, _component);
 		};
 
-		GetComponents = function (_component=undefined) {
+		GetComponent = function (_component=undefined) {
 			gml_pragma("forceinline");
-			return CE_EntityGetComponents(self, _component);
+			return CE_EntityGetComponent(self, _component);
+		};
+
+		ListComponents = function (_component=undefined) {
+			gml_pragma("forceinline");
+			return CE_EntityListComponents(self, _component);
 		};
 
 		RemoveComponent = function (_component) {
@@ -99,13 +104,37 @@ function CE_EntityHasComponent(_entity, _component)
 	}
 }
 
-/// @func CE_EntityGetComponents(_entity[, _component])
+/// @func CE_EntityGetComponent(_entity, _component)
+/// @desc Retrieves a component of given type.
+/// @param _entity The target entity.
+/// @param {typeof CE_Component} _component The type of the component.
+/// @return {CE_Component/undefined} The component instance or `undefined`
+/// if the entity does not have a component of given type.
+function CE_EntityGetComponent(_entity, _component)
+{
+	gml_pragma("forceinline");
+	with (_entity)
+	{
+		var i = 0;
+		repeat (array_length(Components))
+		{
+			var _current = Components[i++];
+			if (_current.IsInstance(_component))
+			{
+				return _current;
+			}
+		}
+		return undefined;
+	}
+}
+
+/// @func CE_EntityListComponents(_entity[, _component])
 /// @desc Retrieves an array of component instances of given type.
 /// @param _entity The target entity.
 /// @param {typeof CE_Component} [_component] The type of the component. If not
 /// defined, then all components are returned.
 /// @return {CE_Component[]} An array of component instances.
-function CE_EntityGetComponents(_entity, _component=undefined)
+function CE_EntityListComponents(_entity, _component=undefined)
 {
 	gml_pragma("forceinline");
 	with (_entity)
@@ -231,14 +260,24 @@ function CE_Entity()
 		return CE_EntityHasComponent(self, _component);
 	};
 
-	/// @func GetComponents(_component)
+	/// @func GetComponent(_component)
+	/// @desc Retrieves a component of given type.
+	/// @param {typeof CE_Component} _component The type of the component.
+	/// @return {CE_Component/undefined} The component instance or `undefined`
+	/// if the entity does not have a component of given type.
+	static GetComponent = function (_component) {
+		gml_pragma("forceinline");
+		return CE_EntityGetComponent(self, _component);
+	};
+
+	/// @func ListComponents(_component)
 	/// @desc Retrieves an array of component instances of given type.
 	/// @param {typeof CE_Component} [_component] The type of the component.
 	/// If not defined, then all components are returned.
 	/// @return {CE_Component[]} An array of component instances.
-	static GetComponents = function (_component=undefined) {
+	static ListComponents = function (_component=undefined) {
 		gml_pragma("forceinline");
-		return CE_EntityGetComponents(self, _component);
+		return CE_EntityListComponents(self, _component);
 	};
 
 	/// @func RemoveComponent(_component)
@@ -270,7 +309,6 @@ function CE_Entity()
 /// CE_EACH_COMPONENT.OnDraw();
 /// ```
 #macro CE_EACH_COMPONENT \
-	var __ceComponents = GetComponents(); \
 	var __ceComponentsIndex = 0; \
-	repeat (array_length(__ceComponents)) \
-		__ceComponents[__ceComponentsIndex++]
+	repeat (array_length(Components)) \
+		Components[__ceComponentsIndex++]
