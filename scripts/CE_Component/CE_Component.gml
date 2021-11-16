@@ -16,6 +16,20 @@ function CE_Component()
 	/// do anything.
 	Enabled = true;
 
+	/// @func OnAdd()
+	/// @desc A function executed when the component is added to an entity.
+	/// @return {CE_Component} Returns `self`.
+	static OnAdd = function () {
+		return self;
+	};
+
+	/// @func OnRemove()
+	/// @desc A function executed when the component is removed from an entity.
+	/// @return {CE_Component} Returns `self`.
+	static OnRemove = function () {
+		return self;
+	};
+
 	/// @func OnUpdate()
 	/// @return {CE_Component} Returns `self`.
 	static OnUpdate = function () {

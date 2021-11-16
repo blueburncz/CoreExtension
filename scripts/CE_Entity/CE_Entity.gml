@@ -62,8 +62,9 @@ function CE_EntityAddComponent(_entity, _component)
 		{
 			throw new CE_Exception("Component already has an owner!");
 		}
-		_component.Owner = self;
 		array_push(Components, _component);
+		_component.Owner = self;
+		_component.OnAdd();
 		return self;
 	}
 }
@@ -191,9 +192,11 @@ function CE_EntityRemoveComponent(_entity, _component)
 			var i = 0;
 			repeat (array_length(Components))
 			{
-				if (Components[i] == _component)
+				var _current = Components[i];
+				if (_current == _component)
 				{
 					array_delete(Components, i, 1);
+					_current.OnRemove();
 					break;
 				}
 				++i;
@@ -205,9 +208,11 @@ function CE_EntityRemoveComponent(_entity, _component)
 			var i = 0;
 			repeat (array_length(Components))
 			{
-				if (Components[i].IsInstance(_component))
+				var _current = Components[i];
+				if (_current.IsInstance(_component))
 				{
 					array_delete(Components, i, 1);
+					_current.OnRemove();
 					break;
 				}
 			}
