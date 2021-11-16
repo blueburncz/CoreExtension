@@ -18,33 +18,23 @@ function CE_Component()
 
 	/// @func OnAdd()
 	/// @desc A function executed when the component is added to an entity.
-	/// @return {CE_Component} Returns `self`.
 	static OnAdd = function () {
-		return self;
 	};
 
 	/// @func OnRemove()
 	/// @desc A function executed when the component is removed from an entity.
-	/// @return {CE_Component} Returns `self`.
 	static OnRemove = function () {
-		return self;
 	};
 
 	/// @func OnUpdate()
-	/// @return {CE_Component} Returns `self`.
 	static OnUpdate = function () {
-		return self;
 	};
 
 	/// @func OnDraw()
-	/// @return {CE_Component} Returns `self`.
 	static OnDraw = function () {
-		return self;
 	};
 
 	/// @func OnDrawGUI()
-	/// @return {CE_Component} Returns `self`.
 	static OnDrawGUI = function () {
-		return self;
 	};
 }
