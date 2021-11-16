@@ -12,6 +12,10 @@ function CE_Component()
 	/// @readonly
 	Owner = undefined;
 
+	/// @var {bool} If `false` then the component is disabled and it should not
+	/// do anything.
+	Enabled = true;
+
 	/// @func OnUpdate()
 	/// @return {CE_Component} Returns `self`.
 	static OnUpdate = function () {

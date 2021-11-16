@@ -29,14 +29,14 @@ function CE_EntityInit(_instance)
 			return CE_EntityHasComponent(self, _component);
 		};
 
-		GetComponent = function (_component=undefined) {
+		GetComponent = function (_component=undefined, _includeDisabled=false) {
 			gml_pragma("forceinline");
-			return CE_EntityGetComponent(self, _component);
+			return CE_EntityGetComponent(self, _component, _includeDisabled);
 		};
 
-		ListComponents = function (_component=undefined) {
+		ListComponents = function (_component=undefined, _includeDisabled=false) {
 			gml_pragma("forceinline");
-			return CE_EntityListComponents(self, _component);
+			return CE_EntityListComponents(self, _component, _includeDisabled);
 		};
 
 		RemoveComponent = function (_component) {
@@ -104,13 +104,15 @@ function CE_EntityHasComponent(_entity, _component)
 	}
 }
 
-/// @func CE_EntityGetComponent(_entity, _component)
+/// @func CE_EntityGetComponent(_entity, _component[, _includeDisabled])
 /// @desc Retrieves a component of given type.
 /// @param _entity The target entity.
 /// @param {typeof CE_Component} _component The type of the component.
+/// @param {bool} [_includeDisabled] If true then the returned component can be
+/// disabled. Defaults to `false`.
 /// @return {CE_Component/undefined} The component instance or `undefined`
 /// if the entity does not have a component of given type.
-function CE_EntityGetComponent(_entity, _component)
+function CE_EntityGetComponent(_entity, _component, _includeDisabled=false)
 {
 	gml_pragma("forceinline");
 	with (_entity)
@@ -121,6 +123,10 @@ function CE_EntityGetComponent(_entity, _component)
 			var _current = Components[i++];
 			if (_current.IsInstance(_component))
 			{
+				if (!_includeDisabled && !_current.Enabled)
+				{
+					continue;
+				}
 				return _current;
 			}
 		}
@@ -128,13 +134,15 @@ function CE_EntityGetComponent(_entity, _component)
 	}
 }
 
-/// @func CE_EntityListComponents(_entity[, _component])
+/// @func CE_EntityListComponents(_entity[, _component[, _includeDisabled]])
 /// @desc Retrieves an array of component instances of given type.
 /// @param _entity The target entity.
 /// @param {typeof CE_Component} [_component] The type of the component. If not
+/// @param {bool} [_includeDisabled] If `true` then the returned components can be
+/// disabled. Defaults to `false`.
 /// defined, then all components are returned.
 /// @return {CE_Component[]} An array of component instances.
-function CE_EntityListComponents(_entity, _component=undefined)
+function CE_EntityListComponents(_entity, _component=undefined, _includeDisabled=false)
 {
 	gml_pragma("forceinline");
 	with (_entity)
@@ -153,6 +161,10 @@ function CE_EntityListComponents(_entity, _component=undefined)
 			var _current = Components[i++];
 			if (_current.IsInstance(_component))
 			{
+				if (!_includeDisabled && !_current.Enabled)
+				{
+					continue;
+				}
 				array_push(_components, _current);
 			}
 		}
@@ -270,14 +282,16 @@ function CE_Entity()
 		return CE_EntityGetComponent(self, _component);
 	};
 
-	/// @func ListComponents(_component)
+	/// @func ListComponents(_component[, _includeDisabled])
 	/// @desc Retrieves an array of component instances of given type.
-	/// @param {typeof CE_Component} [_component] The type of the component.
-	/// If not defined, then all components are returned.
+	/// @param {typeof CE_Component/undefined} [_component] The type of the
+	/// component. If `undefined`, then all components are returned.
+	/// @param {bool} [_includeDisabled] If `true` then returned components can
+	/// be disabled. Defaults to `false`.
 	/// @return {CE_Component[]} An array of component instances.
-	static ListComponents = function (_component=undefined) {
+	static ListComponents = function (_component=undefined, _includeDisabled=false) {
 		gml_pragma("forceinline");
-		return CE_EntityListComponents(self, _component);
+		return CE_EntityListComponents(self, _component, _includeDisabled);
 	};
 
 	/// @func RemoveComponent(_component)
@@ -299,7 +313,9 @@ function CE_Entity()
 	};
 }
 
-/// @macro Shorthand used to call a method for each component of an entity.
+/// @macro Shorthand used to call a method for each *enabled* component of an
+/// entity.
+///
 /// @example
 /// ```gml
 /// // Step event
@@ -309,6 +325,7 @@ function CE_Entity()
 /// CE_EACH_COMPONENT.OnDraw();
 /// ```
 #macro CE_EACH_COMPONENT \
+	var __ceComponents = ListComponents(); \
 	var __ceComponentsIndex = 0; \
-	repeat (array_length(Components)) \
-		Components[__ceComponentsIndex++]
+	repeat (array_length(__ceComponents)) \
+		__ceComponents[__ceComponentsIndex++]
