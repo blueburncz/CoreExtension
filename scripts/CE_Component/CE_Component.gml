@@ -26,8 +26,19 @@ function CE_Component()
 	static OnRemove = function () {
 	};
 
-	/// @func OnUpdate()
-	static OnUpdate = function () {
+	/// @func OnPreUpdate(_delta)
+	/// @param {real} _delta
+	static OnPreUpdate = function (_delta) {
+	};
+
+	/// @func OnUpdate(_delta)
+	/// @param {real} _delta
+	static OnUpdate = function (_delta) {
+	};
+
+	/// @func OnPostUpdate(_delta)
+	/// @param {real} _delta
+	static OnPostUpdate = function (_delta) {
 	};
 
 	/// @func OnDraw()
