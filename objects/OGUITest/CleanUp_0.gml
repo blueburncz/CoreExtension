@@ -1,0 +1,1 @@
+ce_gui_root_destroy(gui);
