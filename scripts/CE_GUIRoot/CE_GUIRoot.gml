@@ -133,9 +133,8 @@ function CE_GUIRoot()
 		global.__ceGuiCurrent = self;
 		method(self, Super_Container.OnDraw)();
 
-		#region Proxy input
+		#region Proxy widget
 		var _focused = WidgetFocused;
-
 		if (_focused != noone)
 		{
 			var _focusedX = _focused._xReal;
@@ -146,12 +145,12 @@ function CE_GUIRoot()
 
 			if (rectangle_in_rectangle(_focusedX, _focusedY,
 				_focusedX + _focused.Width, _focusedY + _focused.Height,
-				0, 0, _displayWidth, _displayHeight - _keyboardHeight) == 0)
+				0, 0, _displayWidth, _displayHeight - _keyboardHeight / Scale) != 1)
 			{
 				_focused.OnDrawProxy();
 			}
 		}
-		#endregion Proxy input
+		#endregion Proxy widget
 
 		global.__ceGuiCurrent = noone;
 
@@ -169,12 +168,7 @@ function CE_GUIRoot()
 			var _parent = _widget.Parent;
 			if (_parent != noone)
 			{
-				var _widgets = _parent.Widgets;
-				var _idx = ds_list_find_index(_widgets, _widget);
-				if (_idx != -1)
-				{
-					ds_list_delete(_widgets, _idx);
-				}
+				ce_ds_list_remove(_parent.Widgets, _widget);
 			}
 			#endregion Remove from parent
 			_widget.OnCleanUp();

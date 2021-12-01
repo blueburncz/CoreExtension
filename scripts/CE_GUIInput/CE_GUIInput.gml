@@ -82,6 +82,13 @@ function CE_GUIInput(_value, _x=0, _y=0, _width=256, _height=64)
 		{
 			Gui.SetFocusedWidget(noone);
 		}
+
+		var _current = self;
+		while (_current != noone)
+		{
+			_current.Redraw = true;
+			_current = _current.Parent;
+		}
 	};
 
 	static OnDraw = function () {

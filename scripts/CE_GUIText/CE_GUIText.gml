@@ -14,6 +14,8 @@ function CE_GUIText(_text, _x=0, _y=0, _font=noone, _format=false)
 	CE_CLASS_GENERATED_BODY;
 
 	Text = _text;
+	Color = c_white;
+	Alpha = 1.0;
 	_textReal = "";
 	X = _x;
 	Y = _y;
@@ -26,6 +28,6 @@ function CE_GUIText(_text, _x=0, _y=0, _font=noone, _format=false)
 		var _width = Width;
 		var _height = Height;
 		DrawBackground(_x, _y, _width, _height);
-		ce_gui_draw_text(Gui, _x, _y, _textReal, c_white, 1, Font);
+		ce_gui_draw_text(Gui, _x, _y, _textReal, Color, Alpha, Font);
 	};
 }
