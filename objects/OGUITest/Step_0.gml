@@ -25,7 +25,7 @@ if (windowInit
 
 	display_set_gui_size(_windowWidth, _windowHeight);
 	display_set_gui_maximize(_scale, _scale);
-	gui[? "scale"] = _scale;
+	gui.Scale = _scale;
 
 	windowSizePrev = [
 		_windowWidth,
@@ -35,4 +35,4 @@ if (windowInit
 	windowInit = false;
 }
 
-ce_gui_root_update(gui);
+gui.OnUpdate();

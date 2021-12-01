@@ -114,8 +114,8 @@ function ce_gui_mouse_in_rect(_x, _y, _width, _height)
 {
 	gml_pragma("forceinline");
 	return ce_point_in_rect(
-		ce_gui_root_get_mouse_x(),
-		ce_gui_root_get_mouse_y(),
+		global.__ceGuiCurrent.MouseX,
+		global.__ceGuiCurrent.MouseY,
 		_x,
 		_y,
 		_width,

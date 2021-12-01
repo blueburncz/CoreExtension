@@ -2,13 +2,13 @@
 /// @desc Creates a new vertical box widget.
 /// @param {real} [_x] The x position. Defaults to 0.
 /// @param {real} [_y] The y position. Defaults to 0.
-/// @return {real} The id of the created widget.
+/// @return {CE_GUIContainer} The created widget.
 function ce_gui_vbox_create(_x=0, _y=0)
 {
-	var _w = ce_gui_container_create();
-	_w[? "contentStyle"] = CE_EGuiContentStyle.Column;
-	_w[? "grow"] = true;
-	_w[? "x"] = _x;
-	_w[? "y"] = _y;
+	var _w = new CE_GUIContainer();
+	_w.ContentStyle = CE_EGuiContentStyle.Column;
+	_w.Grow = true;
+	_w.X = _x;
+	_w.Y = _y;
 	return _w;
 }

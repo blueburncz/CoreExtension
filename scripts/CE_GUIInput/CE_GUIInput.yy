@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Widget",
-    "path": "folders/CE/GUI/Widget.yy",
+    "name": "GUI",
+    "path": "folders/CE/GUI.yy",
   },
   "resourceVersion": "1.0",
-  "name": "ce_gui_widget",
+  "name": "CE_GUIInput",
   "tags": [],
   "resourceType": "GMScript",
 }

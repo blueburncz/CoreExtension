@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Draw",
-    "path": "folders/CE/GUI/Draw.yy",
+    "name": "GUI",
+    "path": "folders/CE/GUI.yy",
   },
   "resourceVersion": "1.0",
-  "name": "ce_gui_draw_proxy_input",
+  "name": "CE_GUIContainer",
   "tags": [],
   "resourceType": "GMScript",
 }
