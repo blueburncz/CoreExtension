@@ -10,6 +10,8 @@
 /// default font.
 function ce_gui_draw_text(_gui, _x, _y, _string)
 {
+	_x = _x;
+	_y = _y;
 	_gui.SetCurrentFont((argument_count > 6) ? argument[6] : noone);
 	var _color = (argument_count > 4) ? argument[4] : draw_get_color();
 	draw_text_color(_x, _y, _string,

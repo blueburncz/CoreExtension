@@ -31,14 +31,14 @@ function CE_GUIRoot()
 	/// @return {real} The width of the display within the GUI.
 	static GetDisplayWidth = function () {
 		gml_pragma("forceinline");
-		return display_get_gui_width() / Scale;
+		return window_get_width() / Scale;
 	};
 
 	/// @func GetDisplayHeight()
 	/// @return {real} The width of the display within the GUI.
 	static GetDisplayHeight = function () {
 		gml_pragma("forceinline");
-		return display_get_gui_height() / Scale;
+		return window_get_height() / Scale;
 	};
 
 	/// @func IsTyping()
@@ -99,22 +99,10 @@ function CE_GUIRoot()
 	static OnUpdate = function () {
 		global.__ceGuiCurrent = self;
 
-		var _guiScale = Scale;
-		var _1ByGuiScale = 1 / _guiScale;
+		SetRectangle(0, 0, GetDisplayWidth(), GetDisplayHeight());
 
-		var _guiWidth = display_get_gui_width();
-		var _guiHeight = display_get_gui_height();
-
-		var _guiWidthScaled = _guiWidth * _1ByGuiScale;
-		var _guiHeightScaled = _guiHeight * _1ByGuiScale;
-
-		SetRectangle(0, 0, _guiWidthScaled, _guiHeightScaled);
-
-		var _mouseXLinear = window_mouse_get_x() / window_get_width();
-		var _mouseYLinear = window_mouse_get_y() / window_get_height();
-
-		var _mouseX = _mouseXLinear * (_guiWidth / (CE_DESIGN_SCREEN_WIDTH * _guiScale)) * CE_DESIGN_SCREEN_WIDTH;
-		var _mouseY = _mouseYLinear * (_guiHeight / (CE_DESIGN_SCREEN_HEIGHT * _guiScale)) * CE_DESIGN_SCREEN_HEIGHT;
+		var _mouseX = device_mouse_x_to_gui(0);
+		var _mouseY = device_mouse_y_to_gui(0);
 
 		MouseX = _mouseX;
 		MouseY = _mouseY;

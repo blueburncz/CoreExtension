@@ -1,18 +1,14 @@
 font_add_enable_aa(true);
 
-//global.fntRoboto = font_add("Fonts/Roboto/Roboto-Regular.ttf", 32, false, false, 32, 128);
-//global.fntRobotoLarge = font_add("Fonts/Roboto/Roboto-Regular.ttf", 64, false, false, 32, 128);
-
-//global.fntRobotoMono = font_add("Fonts/Roboto_Mono/RobotoMono-Regular.ttf", 32, false, false, 32, 128);
-//global.fntRobotoMonoLarge = font_add("Fonts/Roboto_Mono/RobotoMono-Regular.ttf", 64, false, false, 32, 128);
-
 gui = new CE_GUIRoot();
+gui.Font = FntGUI;
 
 windowInit = true;
 
 windowSizePrev = [0, 0];
 
-var _vbox = ce_gui_vbox_create(32, 32);
+var _vbox = ce_gui_vbox_create(32, -32);
+_vbox.AlignV = CE_EGuiAlign.End;
 gui.Add(_vbox);
 
 _vbox.Add(new CE_GUIText("String"));

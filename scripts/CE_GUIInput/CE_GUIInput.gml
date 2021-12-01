@@ -6,7 +6,7 @@
 /// @param {real} [y] The y position. Defaults to 0.
 /// @param {real} [width] The width. Defaults to 256.
 /// @param {real} [height] The height. Defaults to 32.
-function CE_GUIInput(_value, _x=0, _y=0, _width=256, _height=32)
+function CE_GUIInput(_value, _x=0, _y=0, _width=256, _height=64)
 	: CE_GUIWidget(CE_EGuiWidget.Input) constructor
 {
 	CE_CLASS_GENERATED_BODY;
@@ -142,10 +142,10 @@ function CE_GUIInput(_value, _x=0, _y=0, _width=256, _height=32)
 		var _gui = Gui;
 		var _displayWidth = _gui.GetDisplayWidth();
 		var _displayHeight = _gui.GetDisplayHeight();
-		var _keyboardHeight = keyboard_virtual_height();
+		var _keyboardHeight = keyboard_virtual_height() ?? 0;
 
-		// TODO: Set big font
-		//_gui.SetCurrentFont(global.fntRobotoMonoLarge);
+		// TODO: Proxy input font configuration!
+		_gui.SetCurrentFont(FntGUILarge);
 
 		var _charWidth = string_width("Q");
 		var _charHeight = string_height("Q");
@@ -170,8 +170,8 @@ function CE_GUIInput(_value, _x=0, _y=0, _width=256, _height=32)
 		var _text_y = _inputY + _padding;
 
 		// Text
-		// TODO: Set big font
-		ce_gui_draw_text(_gui, _textX, _text_y, _text, c_black, 1/*, global.fntRobotoMonoLarge*/);
+		// TODO: Proxy input font configuration!
+		ce_gui_draw_text(_gui, _textX, _text_y, _text, c_black, 1, FntGUILarge);
 
 		// Beam
 		ce_draw_rectangle(_textX + string_width(_text), _text_y, 4, _charHeight, $FF8000, 1);
