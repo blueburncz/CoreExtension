@@ -1,26 +1,20 @@
-/// @func ce_gui_text_create(_text[, _x[, _y[, _font[, _format]]]])
+/// @func ce_gui_text_create(_text[, _format[, _props]])
 /// @extends CE_GUIWidget
 /// @desc A text widget.
 /// @param {real} _text The text to draw.
-/// @param {real} [_x] The x position of the sprite widget. Defaults to 0.
-/// @param {real} [_y] The y position of the sprite widget. Defaults to 0.
-/// @param {real} [_font] The id of the font resource to use. Use `noone`
-/// (default) for the default font.
 /// @param {bool} [_format] True to use `ce_string_format` when drawing
 /// the text. Defaults to `false`.
-function CE_GUIText(_text, _x=0, _y=0, _font=noone, _format=false)
-	: CE_GUIWidget() constructor
+/// @param {struct} [_props]
+function CE_GUIText(_text, _format=false, _props={})
+	: CE_GUIWidget(_props) constructor
 {
 	CE_CLASS_GENERATED_BODY;
 
 	Text = _text;
-	Color = c_white;
-	Alpha = 1.0;
 	_textReal = "";
-	X = _x;
-	Y = _y;
-	Font = _font;
 	Format = _format;
+	Color = ce_struct_get(_props, "Color", c_white);
+	Alpha = ce_struct_get(_props, "Color", 1.0);
 
 	static OnDraw = function () {
 		var _x = _xReal;

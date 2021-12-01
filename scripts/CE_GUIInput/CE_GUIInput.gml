@@ -1,25 +1,21 @@
-/// @func ce_gui_input_create(_value[, _x[, _y[, _width[, _height]]]])
+/// @func ce_gui_input_create(_value[, _props])
 /// @extends CE_GUIWidget
 /// @desc An input widget.
 /// @param {any} value The initial value.
-/// @param {real} [x] The x position. Defaults to 0.
-/// @param {real} [y] The y position. Defaults to 0.
-/// @param {real} [width] The width. Defaults to 256.
-/// @param {real} [height] The height. Defaults to 32.
-function CE_GUIInput(_value, _x=0, _y=0, _width=256, _height=64)
-	: CE_GUIWidget() constructor
+/// @param {struct} [_props]
+function CE_GUIInput(_value, _props={})
+	: CE_GUIWidget(_props) constructor
 {
 	CE_CLASS_GENERATED_BODY;
 
 	Value = _value;
 	Length = noone;
 	_keyboardString = "";
-	X = _x;
-	Y = _y;
-	Width = _width;
-	Height = _height;
-	BackgroundColor = c_white;
-	BackgroundAlpha = 1;
+
+	Width = ce_struct_get(_props, "Width", 256);
+	Height = ce_struct_get(_props, "Height", 64);
+	BackgroundColor = ce_struct_get(_props, "BackgroundColor", c_white);
+	BackgroundAlpha = ce_struct_get(_props, "BackgroundAlpha", 1.0);
 
 	AddEventListener(CE_EGuiEvent.Focus, method(self, OnFocus));
 	AddEventListener(CE_EGuiEvent.Blur, method(self, OnBlur));

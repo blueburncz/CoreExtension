@@ -1,14 +1,13 @@
-/// @func CE_GUIHSlider(_min, _max, _value[, _integers[, _x[, _y]]])
+/// @func CE_GUIHSlider(_min, _max, _value[, _integers[, _props]])
 /// @extends CE_GUIWidget
 /// @param {real} _min Minimum value.
 /// @param {real} _max Maximum value.
 /// @param {real} _value The current value.
 /// @param {bool} [_integers] True if the values can be integers only. Defaults
 /// to `false`.
-/// @param {real} [_x] The x position. Defaults to 0.
-/// @param {real} [_y] The y position. Defaults to 0.
-function CE_GUIHSlider(_min, _max, _value, _integers=false, _x=0, _y=0)
-	: CE_GUIWidget() constructor
+/// @param {struct} [_props]
+function CE_GUIHSlider(_min, _max, _value, _integers=false, _props={})
+	: CE_GUIWidget(_props) constructor
 {
 	CE_CLASS_GENERATED_BODY;
 
@@ -16,8 +15,6 @@ function CE_GUIHSlider(_min, _max, _value, _integers=false, _x=0, _y=0)
 	Max = _max;
 	Value = _value;
 	Integers = _integers;
-	X = _x;
-	Y = _y;
 
 	var _onDrag = method(self, OnDrag);
 	AddEventListener(CE_EGuiEvent.Click, _onDrag);

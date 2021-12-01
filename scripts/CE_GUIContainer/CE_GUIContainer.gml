@@ -1,8 +1,9 @@
-/// @func CE_GUIContainer()
+/// @func CE_GUIContainer([_props])
 /// @extends CE_GUIWidget
 /// @desc A container of widgets.
-function CE_GUIContainer()
-	: CE_GUIWidget() constructor
+/// @param {struct} [_props]
+function CE_GUIContainer(_props={})
+	: CE_GUIWidget(_props) constructor
 {
 	CE_CLASS_GENERATED_BODY;
 
@@ -12,28 +13,28 @@ function CE_GUIContainer()
 
 	Widgets = ds_list_create();
 
-	Sprite = noone;
-	Subimage = 0;
+	Sprite = ce_struct_get(_props, "Sprite", noone);
+	Subimage = ce_struct_get(_props, "Subimage", 0);
 
-	Overflow = true;
-	Surface = noone;
+	Overflow = ce_struct_get(_props, "Overflow", false);
+	Surface = ce_struct_get(_props, "Surface", noone);
 	Redraw = true;
-	ContentStyle = CE_EGuiContentStyle.Default;
-	GridColumns = 1;
-	GridRows = 1;
+	ContentStyle = ce_struct_get(_props, "ContentStyle", CE_EGuiContentStyle.Default);
+	GridColumns = ce_struct_get(_props, "GridColumns", 1);
+	GridRows = ce_struct_get(_props, "GridRows", 1);
 	ContentW = 0;
 	ContentH = 0;
 	ScrollX = 0;
 	ScrollY = 0;
-	ScrollXEnable = false;
-	ScrollYEnable = false;
-	Grow = false;
+	ScrollXEnable = ce_struct_get(_props, "ScrollXEnable", false);
+	ScrollYEnable = ce_struct_get(_props, "ScrollYEnable", false);
+	Grow = ce_struct_get(_props, "Grow", false);
 
 	// Padding
-	PaddingLeft = 0;
-	PaddingTop = 0;
-	PaddingRight = 0;
-	PaddingBottom = 0;
+	PaddingLeft = ce_struct_get(_props, "PaddingLeft", 0);
+	PaddingTop = ce_struct_get(_props, "PaddingTop", 0);
+	PaddingRight = ce_struct_get(_props, "PaddingRight", 0);
+	PaddingBottom = ce_struct_get(_props, "PaddingBottom", 0);
 
 	AddEventListener(CE_EGuiEvent.Drag, method(self, OnDrag));
 

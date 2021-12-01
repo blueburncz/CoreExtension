@@ -1,6 +1,7 @@
-/// @func CE_GUIWidget()
+/// @func CE_GUIWidget([_props])
 /// @desc Base class for GUI widgets.
-function CE_GUIWidget()
+/// @param {struct} [_props]
+function CE_GUIWidget(_props={})
 	: CE_Class() constructor
 {
 	CE_CLASS_GENERATED_BODY;
@@ -9,31 +10,32 @@ function CE_GUIWidget()
 		Destroy: Destroy,
 	};
 
-	Id = undefined;
-	X = 0;
-	Y = 0;
-	Width = 1;
-	Height = 1;
 	Gui = noone;
 	Parent = noone;
 	Events = noone;
-	Font = noone;
-	Visible = true;
-	Position = CE_EGuiPosition.Scroll;
+
+	Id = ce_struct_get(_props, "Id", undefined);
+	X = ce_struct_get(_props, "X", 0);
+	Y = ce_struct_get(_props, "Y", 0);
+	Width = ce_struct_get(_props, "Width", 1);
+	Height = ce_struct_get(_props, "Height", 1);
+	Font = ce_struct_get(_props, "Font", noone);
+	Visible = ce_struct_get(_props, "Visible", true);
+	Position = ce_struct_get(_props, "Position", CE_EGuiPosition.Scroll);
 
 	// Pivot
-	PivotX = 0;
-	PivotY = 0;
+	PivotX = ce_struct_get(_props, "PivotX", 0);
+	PivotY = ce_struct_get(_props, "PivotY", 0);
 
 	// Margin
-	MarginLeft = 0;
-	MarginTop = 0;
-	MarginRight = 0;
-	MarginBottom = 0;
+	MarginLeft = ce_struct_get(_props, "MarginLeft", 0);
+	MarginTop = ce_struct_get(_props, "MarginTop", 0);
+	MarginRight = ce_struct_get(_props, "MarginRight", 0);
+	MarginBottom = ce_struct_get(_props, "MarginBottom", 0);
 
 	// Align within the parent widget
-	AlignH = CE_EGuiAlign.Start;
-	AlignV = CE_EGuiAlign.Start;
+	AlignH = ce_struct_get(_props, "AlignH", CE_EGuiAlign.Start);
+	AlignV = ce_struct_get(_props, "AlignV", CE_EGuiAlign.Start);
 
 	// True calculated dimensions
 	_xReal = 0;
@@ -47,23 +49,23 @@ function CE_GUIWidget()
 	MouseY = 0;
 
 	// Background
-	BackgroundColor = c_black;
-	BackgroundAlpha = 0;
-	BackgroundSprite = undefined;
-	BackgroundIndex = 0;
-	BackgroundStyle = CE_EGuiBackgroundStyle.Stretch;
-	BackgroundSpriteBlend = c_white;
-	BackgroundSpriteAlpha = 1;
-	BackgroundTile = false; // Applies only to nine slice backgrounds.
-	BackgroundAlignHor = 0;
-	BackgroundAlignVer = 0;
-	BackgroundWidth = undefined;
-	BackgroundHeight = undefined;
-	BackgroundScaleX = 1;
-	BackgroundScaleY = 1;
-	BackgroundX = 0;
-	BackgroundY = 0;
-	BackgroundRot = 0;
+	BackgroundColor = ce_struct_get(_props, "BackgroundColor", c_black);
+	BackgroundAlpha = ce_struct_get(_props, "BackgroundAlpha", 0);
+	BackgroundSprite = ce_struct_get(_props, "BackgroundSprite", undefined);
+	BackgroundIndex = ce_struct_get(_props, "BackgroundIndex", 0);
+	BackgroundStyle = ce_struct_get(_props, "BackgroundStyle", CE_EGuiBackgroundStyle.Stretch);
+	BackgroundSpriteBlend = ce_struct_get(_props, "BackgroundSpriteBlend", c_white);
+	BackgroundSpriteAlpha = ce_struct_get(_props, "BackgroundSpriteAlpha", 1);
+	BackgroundTile = ce_struct_get(_props, "BackgroundTile", false); // Applies only to nine slice backgrounds.
+	BackgroundAlignHor = ce_struct_get(_props, "BackgroundAlignHor", 0);
+	BackgroundAlignVer = ce_struct_get(_props, "BackgroundAlignVer", 0);
+	BackgroundWidth = ce_struct_get(_props, "BackgroundWidth", undefined);
+	BackgroundHeight = ce_struct_get(_props, "BackgroundHeight", undefined);
+	BackgroundScaleX = ce_struct_get(_props, "BackgroundScaleX", 1);
+	BackgroundScaleY = ce_struct_get(_props, "BackgroundScaleY", 1);
+	BackgroundX = ce_struct_get(_props, "BackgroundX", 0);
+	BackgroundY = ce_struct_get(_props, "BackgroundY", 0);
+	BackgroundRot = ce_struct_get(_props, "BackgroundRot", 0);
 
 	/// @func SetMargin(_left[, _top, _right, _bottom])
 	/// @desc Sets the margin of the widget.
