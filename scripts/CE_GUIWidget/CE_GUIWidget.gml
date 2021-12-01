@@ -524,6 +524,11 @@ function CE_GUIWidget(_type=CE_EGuiWidget.Widget)
 		DrawBackground(_xReal, _yReal, Width, Height);
 	};
 
+	/// @func OnDrawProxy()
+	/// @desc Render proxy when the widget is underneath the keyboard.
+	static OnDrawProxy = function () {
+	};
+
 	/// @func Draw()
 	/// @desc Draws the widget, if it's visible.
 	/// @return {CE_GUIWidget} Returns `self`.

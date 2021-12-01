@@ -136,21 +136,19 @@ function CE_GUIRoot()
 		#region Proxy input
 		var _focused = WidgetFocused;
 
-		if (_focused != noone
-			&& _focused.Type == CE_EGuiWidget.Input)
+		if (_focused != noone)
 		{
-			var _focusedInput = _focused;
-			var _focusedInputX = _focusedInput._xReal;
-			var _focusedInputY = _focusedInput._yReal;
+			var _focusedX = _focused._xReal;
+			var _focusedY = _focused._yReal;
 			var _displayWidth = GetDisplayWidth();
 			var _displayHeight = GetDisplayHeight();
 			var _keyboardHeight = keyboard_virtual_height() ?? 0;
 
-			if (rectangle_in_rectangle(_focusedInputX, _focusedInputY,
-				_focusedInputX + _focusedInput.Width, _focusedInputY + _focusedInput.Height,
+			if (rectangle_in_rectangle(_focusedX, _focusedY,
+				_focusedX + _focused.Width, _focusedY + _focused.Height,
 				0, 0, _displayWidth, _displayHeight - _keyboardHeight) == 0)
 			{
-				_focusedInput.OnDrawProxy();
+				_focused.OnDrawProxy();
 			}
 		}
 		#endregion Proxy input
