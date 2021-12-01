@@ -1,4 +1,4 @@
-/// @func ce_gui_input_create(_value[, _props])
+/// @func CE_GUIInput(_value[, _props])
 /// @extends CE_GUIWidget
 /// @desc An input widget.
 /// @param {any} value The initial value.
@@ -8,14 +8,22 @@ function CE_GUIInput(_value, _props={})
 {
 	CE_CLASS_GENERATED_BODY;
 
+	/// @var {real/string}
 	Value = _value;
-	Length = noone;
+
+	/// @var {uint/undefined} Limit number of characters.
+	Length = undefined;
+
 	_keyboardString = "";
 
 	Width = ce_struct_get(_props, "Width", 256);
-	Height = ce_struct_get(_props, "Height", 64);
 	BackgroundColor = ce_struct_get(_props, "BackgroundColor", c_white);
-	BackgroundAlpha = ce_struct_get(_props, "BackgroundAlpha", 1.0);
+	BackgroundAlpha = ce_struct_get(_props, "BackgroundAlpha", 1);
+
+	PaddingLeft = ce_struct_get(_props, "PaddingLeft", 16);
+	PaddingRight = ce_struct_get(_props, "PaddingRight", 16);
+	PaddingTop = ce_struct_get(_props, "PaddingTop", 8);
+	PaddingBottom = ce_struct_get(_props, "PaddingBottom", 8);
 
 	AddEventListener(CE_EGuiEvent.Focus, method(self, OnFocus));
 	AddEventListener(CE_EGuiEvent.Blur, method(self, OnBlur));
@@ -76,11 +84,11 @@ function CE_GUIInput(_value, _props={})
 		if (_key == vk_enter
 			|| _key == vk_return)
 		{
-			Gui.SetFocusedWidget(noone);
+			Root.SetFocusedWidget(undefined);
 		}
 
 		var _current = self;
-		while (_current != noone)
+		while (_current != undefined)
 		{
 			_current.Redraw = true;
 			_current = _current.Parent;
@@ -88,38 +96,42 @@ function CE_GUIInput(_value, _props={})
 	};
 
 	static OnDraw = function () {
-		var _gui = Gui;
-		var _x = _xReal;
-		var _y = _yReal;
+		var _root = Root;
+		_root.SetCurrentFont(Font);
+		var _charWidth = string_width("Q");
+		var _charHeight = string_height("Q");
+
+		var _x = RealX;
+		var _y = RealY;
 		var _width = Width;
-		var _height = Height;
+		var _height = PaddingTop + _charHeight + PaddingBottom;
+		Height = _height;
+
+		var _textX = _x + PaddingLeft;
+		var _textY = _y + PaddingTop;
 		var _value = Value;
 
 		DrawBackground(_x, _y, _width, _height);
-		_gui.SetCurrentFont(Font);
 
-		var _padding = 16;
-		var _charWidth = string_width("Q");
-		var _charHeight = string_height("Q");
-		var _textX = _x + _padding;
-		var _text_y = _y + round((_height - _charHeight) * 0.5);
 		var _color = c_black;
-		var _charCount = floor((_width - _padding * 2) / _charWidth);
-		var _focused = (_gui.WidgetFocused == self);
+		var _charCount = floor((_width - PaddingLeft - PaddingRight) / _charWidth);
+		var _focused = (_root.WidgetFocused == self);
 		var _text;
 
 		if (_focused)
 		{
 			var _length = Length;
-			if (is_real(_value))
-			{
-				var _digits = string_digits(keyboard_string);
-				if (keyboard_string != _digits)
-				{
-					keyboard_string = _digits;
-				}
-			}
-			if (_length > 0 && string_length(keyboard_string) > _length)
+			//if (is_real(_value))
+			//{
+			//	var _digits = string_digits(keyboard_string);
+			//	if (keyboard_string != _digits)
+			//	{
+			//		keyboard_string = _digits;
+			//	}
+			//}
+			if (_length != undefined
+				&& _length > 0
+				&& string_length(keyboard_string) > _length)
 			{
 				keyboard_string = string_copy(keyboard_string, 1, _length);
 			}
@@ -133,22 +145,22 @@ function CE_GUIInput(_value, _props={})
 			_text = string_copy(_text, 1, _charCount);
 		}
 
-		draw_text_color(_textX, _text_y, _text, _color, _color, _color, _color, 1);
+		draw_text_color(_textX, _textY, _text, _color, _color, _color, _color, 1);
 
 		if (_focused)
 		{
-			ce_draw_rectangle(_textX + string_width(_text), _text_y, 4, _charHeight, $FF8000, 1);
+			ce_draw_rectangle(_textX + string_width(_text), _textY, 4, _charHeight, $FF8000, 1);
 		}
 	};
 
 	static OnDrawProxy = function () {
-		var _gui = Gui;
-		var _displayWidth = _gui.GetDisplayWidth();
-		var _displayHeight = _gui.GetDisplayHeight();
+		var _root = Root;
+		var _displayWidth = _root.GetDisplayWidth();
+		var _displayHeight = _root.GetDisplayHeight();
 		var _keyboardHeight = keyboard_virtual_height() ?? 0;
 
 		// TODO: Proxy input font configuration!
-		_gui.SetCurrentFont(FntGUILarge);
+		_root.SetCurrentFont(FntGUILarge);
 
 		var _charWidth = string_width("Q");
 		var _charHeight = string_height("Q");
@@ -170,13 +182,13 @@ function CE_GUIInput(_value, _props={})
 		var _copyFrom = max(string_length(_text) - _charCount + 1, 1);
 		_text = string_copy(_text, _copyFrom, _charCount);
 		var _textX = _inputX + _padding;
-		var _text_y = _inputY + _padding;
+		var _textY = _inputY + _padding;
 
 		// Text
 		// TODO: Proxy input font configuration!
-		ce_gui_draw_text(_gui, _textX, _text_y, _text, c_black, 1, FntGUILarge);
+		DrawText(_textX, _textY, _text, c_black, 1, FntGUILarge);
 
 		// Beam
-		ce_draw_rectangle(_textX + string_width(_text), _text_y, 4, _charHeight, $FF8000, 1);
+		ce_draw_rectangle(_textX + string_width(_text), _textY, 4, _charHeight, $FF8000, 1);
 	};
 }

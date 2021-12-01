@@ -18,7 +18,7 @@ _container.ScrollYEnable = true;
 _container.BackgroundColor = c_white;
 _container.BackgroundAlpha = 0.5;
 _container.SetPadding(32);
-gui.Add(_container);
+gui.AddWidget(_container);
 
 repeat (20)
 {
@@ -31,13 +31,13 @@ repeat (20)
 	_c.AddEventListener(CE_EGuiEvent.Click, method(_c, function (_event) {
 		BackgroundColor = make_color_hsv(255 - color_get_hue(BackgroundColor), 255, 255);
 	}));
-	_container.Add(_c);
+	_container.AddWidget(_c);
 }
 
-_container.Add(new CE_GUIText("String"));
-_container.Add(new CE_GUIInput(""));
-_container.Add(new CE_GUIText("Real"));
-_container.Add(new CE_GUIInput(0));
+_container.AddWidget(ce_gui_create_text("String"));
+_container.AddWidget(new CE_GUIInput(""));
+_container.AddWidget(ce_gui_create_text("Real"));
+_container.AddWidget(new CE_GUIInput(0));
 
 repeat (11)
 {
@@ -50,5 +50,5 @@ repeat (11)
 	_c.AddEventListener(CE_EGuiEvent.Click, method(_c, function (_event) {
 		BackgroundColor = make_color_hsv(255 - color_get_hue(BackgroundColor), 255, 255);
 	}));
-	_container.Add(_c);
+	_container.AddWidget(_c);
 }

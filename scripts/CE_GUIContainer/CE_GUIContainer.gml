@@ -13,12 +13,8 @@ function CE_GUIContainer(_props={})
 
 	Widgets = ds_list_create();
 
-	Sprite = ce_struct_get(_props, "Sprite", noone);
-	Subimage = ce_struct_get(_props, "Subimage", 0);
-
 	Overflow = ce_struct_get(_props, "Overflow", false);
-	Surface = ce_struct_get(_props, "Surface", noone);
-	Redraw = true;
+	Surface = noone;
 	ContentStyle = ce_struct_get(_props, "ContentStyle", CE_EGuiContentStyle.Default);
 	GridColumns = ce_struct_get(_props, "GridColumns", 1);
 	GridRows = ce_struct_get(_props, "GridRows", 1);
@@ -28,59 +24,19 @@ function CE_GUIContainer(_props={})
 	ScrollY = 0;
 	ScrollXEnable = ce_struct_get(_props, "ScrollXEnable", false);
 	ScrollYEnable = ce_struct_get(_props, "ScrollYEnable", false);
-	Grow = ce_struct_get(_props, "Grow", false);
-
-	// Padding
-	PaddingLeft = ce_struct_get(_props, "PaddingLeft", 0);
-	PaddingTop = ce_struct_get(_props, "PaddingTop", 0);
-	PaddingRight = ce_struct_get(_props, "PaddingRight", 0);
-	PaddingBottom = ce_struct_get(_props, "PaddingBottom", 0);
 
 	AddEventListener(CE_EGuiEvent.Drag, method(self, OnDrag));
 
-	/// @func SetPadding(_left[, _top, _right, _bottom])
-	/// @desc Sets the margin of the container.
-	/// @param {real} _left The left padding.
-	/// @param {real} [_top] The top padding. Defaults to the value of param `left`.
-	/// @param {real} [_right] The right padding. Defaults to the value of param `left`.
-	/// @param {real} [_bottom] The bottom padding. Defaults to the value of param `left`.
-	/// @return {CE_GUIContainer} Returns `self`.
-	static SetPadding = function (_left) {
-		gml_pragma("forceinline");
-		PaddingLeft = _left;
-		if (argument_count == 1)
-		{
-			PaddingTop = _left;
-			PaddingRight = _left;
-			PaddingBottom = _left;
-		}
-		else
-		{
-			PaddingTop = argument[1];
-			PaddingRight = argument[2];
-			PaddingBottom = argument[3];
-		}
-		return self;
-	};
-
-	/// @func Add(_widget)
+	/// @func AddWidget(_widget)
 	/// @desc Adds the widget to the container.
 	/// @param {real} _widget The id of the widget.
 	/// @return {CE_GUIContainer} Return `self`.
-	static Add = function (_widget) {
-		ce_assert(_widget.Gui == noone, "Widget is already added to a GUI.");
-		ce_assert(_widget.Parent == noone, "Widget already has a parent.");
-		if (IsInstance(CE_GUIRoot))
-		{
-			_widget.Gui = self;
-		}
-		else
-		{
-			var _parentGui = Gui;
-			ce_assert(_parentGui != noone, "Parent must be added to a GUI.");
-			_widget.Gui = _parentGui;
-			_widget.Parent = self;
-		}
+	static AddWidget = function (_widget) {
+		ce_assert(_widget.Root == undefined, "Widget is already added to a GUI.");
+		ce_assert(_widget.Parent == undefined, "Widget already has a parent.");
+		ce_assert(Root != undefined, "Parent must be added to a GUI.");
+		_widget.Root = Root;
+		_widget.Parent = self;
 		ce_ds_list_add_unique(Widgets, _widget);
 		return self;
 	};
@@ -146,8 +102,8 @@ function CE_GUIContainer(_props={})
 	};
 
 	static OnDraw = function () {
-		var _x = _xReal;
-		var _y = _yReal;
+		var _x = RealX;
+		var _y = RealY;
 		var _width = Width;
 		var _height = Height;
 		var _overflow = Overflow;
@@ -166,7 +122,7 @@ function CE_GUIContainer(_props={})
 			if (_redraw)
 			{
 				var _parent = Parent;
-				if (_parent != noone)
+				if (_parent != undefined)
 				{
 					_parent.Redraw = true;
 				}
@@ -202,7 +158,8 @@ function CE_GUIContainer(_props={})
 		}
 		ds_list_destroy(Widgets);
 
-		if (Surface != noone)
+		if (Surface != noone
+			&& surface_exists(Surface))
 		{
 			surface_free(Surface);
 		}

@@ -1,5 +1,5 @@
 var _dragging = gui.WidgetDragging;
-if (_dragging != noone)
+if (_dragging != undefined)
 {
 	var _mouseX = gui.MouseX;
 	var _mouseY = gui.MouseY;

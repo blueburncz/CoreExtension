@@ -1,6 +1,11 @@
 var _draggable = gui.WidgetDraggable;
-if (_draggable != noone)
+if (_draggable != undefined)
 {
+	if (gui.WidgetFocused != undefined)
+	{
+		gui.SetFocusedWidget(undefined);
+	}
+
 	gui.WidgetDragging = _draggable;
 	gui.MouseDragXLast = gui.MouseX;
 	gui.MouseDragYLast = gui.MouseY;

@@ -1,5 +1,6 @@
-/// @var {real} The id of the GUI that is currently being rendered.
-global.__ceGuiCurrent = noone;
+/// @var {CE_GUIRoot/undefined}
+/// @private
+global.__ceGuiCurrent = undefined;
 
 /// @func CE_GUIRoot()
 /// @extends CE_GUIContainer
@@ -13,15 +14,17 @@ function CE_GUIRoot()
 		OnDraw: OnDraw,
 	};
 
-	WidgetHovered = noone;
-	WidgetDragging = noone;
-	WidgetFocused = noone;
+	Root = self;
+
+	WidgetHovered = undefined;
+	WidgetDragging = undefined;
+	WidgetFocused = undefined;
 	Scale = 1;
 
 	MouseDragXLast = 0;
 	MouseDragYLast = 0;
 
-	WidgetDraggable = noone;
+	WidgetDraggable = undefined;
 
 	FixPositioning = false;
 
@@ -48,7 +51,7 @@ function CE_GUIRoot()
 		{
 			return true;
 		}
-		if (WidgetFocused != noone
+		if (WidgetFocused != undefined
 			&& WidgetFocused.IsInstance(CE_GUIInput))
 		{
 			return true;
@@ -56,15 +59,12 @@ function CE_GUIRoot()
 		return false;
 	};
 
-	/// @func SetCurrentFont(_font)
-	/// @param {real} _font The id of the font resource.
+	/// @func SetCurrentFont([_font])
+	/// @param {font} [_font] The font resource.
 	/// @return {CE_GUIRoot} Returns `self`.
-	static SetCurrentFont = function (_font) {
-		if (_font == noone)
-		{
-			_font = Font;
-		}
-		if (_font != noone && draw_get_font() != _font)
+	static SetCurrentFont = function (_font=Font) {
+		if (_font != undefined
+			&& draw_get_font() != _font)
 		{
 			draw_set_font(_font);
 		}
@@ -72,21 +72,21 @@ function CE_GUIRoot()
 	};
 
 	/// @func SetFocusedWidget(_widget)
-	/// @param {real} _widget The id of the widget. Use `noone` for none.
+	/// @param {CE_GUIWidget/undefined} _widget The widget or `undefined`.
 	/// @return {CE_GUIRoot} Returns `self`.
 	static SetFocusedWidget = function (_widget) {
 		var _widgetPrev = WidgetFocused;
 
 		WidgetFocused = _widget;
 
-		if (_widgetPrev != noone)
+		if (_widgetPrev != undefined)
 		{
 			var _ev = new CE_GUIEvent(CE_EGuiEvent.Blur);
 			_widgetPrev.TriggerEvent(_ev);
 			_ev.Destroy();
 		}
 
-		if (_widget != noone)
+		if (_widget != undefined)
 		{
 			var _ev = new CE_GUIEvent(CE_EGuiEvent.Focus);
 			_widget.TriggerEvent(_ev);
@@ -106,8 +106,8 @@ function CE_GUIRoot()
 
 		MouseX = _mouseX;
 		MouseY = _mouseY;
-		WidgetHovered = noone;
-		WidgetDraggable = noone;
+		WidgetHovered = undefined;
+		WidgetDraggable = undefined;
 
 		UpdatePosition(_mouseX, _mouseY);
 		while (FixPositioning)
@@ -116,7 +116,7 @@ function CE_GUIRoot()
 			UpdatePosition(_mouseX, _mouseY);
 		}
 
-		global.__ceGuiCurrent = noone;
+		global.__ceGuiCurrent = undefined;
 	};
 
 	static OnDraw = function () {
@@ -135,10 +135,10 @@ function CE_GUIRoot()
 
 		#region Proxy widget
 		var _focused = WidgetFocused;
-		if (_focused != noone)
+		if (_focused != undefined)
 		{
-			var _focusedX = _focused._xReal;
-			var _focusedY = _focused._yReal;
+			var _focusedX = _focused.RealX;
+			var _focusedY = _focused.RealY;
 			var _displayWidth = GetDisplayWidth();
 			var _displayHeight = GetDisplayHeight();
 			var _keyboardHeight = keyboard_virtual_height() ?? 0;
@@ -152,7 +152,7 @@ function CE_GUIRoot()
 		}
 		#endregion Proxy widget
 
-		global.__ceGuiCurrent = noone;
+		global.__ceGuiCurrent = undefined;
 
 		#region Destroy widgets
 		var _destroyList = DestroyList;
@@ -166,7 +166,7 @@ function CE_GUIRoot()
 			}
 			#region Remove from parent
 			var _parent = _widget.Parent;
-			if (_parent != noone)
+			if (_parent != undefined)
 			{
 				ce_ds_list_remove(_parent.Widgets, _widget);
 			}
@@ -197,5 +197,5 @@ function CE_GUIRoot()
 function ce_is_mouse_over_gui(_root)
 {
 	gml_pragma("forceinline");
-	return (_root.WidgetHovered != noone);
+	return (_root.WidgetHovered != undefined);
 }

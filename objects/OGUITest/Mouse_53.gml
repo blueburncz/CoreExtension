@@ -1,2 +1,2 @@
-// TODO: Fix mouse position on mobile
+// Required for plaforms with touch controls only
 gui.OnUpdate();

@@ -10,62 +10,197 @@ function CE_GUIWidget(_props={})
 		Destroy: Destroy,
 	};
 
-	Gui = noone;
-	Parent = noone;
-	Events = noone;
-
+	/// @var {string/undefined}
 	Id = ce_struct_get(_props, "Id", undefined);
-	X = ce_struct_get(_props, "X", 0);
-	Y = ce_struct_get(_props, "Y", 0);
-	Width = ce_struct_get(_props, "Width", 1);
-	Height = ce_struct_get(_props, "Height", 1);
-	Font = ce_struct_get(_props, "Font", noone);
+
+	/// @var {CE_GUIRoot/undefined}
+	/// @readonly
+	Root = undefined;
+
+	/// @var {CE_GUIWidget/undefined}
+	/// @readonly
+	Parent = undefined;
+
+	/// @var {ds_map<string, function>}
+	/// @private
+	Events = undefined;
+
+	/// @var {bool}
 	Visible = ce_struct_get(_props, "Visible", true);
-	Position = ce_struct_get(_props, "Position", CE_EGuiPosition.Scroll);
 
-	// Pivot
-	PivotX = ce_struct_get(_props, "PivotX", 0);
-	PivotY = ce_struct_get(_props, "PivotY", 0);
+	/// @var {bool}
+	Redraw = true;
 
-	// Margin
-	MarginLeft = ce_struct_get(_props, "MarginLeft", 0);
-	MarginTop = ce_struct_get(_props, "MarginTop", 0);
-	MarginRight = ce_struct_get(_props, "MarginRight", 0);
-	MarginBottom = ce_struct_get(_props, "MarginBottom", 0);
-
-	// Align within the parent widget
-	AlignH = ce_struct_get(_props, "AlignH", CE_EGuiAlign.Start);
-	AlignV = ce_struct_get(_props, "AlignV", CE_EGuiAlign.Start);
-
-	// True calculated dimensions
-	_xReal = 0;
-	_yReal = 0;
-	_widthReal = 0;
-	_heightReal = 0;
-
-	// Mouse coordinates relative to the widget position. Applicable only when
-	// the widget is hovered/clicked/...
+	/// @var {real} Mouse X position relative to the widget.
+	/// Applicable only when the widget is hovered/clicked/...
+	/// @readonly
 	MouseX = 0;
+
+	/// @var {real} Mouse Y position relative to the widget.
+	/// Applicable only when the widget is hovered/clicked/...
+	/// @readonly
 	MouseY = 0;
 
-	// Background
+	////////////////////////////////////////////////////////////////////////////
+	// Position and size props
+
+	/// @var {CE_EGuiPosition}
+	Position = ce_struct_get(_props, "Position", CE_EGuiPosition.Scroll);
+
+	/// @var {real}
+	AlignH = ce_struct_get(_props, "AlignH", CE_EGuiAlign.Start);
+
+	/// @var {real}
+	AlignV = ce_struct_get(_props, "AlignV", CE_EGuiAlign.Start);
+
+	/// @var {real}
+	PivotX = ce_struct_get(_props, "PivotX", 0);
+
+	/// @var {real}
+	PivotY = ce_struct_get(_props, "PivotY", 0);
+
+	/// @var {real}
+	X = ce_struct_get(_props, "X", 0);
+
+	/// @var {real}
+	/// @readonly
+	RealX = 0;
+
+	/// @var {real}
+	Y = ce_struct_get(_props, "Y", 0);
+
+	/// @var {real}
+	/// @readonly
+	RealY = 0;
+
+	/// @var {real}
+	Width = ce_struct_get(_props, "Width", 1);
+
+	/// @var {real}
+	/// @readonly
+	RealWidth = 0;
+
+	/// @var {real}
+	Height = ce_struct_get(_props, "Height", 1);
+
+	/// @var {real}
+	/// @readonly
+	RealHeight = 0;
+
+	/// @var {bool}
+	Grow = ce_struct_get(_props, "Grow", false);
+
+	////////////////////////////////////////////////////////////////////////////
+	// Margin
+
+	/// @var {real}
+	MarginLeft = ce_struct_get(_props, "MarginLeft", 0);
+
+	/// @var {real}
+	MarginTop = ce_struct_get(_props, "MarginTop", 0);
+
+	/// @var {real}
+	MarginRight = ce_struct_get(_props, "MarginRight", 0);
+
+	/// @var {real}
+	MarginBottom = ce_struct_get(_props, "MarginBottom", 0);
+
+	////////////////////////////////////////////////////////////////////////////
+	// Padding
+
+	/// @var {real}
+	PaddingLeft = ce_struct_get(_props, "PaddingLeft", 0);
+
+	/// @var {real}
+	PaddingTop = ce_struct_get(_props, "PaddingTop", 0);
+
+	/// @var {real}
+	PaddingRight = ce_struct_get(_props, "PaddingRight", 0);
+
+	/// @var {real}
+	PaddingBottom = ce_struct_get(_props, "PaddingBottom", 0);
+
+	////////////////////////////////////////////////////////////////////////////
+	// Background props
+
+	/// @var {uint}
 	BackgroundColor = ce_struct_get(_props, "BackgroundColor", c_black);
+
+	/// @var {real}
 	BackgroundAlpha = ce_struct_get(_props, "BackgroundAlpha", 0);
+
+	/// @var {sprite/undefined}
 	BackgroundSprite = ce_struct_get(_props, "BackgroundSprite", undefined);
+
+	/// @var {uint}
 	BackgroundIndex = ce_struct_get(_props, "BackgroundIndex", 0);
+
+	/// @var {CE_EGuiBackgroundStyle}
 	BackgroundStyle = ce_struct_get(_props, "BackgroundStyle", CE_EGuiBackgroundStyle.Stretch);
+
+	/// @var {uint}
 	BackgroundSpriteBlend = ce_struct_get(_props, "BackgroundSpriteBlend", c_white);
+
+	/// @var {real}
 	BackgroundSpriteAlpha = ce_struct_get(_props, "BackgroundSpriteAlpha", 1);
-	BackgroundTile = ce_struct_get(_props, "BackgroundTile", false); // Applies only to nine slice backgrounds.
-	BackgroundAlignHor = ce_struct_get(_props, "BackgroundAlignHor", 0);
-	BackgroundAlignVer = ce_struct_get(_props, "BackgroundAlignVer", 0);
+
+	/// @var {bool} Applies only to nine-slice backgrounds.
+	BackgroundTile = ce_struct_get(_props, "BackgroundTile", false);
+
+	/// @var {real}
+	BackgroundAlignH = ce_struct_get(_props, "BackgroundAlignH", 0);
+
+	/// @var {real}
+	BackgroundAlignV = ce_struct_get(_props, "BackgroundAlignV", 0);
+
+	/// @var {real/undefined}
 	BackgroundWidth = ce_struct_get(_props, "BackgroundWidth", undefined);
+
+	/// @var {real/undefined}
 	BackgroundHeight = ce_struct_get(_props, "BackgroundHeight", undefined);
+
+	/// @var {real}
 	BackgroundScaleX = ce_struct_get(_props, "BackgroundScaleX", 1);
+
+	/// @var {real}
 	BackgroundScaleY = ce_struct_get(_props, "BackgroundScaleY", 1);
+
+	/// @var {real}
 	BackgroundX = ce_struct_get(_props, "BackgroundX", 0);
+
+	/// @var {real}
 	BackgroundY = ce_struct_get(_props, "BackgroundY", 0);
+
+	/// @var {real}
 	BackgroundRot = ce_struct_get(_props, "BackgroundRot", 0);
+
+	////////////////////////////////////////////////////////////////////////////
+	// Text props
+
+	/// @var {font/undefined}
+	Font = ce_struct_get(_props, "Font", undefined);
+
+	/// @var {uint}
+	Color = ce_struct_get(_props, "Color", c_white);
+
+	/// @var {real}
+	Alpha = ce_struct_get(_props, "Color", 1);
+
+	/// @var {string}
+	Text = ce_struct_get(_props, "Text", "");
+
+	/// @var {string}
+	/// @readonly
+	RealText = "";
+
+	/// @var {bool}
+	TextFormat = ce_struct_get(_props, "TextFormat", false);
+
+	/// @var {real}
+	TextAlignH = ce_struct_get(_props, "TextAlignH", CE_EGuiAlign.Start);
+
+	/// @var {real}
+	TextAlignV = ce_struct_get(_props, "TextAlignV", CE_EGuiAlign.Start);
 
 	/// @func SetMargin(_left[, _top, _right, _bottom])
 	/// @desc Sets the margin of the widget.
@@ -74,7 +209,7 @@ function CE_GUIWidget(_props={})
 	/// @param {real} [_right] The right margin. Defaults to the value of param `left`.
 	/// @param {real} [_bottom] The bottom margin. Defaults to the value of param `left`.
 	/// @return {CE_GUIWidget} Returns `self`.
-	static SetMargin = function (_left)	{
+	static SetMargin = function (_left) {
 		gml_pragma("forceinline");
 		MarginLeft = _left;
 		if (argument_count == 1)
@@ -92,6 +227,71 @@ function CE_GUIWidget(_props={})
 		return self;
 	};
 
+	/// @func SetMarginH(_margin)
+	/// @param {real} _margin
+	/// @return {CE_GUIWidget} Returns `self`.
+	static SetMarginH = function (_margin) {
+		gml_pragma("forceinline");
+		MarginLeft = _margin;
+		MarginRight = _margin;
+		return self;
+	};
+
+	/// @func SetMarginV(_margin)
+	/// @param {real} _margin
+	/// @return {CE_GUIWidget} Returns `self`.
+	static SetMarginV = function (_margin) {
+		gml_pragma("forceinline");
+		MarginTop = _margin;
+		MarginBottom = _margin;
+		return self;
+	};
+
+	/// @func SetPadding(_left[, _top, _right, _bottom])
+	/// @desc Sets the padding of the widget.
+	/// @param {real} _left The left padding.
+	/// @param {real} [_top] The top padding. Defaults to the value of param `left`.
+	/// @param {real} [_right] The right padding. Defaults to the value of param `left`.
+	/// @param {real} [_bottom] The bottom padding. Defaults to the value of param `left`.
+	/// @return {CE_GUIWidget} Returns `self`.
+	static SetPadding = function (_left) {
+		gml_pragma("forceinline");
+		PaddingLeft = _left;
+		if (argument_count == 1)
+		{
+			PaddingTop = _left;
+			PaddingRight = _left;
+			PaddingBottom = _left;
+		}
+		else
+		{
+			PaddingTop = argument[1];
+			PaddingRight = argument[2];
+			PaddingBottom = argument[3];
+		}
+		return self;
+	};
+
+	/// @func SetPaddingH(_padding)
+	/// @param {real} _padding
+	/// @return {CE_GUIWidget} Returns `self`.
+	static SetMarginH = function (_padding) {
+		gml_pragma("forceinline");
+		PaddingLeft = _padding;
+		PaddingRight = _padding;
+		return self;
+	};
+
+	/// @func SetPaddingV(_padding)
+	/// @param {real} _padding
+	/// @return {CE_GUIWidget} Returns `self`.
+	static SetPaddingV = function (_padding) {
+		gml_pragma("forceinline");
+		PaddingTop = _padding;
+		PaddingBottom = _padding;
+		return self;
+	};
+
 	/// @func AddEventListener(_eventType, _listener)
 	/// @desc TODO Write script description.
 	/// @param {CE_EGuiEvent} _eventType The event type.
@@ -100,7 +300,7 @@ function CE_GUIWidget(_props={})
 	/// @return {CE_GUIWidget} Returns `self`.
 	static AddEventListener = function (_eventType, _listener) {
 		var _eventMap = Events;
-		if (_eventMap == noone)
+		if (_eventMap == undefined)
 		{
 			_eventMap = ds_map_create();
 			Events = _eventMap;
@@ -126,10 +326,7 @@ function CE_GUIWidget(_props={})
 	/// @desc TODO Write script desription.
 	/// @param {real} _event The id of the event.
 	static TriggerEvent = function (_event) {
-		if (_event.Target == noone)
-		{
-			_event.Target = self;
-		}
+		_event.Target ??= self;
 
 		var _eventMap = Events;
 		if (!ds_exists(_eventMap, ds_type_map))
@@ -152,7 +349,7 @@ function CE_GUIWidget(_props={})
 			_listeners[| i](_event);
 		}
 
-		if (_event.Propagate && Parent != noone)
+		if (_event.Propagate && Parent != undefined)
 		{
 			Parent.TriggerEvent(_event);
 		}
@@ -165,15 +362,15 @@ function CE_GUIWidget(_props={})
 	/// widget's position).
 	/// @param {real} _mouseY The y position of the mouse cursor (relative to the
 	/// widget's position).
-	/// @return {real} The id of the hovered widget or `noone`.
+	/// @return {CE_GUIWidget/undefined} The hovered widget or `undefined`.
 	static FindHoveredWidget = function (_mouseX, _mouseY) {
 		if (!Visible)
 		{
-			return noone;
+			return undefined;
 		}
 
-		var _x = _xReal;
-		var _y = _yReal;
+		var _x = RealX;
+		var _y = RealY;
 		var _width = Width;
 		var _height = Height;
 
@@ -182,7 +379,7 @@ function CE_GUIWidget(_props={})
 
 		if (!ce_point_in_rect(_mouseX, _mouseY, _x, _y, _width, _height))
 		{
-			return noone;
+			return undefined;
 		}
 
 		Redraw = true;
@@ -196,7 +393,7 @@ function CE_GUIWidget(_props={})
 		for (var i = ds_list_size(_widgets) - 1; i >= 0; --i)
 		{
 			var _hovered = _widgets[| i].FindHoveredWidget(_mouseX - _x, _mouseY - _y);
-			if (_hovered != noone)
+			if (_hovered != undefined)
 			{
 				return _hovered;
 			}
@@ -238,47 +435,44 @@ function CE_GUIWidget(_props={})
 			return;
 		}
 
-		var _gui = Gui;
-		var _x = _xReal;
-		var _y = _yReal;
+		var _root = Root;
+		var _x = RealX;
+		var _y = RealY;
 		var _width = Width;
 		var _height = Height;
 
-		if (IsInstance(CE_GUIText))
+		var _text = Text;
+		if (TextFormat)
 		{
-			var _text = Text;
-			if (Format)
-			{
-				_text = ce_string_format(_text);
-			}
-			Gui.SetCurrentFont(Font);
-			var _widthNew = string_width(_text);
-			var _heightNew = string_height(_text);
-			if (_width != _widthNew
-				|| _height != _heightNew)
-			{
-				_width = _widthNew;
-				_height = _heightNew;
-				Width = _width;
-				Height = _height;
-				_gui.FixPositioning = true;
-			}
-			_textReal = _text;
+			_text = ce_string_format(_text);
 		}
+		Root.SetCurrentFont(Font);
+		var _widthNew = string_width(_text);
+		var _heightNew = string_height(_text);
+		if (_width < _widthNew
+			|| _height < _heightNew)
+		{
+			_width = _widthNew;
+			_height = _heightNew;
+			Width = _width;
+			Height = _height;
+			_root.FixPositioning = true;
+		}
+		RealText = _text;
 
 		MouseX = _mouseX;
 		MouseY = _mouseY;
 
 		if (ce_gui_mouse_in_rect(_x, _y, _width, _height))
 		{
-			if (_gui != noone)
+			if (_root != undefined)
 			{
-				_gui.WidgetHovered = self;
+				_root.WidgetHovered = self;
 				var _eventMap = Events;
-				if (ds_exists(_eventMap, ds_type_map)
+				if (_eventMap != undefined
 					&& ds_map_exists(_eventMap, CE_EGuiEvent.Drag))
 				{
-					_gui.WidgetDraggable = self;
+					_root.WidgetDraggable = self;
 				}
 			}
 			Redraw = true;
@@ -404,8 +598,8 @@ function CE_GUIWidget(_props={})
 			}
 			#endregion Position style
 
-			_w._xReal = _wXReal;
-			_w._yReal = _wYReal;
+			_w.RealX = _wXReal;
+			_w.RealY = _wYReal;
 
 			_w.UpdatePosition(_mouseX + _x - _wXReal, _mouseY + _y - _wYReal);
 		}
@@ -422,9 +616,9 @@ function CE_GUIWidget(_props={})
 		{
 			Width = _contentW;
 			Height = _contentH;
-			if (_gui != noone)
+			if (_root != undefined)
 			{
-				_gui.FixPositioning = true;
+				_root.FixPositioning = true;
 			}
 		}
 
@@ -457,8 +651,8 @@ function CE_GUIWidget(_props={})
 			var _backgroundHeight = BackgroundHeight;
 			var _backgroundSpriteBlend = BackgroundSpriteBlend;
 			var _backgroundSpriteAlpha = BackgroundSpriteAlpha;
-			var _backgroundAlignHor = BackgroundAlignHor;
-			var _backgroundAlignVer = BackgroundAlignVer;
+			var _backgroundAlignHor = BackgroundAlignH;
+			var _backgroundAlignVer = BackgroundAlignV;
 
 			switch (BackgroundStyle)
 			{
@@ -526,10 +720,26 @@ function CE_GUIWidget(_props={})
 		#endregion Background sprite
 	};
 
+	/// @func DrawText(_x, _y, _string[, _color[, _alpha[, _font]]])
+	/// @desc Draws text at given position.
+	/// @param {real} _x The x position to draw the text at.
+	/// @param {real} _y The y position to draw the text at.
+	/// @param {string} _string The text to draw.
+	/// @param {real} [_color] The color of the text.
+	/// @param {real} [_alpha] The alpha of the text.
+	/// @param {font/undefined} [_font] The font resource to use.
+	/// @return {CE_GUIWidget} Returns `self`.
+	static DrawText = function (_x, _y, _string, _color=Color, _alpha=Alpha, _font=Font) {
+		Root.SetCurrentFont(_font);
+		draw_text_color(_x, _y, _string, _color, _color, _color, _color, _alpha);
+		return self;
+	};
+
 	/// @func OnDraw()
 	/// @desc Implements rendering of the widget.
 	static OnDraw = function () {
-		DrawBackground(_xReal, _yReal, Width, Height);
+		DrawBackground(RealX, RealY, Width, Height);
+		DrawText(RealX, RealY, Text);
 	};
 
 	/// @func OnDrawProxy()
@@ -554,7 +764,8 @@ function CE_GUIWidget(_props={})
 	static OnCleanUp = function () {
 		method(self, Super_Class.Destroy)();
 
-		if (ds_exists(Events, ds_type_map))
+		if (Events != undefined
+			&& ds_exists(Events, ds_type_map))
 		{
 			ds_map_destroy(Events);
 		}
@@ -564,7 +775,7 @@ function CE_GUIWidget(_props={})
 	/// @desc Enqueues widget for destruction at the end of the frame.
 	static Destroy = function () {
 		Visible = false;
-		ds_list_add(Gui.DestroyList, self);
+		ds_list_add(Root.DestroyList, self);
 	};
 }
 
@@ -576,7 +787,7 @@ function ce_gui_widget_exists(_widget)
 	gml_pragma("forceinline");
 	try
 	{
-		if (variable_struct_exists(_widget, "Gui"))
+		if (variable_struct_exists(_widget, "Root"))
 		{
 			return true;
 		}

@@ -39,8 +39,8 @@ function CE_GUIHSlider(_min, _max, _value, _integers=false, _props={})
 	};
 
 	static OnDraw = function () {
-		var _x = _xReal;
-		var _y = _yReal;
+		var _x = RealX;
+		var _y = RealY;
 		var _width = Width;
 		var _height = Height;
 		var _min = Min;
