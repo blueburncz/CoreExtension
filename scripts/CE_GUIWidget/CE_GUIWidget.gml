@@ -1,7 +1,6 @@
-/// @func CE_GUIWidget([_type])
+/// @func CE_GUIWidget()
 /// @desc Base class for GUI widgets.
-/// @param {CE_EGuiWidget} [_type]
-function CE_GUIWidget(_type=CE_EGuiWidget.Widget)
+function CE_GUIWidget()
 	: CE_Class() constructor
 {
 	CE_CLASS_GENERATED_BODY;
@@ -10,7 +9,6 @@ function CE_GUIWidget(_type=CE_EGuiWidget.Widget)
 		Destroy: Destroy,
 	};
 
-	Type = _type;
 	Id = undefined;
 	X = 0;
 	Y = 0;
@@ -244,7 +242,7 @@ function CE_GUIWidget(_type=CE_EGuiWidget.Widget)
 		var _width = Width;
 		var _height = Height;
 
-		if (Type == CE_EGuiWidget.Text)
+		if (IsInstance(CE_GUIText))
 		{
 			var _text = Text;
 			if (Format)

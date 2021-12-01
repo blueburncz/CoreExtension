@@ -7,7 +7,7 @@
 /// @param {real} [width] The width. Defaults to 256.
 /// @param {real} [height] The height. Defaults to 32.
 function CE_GUIInput(_value, _x=0, _y=0, _width=256, _height=64)
-	: CE_GUIWidget(CE_EGuiWidget.Input) constructor
+	: CE_GUIWidget() constructor
 {
 	CE_CLASS_GENERATED_BODY;
 

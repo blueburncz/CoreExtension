@@ -8,7 +8,7 @@
 /// @param {real} [_x] The x position. Defaults to 0.
 /// @param {real} [_y] The y position. Defaults to 0.
 function CE_GUIHSlider(_min, _max, _value, _integers=false, _x=0, _y=0)
-	: CE_GUIWidget(CE_EGuiWidget.HSlider) constructor
+	: CE_GUIWidget() constructor
 {
 	CE_CLASS_GENERATED_BODY;
 

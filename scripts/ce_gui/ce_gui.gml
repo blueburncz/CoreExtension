@@ -81,25 +81,6 @@ enum CE_EGuiEvent
 	SIZE
 };
 
-/// @enum GUI widget types.
-enum CE_EGuiWidget
-{
-	/// @member A widget that contains another widgets.
-	Container,
-	/// @member A horizontal slider.
-	HSlider,
-	/// @member An input.
-	Input,
-	/// @member A widget that is the root of the widget tree.
-	Root,
-	/// @member A text widget.
-	Text,
-	/// @member A blank widget.
-	Widget,
-	/// @member Total number of members of this enum.
-	SIZE
-};
-
 /// @func ce_gui_mouse_in_rect(_x, _y, _width, _height)
 /// @param {real} _x The x position of the rectangle's top left corner.
 /// @param {real} _y The y position of the rectangle's top left corner.

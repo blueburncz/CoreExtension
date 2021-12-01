@@ -5,7 +5,7 @@ global.__ceGuiCurrent = noone;
 /// @extends CE_GUIContainer
 /// @desc Root GUI widget.
 function CE_GUIRoot()
-	: CE_GUIContainer(CE_EGuiWidget.Root) constructor
+	: CE_GUIContainer() constructor
 {
 	CE_CLASS_GENERATED_BODY;
 
@@ -49,7 +49,7 @@ function CE_GUIRoot()
 			return true;
 		}
 		if (WidgetFocused != noone
-			&& WidgetFocused.Type == CE_EGuiWidget.Input)
+			&& WidgetFocused.IsInstance(CE_GUIInput))
 		{
 			return true;
 		}

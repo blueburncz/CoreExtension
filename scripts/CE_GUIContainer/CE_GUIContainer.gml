@@ -1,9 +1,8 @@
-/// @func CE_GUIContainer([_type])
+/// @func CE_GUIContainer()
 /// @extends CE_GUIWidget
 /// @desc A container of widgets.
-/// @param {CE_EGuiWidget} [_type] The type of the container.
-function CE_GUIContainer(_type=CE_EGuiWidget.Container)
-	: CE_GUIWidget(_type) constructor
+function CE_GUIContainer()
+	: CE_GUIWidget() constructor
 {
 	CE_CLASS_GENERATED_BODY;
 
@@ -70,7 +69,7 @@ function CE_GUIContainer(_type=CE_EGuiWidget.Container)
 	static Add = function (_widget) {
 		ce_assert(_widget.Gui == noone, "Widget is already added to a GUI.");
 		ce_assert(_widget.Parent == noone, "Widget already has a parent.");
-		if (Type == CE_EGuiWidget.Root)
+		if (IsInstance(CE_GUIRoot))
 		{
 			_widget.Gui = self;
 		}

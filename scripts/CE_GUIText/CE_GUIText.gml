@@ -9,7 +9,7 @@
 /// @param {bool} [_format] True to use `ce_string_format` when drawing
 /// the text. Defaults to `false`.
 function CE_GUIText(_text, _x=0, _y=0, _font=noone, _format=false)
-	: CE_GUIWidget(CE_EGuiWidget.Text) constructor
+	: CE_GUIWidget() constructor
 {
 	CE_CLASS_GENERATED_BODY;
 
