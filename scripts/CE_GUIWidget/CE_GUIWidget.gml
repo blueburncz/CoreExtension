@@ -126,7 +126,10 @@ function CE_GUIWidget(_type=CE_EGuiWidget.Widget)
 	/// @desc TODO Write script desription.
 	/// @param {real} _event The id of the event.
 	static TriggerEvent = function (_event) {
-		_event.Target = self;
+		if (_event.Target == noone)
+		{
+			_event.Target = self;
+		}
 
 		var _eventMap = Events;
 		if (!ds_exists(_eventMap, ds_type_map))
@@ -147,6 +150,11 @@ function CE_GUIWidget(_type=CE_EGuiWidget.Widget)
 		for (var i = 0; i < _size; ++i)
 		{
 			_listeners[| i](_event);
+		}
+
+		if (_event.Propagate && Parent != noone)
+		{
+			Parent.TriggerEvent(_event);
 		}
 	};
 

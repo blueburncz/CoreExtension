@@ -8,4 +8,6 @@ function CE_GUIEvent(_type)
 	Type = _type;
 
 	Target = noone;
+
+	Propagate = true;
 }

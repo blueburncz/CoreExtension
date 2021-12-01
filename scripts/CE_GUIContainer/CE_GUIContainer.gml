@@ -113,6 +113,7 @@ function CE_GUIContainer(_type=CE_EGuiWidget.Container)
 				ScrollX = _scrollX;
 				_redraw = true;
 			}
+			_event.Propagate = false;
 		}
 
 		if (ScrollYEnable)
@@ -125,6 +126,7 @@ function CE_GUIContainer(_type=CE_EGuiWidget.Container)
 				ScrollY = _scrollY;
 				_redraw = true;
 			}
+			_event.Propagate = false;
 		}
 
 		if (_redraw)
