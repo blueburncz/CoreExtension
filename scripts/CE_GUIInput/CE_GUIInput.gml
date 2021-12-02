@@ -1,20 +1,28 @@
-/// @func CE_GUIInput(_value[, _props])
+/// @func CE_GUIInput(_value[, _decimalPlaces[, _props]])
 /// @extends CE_GUIWidget
 /// @desc An input widget.
-/// @param {any} value The initial value.
+/// @param {any} _value The initial value.
+/// @param {uint} [_decimalPlaces] Number of decimal places. Defaults to 2.
 /// @param {struct} [_props]
-function CE_GUIInput(_value, _props={})
+function CE_GUIInput(_value, _decimalPlaces=2, _props={})
 	: CE_GUIWidget(_props) constructor
 {
 	CE_CLASS_GENERATED_BODY;
 
 	/// @var {real/string}
+	/// @readonly
 	Value = _value;
+
+	/// @var {uint}
+	/// @readonly
+	DecimalPlaces = _decimalPlaces;
 
 	/// @var {uint/undefined} Limit number of characters.
 	Length = undefined;
 
-	_keyboardString = "";
+	/// @var {string} Backup of the keyboard string.
+	/// @private
+	KeyboardString = "";
 
 	Width = ce_struct_get(_props, "Width", 256);
 	BackgroundColor = ce_struct_get(_props, "BackgroundColor", c_white);
@@ -27,13 +35,16 @@ function CE_GUIInput(_value, _props={})
 
 	AddEventListener(CE_GUIFocusEvent, method(self, OnFocus));
 	AddEventListener(CE_GUIBlurEvent, method(self, OnBlur));
+	AddEventListener(CE_GUIKeyDownEvent, method(self, OnKeyDown));
 	AddEventListener(CE_GUIKeyPressEvent, method(self, OnKeyPress));
 
 	static OnFocus = function (_event) {
 		var _value = Value;
 
-		_keyboardString = keyboard_string;
-		keyboard_string = string(_value);
+		KeyboardString = keyboard_string;
+		keyboard_string = is_real(_value)
+			? ce_real_to_string(_value, DecimalPlaces)
+			: _value;
 
 		if (os_type == os_android)
 		{
@@ -50,9 +61,10 @@ function CE_GUIInput(_value, _props={})
 
 		if (is_real(_valueOld))
 		{
-			if (keyboard_string != "")
+			var _real = ce_parse_real(keyboard_string);
+			if (!is_nan(_real))
 			{
-				Value = real(keyboard_string);
+				Value = _real;
 			}
 		}
 		else
@@ -60,8 +72,8 @@ function CE_GUIInput(_value, _props={})
 			Value = keyboard_string;
 		}
 
-		keyboard_string = _keyboardString;
-		_keyboardString = "";
+		keyboard_string = KeyboardString;
+		KeyboardString = "";
 
 		if (os_type == os_android)
 		{
@@ -78,21 +90,18 @@ function CE_GUIInput(_value, _props={})
 		}
 	};
 
+	static OnKeyDown = function (_event) {
+		RequestRedraw();
+	};
+
 	static OnKeyPress = function (_event) {
 		var _key = _event.Key;
-
 		if (_key == vk_enter
 			|| _key == vk_return)
 		{
 			Root.SetFocusedWidget(undefined);
 		}
-
-		var _current = self;
-		while (_current != undefined)
-		{
-			_current.Redraw = true;
-			_current = _current.Parent;
-		}
+		RequestRedraw();
 	};
 
 	static OnDraw = function () {
@@ -141,7 +150,9 @@ function CE_GUIInput(_value, _props={})
 		}
 		else
 		{
-			_text = string(_value);
+			_text = is_real(_value)
+				? ce_real_to_string(_value, DecimalPlaces)
+				: _value;
 			_text = string_copy(_text, 1, _charCount);
 		}
 

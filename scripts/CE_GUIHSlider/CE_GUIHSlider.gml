@@ -11,10 +11,24 @@ function CE_GUIHSlider(_min, _max, _value, _integers=false, _props={})
 {
 	CE_CLASS_GENERATED_BODY;
 
+	/// @var {real}
+	/// @readonly
 	Min = _min;
+
+	/// @var {real}
+	/// @readonly
 	Max = _max;
+
+	/// @var {real}
+	/// @readonly
 	Value = _value;
+
+	/// @var {bool}
+	/// @readonly
 	Integers = _integers;
+
+	Width = ce_struct_get(_props, "Width", 256);
+	Height = ce_struct_get(_props, "Height", 24);
 
 	var _onDrag = method(self, OnDrag);
 	AddEventListener(CE_GUIClickEvent, _onDrag);
@@ -22,6 +36,8 @@ function CE_GUIHSlider(_min, _max, _value, _integers=false, _props={})
 	AddEventListener(CE_GUIDragStartEvent, _onDrag);
 
 	static OnDrag = function (_event) {
+		_event.Propagate = false;
+
 		var _width = Width;
 		var _min = Min;
 		var _max = Max;
@@ -49,6 +65,6 @@ function CE_GUIHSlider(_min, _max, _value, _integers=false, _props={})
 		var _mul = (_val - _min) / (_max - _min);
 
 		ce_draw_rectangle(_x, _y, _width, _height, $101010);
-		ce_draw_rectangle(_x, _y, _width * _mul, _height, $70FF00);
+		ce_draw_rectangle(_x, _y, _width * _mul, _height, $FF8000);
 	};
 }

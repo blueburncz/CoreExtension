@@ -11,25 +11,54 @@ function CE_GUIContainer(_props={})
 		OnCleanUp: OnCleanUp,
 	};
 
+	/// @var {ds_list<CE_GUIWidget>}
+	/// @readonly
 	Widgets = ds_list_create();
 
+	/// @var {bool}
 	Overflow = ce_struct_get(_props, "Overflow", false);
+
+	/// @var {surface}
+	/// @readonly
 	Surface = noone;
+
+	/// @var {CE_EGUIContentStyle}
 	ContentStyle = ce_struct_get(_props, "ContentStyle", CE_EGUIContentStyle.Default);
+
+	/// @var {uint}
 	GridColumns = ce_struct_get(_props, "GridColumns", 1);
+
+	/// @var {uint}
 	GridRows = ce_struct_get(_props, "GridRows", 1);
+
+	/// @var {real}
+	/// @readonly
 	ContentW = 0;
+
+	/// @var {real}
+	/// @readonly
 	ContentH = 0;
+
+	/// @var {real}
+	/// @readonly
 	ScrollX = 0;
+
+	/// @var {real}
+	/// @readonly
 	ScrollY = 0;
+
+	/// @var {bool}
 	ScrollXEnable = ce_struct_get(_props, "ScrollXEnable", false);
+
+	/// @var {bool}
 	ScrollYEnable = ce_struct_get(_props, "ScrollYEnable", false);
 
+	AddEventListener(CE_GUIChangeEvent, method(self, OnChange));
 	AddEventListener(CE_GUIDragEvent, method(self, OnDrag));
 
 	/// @func AddWidget(_widget)
 	/// @desc Adds the widget to the container.
-	/// @param {real} _widget The id of the widget.
+	/// @param {CE_GUIWidget} _widget The widget to add.
 	/// @return {CE_GUIContainer} Return `self`.
 	static AddWidget = function (_widget) {
 		ce_assert(_widget.Root == undefined, "Widget is already added to a GUI.");
@@ -54,8 +83,12 @@ function CE_GUIContainer(_props={})
 		return self;
 	};
 
+	static OnChange = function (_event) {
+		Redraw = true;
+	};
+
 	/// @func OnDrag(_event)
-	/// @param {real} _event The id of the event.
+	/// @param {CE_GUIDragEvent} _event The event.
 	static OnDrag = function (_event) {
 		var _redraw = false;
 

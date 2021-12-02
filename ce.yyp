@@ -34,6 +34,7 @@
     {"id":{"name":"OTest","path":"objects/OTest/OTest.yy",},"order":1,},
     {"id":{"name":"CE_ShNavGrid","path":"shaders/CE_ShNavGrid/CE_ShNavGrid.yy",},"order":2,},
     {"id":{"name":"ce_object_utils","path":"scripts/ce_object_utils/ce_object_utils.yy",},"order":0,},
+    {"id":{"name":"CE_GUIKeyDownEvent","path":"scripts/CE_GUIKeyDownEvent/CE_GUIKeyDownEvent.yy",},"order":10,},
     {"id":{"name":"CE_GUIDragStartEvent","path":"scripts/CE_GUIDragStartEvent/CE_GUIDragStartEvent.yy",},"order":6,},
     {"id":{"name":"CE_Quaternion","path":"scripts/CE_Quaternion/CE_Quaternion.yy",},"order":1,},
     {"id":{"name":"ce_gui","path":"scripts/ce_gui/ce_gui.yy",},"order":1,},

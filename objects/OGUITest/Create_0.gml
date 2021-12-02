@@ -38,17 +38,5 @@ _container.AddWidget(ce_gui_create_text("String"));
 _container.AddWidget(new CE_GUIInput(""));
 _container.AddWidget(ce_gui_create_text("Real"));
 _container.AddWidget(new CE_GUIInput(0));
-
-repeat (11)
-{
-	var _c = new CE_GUIContainer();
-	_c.Width = 300;
-	_c.Height = 100;
-	_c.MarginBottom = 8;
-	_c.BackgroundColor = make_color_hsv(random(255), 255, 255);
-	_c.BackgroundAlpha = 1.0;
-	_c.AddEventListener(CE_GUIClickEvent, method(_c, function (_event) {
-		BackgroundColor = make_color_hsv(255 - color_get_hue(BackgroundColor), 255, 255);
-	}));
-	_container.AddWidget(_c);
-}
+_container.AddWidget(ce_gui_create_text("HSlider"));
+_container.AddWidget(new CE_GUIHSlider(0, 1, 0.5));

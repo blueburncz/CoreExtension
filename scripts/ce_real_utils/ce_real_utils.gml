@@ -116,32 +116,28 @@ function ce_real_is_odd(_real)
 	return (_real & $1 == 1);
 }
 
-/// @func ce_real_to_string(_real[, _decPlaces])
+/// @func ce_real_to_string(_real[, _decimalPlaces])
 /// @desc Converts a real value to a string without generating trailing zeros
 /// after a decimal point.
 /// @param {real} _real The real value to convert to a string.
-/// @param {real} [_decPlaces] Maximum decimal places. Defaults to 16.
+/// @param {real} [_decimalPlaces] Maximum decimal places. Defaults to 16.
 /// @return {string} The resulting string.
 /// @example
 /// ```gml
 /// ce_real_to_string(16); // => 16
 /// ce_real_to_string(16.870); // => 16.87
 /// ```
-function ce_real_to_string(_real)
+function ce_real_to_string(_real, _decimalPlaces=16)
 {
-	var _decPlaces = (argument_count > 1) ? argument[1] : 16;
-	var _string = string_format(_real, -1, _decPlaces);
+	var _string = string_format(_real, -1, _decimalPlaces);
 	var _stringLength = string_length(_string);
 
-	do
+	while (_decimalPlaces >= 0
+		&& string_byte_at(_string, _stringLength) == 48)
 	{
-		_string = string_format(_real, -1, --_decPlaces);
-		if (string_byte_at(_string, --_stringLength) != 48)
-		{
-			break;
-		}
+		_string = string_format(_real, -1, --_decimalPlaces);
+		--_stringLength;
 	}
-	until (_decPlaces == 0);
 
 	return _string;
 }

@@ -293,10 +293,10 @@ function CE_GUIWidget(_props={})
 	};
 
 	/// @func AddEventListener(_event, _listener)
-	/// @desc TODO: Write script description.
+	/// @desc Adds an event listener to the widget.
 	/// @param {typeof CE_GUIEvent} _event The event type.
-	/// @param {real} _listener An id of a script that will be executed when
-	/// the event occurs.
+	/// @param {function} _listener An function that will be executed when
+	/// the event is triggered.
 	/// @return {CE_GUIWidget} Returns `self`.
 	static AddEventListener = function (_event, _listener) {
 		var _eventMap = Events;
@@ -338,36 +338,33 @@ function CE_GUIWidget(_props={})
 	};
 
 	/// @func TriggerEvent(_event)
-	/// @desc TODO: Write script desription.
-	/// @param {real} _event The id of the event.
+	/// @desc Triggers an event in the widget.
+	/// @param {CE_GUIEvent} _event The event to trigger.
+	/// @return {CE_GUIWidget} Returns `self`.
 	static TriggerEvent = function (_event) {
 		_event.Target ??= self;
 
 		var _eventMap = Events;
-		if (_eventMap == undefined)
+		if (_eventMap != undefined)
 		{
-			return;
-		}
-
-		var _eventType = CE_ClassGetName(_event);
-
-		if (!ds_map_exists(_eventMap, _eventType))
-		{
-			return;
-		}
-
-		var _listeners = _eventMap[? _eventType];
-		var _size = ds_list_size(_listeners);
-
-		for (var i = 0; i < _size; ++i)
-		{
-			_listeners[| i](_event);
+			var _eventType = CE_ClassGetName(_event);
+			if (ds_map_exists(_eventMap, _eventType))
+			{
+				var _listeners = _eventMap[? _eventType];
+				var _size = ds_list_size(_listeners);
+				for (var i = 0; i < _size; ++i)
+				{
+					_listeners[| i](_event);
+				}
+			}
 		}
 
 		if (_event.Propagate && Parent != undefined)
 		{
 			Parent.TriggerEvent(_event);
 		}
+
+		return self;
 	};
 
 	/// @func FindHoveredWidget(_mouseX, _mouseY)
@@ -418,7 +415,8 @@ function CE_GUIWidget(_props={})
 	};
 
 	/// @func IsMouseOver()
-	/// @return {bool} Returns `true` if the mouse is over the widget.
+	/// @desc Checks if the mouse cursor is over the widget.
+	/// @return {bool} Returns `true` if the mouse cursor is over the widget.
 	static IsMouseOver = function () {
 		gml_pragma("forceinline");
 		return (global.__ceGuiCurrent.WidgetHovered == self);
@@ -441,6 +439,7 @@ function CE_GUIWidget(_props={})
 	};
 
 	/// @func UpdatePosition(_mouseX, _mouseY)
+	/// @desc Updates the widget's position.
 	/// @param {real} _mouseX The mouse x position relative to the widget.
 	/// @param {real} _mouseY The mouse y position relative to the widget.
 	/// @return {CE_GUIWidget} Returns `self`.
@@ -641,6 +640,7 @@ function CE_GUIWidget(_props={})
 	};
 
 	/// @func DrawBackground(_x, _y, _width, _height)
+	/// @desc Draws the background of the widget.
 	/// @param {real} _x The x position of the background.
 	/// @param {real} _y The y position of the background.
 	/// @param {real} _width The width of the background.
@@ -736,7 +736,7 @@ function CE_GUIWidget(_props={})
 	};
 
 	/// @func DrawText(_x, _y, _string[, _color[, _alpha[, _font]]])
-	/// @desc Draws text at given position.
+	/// @desc Draws a text at given position.
 	/// @param {real} _x The x position to draw the text at.
 	/// @param {real} _y The y position to draw the text at.
 	/// @param {string} _string The text to draw.
@@ -763,7 +763,7 @@ function CE_GUIWidget(_props={})
 	};
 
 	/// @func Draw()
-	/// @desc Draws the widget, if it's visible.
+	/// @desc Draws the widget, if it is visible.
 	/// @return {CE_GUIWidget} Returns `self`.
 	static Draw = function () {
 		if (!Visible)
@@ -771,6 +771,20 @@ function CE_GUIWidget(_props={})
 			return;
 		}
 		OnDraw();
+		return self;
+	};
+
+	/// @func RequestRedraw()
+	/// @desc TODO
+	/// @return {CE_GUIWidget} Returns `self`.
+	static RequestRedraw = function () {
+		gml_pragma("forceinline");
+		var _current = self;
+		while (_current != undefined)
+		{
+			_current.Redraw = true;
+			_current = _current.Parent;
+		}
 		return self;
 	};
 
@@ -795,7 +809,7 @@ function CE_GUIWidget(_props={})
 
 /// @func ce_gui_widget_exists(_widget)
 /// @param {CE_GUIWidget} _widget The id of the widget.
-/// @return {bool} True if the widget exists.
+/// @return {bool} Returns `true` if the widget exists.
 function ce_gui_widget_exists(_widget)
 {
 	gml_pragma("forceinline");
