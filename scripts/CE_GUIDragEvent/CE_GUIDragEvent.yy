@@ -6,7 +6,7 @@
     "path": "folders/CE/GUI/Events.yy",
   },
   "resourceVersion": "1.0",
-  "name": "CE_GUIEvent",
+  "name": "CE_GUIDragEvent",
   "tags": [],
   "resourceType": "GMScript",
 }

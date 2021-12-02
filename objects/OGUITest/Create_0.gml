@@ -8,7 +8,7 @@ windowInit = true;
 windowSizePrev = [0, 0];
 
 var _container = new CE_GUIContainer();
-_container.ContentStyle = CE_EGuiContentStyle.Column;
+_container.ContentStyle = CE_EGUIContentStyle.Column;
 _container.X = 32;
 _container.Y = 32;
 _container.Width = 500;
@@ -28,7 +28,7 @@ repeat (20)
 	_c.MarginBottom = 8;
 	_c.BackgroundColor = make_color_hsv(random(255), 255, 255);
 	_c.BackgroundAlpha = 1.0;
-	_c.AddEventListener(CE_EGuiEvent.Click, method(_c, function (_event) {
+	_c.AddEventListener(CE_GUIClickEvent, method(_c, function (_event) {
 		BackgroundColor = make_color_hsv(255 - color_get_hue(BackgroundColor), 255, 255);
 	}));
 	_container.AddWidget(_c);
@@ -47,7 +47,7 @@ repeat (11)
 	_c.MarginBottom = 8;
 	_c.BackgroundColor = make_color_hsv(random(255), 255, 255);
 	_c.BackgroundAlpha = 1.0;
-	_c.AddEventListener(CE_EGuiEvent.Click, method(_c, function (_event) {
+	_c.AddEventListener(CE_GUIClickEvent, method(_c, function (_event) {
 		BackgroundColor = make_color_hsv(255 - color_get_hue(BackgroundColor), 255, 255);
 	}));
 	_container.AddWidget(_c);

@@ -44,14 +44,14 @@ function CE_GUIWidget(_props={})
 	////////////////////////////////////////////////////////////////////////////
 	// Position and size props
 
-	/// @var {CE_EGuiPosition}
-	Position = ce_struct_get(_props, "Position", CE_EGuiPosition.Scroll);
+	/// @var {CE_EGUIPosition}
+	Position = ce_struct_get(_props, "Position", CE_EGUIPosition.Scroll);
 
 	/// @var {real}
-	AlignH = ce_struct_get(_props, "AlignH", CE_EGuiAlign.Start);
+	AlignH = ce_struct_get(_props, "AlignH", CE_EGUIAlign.Start);
 
 	/// @var {real}
-	AlignV = ce_struct_get(_props, "AlignV", CE_EGuiAlign.Start);
+	AlignV = ce_struct_get(_props, "AlignV", CE_EGUIAlign.Start);
 
 	/// @var {real}
 	PivotX = ce_struct_get(_props, "PivotX", 0);
@@ -135,8 +135,8 @@ function CE_GUIWidget(_props={})
 	/// @var {uint}
 	BackgroundIndex = ce_struct_get(_props, "BackgroundIndex", 0);
 
-	/// @var {CE_EGuiBackgroundStyle}
-	BackgroundStyle = ce_struct_get(_props, "BackgroundStyle", CE_EGuiBackgroundStyle.Stretch);
+	/// @var {CE_EGUIBackgroundStyle}
+	BackgroundStyle = ce_struct_get(_props, "BackgroundStyle", CE_EGUIBackgroundStyle.Stretch);
 
 	/// @var {uint}
 	BackgroundSpriteBlend = ce_struct_get(_props, "BackgroundSpriteBlend", c_white);
@@ -197,10 +197,10 @@ function CE_GUIWidget(_props={})
 	TextFormat = ce_struct_get(_props, "TextFormat", false);
 
 	/// @var {real}
-	TextAlignH = ce_struct_get(_props, "TextAlignH", CE_EGuiAlign.Start);
+	TextAlignH = ce_struct_get(_props, "TextAlignH", CE_EGUIAlign.Start);
 
 	/// @var {real}
-	TextAlignV = ce_struct_get(_props, "TextAlignV", CE_EGuiAlign.Start);
+	TextAlignV = ce_struct_get(_props, "TextAlignV", CE_EGUIAlign.Start);
 
 	/// @func SetMargin(_left[, _top, _right, _bottom])
 	/// @desc Sets the margin of the widget.
@@ -292,19 +292,21 @@ function CE_GUIWidget(_props={})
 		return self;
 	};
 
-	/// @func AddEventListener(_eventType, _listener)
-	/// @desc TODO Write script description.
-	/// @param {CE_EGuiEvent} _eventType The event type.
+	/// @func AddEventListener(_event, _listener)
+	/// @desc TODO: Write script description.
+	/// @param {typeof CE_GUIEvent} _event The event type.
 	/// @param {real} _listener An id of a script that will be executed when
 	/// the event occurs.
 	/// @return {CE_GUIWidget} Returns `self`.
-	static AddEventListener = function (_eventType, _listener) {
+	static AddEventListener = function (_event, _listener) {
 		var _eventMap = Events;
 		if (_eventMap == undefined)
 		{
 			_eventMap = ds_map_create();
 			Events = _eventMap;
 		}
+
+		var _eventType = CE_ClassGetName(_event);
 
 		var _listeners;
 		if (!ds_map_exists(_eventMap, _eventType))
@@ -322,19 +324,32 @@ function CE_GUIWidget(_props={})
 		return self;
 	};
 
+	/// @func HasEventListener(_event)
+	/// @desc Checks if the widget has a listener for the event.
+	/// @param {typeof CE_GUIEvent} _event The event type.
+	/// @return {bool} Returns `true` if the widget has a listener for the event.
+	static HasEventListener = function (_event) {
+		gml_pragma("forceinline");
+		if (Events == undefined)
+		{
+			return false;
+		}
+		return ds_map_exists(Events, CE_ClassGetName(_event));
+	};
+
 	/// @func TriggerEvent(_event)
-	/// @desc TODO Write script desription.
+	/// @desc TODO: Write script desription.
 	/// @param {real} _event The id of the event.
 	static TriggerEvent = function (_event) {
 		_event.Target ??= self;
 
 		var _eventMap = Events;
-		if (!ds_exists(_eventMap, ds_type_map))
+		if (_eventMap == undefined)
 		{
 			return;
 		}
 
-		var _eventType = _event.Type;
+		var _eventType = CE_ClassGetName(_event);
 
 		if (!ds_map_exists(_eventMap, _eventType))
 		{
@@ -468,9 +483,9 @@ function CE_GUIWidget(_props={})
 			if (_root != undefined)
 			{
 				_root.WidgetHovered = self;
-				var _eventMap = Events;
-				if (_eventMap != undefined
-					&& ds_map_exists(_eventMap, CE_EGuiEvent.Drag))
+				if (HasEventListener(CE_GUIDragEvent)
+					|| HasEventListener(CE_GUIDragStartEvent)
+					|| HasEventListener(CE_GUIDragEndEvent))
 				{
 					_root.WidgetDraggable = self;
 				}
@@ -489,7 +504,7 @@ function CE_GUIWidget(_props={})
 		var _yScroll = _y - _scrollY;
 
 		var _contentStyle = variable_struct_exists(self, "ContentStyle")
-			? ContentStyle : CE_EGuiContentStyle.Default;
+			? ContentStyle : CE_EGUIContentStyle.Default;
 
 		var _contentW = 0;
 		var _contentH = 0;
@@ -504,7 +519,7 @@ function CE_GUIWidget(_props={})
 		var _stepX = 0;
 		var _stepY = 0;
 
-		if (_contentStyle == CE_EGuiContentStyle.Grid)
+		if (_contentStyle == CE_EGUIContentStyle.Grid)
 		{
 			_stepX += (_width - _paddingRight - _paddingLeft) / GridColumns;
 			_stepY += (_height - _paddingBottom - _paddingTop) / GridRows;
@@ -526,17 +541,17 @@ function CE_GUIWidget(_props={})
 			var _wYReal = 0;
 			var _position = variable_struct_exists(_w, "Position")
 				? _w.Position
-				: CE_EGuiPosition.Scroll;
+				: CE_EGUIPosition.Scroll;
 
 			#region Position style
 			switch (_position)
 			{
-			case CE_EGuiPosition.Scroll:
+			case CE_EGUIPosition.Scroll:
 				var _wWidth = _w.Width;
 				var _wHeight = _w.Height;
 				var __xReal, __yReal;
 
-				if (_contentStyle == CE_EGuiContentStyle.Grid)
+				if (_contentStyle == CE_EGUIContentStyle.Grid)
 				{
 					__xReal = _drawX + _w.X + (_stepX - _wWidth) * _w.AlignH;
 					__yReal = _drawY + _w.Y + (_stepY - _wHeight) * _w.AlignV;
@@ -557,18 +572,18 @@ function CE_GUIWidget(_props={})
 				#region Content style
 				switch (_contentStyle)
 				{
-				case CE_EGuiContentStyle.Column:
+				case CE_EGUIContentStyle.Column:
 					_drawY += _wHeight;
 					_contentW = max(__xReal + _wWidth, _contentW);
 					_contentH = max(__yReal + _wHeight, _contentH);
 					break;
 
-				case CE_EGuiContentStyle.Default:
+				case CE_EGUIContentStyle.Default:
 					_contentW = max(__xReal + _wWidth, _contentW);
 					_contentH = max(__yReal + _wHeight, _contentH);
 					break;
 
-				case CE_EGuiContentStyle.Grid:
+				case CE_EGUIContentStyle.Grid:
 					_drawX += _stepX;
 					if (_drawX >= _width - _paddingRight)
 					{
@@ -579,7 +594,7 @@ function CE_GUIWidget(_props={})
 					_contentH = max(_drawY + _stepY, _contentH);
 					break;
 
-				case CE_EGuiContentStyle.Row:
+				case CE_EGUIContentStyle.Row:
 					_drawX += _wWidth;
 					_contentW = max(__xReal + _wWidth, _contentW);
 					_contentH = max(__yReal + _wHeight, _contentH);
@@ -588,7 +603,7 @@ function CE_GUIWidget(_props={})
 				#endregion Content style
 				break;
 
-			case CE_EGuiPosition.Fixed:
+			case CE_EGUIPosition.Fixed:
 				_wXReal = _x + _w.X + (_width - _w.Width) * _w.AlignH;
 				_wYReal = _y + _w.Y + (_height - _w.Height) * _w.AlignV;
 				break;
@@ -656,7 +671,7 @@ function CE_GUIWidget(_props={})
 
 			switch (BackgroundStyle)
 			{
-			case CE_EGuiBackgroundStyle.Scale:
+			case CE_EGUIBackgroundStyle.Scale:
 				var _backgroundScaleX = BackgroundScaleX;
 				var _backgroundScaleY = BackgroundScaleY;
 
@@ -679,7 +694,7 @@ function CE_GUIWidget(_props={})
 					_backgroundSpriteAlpha);
 				break;
 
-			case CE_EGuiBackgroundStyle.Stretch:
+			case CE_EGUIBackgroundStyle.Stretch:
 				_backgroundWidth = is_undefined(_backgroundWidth) ? _width : _backgroundWidth;
 				_backgroundHeight = is_undefined(_backgroundHeight) ? _height : _backgroundHeight;
 
@@ -697,7 +712,7 @@ function CE_GUIWidget(_props={})
 					_backgroundSpriteAlpha);
 				break;
 
-			case CE_EGuiBackgroundStyle.NineSlice:
+			case CE_EGUIBackgroundStyle.NineSlice:
 				_backgroundWidth = is_undefined(_backgroundWidth) ? _width : _backgroundWidth;
 				_backgroundHeight = is_undefined(_backgroundHeight) ? _height : _backgroundHeight;
 
@@ -764,8 +779,7 @@ function CE_GUIWidget(_props={})
 	static OnCleanUp = function () {
 		method(self, Super_Class.Destroy)();
 
-		if (Events != undefined
-			&& ds_exists(Events, ds_type_map))
+		if (Events != undefined)
 		{
 			ds_map_destroy(Events);
 		}

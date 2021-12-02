@@ -1,5 +1,5 @@
 /// @enum Enumeration of possible background image styles.
-enum CE_EGuiBackgroundStyle
+enum CE_EGUIBackgroundStyle
 {
 	/// @member Draw background scaled.
 	Scale,
@@ -12,7 +12,7 @@ enum CE_EGuiBackgroundStyle
 };
 
 /// @enum Enumeration of widget alignment.
-enum CE_EGuiAlign
+enum CE_EGUIAlign
 {
 	/// @member Align at the start of the parent widget.
 	Start = 0,
@@ -27,7 +27,7 @@ enum CE_EGuiAlign
 };
 
 /// @enum Enumeration of possible widget positions relative to their parent.
-enum CE_EGuiPosition
+enum CE_EGUIPosition
 {
 	/// @enum Parent's scroll is applied to widget's position (default).
 	Scroll,
@@ -38,7 +38,7 @@ enum CE_EGuiPosition
 };
 
 /// @enum Enumeration of possible content styles.
-enum CE_EGuiContentStyle
+enum CE_EGUIContentStyle
 {
 	/// @enum Widgets are drawed in a column and their defined position becomes
 	/// an offset from their calculated position.
@@ -51,32 +51,6 @@ enum CE_EGuiContentStyle
 	/// @enum Widgets are drawed in a rows and their defined position becomes
 	/// an offset from their calculated position.
 	Row,
-	/// @member Total number of members of this enum.
-	SIZE
-};
-
-/// @enum GUI events.
-enum CE_EGuiEvent
-{
-	/// @member An event triggered when a widget loses focus.
-	Blur,
-	/// @member An event triggered when control's value has changed.
-	Change,
-	/// @member An event triggered when a widget is clicked.
-	Click,
-	/// @member An event triggered when a widget is deactivated.
-	Deactivate,
-	/// @member An event triggered when a widget is dragged.
-	Drag,
-	/// @member An event triggered when user stop dragging the widget.
-	DragEnd,
-	/// @member An event triggered when user starts dragging the widget.
-	DragStart,
-	/// @member An event triggered when a widget receives focus.
-	Focus,
-	/// @member An event triggered within the focused widget when a keyboard
-	/// key is pressed.
-	KeyPress,
 	/// @member Total number of members of this enum.
 	SIZE
 };

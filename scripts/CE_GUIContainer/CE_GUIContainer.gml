@@ -15,7 +15,7 @@ function CE_GUIContainer(_props={})
 
 	Overflow = ce_struct_get(_props, "Overflow", false);
 	Surface = noone;
-	ContentStyle = ce_struct_get(_props, "ContentStyle", CE_EGuiContentStyle.Default);
+	ContentStyle = ce_struct_get(_props, "ContentStyle", CE_EGUIContentStyle.Default);
 	GridColumns = ce_struct_get(_props, "GridColumns", 1);
 	GridRows = ce_struct_get(_props, "GridRows", 1);
 	ContentW = 0;
@@ -25,7 +25,7 @@ function CE_GUIContainer(_props={})
 	ScrollXEnable = ce_struct_get(_props, "ScrollXEnable", false);
 	ScrollYEnable = ce_struct_get(_props, "ScrollYEnable", false);
 
-	AddEventListener(CE_EGuiEvent.Drag, method(self, OnDrag));
+	AddEventListener(CE_GUIDragEvent, method(self, OnDrag));
 
 	/// @func AddWidget(_widget)
 	/// @desc Adds the widget to the container.

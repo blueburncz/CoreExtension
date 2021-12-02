@@ -81,14 +81,14 @@ function CE_GUIRoot()
 
 		if (_widgetPrev != undefined)
 		{
-			var _ev = new CE_GUIEvent(CE_EGuiEvent.Blur);
+			var _ev = new CE_GUIBlurEvent();
 			_widgetPrev.TriggerEvent(_ev);
 			_ev.Destroy();
 		}
 
 		if (_widget != undefined)
 		{
-			var _ev = new CE_GUIEvent(CE_EGuiEvent.Focus);
+			var _ev = new CE_GUIFocusEvent();
 			_widget.TriggerEvent(_ev);
 			_ev.Destroy();
 		}

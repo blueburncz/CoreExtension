@@ -17,9 +17,9 @@ function CE_GUIHSlider(_min, _max, _value, _integers=false, _props={})
 	Integers = _integers;
 
 	var _onDrag = method(self, OnDrag);
-	AddEventListener(CE_EGuiEvent.Click, _onDrag);
-	AddEventListener(CE_EGuiEvent.Drag, _onDrag);
-	AddEventListener(CE_EGuiEvent.DragStart, _onDrag);
+	AddEventListener(CE_GUIClickEvent, _onDrag);
+	AddEventListener(CE_GUIDragEvent, _onDrag);
+	AddEventListener(CE_GUIDragStartEvent, _onDrag);
 
 	static OnDrag = function (_event) {
 		var _width = Width;
@@ -32,9 +32,9 @@ function CE_GUIHSlider(_min, _max, _value, _integers=false, _props={})
 		if (_value != _valueOld)
 		{
 			Value = _value;
-			var _eventChanged = new CE_GUIEvent(CE_EGuiEvent.Change);
-			TriggerEvent(_eventChanged);
-			_eventChanged.Destroy();
+			var _eventChange = new CE_GUIChangeEvent(_valueOld);
+			TriggerEvent(_eventChange);
+			_eventChange.Destroy();
 		}
 	};
 

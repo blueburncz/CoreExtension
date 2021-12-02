@@ -18,7 +18,7 @@ function ce_gui_create_text(_text, _props={})
 function ce_gui_create_grid(_rows, _cols)
 {
 	var _w = new CE_GUIContainer();
-	_w.ContentStyle = CE_EGuiContentStyle.Grid;
+	_w.ContentStyle = CE_EGUIContentStyle.Grid;
 	_w.GridColumns = _rows;
 	_w.GridRows = _cols;
 	_w.X = (argument_count > 2) ? argument[2] : 0;
@@ -36,7 +36,7 @@ function ce_gui_create_grid(_rows, _cols)
 function ce_gui_create_hbox(_x=0, _y=0)
 {
 	var _w = new CE_GUIContainer();
-	_w.ContentStyle = CE_EGuiContentStyle.Row;
+	_w.ContentStyle = CE_EGUIContentStyle.Row;
 	_w.Grow = true;
 	_w.X = _x;
 	_w.Y = _y;
@@ -75,7 +75,7 @@ function ce_gui_create_sprite(_sprite, _index=0, _x=0, _y=0, _color=c_white, _al
 function ce_gui_create_vbox(_x=0, _y=0)
 {
 	var _w = new CE_GUIContainer();
-	_w.ContentStyle = CE_EGuiContentStyle.Column;
+	_w.ContentStyle = CE_EGUIContentStyle.Column;
 	_w.Grow = true;
 	_w.X = _x;
 	_w.Y = _y;

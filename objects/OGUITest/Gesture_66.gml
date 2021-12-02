@@ -9,7 +9,7 @@ if (_draggable != undefined)
 	gui.WidgetDragging = _draggable;
 	gui.MouseDragXLast = gui.MouseX;
 	gui.MouseDragYLast = gui.MouseY;
-	var _event = new CE_GUIEvent(CE_EGuiEvent.DragStart);
+	var _event = new CE_GUIDragStartEvent();
 	_draggable.TriggerEvent(_event);
 	_event.Destroy();
 }

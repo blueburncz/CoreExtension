@@ -7,7 +7,7 @@ if (gui.WidgetFocused != _hovered)
 
 if (_hovered != undefined)
 {
-	var _event = new CE_GUIEvent(CE_EGuiEvent.Click);
+	var _event = new CE_GUIClickEvent(mb_left);
 	_hovered.TriggerEvent(_event);
 	_event.Destroy();
 }

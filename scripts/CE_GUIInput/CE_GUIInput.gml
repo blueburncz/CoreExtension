@@ -25,9 +25,9 @@ function CE_GUIInput(_value, _props={})
 	PaddingTop = ce_struct_get(_props, "PaddingTop", 8);
 	PaddingBottom = ce_struct_get(_props, "PaddingBottom", 8);
 
-	AddEventListener(CE_EGuiEvent.Focus, method(self, OnFocus));
-	AddEventListener(CE_EGuiEvent.Blur, method(self, OnBlur));
-	AddEventListener(CE_EGuiEvent.KeyPress, method(self, OnKeyPress));
+	AddEventListener(CE_GUIFocusEvent, method(self, OnFocus));
+	AddEventListener(CE_GUIBlurEvent, method(self, OnBlur));
+	AddEventListener(CE_GUIKeyPressEvent, method(self, OnKeyPress));
 
 	static OnFocus = function (_event) {
 		var _value = Value;
@@ -72,7 +72,7 @@ function CE_GUIInput(_value, _props={})
 
 		if (_valueOld != Value)
 		{
-			var _ev = new CE_GUIEvent(CE_EGuiEvent.Change);
+			var _ev = new CE_GUIChangeEvent(_valueOld);
 			TriggerEvent(_ev);
 			_ev.Destroy();
 		}
