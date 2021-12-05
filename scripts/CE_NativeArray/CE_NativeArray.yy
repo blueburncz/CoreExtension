@@ -6,7 +6,7 @@
     "path": "folders/CE/NativeArray.yy",
   },
   "resourceVersion": "1.0",
-  "name": "ce_native_array",
+  "name": "CE_NativeArray",
   "tags": [],
   "resourceType": "GMScript",
 }

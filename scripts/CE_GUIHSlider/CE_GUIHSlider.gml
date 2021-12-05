@@ -28,7 +28,7 @@ function CE_GUIHSlider(_min, _max, _value, _integers=false, _props={})
 	Integers = _integers;
 
 	Width = ce_struct_get(_props, "Width", 256);
-	Height = ce_struct_get(_props, "Height", 24);
+	Height = ce_struct_get(_props, "Height", 32);
 
 	var _onDrag = method(self, OnDrag);
 	AddEventListener(CE_GUIClickEvent, _onDrag);
