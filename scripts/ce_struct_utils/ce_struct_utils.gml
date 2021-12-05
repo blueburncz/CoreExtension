@@ -5,14 +5,12 @@
 /// @param {any} [_default] The value returned when the struct doesn't have
 /// such property.
 /// @return {any} The property value.
-function ce_struct_get(_struct, _name)
+function ce_struct_get(_struct, _name, _default=undefined)
 {
 	gml_pragma("forceinline");
 	if (!variable_struct_exists(_struct, _name))
 	{
-		return (argument_count > 2)
-			? argument[2]
-			: undefined;
+		return _default;
 	}
 	return variable_struct_get(_struct, _name);
 }
