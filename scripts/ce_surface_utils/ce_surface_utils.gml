@@ -8,23 +8,23 @@ function ce_surface_blur(_target, _work, _scale)
 {
 	var _width = surface_get_width(_target);
 	var _height = surface_get_height(_target);
-	var _is_temp = false;
+	var _isTemp = false;
 
 	if (_work == undefined)
 	{
 		_work = surface_create(_width, _height);
-		_is_temp = true;
+		_isTemp = true;
 	}
 
 	static _shader = CE_ShGaussianBlur;
-	static _u_texel = shader_get_uniform(_shader, "u_vTexel");
-	var _texel_w = _scale / _width;
-	var _texel_h = _scale / _height;
+	static _uTexel = shader_get_uniform(_shader, "u_vTexel");
+	var _texelW = _scale / _width;
+	var _texelH = _scale / _height;
 
 	surface_set_target(_work);
 	draw_clear_alpha(0, 0);
 	shader_set(_shader);
-	shader_set_uniform_f(_u_texel, _texel_w, 0.0);
+	shader_set_uniform_f(_uTexel, _texelW, 0.0);
 	draw_surface(_target, 0, 0);
 	shader_reset();
 	surface_reset_target();
@@ -32,12 +32,12 @@ function ce_surface_blur(_target, _work, _scale)
 	surface_set_target(_target);
 	draw_clear_alpha(0, 0);
 	shader_set(_shader);
-	shader_set_uniform_f(_u_texel, 0.0, _texel_h);
+	shader_set_uniform_f(_uTexel, 0.0, _texelH);
 	draw_surface(_work, 0, 0);
 	shader_reset();
 	surface_reset_target();
 
-	if (_is_temp)
+	if (_isTemp)
 	{
 		surface_free(_work);
 	}

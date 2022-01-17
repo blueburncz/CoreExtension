@@ -33,110 +33,110 @@ function ce_draw_sprite_nine_slice(_sprite, _subimage, _x, _y, _width, _height, 
 	var _color = (argument_count > 7) ? argument[7] : c_white;
 	var _alpha = (argument_count > 8) ? argument[8] : 1;
 
-	var _sprite_width = sprite_get_width(_sprite);
-	var _sprite_height = sprite_get_height(_sprite);
+	var _spriteWidth = sprite_get_width(_sprite);
+	var _spriteHeight = sprite_get_height(_sprite);
 
-	var _slice_x = _sprite_width / 3;
-	var _slice_x2 = _slice_x * 2;
-	var _slice_y = _sprite_height / 3;
-	var _slice_y2 = _slice_y * 2;
+	var _sliceX = floor(_spriteWidth / 3);
+	var _sliceX2 = _sliceX * 2;
+	var _sliceY = floor(_spriteHeight / 3);
+	var _sliceY2 = _sliceY * 2;
 
-	_width = max(_width, _slice_x2);
-	_height = max(_height, _slice_y2);
+	_width = max(_width, _sliceX2);
+	_height = max(_height, _sliceY2);
 
-	var _width_inner = _width - _slice_x2;
-	var _height_inner = _height - _slice_y2;
+	var _widthInner = _width - _sliceX2;
+	var _heightInner = _height - _sliceY2;
 
-	var _scale_hor = _width_inner / _slice_x;
-	var _scale_ver = _height_inner / _slice_y;
+	var _scaleHor = _widthInner / _sliceX;
+	var _scaleVer = _heightInner / _sliceY;
 
-	var _center_x = _x + _slice_x;
-	var _center_y = _y + _slice_y;
-	var _right_x = _x + _width - _slice_x;
-	var _bottom_y = _y + _height - _slice_y;
+	var _centerX = _x + _sliceX;
+	var _centerY = _y + _sliceY;
+	var _rightX = _x + _width - _sliceX;
+	var _bottomY = _y + _height - _sliceY;
 
 	if (!_tiled)
 	{
 		// Top edge
-		draw_sprite_part_ext(_sprite, _subimage, _slice_x, 0,
-			_slice_x, _slice_y, _center_x, _y, _scale_hor, 1, _color, _alpha);
+		draw_sprite_part_ext(_sprite, _subimage, _sliceX, 0,
+			_sliceX, _sliceY, _centerX, _y, _scaleHor, 1, _color, _alpha);
 
 		// Left edge
-		draw_sprite_part_ext(_sprite, _subimage, 0, _slice_y,
-			_slice_x, _slice_y, _x, _center_y, 1, _scale_ver, _color, _alpha);
+		draw_sprite_part_ext(_sprite, _subimage, 0, _sliceY,
+			_sliceX, _sliceY, _x, _centerY, 1, _scaleVer, _color, _alpha);
 
 		// Center
-		draw_sprite_part_ext(_sprite, _subimage, _slice_x, _slice_y,
-			_slice_x, _slice_y, _center_x, _center_y, _scale_hor, _scale_ver, _color, _alpha);
+		draw_sprite_part_ext(_sprite, _subimage, _sliceX, _sliceY,
+			_sliceX, _sliceY, _centerX, _centerY, _scaleHor, _scaleVer, _color, _alpha);
 
 		// Right edge
-		draw_sprite_part_ext(_sprite, _subimage, _slice_x2, _slice_y,
-			_slice_x, _slice_y, _right_x, _center_y, 1, _scale_ver, _color, _alpha);
+		draw_sprite_part_ext(_sprite, _subimage, _sliceX2, _sliceY,
+			_sliceX, _sliceY, _rightX, _centerY, 1, _scaleVer, _color, _alpha);
 
 		// Bottom edge
-		draw_sprite_part_ext(_sprite, _subimage, _slice_x, _slice_y2,
-			_slice_x, _slice_y, _center_x, _bottom_y, _scale_hor, 1, _color, _alpha);
+		draw_sprite_part_ext(_sprite, _subimage, _sliceX, _sliceY2,
+			_sliceX, _sliceY, _centerX, _bottomY, _scaleHor, 1, _color, _alpha);
 	}
 	else
 	{
-		var _draw_x = _center_x;
+		var _drawX = _centerX;
 
-		while (_draw_x < _center_x + _width_inner)
+		while (_drawX < _centerX + _widthInner)
 		{
-			var _draw_y = _center_y;
-			while (_draw_y < _center_y + _height_inner)
+			var _drawY = _centerY;
+			while (_drawY < _centerY + _heightInner)
 			{
 				// Center
-				draw_sprite_part_ext(_sprite, _subimage, _slice_x, _slice_y,
-					_slice_x, _slice_y, _draw_x, _draw_y, 1, 1, _color, _alpha);
-				_draw_y += _slice_y;
+				draw_sprite_part_ext(_sprite, _subimage, _sliceX, _sliceY,
+					_sliceX, _sliceY, _drawX, _drawY, 1, 1, _color, _alpha);
+				_drawY += _sliceY;
 			}
-			_draw_x += _slice_x;
+			_drawX += _sliceX;
 		}
 
-		_draw_x = _center_x;
+		_drawX = _centerX;
 
-		var _draw_y = _center_y;
-		while (_draw_y < _center_y + _height_inner)
+		var _drawY = _centerY;
+		while (_drawY < _centerY + _heightInner)
 		{
 			// Left edge
-			draw_sprite_part_ext(_sprite, _subimage, 0, _slice_y,
-				_slice_x, _slice_y, _x, _draw_y, 1, 1, _color, _alpha);
+			draw_sprite_part_ext(_sprite, _subimage, 0, _sliceY,
+				_sliceX, _sliceY, _x, _drawY, 1, 1, _color, _alpha);
 			// Right edge
-			draw_sprite_part_ext(_sprite, _subimage, _slice_x2, _slice_y,
-				_slice_x, _slice_y, _right_x, _draw_y, 1, 1, _color, _alpha);
-			_draw_y += _slice_y;
+			draw_sprite_part_ext(_sprite, _subimage, _sliceX2, _sliceY,
+				_sliceX, _sliceY, _rightX, _drawY, 1, 1, _color, _alpha);
+			_drawY += _sliceY;
 		}
 
-		while (_draw_x < _x + _width - _slice_x)
+		while (_drawX < _x + _width - _sliceX)
 		{
 			// Top edge
-			draw_sprite_part_ext(_sprite, _subimage, _slice_x, 0,
-				_slice_x, _slice_y, _draw_x, _y, 1, 1, _color, _alpha);
+			draw_sprite_part_ext(_sprite, _subimage, _sliceX, 0,
+				_sliceX, _sliceY, _drawX, _y, 1, 1, _color, _alpha);
 
 			// Bottom edge
-			draw_sprite_part_ext(_sprite, _subimage, _slice_x, _slice_y2,
-				_slice_x, _slice_y, _draw_x, _bottom_y, 1, 1, _color, _alpha);
+			draw_sprite_part_ext(_sprite, _subimage, _sliceX, _sliceY2,
+				_sliceX, _sliceY, _drawX, _bottomY, 1, 1, _color, _alpha);
 
-			_draw_x += _slice_x;
+			_drawX += _sliceX;
 		}
 	}
 
 	// Top left corner
 	draw_sprite_part_ext(_sprite, _subimage, 0, 0,
-		_slice_x, _slice_y, _x, _y, 1, 1, _color, _alpha);
+		_sliceX, _sliceY, _x, _y, 1, 1, _color, _alpha);
 
 	// Top right corner
-	draw_sprite_part_ext(_sprite, _subimage, _slice_x2, 0,
-		_slice_x, _slice_y, _right_x, _y, 1, 1, _color, _alpha);
+	draw_sprite_part_ext(_sprite, _subimage, _sliceX2, 0,
+		_sliceX, _sliceY, _rightX, _y, 1, 1, _color, _alpha);
 
 	// Bottom left corner
-	draw_sprite_part_ext(_sprite, _subimage, 0, _slice_y2,
-		_slice_x, _slice_y, _x, _bottom_y, 1, 1, _color, _alpha);
+	draw_sprite_part_ext(_sprite, _subimage, 0, _sliceY2,
+		_sliceX, _sliceY, _x, _bottomY, 1, 1, _color, _alpha);
 
 	// Bottom right corner
-	draw_sprite_part_ext(_sprite, _subimage, _slice_x2, _slice_y2,
-		_slice_x, _slice_y, _right_x, _bottom_y, 1, 1, _color, _alpha);
+	draw_sprite_part_ext(_sprite, _subimage, _sliceX2, _sliceY2,
+		_sliceX, _sliceY, _rightX, _bottomY, 1, 1, _color, _alpha);
 }
 
 /// @func ce_draw_text_shadow(_x, _y, _string[, _color[, _shadow]])

@@ -9,9 +9,9 @@ function ce_ds_map_clone(_map)
 	return _clone;
 }
 
-/// @func ce_ds_map_create_from_array(_key_value_array)
+/// @func ce_ds_map_create_from_array(_keyValueArray)
 /// @desc Creates a new map, taking keys and values from the array.
-/// @param {array} _key_value_array An array that containing keys at odd indices and
+/// @param {array} _keyValueArray An array that containing keys at odd indices and
 /// values at even indices.
 /// @return {ds_map} The created map.
 /// @example
@@ -27,13 +27,13 @@ function ce_ds_map_clone(_map)
 /// ds_map_add(_p2, "last_name", "Dude");
 /// ds_map_add(_p2, "age", 24);
 /// ```
-function ce_ds_map_create_from_array(_key_value_array)
+function ce_ds_map_create_from_array(_keyValueArray)
 {
 	var _map = ds_map_create();
-	var _size = array_length(_key_value_array);
+	var _size = array_length(_keyValueArray);
 	for (var i = 0; i < _size; i += 2)
 	{
-		_map[? _key_value_array[i]] = _key_value_array[i + 1];
+		_map[? _keyValueArray[i]] = _keyValueArray[i + 1];
 	}
 	return _map;
 }
@@ -54,17 +54,17 @@ function ce_ds_map_extend(_target, _source)
 	}
 }
 
-/// @func ce_ds_map_extend_from_array(_map, _key_value_array)
+/// @func ce_ds_map_extend_from_array(_map, _keyValueArray)
 /// @desc Extends a map by key-value pairs stored in an array.
 /// @param {ds_map} _map The map to extend.
-/// @param {array} _key_value_array An array that contains keys
+/// @param {array} _keyValueArray An array that contains keys
 /// at odd indices and values at even indices.
-function ce_ds_map_extend_from_array(_map, _key_value_array)
+function ce_ds_map_extend_from_array(_map, _keyValueArray)
 {
-	var _size = array_length(_key_value_array);
+	var _size = array_length(_keyValueArray);
 	for (var i = 0; i < _size; i += 2)
 	{
-		_map[? _key_value_array[i]] = _key_value_array[i + 1];
+		_map[? _keyValueArray[i]] = _keyValueArray[i + 1];
 	}
 }
 
@@ -89,7 +89,7 @@ function ce_ds_map_find_key(_map, _value)
 
 /// @func ce_ds_map_get(_map, _index[, _default])
 /// @desc Retrieves a value at given index of a map.
-/// @param {ds_map} _map The map to get the value from.
+/// @param {ds_map} _map The map to Get the value from.
 /// @param {real} _index The index.
 /// @param {any} [_default] The default value. Defaults to `undefined`.
 /// @return {any} Value at given index or the default value if the index does

@@ -1,6 +1,6 @@
 /// @func ce_char_is_digit(_char)
 /// @param {string} _char The character.
-/// @return {bool} `true` if the character is a digit.
+/// @return {bool} Returns `true` if the character is a digit.
 function ce_char_is_digit(_char)
 {
 	gml_pragma("forceinline");
@@ -9,7 +9,7 @@ function ce_char_is_digit(_char)
 
 /// @func ce_char_is_letter(_char)
 /// @param {string} _char The character.
-/// @return {bool} `true` if the character is a letter.
+/// @return {bool} Returns `true` if the character is a letter.
 function ce_char_is_letter(_char)
 {
 	gml_pragma("forceinline");
@@ -21,7 +21,7 @@ function ce_char_is_letter(_char)
 /// @desc Compares the first string to the second string.
 /// @param {string} _s1 The first string.
 /// @param {string} _s2 The seconds string.
-/// @return {real} `cmpfunc_equal` when the strings are equal or
+/// @return {real} Returns `cmpfunc_equal` when the strings are equal or
 /// `cmpfunc_less` / `cmpfunc_greater` when the first one goes
 /// before / after the second one.
 /// @example Sorting an array of strings using a bubble sort algorithm and this
@@ -65,7 +65,7 @@ function ce_string_compare(_s1, _s2)
 /// @func ce_string_endswith(_string, _substring)
 /// @param {string} _string The string to check.
 /// @param {string} _substring The expected end of the string.
-/// @return {bool} `true` if the string ends with the substring.
+/// @return {bool} Returns `true` if the string ends with the substring.
 function ce_string_endswith(_string, _substring)
 {
 	var _len = string_length(_substring);
@@ -127,8 +127,8 @@ function ce_string_format(_string)
 	// TODO: Add support for `other.` etc?
 	var _str = _string;
 	var _data = (argument_count > 1) ? argument[1] : undefined;
-	var _is_map = is_real(_data);
-	var _is_array = is_array(_data);
+	var _isMap = is_real(_data);
+	var _isArray = is_array(_data);
 	var _result = "";
 
 	while (true)
@@ -146,23 +146,23 @@ function ce_string_format(_string)
 			return _string;
 		}
 		--_end;
-		var _var_name = string_copy(_str, 1, _end);
+		var _varName = string_copy(_str, 1, _end);
 		var _added = false;
-		if (_is_map
-			&& ds_map_exists(_data, _var_name))
+		if (_isMap
+			&& ds_map_exists(_data, _varName))
 		{
-			_result += string(_data[? _var_name]);
+			_result += string(_data[? _varName]);
 			_added = true;
 		}
-		else if (_is_array
-			&& string_digits(_var_name) == _var_name)
+		else if (_isArray
+			&& string_digits(_varName) == _varName)
 		{
-			_result += string(_data[real(_var_name)]);
+			_result += string(_data[real(_varName)]);
 			_added = true
 		}
 		if (!_added)
 		{
-			_result += string(variable_instance_get(id, _var_name));
+			_result += string(variable_instance_get(id, _varName));
 		}
 		_str = string_delete(_str, 1, _end + 1);
 	}
@@ -255,24 +255,24 @@ function ce_string_join_list(_string, _list)
 	return _str;
 }
 
-/// @func ce_string_remove_part(_string, _start_str, _end_str)
-/// @desc Removes part beginning with `_start_st`r and ending with `_end_str`
+/// @func ce_string_remove_part(_string, _startStr, _endStr)
+/// @desc Removes part beginning with `_startStr` and ending with `_endStr`
 /// from the string.
 /// @param {string} _string The string to remove the part from.
-/// @param {string} _start_str The start of the part to remove.
-/// @param {string} _end_str The end of the part to remove.
+/// @param {string} _startStr The start of the part to remove.
+/// @param {string} _endStr The end of the part to remove.
 /// @return {string} The string with the given part removed.
-function ce_string_remove_part(_string, _start_str, _end_str)
+function ce_string_remove_part(_string, _startStr, _endStr)
 {
-	var _start = string_pos(_start_str, _string);
-	var _end = string_pos(_end_str, _string);
-	return string_delete(_string, _start, _end - _start + string_length(_end_str));
+	var _start = string_pos(_startStr, _string);
+	var _end = string_pos(_endStr, _string);
+	return string_delete(_string, _start, _end - _start + string_length(_endStr));
 }
 
 /// @func ce_string_startswith(_string, _substring)
 /// @param {string} _string The string.
 /// @param {string} _substring The expected start of the string.
-/// @return {bool} `true` if the string starts with the substring.
+/// @return {bool} Returns `true` if the string starts with the substring.
 function ce_string_startswith(_string, _substring)
 {
 	return (string_copy(_string, 1, string_length(_substring)) == _substring);

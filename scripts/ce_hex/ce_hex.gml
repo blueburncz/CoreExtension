@@ -31,8 +31,8 @@ function ce_byte_to_hex(_byte)
 function ce_nibble_to_hex(_nibble)
 {
 	gml_pragma("forceinline");
-	static _nibble_to_hex = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
-	return _nibble_to_hex[_nibble];
+	static _nibbleToHex = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
+	return _nibbleToHex[_nibble];
 }
 
 /// @func ce_hex_to_nibble(_hex)

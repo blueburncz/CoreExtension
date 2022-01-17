@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "Math",
-    "path": "folders/CE/Scripts/Math.yy",
+    "path": "folders/Packages/kraifpatrik/CoreExtension/Math.yy",
   },
   "resourceVersion": "1.0",
   "name": "ce_math_misc",
