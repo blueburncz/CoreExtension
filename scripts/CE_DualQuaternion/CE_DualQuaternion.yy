@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "DualQuaternion",
-    "path": "folders/CE/DualQuaternion.yy",
+    "name": "Math",
+    "path": "folders/Packages/kraifpatrik/CoreExtension/Math.yy",
   },
   "resourceVersion": "1.0",
   "name": "CE_DualQuaternion",

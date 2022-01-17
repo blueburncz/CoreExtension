@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "StateMachine",
-    "path": "folders/Packages/kraifpatrik/CoreExtension/StateMachine.yy",
+    "name": "Utils",
+    "path": "folders/Packages/kraifpatrik/CoreExtension/Utils.yy",
   },
   "resourceVersion": "1.0",
-  "name": "CE_StateMachine",
+  "name": "ce_time_utils",
   "tags": [],
   "resourceType": "GMScript",
 }

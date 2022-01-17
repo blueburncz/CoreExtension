@@ -26,6 +26,26 @@ function CE_Component()
 	static OnRemove = function () {
 	};
 
+	/// @func OnCollisionEnter(_other)
+	/// @desc A function executed once the entity starts colliding with other
+	/// entity.
+	/// @param _other The other entity.
+	static OnCollisionEnter = function (_other) {
+	};
+
+	/// @func OnCollision(_other)
+	/// @desc A function executed while the entity collides with other entity.
+	/// @param _other The other entity.
+	static OnCollision = function (_other) {
+	};
+
+	/// @func OnCollisionExit(_other)
+	/// @desc A function executed once the entity is not colliding with other
+	/// entity anymore.
+	/// @param _other The other entity.
+	static OnCollisionExit = function (_other) {
+	};
+
 	/// @func OnPreUpdate(_delta)
 	/// @param {real} _delta
 	static OnPreUpdate = function (_delta) {

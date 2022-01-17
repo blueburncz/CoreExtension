@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "StateMachine",
-    "path": "folders/Packages/kraifpatrik/CoreExtension/StateMachine.yy",
+    "name": "NavGrid",
+    "path": "folders/Packages/kraifpatrik/CoreExtension/NavGrid.yy",
   },
   "resourceVersion": "1.0",
-  "name": "CE_StateMachine",
+  "name": "CE_NavGridPath",
   "tags": [],
   "resourceType": "GMScript",
 }

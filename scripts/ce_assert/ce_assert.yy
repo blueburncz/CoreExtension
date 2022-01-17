@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Assert",
-    "path": "folders/CE/Assert.yy",
+    "name": "Core",
+    "path": "folders/Packages/kraifpatrik/CoreExtension/Core.yy",
   },
   "resourceVersion": "1.0",
   "name": "ce_assert",

@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "UUID",
-    "path": "folders/CE/UUID.yy",
+    "name": "Core",
+    "path": "folders/Packages/kraifpatrik/CoreExtension/Core.yy",
   },
   "resourceVersion": "1.0",
   "name": "ce_uuid",

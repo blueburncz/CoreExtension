@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "NativeArray",
-    "path": "folders/CE/NativeArray.yy",
+    "name": "Native",
+    "path": "folders/Packages/kraifpatrik/CoreExtension/Native.yy",
   },
   "resourceVersion": "1.0",
   "name": "CE_NativeArray",

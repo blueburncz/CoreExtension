@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "CE",
-    "path": "folders/CE.yy",
+    "name": "Exceptions",
+    "path": "folders/Packages/kraifpatrik/CoreExtension/Core/Exceptions.yy",
   },
   "resourceVersion": "1.0",
   "name": "CE_Exception",

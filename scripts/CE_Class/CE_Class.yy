@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "CE",
-    "path": "folders/CE.yy",
+    "name": "Core",
+    "path": "folders/Packages/kraifpatrik/CoreExtension/Core.yy",
   },
   "resourceVersion": "1.0",
   "name": "CE_Class",

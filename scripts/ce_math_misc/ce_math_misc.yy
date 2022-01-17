@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "MathMisc",
-    "path": "folders/CE/MathMisc.yy",
+    "name": "Math",
+    "path": "folders/Packages/kraifpatrik/CoreExtension/Math.yy",
   },
   "resourceVersion": "1.0",
   "name": "ce_math_misc",

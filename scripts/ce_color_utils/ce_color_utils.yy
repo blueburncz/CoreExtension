@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "ColorUtils",
-    "path": "folders/CE/ColorUtils.yy",
+    "name": "Utils",
+    "path": "folders/Packages/kraifpatrik/CoreExtension/Utils.yy",
   },
   "resourceVersion": "1.0",
   "name": "ce_color_utils",

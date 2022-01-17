@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "MapUtils",
-    "path": "folders/CE/MapUtils.yy",
+    "name": "Utils",
+    "path": "folders/Packages/kraifpatrik/CoreExtension/Utils.yy",
   },
   "resourceVersion": "1.0",
   "name": "ce_map_utils",

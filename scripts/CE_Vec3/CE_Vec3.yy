@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Vec3",
-    "path": "folders/CE/Vec3.yy",
+    "name": "Math",
+    "path": "folders/Packages/kraifpatrik/CoreExtension/Math.yy",
   },
   "resourceVersion": "1.0",
   "name": "CE_Vec3",

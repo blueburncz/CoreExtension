@@ -26,3 +26,26 @@ function ce_struct_set(_struct, _name, _value)
 	gml_pragma("forceinline");
 	variable_struct_set(_struct, _name, _value);
 }
+
+/// @func ce_struct_extend(_target, ..._source)
+/// @desc Extends target structure with properties from source structure.
+/// @param {struct} _target The structure to add the properties to.
+/// @param {struct} _source The structure containing properties to add.
+/// @return {struct} Returns the target structure.
+function ce_struct_extend(_target)
+{
+	gml_pragma("forceinline");
+	var s = 1;
+	repeat (argument_count - 1)
+	{
+		var _source = argument[s++];
+		var _names = variable_struct_get_names(_source);
+		var n = 0;
+		repeat (array_length(_names))
+		{
+			var _name = _names[n++];
+			_target[$ _name] = _source[$ _name];
+		}
+	}
+	return _target;
+}

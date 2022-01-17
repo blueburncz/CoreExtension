@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Hex",
-    "path": "folders/CE/Hex.yy",
+    "name": "Core",
+    "path": "folders/Packages/kraifpatrik/CoreExtension/Core.yy",
   },
   "resourceVersion": "1.0",
   "name": "ce_hex",

@@ -28,7 +28,7 @@
 /// @param {real} _height The height of the navgrid.
 /// @param {real} _cellWidth The width of a single cell.
 /// @param {real} _cellHeight The height of a single cell.
-/// @see CE_Path
+/// @see CE_NavGridPath
 function CE_NavGrid(_x, _y, _width, _height, _cellWidth, _cellHeight) constructor
 {
 	// Check if the cell coordinates can be encoded into 32bit uint
@@ -422,7 +422,7 @@ function CE_NavGrid(_x, _y, _width, _height, _cellWidth, _cellHeight) constructo
 
 	/// @func FindPath(_path, _fromX, _fromY, _toX, _toY, _allowDiagonal)
 	/// @desc Finds a path between two points.
-	/// @param {CE_Path} _path The path to output the result to.
+	/// @param {CE_NavGridPath} _path The path to output the result to.
 	/// @param {real} _fromX The X coordinate to find the path from.
 	/// @param {real} _fromY The Y coordinate to find the path from.
 	/// @param {real} _toX The X coordinate to find the path to.

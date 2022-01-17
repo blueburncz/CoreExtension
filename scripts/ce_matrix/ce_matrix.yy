@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Matrix",
-    "path": "folders/CE/Matrix.yy",
+    "name": "Math",
+    "path": "folders/Packages/kraifpatrik/CoreExtension/Math.yy",
   },
   "resourceVersion": "1.0",
   "name": "ce_matrix",

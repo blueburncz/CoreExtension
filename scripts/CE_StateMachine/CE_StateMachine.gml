@@ -1,7 +1,7 @@
 /// @func CE_StateMachine()
 /// @extends CE_Class
 /// @desc A state machine.
-/// @see CE_State
+/// @see CE_StateMachineState
 function CE_StateMachine()
 	: CE_Class() constructor
 {
@@ -11,7 +11,7 @@ function CE_StateMachine()
 		Destroy: Destroy,
 	};
 
-	/// @var {CE_State[]} An array of sates.
+	/// @var {CE_StateMachineState[]} An array of sates.
 	/// @private
 	StateArray = [];
 
@@ -26,7 +26,7 @@ function CE_StateMachine()
 	/// @see CE_StateMachine.Finish
 	Finished = false;
 
-	/// @var {CE_State/undefined} The current state.
+	/// @var {CE_StateMachineState/undefined} The current state.
 	/// @readonly
 	State = undefined;
 
@@ -82,7 +82,7 @@ function CE_StateMachine()
 
 	/// @func AddState(_state)
 	/// @desc Adds a state to the state machine.
-	/// @param {CE_State} _state The state to add.
+	/// @param {CE_StateMachineState} _state The state to add.
 	/// @return {CE_StateMachine} Returns `self`.
 	static AddState = function (_state) {
 		gml_pragma("forceinline");

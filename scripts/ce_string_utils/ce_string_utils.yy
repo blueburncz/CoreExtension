@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "StringUtils",
-    "path": "folders/CE/StringUtils.yy",
+    "name": "Utils",
+    "path": "folders/Packages/kraifpatrik/CoreExtension/Utils.yy",
   },
   "resourceVersion": "1.0",
   "name": "ce_string_utils",
