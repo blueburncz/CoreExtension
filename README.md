@@ -19,7 +19,7 @@ CE is released under the CC0 license, which means you can use it for free withou
 CE is fully documented using the [GMDoc](https://github.com/kraifpatrik/gmdoc) format. An HTML documentation currently isn't hosted online, but you can build one yourself using the GMDoc tool. Please refer to its manual for more info. If you need any additional help with CE, feel free to contact me on the GMC forums or Discord (see [Links](#links)).
 
 # Projects using CE
-* [BBMOD](https://marketplace.yoyogames.com/assets/9424/bbmod)
+* [BBMOD](https://marketplace.yoyogames.com/assets/10210/bbmod-3)
 * Your project here?
 
 # Links
