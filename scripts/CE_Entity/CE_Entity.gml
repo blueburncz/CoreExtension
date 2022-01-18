@@ -184,6 +184,7 @@ function CE_EntityListComponents(_entity, _component=undefined, _includeDisabled
 function CE_EntityRemoveComponent(_entity, _component)
 {
 	gml_pragma("forceinline");
+
 	with (_entity)
 	{
 		if (is_struct(_component))
@@ -215,6 +216,7 @@ function CE_EntityRemoveComponent(_entity, _component)
 					_current.OnRemove();
 					break;
 				}
+				++i;
 			}
 		}
 
