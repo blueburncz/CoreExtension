@@ -25,5 +25,4 @@ CE is fully documented using the [GMDoc](https://github.com/kraifpatrik/gmdoc) f
 # Links
 * [Discord](https://discord.gg/ep2BGPm) - If you need help with using CE, you can find me on the [BlueBurn](https://blueburn.cz/) Discord server.
 * [GameMaker Community](https://forum.yoyogames.com/index.php?threads/62585) - Or you can use this dedicated forum thread.
-* [GMDoc](https://marketplace.yoyogames.com/assets/10014/gmdoc-2) - Used to generate HTML documentation.
 * [Xpanda](https://github.com/GameMakerDiscord/Xpanda) - Used to create and manage shaders.
