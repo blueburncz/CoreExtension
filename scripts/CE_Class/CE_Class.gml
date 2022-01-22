@@ -12,7 +12,7 @@
 /// }
 /// ```
 #macro CE_CLASS_GENERATED_BODY \
-	static __ClassName = CE_GetCallingFunctionName(); \
+	static __ClassName = CE_GetCallingFunctionName(); \ // TODO: Could be instanceof?
 	array_push(__Inheritance, __ClassName)
 
 /// @func CE_Class()
