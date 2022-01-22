@@ -36,7 +36,7 @@ function CE_StateMachine()
 
 	/// @var {func/undefined} A function executed in the Update method *before*
 	/// the current state is updated. It should take the state machine as the
-	/// first argument and delta time as the second argument.
+	/// first argument and {@link CE_DeltaTime} as the second argument.
 	OnPreUpdate = undefined;
 
 	/// @var {func/undefined} A function executed when the state changes.
@@ -46,7 +46,7 @@ function CE_StateMachine()
 
 	/// @var {func/undefined} A function executed in the Update method *after*
 	/// the current state is updated. It should take the state machine as the
-	/// first argument and delta time as the second argument.
+	/// first argument and {@link CE_DeltaTime} as the second argument.
 	OnPostUpdate = undefined;
 
 	/// @var {func/undefined} A function executed on the end of the state machine.
@@ -140,8 +140,7 @@ function CE_StateMachine()
 	/// @func Update(_deltaTime)
 	/// @desc Executes function for the current state of the state machine
 	/// (if defined).
-	/// @param {real} _deltaTime How much time has passed since the last frame
-	/// (in microseconds).
+	/// @param {CE_DeltaTime} _deltaTime Delta time singleton.
 	/// @return {CE_StateMachine} Returns `self`.
 	/// @note This function does not do anything if the state machine has not
 	/// started yet or if it has already reached its final state.

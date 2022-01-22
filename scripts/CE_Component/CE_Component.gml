@@ -26,6 +26,11 @@ function CE_Component()
 	static OnRemove = function () {
 	};
 
+	/// @func OnRoomStart()
+	/// @desc A function executed when the room starts.
+	static OnRoomStart = function () {
+	};
+
 	/// @func OnCollisionEnter(_other)
 	/// @desc A function executed once the entity starts colliding with other
 	/// entity.
@@ -46,19 +51,19 @@ function CE_Component()
 	static OnCollisionExit = function (_other) {
 	};
 
-	/// @func OnPreUpdate(_delta)
-	/// @param {real} _delta
-	static OnPreUpdate = function (_delta) {
+	/// @func OnPreUpdate(_deltaTime)
+	/// @param {CE_DeltaTime} _deltaTime
+	static OnPreUpdate = function (_deltaTime) {
 	};
 
-	/// @func OnUpdate(_delta)
-	/// @param {real} _delta
-	static OnUpdate = function (_delta) {
+	/// @func OnUpdate(_deltaTime)
+	/// @param {CE_DeltaTime} _deltaTime
+	static OnUpdate = function (_deltaTime) {
 	};
 
-	/// @func OnPostUpdate(_delta)
-	/// @param {real} _delta
-	static OnPostUpdate = function (_delta) {
+	/// @func OnPostUpdate(_deltaTime)
+	/// @param {CE_DeltaTime} _deltaTime
+	static OnPostUpdate = function (_deltaTime) {
 	};
 
 	/// @func OnDraw()

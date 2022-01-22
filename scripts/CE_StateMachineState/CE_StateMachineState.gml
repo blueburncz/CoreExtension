@@ -21,7 +21,8 @@ function CE_StateMachineState(_name)
 	OnEnter = undefined;
 
 	/// @var {func/undefined} A function executed while the state is active.
-	/// Should take the state as the first argument and delta time as the second.
+	/// Should take the state as the first argument and {@link CE_DeltaTime} as
+	/// the second.
 	OnUpdate = undefined;
 
 	/// @var {func/undefined} A function executed when a state machine exists this
