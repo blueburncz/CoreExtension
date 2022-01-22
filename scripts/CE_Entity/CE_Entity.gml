@@ -151,7 +151,18 @@ function CE_EntityListComponents(_entity, _component=undefined, _includeDisabled
 		// Return all components
 		if (_component == undefined)
 		{
-			return Components;
+			var _components = [];
+			var i = 0;
+			repeat (array_length(Components))
+			{
+				var _current = Components[i++];
+				if (!_includeDisabled && !_current.Enabled)
+				{
+					continue;
+				}
+				array_push(_components, _current);
+			}
+			return _components;
 		}
 
 		// Filter components by type
