@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "Timer",
-    "path": "folders/Packages/kraifpatrik/CoreExtension/Timer.yy",
+    "path": "folders/CoreExtension/Timer.yy",
   },
   "resourceVersion": "1.0",
   "name": "CE_Timer",

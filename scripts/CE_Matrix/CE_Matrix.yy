@@ -6,7 +6,7 @@
     "path": "folders/CoreExtension/Math.yy",
   },
   "resourceVersion": "1.0",
-  "name": "CE_Quaternion",
+  "name": "CE_Matrix",
   "tags": [],
   "resourceType": "GMScript",
 }

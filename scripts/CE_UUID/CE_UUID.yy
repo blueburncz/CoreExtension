@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Math",
-    "path": "folders/CoreExtension/Math.yy",
+    "name": "Core",
+    "path": "folders/CoreExtension/Core.yy",
   },
   "resourceVersion": "1.0",
-  "name": "CE_Quaternion",
+  "name": "CE_UUID",
   "tags": [],
   "resourceType": "GMScript",
 }
