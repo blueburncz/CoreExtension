@@ -70,7 +70,7 @@
   "nineSlice": null,
   "parent": {
     "name": "Draw",
-    "path": "folders/Packages/kraifpatrik/CoreExtension/Utils/Draw.yy",
+    "path": "folders/CoreExtension/Utils/Draw.yy",
   },
   "resourceVersion": "1.0",
   "name": "CE_SprRectangle",

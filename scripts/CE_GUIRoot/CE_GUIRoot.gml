@@ -235,7 +235,7 @@ function CE_GUIRoot()
 			var _scale;
 			if (_windowWidth > _windowHeight)
 			{
-				_scale = ce_scale_keep_aspect(
+				_scale = CE_ScaleKeepAspectRatio(
 					_windowWidth,
 					_windowHeight,
 					CE_DESIGN_SCREEN_WIDTH,
@@ -243,7 +243,7 @@ function CE_GUIRoot()
 			}
 			else
 			{
-				_scale = ce_scale_keep_aspect(
+				_scale = CE_ScaleKeepAspectRatio(
 					_windowWidth,
 					_windowHeight,
 					CE_DESIGN_SCREEN_HEIGHT,
@@ -316,7 +316,7 @@ function CE_GUIRoot()
 			var _parent = _widget.Parent;
 			if (_parent != undefined)
 			{
-				ce_ds_list_remove(_parent.Widgets, _widget);
+				CE_ListRemove(_parent.Widgets, _widget);
 			}
 			#endregion Remove from parent
 			_widget.OnCleanUp();

@@ -3,10 +3,10 @@
   "isCompatibility": false,
   "parent": {
     "name": "GUI",
-    "path": "folders/Packages/kraifpatrik/CoreExtension/GUI.yy",
+    "path": "folders/CoreExtension/GUI.yy",
   },
   "resourceVersion": "1.0",
-  "name": "ce_gui",
+  "name": "CE_GUI",
   "tags": [],
   "resourceType": "GMScript",
 }

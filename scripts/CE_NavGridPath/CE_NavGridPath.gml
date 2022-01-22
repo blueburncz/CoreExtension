@@ -1,7 +1,15 @@
 /// @func CE_NavGridPath()
+/// @extends CE_Class
 /// @see CE_NavGrid
-function CE_NavGridPath() constructor
+function CE_NavGridPath()
+	: CE_Class() constructor
 {
+	CE_CLASS_GENERATED_BODY;
+
+	static Super_Class = {
+		Destroy: Destroy,
+	};
+
 	/// @var {ds_map<uint, uint>}
 	/// @private
 	Map = ds_map_create();
@@ -128,10 +136,8 @@ function CE_NavGridPath() constructor
 		}
 	};
 
-	/// @func Destroy()
-	/// @desc Frees resources used by the navgrid from memory.
 	static Destroy = function () {
-		gml_pragma("forceinline");
+		method(self, Super_Class.Destroy)();
 		ds_map_destroy(Map);
 	};
 }

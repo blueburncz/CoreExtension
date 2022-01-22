@@ -1,4 +1,5 @@
 /// @func CE_NativeArray(_type, _size)
+/// @extends CE_Class
 /// @desc Implements an array using a buffer. This can be used to share
 /// the array with a dynamic library through a pointer to the buffer.
 /// @param {uint} _type The type of all values in the array. Use one of
@@ -6,8 +7,15 @@
 /// not supported!
 /// @param {uint} _size The size of the array.
 /// @see ce_native_array_from_array
-function CE_NativeArray(_type, _size) constructor
+function CE_NativeArray(_type, _size)
+	: CE_Class() constructor
 {
+	CE_CLASS_GENERATED_BODY;
+
+	static Super_Class = {
+		Destroy: Destroy,
+	};
+
 	/// @var {uint} The type of values within the array. See `buffer_`
 	/// constants.
 	/// @readonly
@@ -129,10 +137,8 @@ function CE_NativeArray(_type, _size) constructor
 		return (_str + string(buffer_read(Buffer, Type)) + " ]");
 	};
 
-	/// @func Destroy()
-	/// @desc Frees memory used by the native array.
 	static Destroy = function () {
-		gml_pragma("forceinline");
+		method(self, Super_Class.Destroy)();
 		buffer_delete(Buffer);
 	};
 }

@@ -1,45 +1,45 @@
-/// @func ce_byte_array_to_hex(_bytes)
+/// @func CE_ByteArrayToHex(_bytes)
 /// @desc Converts an array of number between 0..255 into a string of
 /// hexadecimal representations of each number.
 /// @param {array} _bytes The array with numbers.
 /// @return {string} The resulting string.
-function ce_byte_array_to_hex(_bytes)
+function CE_ByteArrayToHex(_bytes)
 {
 	var _str = "";
 	var i = 0;
 	repeat (array_length(_bytes))
 	{
-		_str += ce_byte_to_hex(_bytes[i++]);
+		_str += CE_ByteToHex(_bytes[i++]);
 	}
 	return _str;
 }
 
-/// @func ce_byte_to_hex(_byte)
+/// @func CE_ByteToHex(_byte)
 /// @desc Converts a number in range 0..255 into a hexadecimal representation.
 /// @param {real} _byte The number to convert.
 /// @return {string} The hexadecimal representation.
-function ce_byte_to_hex(_byte)
+function CE_ByteToHex(_byte)
 {
 	gml_pragma("forceinline");
-	return (ce_nibble_to_hex((_byte & 0xF0) >> 4) + ce_nibble_to_hex(_byte & 0xF));
+	return (CE_NibbleToHex((_byte & 0xF0) >> 4) + CE_NibbleToHex(_byte & 0xF));
 }
 
-/// @func ce_nibble_to_hex(_nibble)
+/// @func CE_NibbleToHex(_nibble)
 /// @desc Converts a number in range 0..15 into its hexadecimal representation.
 /// @param {real} _nibble The number to convert.
 /// @return {string} The hexadecimal representation.
-function ce_nibble_to_hex(_nibble)
+function CE_NibbleToHex(_nibble)
 {
 	gml_pragma("forceinline");
 	static _nibbleToHex = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
 	return _nibbleToHex[_nibble];
 }
 
-/// @func ce_hex_to_nibble(_hex)
+/// @func CE_HexToNibble(_hex)
 /// @desc Converts a hex char into a nibble.
 /// @param {string} _hex The character to convert.
 /// @return {real/NaN} The parsed nibble on success or NaN on fail.
-function ce_hex_to_nibble(_hex)
+function CE_HexToNibble(_hex)
 {
 	var _char = string_char_at(_hex, 1);
 	_char = ord(string_upper(_char));
@@ -57,18 +57,18 @@ function ce_hex_to_nibble(_hex)
 	}
 }
 
-/// @func ce_hex_to_real(_hex)
+/// @func CE_HexToReal(_hex)
 /// @desc Converts hex string into a number.
 /// @param {string} _hex The hex string.
 /// @return {real/NaN} The parsed number on success or NaN on fail.
-function ce_hex_to_real(_hex)
+function CE_HexToReal(_hex)
 {
 	var _real = 0;
 	var _index = 1;
 	repeat (string_length(_hex))
 	{
 		var _char = string_char_at(_hex, _index++);
-		var _nibble = ce_hex_to_nibble(_char);
+		var _nibble = CE_HexToNibble(_char);
 		if (is_nan(_nibble))
 		{
 			return NaN;

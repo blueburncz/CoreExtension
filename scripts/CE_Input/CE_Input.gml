@@ -1,11 +1,7 @@
 /// @function CE_Input()
-/// @extends CE_Class
 /// @desc Input-handling singleton.
-function CE_Input()
-	: CE_Class() constructor
+function CE_Input() constructor
 {
-	CE_CLASS_GENERATED_BODY;
-
 	/// @var {ds_map<string/real, real[]>} Mapping of actions to an array
 	/// of keys that trigger them.
 	/// @private

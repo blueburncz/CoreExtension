@@ -35,7 +35,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "GUI",
-    "path": "folders/Packages/kraifpatrik/CoreExtension/GUI.yy",
+    "path": "folders/CoreExtension/GUI.yy",
   },
   "resourceVersion": "1.0",
   "name": "CE_OGUI",

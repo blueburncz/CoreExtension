@@ -11,7 +11,7 @@ function CE_GUIWidget(_props={})
 	};
 
 	/// @var {string/undefined}
-	Id = ce_struct_get(_props, "Id", undefined);
+	Id = CE_StructGet(_props, "Id", undefined);
 
 	/// @var {CE_GUIRoot/undefined}
 	/// @readonly
@@ -26,7 +26,7 @@ function CE_GUIWidget(_props={})
 	Events = undefined;
 
 	/// @var {bool}
-	Visible = ce_struct_get(_props, "Visible", true);
+	Visible = CE_StructGet(_props, "Visible", true);
 
 	/// @var {bool}
 	Redraw = true;
@@ -42,104 +42,104 @@ function CE_GUIWidget(_props={})
 	MouseY = 0;
 
 	/// @var {function/undefined}
-	OnUpdate = ce_struct_get(_props, "OnUpdate", undefined);
+	OnUpdate = CE_StructGet(_props, "OnUpdate", undefined);
 
 	////////////////////////////////////////////////////////////////////////////
 	// Position and size props
 
 	/// @var {CE_EGUIPosition}
-	Position = ce_struct_get(_props, "Position", CE_EGUIPosition.Scroll);
+	Position = CE_StructGet(_props, "Position", CE_EGUIPosition.Scroll);
 
 	/// @var {real}
-	AlignH = ce_struct_get(_props, "AlignH", CE_EGUIAlign.Start);
+	AlignH = CE_StructGet(_props, "AlignH", CE_EGUIAlign.Start);
 
 	/// @var {real}
-	AlignV = ce_struct_get(_props, "AlignV", CE_EGUIAlign.Start);
+	AlignV = CE_StructGet(_props, "AlignV", CE_EGUIAlign.Start);
 
 	/// @var {real}
-	PivotX = ce_struct_get(_props, "PivotX", 0);
+	PivotX = CE_StructGet(_props, "PivotX", 0);
 
 	/// @var {real}
-	PivotY = ce_struct_get(_props, "PivotY", 0);
+	PivotY = CE_StructGet(_props, "PivotY", 0);
 
 	/// @var {real}
-	X = ce_struct_get(_props, "X", 0);
+	X = CE_StructGet(_props, "X", 0);
 
 	/// @var {real}
 	/// @readonly
 	RealX = 0;
 
 	/// @var {real}
-	Y = ce_struct_get(_props, "Y", 0);
+	Y = CE_StructGet(_props, "Y", 0);
 
 	/// @var {real}
 	/// @readonly
 	RealY = 0;
 
 	/// @var {real}
-	Width = ce_struct_get(_props, "Width", 1);
+	Width = CE_StructGet(_props, "Width", 1);
 
 	/// @var {real}
 	/// @readonly
 	RealWidth = 0;
 
 	/// @var {bool}
-	WidthRelative = ce_struct_get(_props, "WidthRelative", false);
+	WidthRelative = CE_StructGet(_props, "WidthRelative", false);
 
 	/// @var {real}
-	Height = ce_struct_get(_props, "Height", 1);
+	Height = CE_StructGet(_props, "Height", 1);
 
 	/// @var {real}
 	/// @readonly
 	RealHeight = 0;
 
 	/// @var {bool}
-	HeightRelative = ce_struct_get(_props, "HeightRelative", false);
+	HeightRelative = CE_StructGet(_props, "HeightRelative", false);
 
 	/// @var {bool}
-	Grow = ce_struct_get(_props, "Grow", false);
+	Grow = CE_StructGet(_props, "Grow", false);
 
 	////////////////////////////////////////////////////////////////////////////
 	// Margin
 
 	/// @var {real}
-	MarginLeft = ce_struct_get(_props, "MarginLeft", 0);
+	MarginLeft = CE_StructGet(_props, "MarginLeft", 0);
 
 	/// @var {real}
-	MarginTop = ce_struct_get(_props, "MarginTop", 0);
+	MarginTop = CE_StructGet(_props, "MarginTop", 0);
 
 	/// @var {real}
-	MarginRight = ce_struct_get(_props, "MarginRight", 0);
+	MarginRight = CE_StructGet(_props, "MarginRight", 0);
 
 	/// @var {real}
-	MarginBottom = ce_struct_get(_props, "MarginBottom", 0);
+	MarginBottom = CE_StructGet(_props, "MarginBottom", 0);
 
 	////////////////////////////////////////////////////////////////////////////
 	// Padding
-	var _padding = ce_struct_get(_props, "Padding", undefined);
-	var _paddingH = ce_struct_get(_props, "PaddingH", undefined);
-	var _paddingV = ce_struct_get(_props, "PaddingV", undefined);
+	var _padding = CE_StructGet(_props, "Padding", undefined);
+	var _paddingH = CE_StructGet(_props, "PaddingH", undefined);
+	var _paddingV = CE_StructGet(_props, "PaddingV", undefined);
 
 	/// @var {real}
-	PaddingLeft = (((ce_struct_get(_props, "PaddingLeft", undefined)
+	PaddingLeft = (((CE_StructGet(_props, "PaddingLeft", undefined)
 		?? _paddingH)
 		?? _padding)
 		?? 0);
 
 	/// @var {real}
-	PaddingTop = (((ce_struct_get(_props, "PaddingTop", undefined)
+	PaddingTop = (((CE_StructGet(_props, "PaddingTop", undefined)
 		?? _paddingV)
 		?? _padding)
 		?? 0);
 
 	/// @var {real}
-	PaddingRight = (((ce_struct_get(_props, "PaddingRight", undefined)
+	PaddingRight = (((CE_StructGet(_props, "PaddingRight", undefined)
 		?? _paddingH)
 		?? _padding)
 		?? 0);
 
 	/// @var {real}
-	PaddingBottom = (((ce_struct_get(_props, "PaddingBottom", undefined)
+	PaddingBottom = (((CE_StructGet(_props, "PaddingBottom", undefined)
 		?? _paddingV)
 		?? _padding)
 		?? 0);
@@ -148,80 +148,80 @@ function CE_GUIWidget(_props={})
 	// Background props
 
 	/// @var {uint}
-	BackgroundColor = ce_struct_get(_props, "BackgroundColor", c_black);
+	BackgroundColor = CE_StructGet(_props, "BackgroundColor", c_black);
 
 	/// @var {real}
-	BackgroundAlpha = ce_struct_get(_props, "BackgroundAlpha", 0);
+	BackgroundAlpha = CE_StructGet(_props, "BackgroundAlpha", 0);
 
 	/// @var {sprite/undefined}
-	BackgroundSprite = ce_struct_get(_props, "BackgroundSprite", undefined);
+	BackgroundSprite = CE_StructGet(_props, "BackgroundSprite", undefined);
 
 	/// @var {uint}
-	BackgroundIndex = ce_struct_get(_props, "BackgroundIndex", 0);
+	BackgroundIndex = CE_StructGet(_props, "BackgroundIndex", 0);
 
 	/// @var {CE_EGUIBackgroundStyle}
-	BackgroundStyle = ce_struct_get(_props, "BackgroundStyle", CE_EGUIBackgroundStyle.Stretch);
+	BackgroundStyle = CE_StructGet(_props, "BackgroundStyle", CE_EGUIBackgroundStyle.Stretch);
 
 	/// @var {bool} Applies only to nine-slice backgrounds.
-	BackgroundTile = ce_struct_get(_props, "BackgroundTile", false);
+	BackgroundTile = CE_StructGet(_props, "BackgroundTile", false);
 
 	/// @var {real}
-	BackgroundAlignH = ce_struct_get(_props, "BackgroundAlignH", 0);
+	BackgroundAlignH = CE_StructGet(_props, "BackgroundAlignH", 0);
 
 	/// @var {real}
-	BackgroundAlignV = ce_struct_get(_props, "BackgroundAlignV", 0);
+	BackgroundAlignV = CE_StructGet(_props, "BackgroundAlignV", 0);
 
 	/// @var {real/undefined}
-	BackgroundWidth = ce_struct_get(_props, "BackgroundWidth", undefined);
+	BackgroundWidth = CE_StructGet(_props, "BackgroundWidth", undefined);
 
 	/// @var {real/undefined}
-	BackgroundHeight = ce_struct_get(_props, "BackgroundHeight", undefined);
+	BackgroundHeight = CE_StructGet(_props, "BackgroundHeight", undefined);
 
 	/// @var {real}
-	BackgroundScaleX = ce_struct_get(_props, "BackgroundScaleX", 1);
+	BackgroundScaleX = CE_StructGet(_props, "BackgroundScaleX", 1);
 
 	/// @var {real}
-	BackgroundScaleY = ce_struct_get(_props, "BackgroundScaleY", 1);
+	BackgroundScaleY = CE_StructGet(_props, "BackgroundScaleY", 1);
 
 	/// @var {real}
-	BackgroundX = ce_struct_get(_props, "BackgroundX", 0);
+	BackgroundX = CE_StructGet(_props, "BackgroundX", 0);
 
 	/// @var {real}
-	BackgroundY = ce_struct_get(_props, "BackgroundY", 0);
+	BackgroundY = CE_StructGet(_props, "BackgroundY", 0);
 
 	/// @var {real}
-	BackgroundRot = ce_struct_get(_props, "BackgroundRot", 0);
+	BackgroundRot = CE_StructGet(_props, "BackgroundRot", 0);
 
 	////////////////////////////////////////////////////////////////////////////
 	// Text props
 
 	/// @var {font/undefined}
-	Font = ce_struct_get(_props, "Font", undefined);
+	Font = CE_StructGet(_props, "Font", undefined);
 
 	/// @var {real}
-	FontScale = ce_struct_get(_props, "FontScale", 1);
+	FontScale = CE_StructGet(_props, "FontScale", 1);
 
 	/// @var {uint}
-	Color = ce_struct_get(_props, "Color", c_white);
+	Color = CE_StructGet(_props, "Color", c_white);
 
 	/// @var {real}
-	Alpha = ce_struct_get(_props, "Color", 1);
+	Alpha = CE_StructGet(_props, "Color", 1);
 
 	/// @var {string}
-	Text = ce_struct_get(_props, "Text", "");
+	Text = CE_StructGet(_props, "Text", "");
 
 	/// @var {string}
 	/// @readonly
 	RealText = "";
 
 	/// @var {bool}
-	TextFormat = ce_struct_get(_props, "TextFormat", false);
+	TextFormat = CE_StructGet(_props, "TextFormat", false);
 
 	/// @var {real}
-	TextAlignH = ce_struct_get(_props, "TextAlignH", CE_EGUIAlign.Start);
+	TextAlignH = CE_StructGet(_props, "TextAlignH", CE_EGUIAlign.Start);
 
 	/// @var {real}
-	TextAlignV = ce_struct_get(_props, "TextAlignV", CE_EGUIAlign.Start);
+	TextAlignV = CE_StructGet(_props, "TextAlignV", CE_EGUIAlign.Start);
 
 	/// @func SetMargin(_left[, _top, _right, _bottom])
 	/// @desc Sets the margin of the widget.
@@ -340,7 +340,7 @@ function CE_GUIWidget(_props={})
 			_listeners = _eventMap[? _eventType];
 		}
 
-		ce_ds_list_add_unique(_listeners, _listener);
+		CE_ListAddUnique(_listeners, _listener);
 
 		return self;
 	};
@@ -410,7 +410,7 @@ function CE_GUIWidget(_props={})
 		MouseX = _mouseX - _x;
 		MouseY = _mouseY - _y;
 
-		if (!ce_point_in_rect(_mouseX, _mouseY, _x, _y, _width, _height))
+		if (!CE_PointInRectangle(_mouseX, _mouseY, _x, _y, _width, _height))
 		{
 			return undefined;
 		}
@@ -471,7 +471,7 @@ function CE_GUIWidget(_props={})
 		var _text = Text;
 		if (TextFormat)
 		{
-			_text = ce_string_format(_text);
+			_text = CE_StringFormat(_text);
 		}
 		RealText = _text;
 
@@ -516,7 +516,7 @@ function CE_GUIWidget(_props={})
 		MouseX = _mouseX;
 		MouseY = _mouseY;
 
-		if (ce_gui_mouse_in_rect(_x, _y, _width, _height))
+		if (CE_GUIMouseInRect(_x, _y, _width, _height))
 		{
 			_root.WidgetHovered = self;
 			if (HasEventListener(CE_GUIDragEvent)
@@ -561,7 +561,7 @@ function CE_GUIWidget(_props={})
 				var _backgroundHeight = (BackgroundHeight ?? _height) * BackgroundScaleY;
 				var _backgroundX = round(_x + BackgroundX + (_width - _backgroundWidth) * BackgroundAlignH);
 				var _backgroundY = round(_y + BackgroundY + (_height - _backgroundHeight) * BackgroundAlignV);
-				ce_draw_rectangle(_backgroundX, _backgroundY, _backgroundWidth, _backgroundHeight, BackgroundColor, _backgroundAlpha);
+				CE_DrawRectangle(_backgroundX, _backgroundY, _backgroundWidth, _backgroundHeight, BackgroundColor, _backgroundAlpha);
 			}
 		}
 		#endregion Background color
@@ -593,7 +593,7 @@ function CE_GUIWidget(_props={})
 			case CE_EGUIBackgroundStyle.Fit:
 				var _spriteWidth = sprite_get_width(_backgroundSprite);
 				var _spriteHeight = sprite_get_width(_backgroundSprite);
-				var _scale = ce_scale_keep_aspect(
+				var _scale = CE_ScaleKeepAspectRatio(
 					_backgroundWidth ?? _width,
 					_backgroundHeight ?? _height,
 					_spriteWidth,
@@ -626,7 +626,7 @@ function CE_GUIWidget(_props={})
 				var _backgroundX = round(_x + BackgroundX + (_width - _backgroundWidth) * BackgroundAlignH);
 				var _backgroundY = round(_y + BackgroundY + (_height - _backgroundHeight) * BackgroundAlignV);
 
-				ce_draw_sprite_nine_slice(_backgroundSprite, _backgroundIndex,
+				CE_DrawSpriteNineSlice(_backgroundSprite, _backgroundIndex,
 					_backgroundX, _backgroundY, _width, _height, BackgroundTile,
 					BackgroundColor, BackgroundAlpha);
 				break;

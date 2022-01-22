@@ -18,26 +18,26 @@ function CE_GUIContainer(_props={})
 	Widgets = ds_list_create();
 
 	/// @var {bool}
-	Overflow = ce_struct_get(_props, "Overflow", false);
+	Overflow = CE_StructGet(_props, "Overflow", false);
 
 	/// @var {surface}
 	/// @readonly
 	Surface = noone;
 
 	/// @var {CE_EGUIContentStyle}
-	ContentStyle = ce_struct_get(_props, "ContentStyle", CE_EGUIContentStyle.Default);
+	ContentStyle = CE_StructGet(_props, "ContentStyle", CE_EGUIContentStyle.Default);
 
 	/// @var {uint}
-	GridColumns = ce_struct_get(_props, "GridColumns", 1);
+	GridColumns = CE_StructGet(_props, "GridColumns", 1);
 
 	/// @var {uint}
-	GridRows = ce_struct_get(_props, "GridRows", 1);
+	GridRows = CE_StructGet(_props, "GridRows", 1);
 
 	/// @var {real}
-	SpacingH = ce_struct_get(_props, "SpacingH", 0);
+	SpacingH = CE_StructGet(_props, "SpacingH", 0);
 
 	/// @var {real}
-	SpacingV = ce_struct_get(_props, "SpacingV", 0);
+	SpacingV = CE_StructGet(_props, "SpacingV", 0);
 
 	/// @var {real}
 	/// @readonly
@@ -56,10 +56,10 @@ function CE_GUIContainer(_props={})
 	ScrollY = 0;
 
 	/// @var {bool}
-	ScrollXEnable = ce_struct_get(_props, "ScrollXEnable", false);
+	ScrollXEnable = CE_StructGet(_props, "ScrollXEnable", false);
 
 	/// @var {bool}
-	ScrollYEnable = ce_struct_get(_props, "ScrollYEnable", false);
+	ScrollYEnable = CE_StructGet(_props, "ScrollYEnable", false);
 
 	AddEventListener(CE_GUIChangeEvent, method(self, OnChange));
 	AddEventListener(CE_GUIDragEvent, method(self, OnDrag));
@@ -81,12 +81,12 @@ function CE_GUIContainer(_props={})
 	/// @param {CE_GUIWidget} _widget The widget to add.
 	/// @return {CE_GUIContainer} Return `self`.
 	static AddWidget = function (_widget) {
-		ce_assert(_widget.Root == undefined, "Widget is already added to a GUI.");
-		ce_assert(_widget.Parent == undefined, "Widget already has a parent.");
-		ce_assert(Root != undefined, "Parent must be added to a GUI.");
+		CE_Assert(_widget.Root == undefined, "Widget is already added to a GUI.");
+		CE_Assert(_widget.Parent == undefined, "Widget already has a parent.");
+		CE_Assert(Root != undefined, "Parent must be added to a GUI.");
 		_widget.Root = Root;
 		_widget.Parent = self;
-		ce_ds_list_add_unique(Widgets, _widget);
+		CE_ListAddUnique(Widgets, _widget);
 		return self;
 	};
 
@@ -276,7 +276,7 @@ function CE_GUIContainer(_props={})
 				break;
 
 			default:
-				ce_assert(false, "Invalid widget position property");
+				CE_Assert(false, "Invalid widget position property");
 			}
 
 			_widget.RealX = _widgetRealX;
@@ -340,7 +340,7 @@ function CE_GUIContainer(_props={})
 		{
 			gpu_push_state();
 			var _surfaceOld = Surface;
-			var _surface = ce_surface_check(_surfaceOld, _width, _height);
+			var _surface = CE_SurfaceCheck(_surfaceOld, _width, _height);
 			if (_surface != _surfaceOld)
 			{
 				Surface = _surface;

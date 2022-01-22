@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "StateMachine",
-    "path": "folders/Packages/kraifpatrik/CoreExtension/StateMachine.yy",
+    "path": "folders/CoreExtension/StateMachine.yy",
   },
   "resourceVersion": "1.0",
   "name": "CE_StateMachineState",

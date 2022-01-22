@@ -57,16 +57,16 @@ enum CE_EGUIContentStyle
 	SIZE
 };
 
-/// @func ce_gui_mouse_in_rect(_x, _y, _width, _height)
+/// @func CE_GUIMouseInRect(_x, _y, _width, _height)
 /// @param {real} _x The x position of the rectangle's top left corner.
 /// @param {real} _y The y position of the rectangle's top left corner.
 /// @param {real} _width The width of the rectangle.
 /// @param {real} _height The height of the rectangle.
 /// @return {bool} True if the mouse is in the rectangle.
-function ce_gui_mouse_in_rect(_x, _y, _width, _height)
+function CE_GUIMouseInRect(_x, _y, _width, _height)
 {
 	gml_pragma("forceinline");
-	return ce_point_in_rect(
+	return CE_PointInRectangle(
 		global.__ceGuiCurrent.MouseX,
 		global.__ceGuiCurrent.MouseY,
 		_x,

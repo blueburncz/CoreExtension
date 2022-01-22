@@ -40,7 +40,7 @@ function CE_Class() constructor
 	/// @return {bool} Returns `true` if the struct inherits from the class.
 	static IsInstance = function (_class) {
 		gml_pragma("forceinline");
-		return ce_array_includes(__Inheritance, CE_ClassGetName(_class));
+		return CE_ArrayIncludes(__Inheritance, CE_ClassGetName(_class));
 	};
 
 	/// @func Implement(_interface)
@@ -65,7 +65,7 @@ function CE_Class() constructor
 	/// @return {bool} Returns `true` if the struct implements the interface.
 	static Implements = function (_interface) {
 		gml_pragma("forceinline");
-		return ce_array_includes(__Interfaces, CE_ClassGetName(_interface));
+		return CE_ArrayIncludes(__Interfaces, CE_ClassGetName(_interface));
 	};
 
 	/// @func Destroy()

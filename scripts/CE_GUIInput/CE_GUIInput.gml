@@ -24,14 +24,14 @@ function CE_GUIInput(_value, _decimalPlaces=2, _props={})
 	/// @private
 	KeyboardString = "";
 
-	Width = ce_struct_get(_props, "Width", 256);
-	BackgroundColor = ce_struct_get(_props, "BackgroundColor", c_white);
-	BackgroundAlpha = ce_struct_get(_props, "BackgroundAlpha", 1);
+	Width = CE_StructGet(_props, "Width", 256);
+	BackgroundColor = CE_StructGet(_props, "BackgroundColor", c_white);
+	BackgroundAlpha = CE_StructGet(_props, "BackgroundAlpha", 1);
 
-	PaddingLeft = ce_struct_get(_props, "PaddingLeft", 16);
-	PaddingRight = ce_struct_get(_props, "PaddingRight", 16);
-	PaddingTop = ce_struct_get(_props, "PaddingTop", 8);
-	PaddingBottom = ce_struct_get(_props, "PaddingBottom", 8);
+	PaddingLeft = CE_StructGet(_props, "PaddingLeft", 16);
+	PaddingRight = CE_StructGet(_props, "PaddingRight", 16);
+	PaddingTop = CE_StructGet(_props, "PaddingTop", 8);
+	PaddingBottom = CE_StructGet(_props, "PaddingBottom", 8);
 
 	AddEventListener(CE_GUIFocusEvent, method(self, OnFocus));
 	AddEventListener(CE_GUIBlurEvent, method(self, OnBlur));
@@ -43,7 +43,7 @@ function CE_GUIInput(_value, _decimalPlaces=2, _props={})
 
 		KeyboardString = keyboard_string;
 		keyboard_string = is_real(_value)
-			? ce_real_to_string(_value, DecimalPlaces)
+			? CE_RealToString(_value, DecimalPlaces)
 			: _value;
 
 		if (os_type == os_android)
@@ -61,7 +61,7 @@ function CE_GUIInput(_value, _decimalPlaces=2, _props={})
 
 		if (is_real(_valueOld))
 		{
-			var _real = ce_parse_real(keyboard_string);
+			var _real = CE_RealParse(keyboard_string);
 			if (!is_nan(_real))
 			{
 				Value = _real;
@@ -151,7 +151,7 @@ function CE_GUIInput(_value, _decimalPlaces=2, _props={})
 		else
 		{
 			_text = is_real(_value)
-				? ce_real_to_string(_value, DecimalPlaces)
+				? CE_RealToString(_value, DecimalPlaces)
 				: _value;
 			_text = string_copy(_text, 1, _charCount);
 		}
@@ -160,7 +160,7 @@ function CE_GUIInput(_value, _decimalPlaces=2, _props={})
 
 		if (_focused)
 		{
-			ce_draw_rectangle(_textX + string_width(_text), _textY, 4, _charHeight, $FF8000, 1);
+			CE_DrawRectangle(_textX + string_width(_text), _textY, 4, _charHeight, $FF8000, 1);
 		}
 	};
 
@@ -177,7 +177,7 @@ function CE_GUIInput(_value, _decimalPlaces=2, _props={})
 		var _charHeight = string_height("Q");
 
 		// Overlay
-		ce_draw_rectangle(0, 0, _displayWidth, _displayHeight, c_black, 0.5);
+		CE_DrawRectangle(0, 0, _displayWidth, _displayHeight, c_black, 0.5);
 
 		var _padding = 8;
 		var _inputWidth = _displayWidth * 0.75;
@@ -186,7 +186,7 @@ function CE_GUIInput(_value, _decimalPlaces=2, _props={})
 		var _inputY = floor(((_displayHeight - _keyboardHeight) - _inputHeight) * 0.5);
 
 		// Background
-		ce_draw_rectangle(_inputX, _inputY, _inputWidth, _inputHeight, c_white, 1);
+		CE_DrawRectangle(_inputX, _inputY, _inputWidth, _inputHeight, c_white, 1);
 
 		var _charCount = floor((_inputWidth - _padding * 2) / _charWidth);
 		var _text = keyboard_string;
@@ -199,6 +199,6 @@ function CE_GUIInput(_value, _decimalPlaces=2, _props={})
 		draw_text_color(_textX, _textY, _text, c_black, c_black, c_black, c_black, 1);
 
 		// Beam
-		ce_draw_rectangle(_textX + string_width(_text), _textY, 4, _charHeight, $FF8000, 1);
+		CE_DrawRectangle(_textX + string_width(_text), _textY, 4, _charHeight, $FF8000, 1);
 	};
 }

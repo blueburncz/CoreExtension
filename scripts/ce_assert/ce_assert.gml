@@ -1,4 +1,4 @@
-/// @func ce_assert(_exp, _msg)
+/// @func CE_Assert(_exp, _msg)
 /// @desc Shows the error message if the expression is not a `real` (`bool`) or
 /// equals to `0` (`false`) and aborts the game.
 /// @param {any} _exp The expression to assert.
@@ -7,7 +7,7 @@
 /// This is handy when you have thoroughly tested your game and you don't want to
 /// show error messages in release builds.
 /// @see CE_DEBUG
-function ce_assert(_exp, _msg)
+function CE_Assert(_exp, _msg)
 {
 	if (CE_DEBUG)
 	{
@@ -18,7 +18,7 @@ function ce_assert(_exp, _msg)
 	}
 }
 
-/// @func ce_assert_ds_exists(_id, _type, _msg)
+/// @func CE_AssertDsExists(_id, _type, _msg)
 /// @desc Checks if the data structure of given id and type exists. If it
 /// does not, then aborts the game, showing the error message.
 /// @param {real} id The id of the ds.
@@ -27,17 +27,17 @@ function ce_assert(_exp, _msg)
 /// @example
 /// ```gml
 /// var _map = ds_map_create();
-/// ce_assert_ds_exists(_map, ds_type_map,
+/// CE_AssertDsExists(_map, ds_type_map,
 ///     "This should pass, since we just created it.");
 /// ds_map_destroy(_map);
-/// ce_assert_ds_exists(_map, ds_type_map,
+/// CE_AssertDsExists(_map, ds_type_map,
 /// "This will abort the game just as expected.");
 /// ```
 /// @note Asserts work only when {@link CE_DEBUG} is Set to `true`!
 /// This is handy when you have thoroughly tested your game and you don't want to
 /// show error messages in release builds.
 /// @see CE_DEBUG
-function ce_assert_ds_exists(_id, _type, _msg)
+function CE_AssertDsExists(_id, _type, _msg)
 {
 	if (CE_DEBUG)
 	{
@@ -48,7 +48,7 @@ function ce_assert_ds_exists(_id, _type, _msg)
 	}
 }
 
-/// @func ce_assert_equal(_exp, _val, _msg)
+/// @func CE_AssertEquals(_exp, _val, _msg)
 /// @desc Shows the error message if the expression is not equal to `val`.
 /// @param {any} _exp The expression to assert.
 /// @param {any} _val The expected value.
@@ -57,7 +57,7 @@ function ce_assert_ds_exists(_id, _type, _msg)
 /// This is handy when you have thoroughly tested your game and you don't want to
 /// show error messages in release builds.
 /// @see CE_DEBUG
-function ce_assert_equal(_exp, _val, _msg)
+function CE_AssertEquals(_exp, _val, _msg)
 {
 	if (CE_DEBUG)
 	{
@@ -69,7 +69,7 @@ function ce_assert_equal(_exp, _val, _msg)
 	}
 }
 
-/// @func ce_assert_is_int(_value, _msg)
+/// @func CE_AssertIsInt(_value, _msg)
 /// @desc Checks whether the given value is an integer, if not, shows the error
 /// message and aborts the game.
 /// @param {any} _value The value to check.
@@ -78,7 +78,7 @@ function ce_assert_equal(_exp, _val, _msg)
 /// This is handy when you have thoroughly tested your game and you don't want to
 /// show error messages in release builds.
 /// @see CE_DEBUG
-function ce_assert_is_int(_value, _msg)
+function CE_AssertIsInt(_value, _msg)
 {
 	if (CE_DEBUG)
 	{
@@ -90,7 +90,7 @@ function ce_assert_is_int(_value, _msg)
 	}
 }
 
-/// @func ce_assert_not_equal(exp, val, msg)
+/// @func CE_AssertNotEquals(exp, val, msg)
 /// @desc Shows the error message if the expression is equal to `val`.
 /// @param {any} _exp The expression to assert.
 /// @param {any} _val The expected value.
@@ -99,7 +99,7 @@ function ce_assert_is_int(_value, _msg)
 /// This is handy when you have thoroughly tested your game and you don't want to
 /// show error messages in release builds.
 /// @see CE_DEBUG
-function ce_assert_not_equal(_exp, _val, _msg)
+function CE_AssertNotEquals(_exp, _val, _msg)
 {
 	if (CE_DEBUG)
 	{

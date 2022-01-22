@@ -1,14 +1,10 @@
 {
   "_version": 2,
   "project": "ce.yyp",
-  "project_name": "CE",
-  "title": "CE Docs",
-  "author": "Patrik Kraif",
-  "prefix": "ce_",
-  "analytics": "",
-  "api": {
-    "rating": "/api/v1/page_rating"
-  },
+  "project_name": "CoreExtension",
+  "title": "CoreExtension Docs",
+  "author": "BlueBurn",
+  "prefix": "CE_",
   "toc": {
     "CE Docs": "index.md"
   }

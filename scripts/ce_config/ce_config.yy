@@ -3,10 +3,10 @@
   "isCompatibility": false,
   "parent": {
     "name": "Core",
-    "path": "folders/Packages/kraifpatrik/CoreExtension/Core.yy",
+    "path": "folders/CoreExtension/Core.yy",
   },
   "resourceVersion": "1.0",
-  "name": "ce_config",
+  "name": "CE_Config",
   "tags": [],
   "resourceType": "GMScript",
 }

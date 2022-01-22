@@ -1,41 +1,41 @@
-/// @func ce_tween_back_in(_time, _value, _final, _duration[, back])
+/// @func CE_TweenBackIn(_time, _value, _final, _duration[, back])
 /// @desc Cubic easing in with a back effect - accelerating from zero velocity.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
 /// @param {real} [_back] The intensity of the back effect.
-function ce_tween_back_in(_time, _value, _final, _duration)
+function CE_TweenBackIn(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
-	return _value + _final - ce_tween_back_out(_duration - _time, _value, _final, _duration);
+	return _value + _final - CE_TweenBackOut(_duration - _time, _value, _final, _duration);
 }
 
-/// @func ce_tween_back_inout(_time, _value, _final, _duration[, back])
+/// @func CE_TweenBackInOut(_time, _value, _final, _duration[, back])
 /// @desc Cubic easing in with a back effect - acceleration until halfway, then deceleration.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
 /// @param {real} [_back] The intensity of the back effect.
-function ce_tween_back_inout(_time, _value, _final, _duration)
+function CE_TweenBackInOut(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
 	if (_time < _duration * 0.5)
 	{
-		return ((_value + _final - ce_tween_back_out(_duration - _time * 2, _value, _final, _duration)) * 0.5) + (_value * 0.5);
+		return ((_value + _final - CE_TweenBackOut(_duration - _time * 2, _value, _final, _duration)) * 0.5) + (_value * 0.5);
 	}
-	return (ce_tween_back_out(_time * 2 - _duration, _value, _final, _duration) * 0.5) + (_final * 0.5);
+	return (CE_TweenBackOut(_time * 2 - _duration, _value, _final, _duration) * 0.5) + (_final * 0.5);
 }
 
-/// @func ce_tween_back_out(_time, _value, _final, _duration[, back])
+/// @func CE_TweenBackOut(_time, _value, _final, _duration[, back])
 /// @desc Cubic easing in with a back effect - decelerating to zero velocity.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
 /// @param {real} [_back] The intensity of the back effect.
-function ce_tween_back_out(_time, _value, _final, _duration)
+function CE_TweenBackOut(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
 	var _back = (argument_count > 4) ? argument[4] : 1.75;
@@ -44,41 +44,41 @@ function ce_tween_back_out(_time, _value, _final, _duration)
 	return ((_final * ((_time * _time * ((_back + 1) * _time + _back)) + 1)) + _value);
 }
 
-/// @func ce_tween_bounce_in(_time, _value, _final, _duration)
+/// @func CE_TweenBounceIn(_time, _value, _final, _duration)
 /// @desc Easing in with bounces - accelerating from zero velocity.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_bounce_in(_time, _value, _final, _duration)
+function CE_TweenBounceIn(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
-	return _value + _final - ce_tween_bounce_out(_duration - _time, _value, _final, _duration);
+	return _value + _final - CE_TweenBounceOut(_duration - _time, _value, _final, _duration);
 }
 
-/// @func ce_tween_bounce_inout(_time, _value, _final, _duration)
+/// @func CE_TweenBounceInOut(_time, _value, _final, _duration)
 /// @desc Easing in/out with bounces - acceleration until halfway, then deceleration.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_bounce_inout(_time, _value, _final, _duration)
+function CE_TweenBounceInOut(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
 	if (_time < _duration * 0.5)
 	{
-		return ((_value + _final - ce_tween_bounce_out(_duration - _time * 2, _value, _final, _duration)) * 0.5) + (_value * 0.5);
+		return ((_value + _final - CE_TweenBounceOut(_duration - _time * 2, _value, _final, _duration)) * 0.5) + (_value * 0.5);
 	}
-	return (ce_tween_bounce_out(_time * 2 - _duration, _value, _final, _duration) * 0.5) + (_final * 0.5);
+	return (CE_TweenBounceOut(_time * 2 - _duration, _value, _final, _duration) * 0.5) + (_final * 0.5);
 }
 
-/// @func ce_tween_bounce_out(_time, _value, _final, _duration)
+/// @func CE_TweenBounceOut(_time, _value, _final, _duration)
 /// @desc Easing in/out with bounces - decelerating to zero velocity.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_bounce_out(_time, _value, _final, _duration)
+function CE_TweenBounceOut(_time, _value, _final, _duration)
 {
 	_time /= _duration;
 	_final -= _value;
@@ -104,41 +104,41 @@ function ce_tween_bounce_out(_time, _value, _final, _duration)
 	return ((_final * ((7.5625 * _time * _time) + 0.984375)) + _value);
 }
 
-/// @func ce_tween_circ_in(_time, _value, _final, _duration)
+/// @func CE_TweenCircIn(_time, _value, _final, _duration)
 /// @desc Circular easing in - accelerating from zero velocity.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_circ_in(_time, _value, _final, _duration)
+function CE_TweenCircIn(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
-	return _value + _final - ce_tween_circ_out(_duration - _time, _value, _final, _duration);
+	return _value + _final - CE_TweenCircOut(_duration - _time, _value, _final, _duration);
 }
 
-/// @func ce_tween_circ_inout(_time, _value, _final, _duration)
+/// @func CE_TweenCircInOut(_time, _value, _final, _duration)
 /// @desc Circular easing in/out - acceleration until halfway, then deceleration.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_circ_inout(_time, _value, _final, _duration)
+function CE_TweenCircInOut(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
 	if (_time < _duration * 0.5)
 	{
-		return ((_value + _final - ce_tween_circ_out(_duration - _time * 2, _value, _final, _duration)) * 0.5) + (_value * 0.5);
+		return ((_value + _final - CE_TweenCircOut(_duration - _time * 2, _value, _final, _duration)) * 0.5) + (_value * 0.5);
 	}
-	return (ce_tween_circ_out(_time * 2 - _duration, _value, _final, _duration) * 0.5) + (_final * 0.5);
+	return (CE_TweenCircOut(_time * 2 - _duration, _value, _final, _duration) * 0.5) + (_final * 0.5);
 }
 
-/// @func ce_tween_circ_out(_time, _value, _final, _duration)
+/// @func CE_TweenCircOut(_time, _value, _final, _duration)
 /// @desc Circular easing out - decelerating to zero velocity.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_circ_out(_time, _value, _final, _duration)
+function CE_TweenCircOut(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
 	_final -= _value;
@@ -147,41 +147,41 @@ function ce_tween_circ_out(_time, _value, _final, _duration)
 	return ((_final * sqr(1 - (_time * _time))) + _value);
 }
 
-/// @func ce_tween_cubic_in(_time, _value, _final, _duration)
+/// @func CE_TweenCubicIn(_time, _value, _final, _duration)
 /// @desc Cubic easing in - accelerating from zero velocity.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_cubic_in(_time, _value, _final, _duration)
+function CE_TweenCubicIn(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
-	return _value + _final - ce_tween_cubic_out(_duration - _time, _value, _final, _duration);
+	return _value + _final - CE_TweenCubicOut(_duration - _time, _value, _final, _duration);
 }
 
-/// @func ce_tween_cubic_inout(_time, _value, _final, _duration)
+/// @func CE_TweenCubicInOut(_time, _value, _final, _duration)
 /// @desc Cubic easing in/out - acceleration until halfway, then deceleration.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_cubic_inout(_time, _value, _final, _duration)
+function CE_TweenCubicInOut(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
 	if (_time < _duration * 0.5)
 	{
-		return ((_value + _final - ce_tween_cubic_out(_duration - _time * 2, _value, _final, _duration)) * 0.5) + (_value * 0.5);
+		return ((_value + _final - CE_TweenCubicOut(_duration - _time * 2, _value, _final, _duration)) * 0.5) + (_value * 0.5);
 	}
-	return (ce_tween_cubic_out(_time * 2 - _duration, _value, _final, _duration) * 0.5) + (_final * 0.5);
+	return (CE_TweenCubicOut(_time * 2 - _duration, _value, _final, _duration) * 0.5) + (_final * 0.5);
 }
 
-/// @func ce_tween_cubic_out(_time, _value, _final, _duration)
+/// @func CE_TweenCubicOut(_time, _value, _final, _duration)
 /// @desc Cubic easing out - decelerating to zero velocity
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_cubic_out(_time, _value, _final, _duration)
+function CE_TweenCubicOut(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
 	_final -= _value;
@@ -190,25 +190,25 @@ function ce_tween_cubic_out(_time, _value, _final, _duration)
 	return ((_final * ((_time * _time * _time) + 1)) + _value);
 }
 
-/// @func ce_tween_elastic_in(_time, _value, _final, _duration)
+/// @func CE_TweenElasticIn(_time, _value, _final, _duration)
 /// @desc Easing with an elastic effect - accelerating from zero velocity.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_elastic_in(_time, _value, _final, _duration)
+function CE_TweenElasticIn(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
-	return _value + _final - ce_tween_elastic_out(_duration - _time, _value, _final, _duration);
+	return _value + _final - CE_TweenElasticOut(_duration - _time, _value, _final, _duration);
 }
 
-/// @func ce_tween_elastic_inout(_time, _value, _final, _duration)
+/// @func CE_TweenElasticInOut(_time, _value, _final, _duration)
 /// @desc Easing in/out with an elastic effect - acceleration until halfway, then deceleration.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_elastic_inout(_time, _value, _final, _duration)
+function CE_TweenElasticInOut(_time, _value, _final, _duration)
 {
 	if (_time==0)
 	{
@@ -238,13 +238,13 @@ function ce_tween_elastic_inout(_time, _value, _final, _duration)
 	return ((0.5 * _final * power(2, -10 * _time) * sin(((_time * _duration) - s) * ((2 * pi) / p))) + _final + _value);
 }
 
-/// @func ce_tween_elastic_out(_time, _value, _final, _duration)
+/// @func CE_TweenElasticOut(_time, _value, _final, _duration)
 /// @desc Easing out with an elastic effect - decelerating to zero velocity.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_elastic_out(_time, _value, _final, _duration)
+function CE_TweenElasticOut(_time, _value, _final, _duration)
 {
 	if (_time == 0)
 	{
@@ -267,95 +267,95 @@ function ce_tween_elastic_out(_time, _value, _final, _duration)
 	return ((_final * power(2,-10 * _time) * sin(((_time * _duration) - s) * ((2 * pi) / p))) + _final + _value);
 }
 
-/// @func ce_tween_exp_in(_time, _value, _final, _duration)
+/// @func CE_TweenExpIn(_time, _value, _final, _duration)
 /// @desc Exponential easing in - accelerating from zero velocity.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_exp_in(_time, _value, _final, _duration)
+function CE_TweenExpIn(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
-	return _value + _final - ce_tween_exp_out(_duration - _time, _value, _final, _duration);
+	return _value + _final - CE_TweenExpOut(_duration - _time, _value, _final, _duration);
 }
 
-/// @func ce_tween_exp_inout(_time, _value, _final, _duration)
+/// @func CE_TweenExpInOut(_time, _value, _final, _duration)
 /// @desc Exponential easing in/out - accelerating until halfway, then decelerating.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_exp_inout(_time, _value, _final, _duration)
+function CE_TweenExpInOut(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
 	if (_time < _duration * 0.5)
 	{
-		return ((_value + _final - ce_tween_exp_out(_duration - _time * 2, _value, _final, _duration)) * 0.5) + (_value * 0.5);
+		return ((_value + _final - CE_TweenExpOut(_duration - _time * 2, _value, _final, _duration)) * 0.5) + (_value * 0.5);
 	}
-	return (ce_tween_exp_out(_time * 2 - _duration, _value, _final, _duration) * 0.5) + (_final * 0.5);
+	return (CE_TweenExpOut(_time * 2 - _duration, _value, _final, _duration) * 0.5) + (_final * 0.5);
 }
 
-/// @func ce_tween_exp_out(_time, _value, _final, _duration)
+/// @func CE_TweenExpOut(_time, _value, _final, _duration)
 /// @desc Exponential easing out - decelerating to zero velocity.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_exp_out(_time, _value, _final, _duration)
+function CE_TweenExpOut(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
 	_final -= _value;
 	return ((_final * (-power(2, -10 * (_time / _duration)) + 1)) + _value);
 }
 
-/// @func ce_tween_linear(_time, _value, _final, _duration)
+/// @func CE_TweenLinear(_time, _value, _final, _duration)
 /// @desc Simple linear tweening - no easing, no acceleration.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_linear(_time, _value, _final, _duration)
+function CE_TweenLinear(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
 	_final -= _value;
 	return ((_final * (_time / _duration)) + _value);
 }
 
-/// @func ce_tween_quad_in(_time, _value, _final, _duration)
+/// @func CE_TweenQuadIn(_time, _value, _final, _duration)
 /// @desc Quadratic easing in - accelerating from zero velocity.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_quad_in(_time, _value, _final, _duration)
+function CE_TweenQuadIn(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
-	return _value + _final - ce_tween_quad_out(_duration - _time, _value, _final, _duration);
+	return _value + _final - CE_TweenQuadOut(_duration - _time, _value, _final, _duration);
 }
 
-/// @func ce_tween_quad_inout(_time, _value, _final, _duration)
+/// @func CE_TweenQuadInOut(_time, _value, _final, _duration)
 /// @desc Quadratic easing in/out - acceleration until halfway, then deceleration.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_quad_inout(_time, _value, _final, _duration)
+function CE_TweenQuadInOut(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
 	if (_time < _duration * 0.5)
 	{
-		return ((_value + _final - ce_tween_quad_out(_duration - _time * 2, _value, _final, _duration)) * 0.5) + (_value * 0.5);
+		return ((_value + _final - CE_TweenQuadOut(_duration - _time * 2, _value, _final, _duration)) * 0.5) + (_value * 0.5);
 	}
-	return (ce_tween_quad_out(_time * 2 - _duration, _value, _final, _duration) * 0.5) + (_final * 0.5);
+	return (CE_TweenQuadOut(_time * 2 - _duration, _value, _final, _duration) * 0.5) + (_final * 0.5);
 }
 
-/// @func ce_tween_quad_out(_time, _value, _final, _duration)
+/// @func CE_TweenQuadOut(_time, _value, _final, _duration)
 /// @desc Quadratic easing out - decelerating to zero velocity.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_quad_out(_time, _value, _final, _duration)
+function CE_TweenQuadOut(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
 	_final -= _value;
@@ -363,41 +363,41 @@ function ce_tween_quad_out(_time, _value, _final, _duration)
 	return ((-_final * _time * (_time - 2)) + _value);
 }
 
-/// @func ce_tween_quart_in(_time, _value, _final, _duration)
+/// @func CE_TweenQuartIn(_time, _value, _final, _duration)
 /// @desc Quartic easing in - accelerating from zero velocity.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_quart_in(_time, _value, _final, _duration)
+function CE_TweenQuartIn(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
-	return _value + _final - ce_tween_quart_out(_duration - _time, _value, _final, _duration);
+	return _value + _final - CE_TweenQuartOut(_duration - _time, _value, _final, _duration);
 }
 
-/// @func ce_tween_quart_inout(_time, _value, _final, _duration)
+/// @func CE_TweenQuartInOut(_time, _value, _final, _duration)
 /// @desc Quartic easing in/out - acceleration until halfway, then deceleration.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_quart_inout(_time, _value, _final, _duration)
+function CE_TweenQuartInOut(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
 	if (_time < _duration * 0.5)
 	{
-		return ((_value + _final - ce_tween_quart_out(_duration - _time * 2, _value, _final, _duration)) * 0.5) + (_value * 0.5);
+		return ((_value + _final - CE_TweenQuartOut(_duration - _time * 2, _value, _final, _duration)) * 0.5) + (_value * 0.5);
 	}
-	return (ce_tween_quart_out(_time * 2 - _duration, _value, _final, _duration) * 0.5) + (_final * 0.5);
+	return (CE_TweenQuartOut(_time * 2 - _duration, _value, _final, _duration) * 0.5) + (_final * 0.5);
 }
 
-/// @func ce_tween_quart_out(_time, _value, _final, _duration)
+/// @func CE_TweenQuartOut(_time, _value, _final, _duration)
 /// @desc Quartic easing out - decelerating to zero velocity.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_quart_out(_time, _value, _final, _duration)
+function CE_TweenQuartOut(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
 	_final -= _value;
@@ -406,41 +406,41 @@ function ce_tween_quart_out(_time, _value, _final, _duration)
 	return ((-_final * (_time * _time * _time * _time - 1)) + _value);
 }
 
-/// @func ce_tween_quint_in(_time, _value, _final, _duration)
+/// @func CE_TweenQuintIn(_time, _value, _final, _duration)
 /// @desc Quintic easing in - accelerating from zero velocity.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_quint_in(_time, _value, _final, _duration)
+function CE_TweenQuintIn(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
-	return _value + _final - ce_tween_quint_out(_duration - _time, _value, _final, _duration);
+	return _value + _final - CE_TweenQuintOut(_duration - _time, _value, _final, _duration);
 }
 
-/// @func ce_tween_quint_inout(_time, _value, _final, _duration)
+/// @func CE_TweenQuintInOut(_time, _value, _final, _duration)
 /// @desc Quintic easing in/out - acceleration until halfway, then deceleration.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_quint_inout(_time, _value, _final, _duration)
+function CE_TweenQuintInOut(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
 	if (_time < _duration * 0.5)
 	{
-		return ((_value + _final - ce_tween_quint_out(_duration - _time * 2, _value, _final, _duration)) * 0.5) + (_value * 0.5);
+		return ((_value + _final - CE_TweenQuintOut(_duration - _time * 2, _value, _final, _duration)) * 0.5) + (_value * 0.5);
 	}
-	return (ce_tween_quint_out(_time * 2 - _duration, _value, _final, _duration) * 0.5) + (_final * 0.5);
+	return (CE_TweenQuintOut(_time * 2 - _duration, _value, _final, _duration) * 0.5) + (_final * 0.5);
 }
 
-/// @func ce_tween_quint_out(_time, _value, _final, _duration)
+/// @func CE_TweenQuintOut(_time, _value, _final, _duration)
 /// @desc Quintic easing out - decelerating to zero velocity.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_quint_out(_time, _value, _final, _duration)
+function CE_TweenQuintOut(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
 	_final -= _value;
@@ -449,41 +449,41 @@ function ce_tween_quint_out(_time, _value, _final, _duration)
 	return ((_final * ((_time * _time * _time * _time * _time) + 1)) + _value);
 }
 
-/// @func ce_tween_sin_in(_time, _value, _final, _duration)
+/// @func CE_TweenSinIn(_time, _value, _final, _duration)
 /// @desc Sinusoidal easing in - accelerating from zero velocity.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_sin_in(_time, _value, _final, _duration)
+function CE_TweenSinIn(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
-	return _value + _final - ce_tween_sin_out(_duration - _time, _value, _final, _duration);
+	return _value + _final - CE_TweenSinOut(_duration - _time, _value, _final, _duration);
 }
 
-/// @func ce_tween_sin_inout(_time, _value, _final, _duration)
+/// @func CE_TweenSinInOut(_time, _value, _final, _duration)
 /// @desc Sinusoidal easing in/out - accelerating until halfway, then decelerating.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_sin_inout(_time, _value, _final, _duration)
+function CE_TweenSinInOut(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
 	if (_time < _duration * 0.5)
 	{
-		return ((_value + _final - ce_tween_sin_out(_duration - _time * 2, _value, _final, _duration)) * 0.5) + (_value * 0.5);
+		return ((_value + _final - CE_TweenSinOut(_duration - _time * 2, _value, _final, _duration)) * 0.5) + (_value * 0.5);
 	}
-	return (ce_tween_sin_out(_time * 2 - _duration, _value, _final, _duration) * 0.5) + (_final * 0.5);
+	return (CE_TweenSinOut(_time * 2 - _duration, _value, _final, _duration) * 0.5) + (_final * 0.5);
 }
 
-/// @func ce_tween_sin_out(_time, _value, _final, _duration)
+/// @func CE_TweenSinOut(_time, _value, _final, _duration)
 /// @desc Sinusoidal easing out - decelerating to zero velocity.
 /// @param {real} _time Current time in frames/seconds/µs...
 /// @param {real} _value Starting value.
 /// @param {real} _final Target value.
 /// @param {real} _duration Duration in frames/seconds/µs...
-function ce_tween_sin_out(_time, _value, _final, _duration)
+function CE_TweenSinOut(_time, _value, _final, _duration)
 {
 	gml_pragma("forceinline");
 	_final -= _value;

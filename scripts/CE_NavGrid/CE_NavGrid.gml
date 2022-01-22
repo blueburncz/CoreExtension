@@ -22,6 +22,7 @@
 #macro CE_NAVGRID_MASK_SE (CE_NAVGRID_MASK_S | CE_NAVGRID_MASK_E)
 
 /// @func CE_NavGrid(_x, _y, _width, _height, _cellWidth, _cellHeight)
+/// @extends CE_Class
 /// @param {real} _x The X position of the top left corner.
 /// @param {real} _y The Y position of the top left corner.
 /// @param {real} _width The width of the navgrid.
@@ -29,8 +30,15 @@
 /// @param {real} _cellWidth The width of a single cell.
 /// @param {real} _cellHeight The height of a single cell.
 /// @see CE_NavGridPath
-function CE_NavGrid(_x, _y, _width, _height, _cellWidth, _cellHeight) constructor
+function CE_NavGrid(_x, _y, _width, _height, _cellWidth, _cellHeight)
+	: CE_Class() constructor
 {
+	CE_CLASS_GENERATED_BODY;
+
+	static Super_Class = {
+		Destroy: Destroy,
+	};
+
 	// Check if the cell coordinates can be encoded into 32bit uint
 	if (_width > $FFFF | _height > $FFFF)
 	{
@@ -733,10 +741,8 @@ function CE_NavGrid(_x, _y, _width, _height, _cellWidth, _cellHeight) constructo
 		return self;
 	};
 
-	/// @func Destroy()
-	/// @desc Frees resources used by the navgrid from memory.
 	static Destroy = function () {
-		gml_pragma("forceinline");
+		method(self, Super_Class.Destroy)();
 		ds_grid_destroy(Grid);
 		ds_priority_destroy(PriorityQueue);
 		ds_map_destroy(CostSoFar);

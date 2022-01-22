@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "Math",
-    "path": "folders/Packages/kraifpatrik/CoreExtension/Math.yy",
+    "path": "folders/CoreExtension/Math.yy",
   },
   "resourceVersion": "1.0",
   "name": "CE_DualQuaternion",
