@@ -83,14 +83,14 @@ function CE_MatrixClone(_m)
 	return _clone;
 }
 
-/// @func CE_MatrixCloneFromColumns(_c0, _c1, _c2, _c3)
+/// @func CE_MatrixFromColumns(_c0, _c1, _c2, _c3)
 /// @desc Creates a matrix with specified columns.
 /// @param {real[4]} _c0 The first column of the matrix.
 /// @param {real[4]} _c1 The second column of the matrix.
 /// @param {real[4]} _c2 The third column of the matrix.
 /// @param {real[4]} _c3 The fourth column of the matrix.
 /// @return {real[16]} The created matrix.
-function CE_MatrixCloneFromColumns(_c0, _c1, _c2, _c3)
+function CE_MatrixFromColumns(_c0, _c1, _c2, _c3)
 {
 	gml_pragma("forceinline");
 	return [
@@ -101,14 +101,14 @@ function CE_MatrixCloneFromColumns(_c0, _c1, _c2, _c3)
 	];
 }
 
-/// @func CE_MatrixCloneFromRows(_r0, _r1, _r2, _r3)
+/// @func CE_MatrixFromRows(_r0, _r1, _r2, _r3)
 /// @desc Creates a matrix with specified rows.
 /// @param {real[4]} _r0 The first row of the matrix.
 /// @param {real[4]} _r1 The second row of the matrix.
 /// @param {real[4]} _r2 The third row of the matrix.
 /// @param {real[4]} _r3 The fourth row of the matrix.
 /// @return {real[16]} The created matrix.
-function CE_MatrixCloneFromRows(_r0, _r1, _r2, _r3)
+function CE_MatrixFromRows(_r0, _r1, _r2, _r3)
 {
 	gml_pragma("forceinline");
 	return [
